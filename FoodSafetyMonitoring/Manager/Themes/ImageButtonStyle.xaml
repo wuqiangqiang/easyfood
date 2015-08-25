@@ -124,15 +124,37 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
+                        <Image x:Name="save" Source="/Manager/Images/export_normal.png"></Image>
                         <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="导出" Foreground="White"></TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/export_pressed.png"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="false">
-                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/export_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--生成报告按钮-->
+    <Style x:Key="ReportImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/export_normal.png"></Image>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="生成报告" Foreground="White"></TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/export_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/export_normal.png"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

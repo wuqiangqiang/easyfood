@@ -30,19 +30,43 @@ namespace FoodSafetyMonitoring.Manager
 
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         string supplierId = (Application.Current.Resources["User"] as UserInfo).SupplierId;
+        string deptid = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
         public UcDetectBillManager()
         {
             InitializeComponent();
             dbOperation = DBUtility.DbHelperMySQL.CreateDbHelper();
             ProvinceCityTable = Application.Current.Resources["省市表"] as DataTable;
-            DataRow[] rows = ProvinceCityTable.Select("pid = '0001'");
+            DataTable table = dbOperation.GetDataSet("select proviceid as id , name " +
+                                                       "from t_set_area LEFT JOIN sys_city  ON t_set_area.proviceid = sys_city.id " +
+                                                        "where  deptid = " + deptid).Tables[0];
+            DataRow[] rows;
+            if (table.Rows.Count == 0)
+            {
+                rows = ProvinceCityTable.Select("pid = '0001'");
+            }
+            else
+            {
+                rows = table.Select();
+            } 
 
             //画面初始化-新增检测单画面
             ComboboxTool.InitComboboxSource(_province, rows,"lr");
             _province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
 
-            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId,"lr");
+            //查找登录者部门所属的省份
+            string proviceid = dbOperation.GetSingle("select province from sys_client_sysdept where INFO_CODE = " + deptid).ToString();
+            int i = 1;
+            foreach(DataRow row in rows)
+            {
+                if (row["id"].ToString() == proviceid)
+                {
+                    _province.SelectedIndex = i;
+                }
+                i = i + 1;
+            }
+
+            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId, "lr");
             //if (supplierId == "nkrx")
             //{
             //    ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1' order by orderId", "lr");
@@ -108,13 +132,17 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请选择被检单位";
             }
-            else if (_detect_number.Text.Trim().Length == 0 && _object_count.Text.Trim().Length != 0)
+            else if (_detect_number.Text.Trim().Length == 0)
             {
                 msg = "*检疫证号不能为空";
             }
-            else if (_detect_number.Text.Trim().Length != 0 && _object_count.Text.Trim().Length == 0)
+            else if ( _object_count.Text.Trim().Length == 0)
             {
                 msg = "*批次头数不能为空";
+            }
+            else if (_object_label.Text.Trim().Length == 0)
+            {
+                msg = "*耳标号不能为空";
             }
             else if (_detect_item.SelectedIndex < 1)
             {

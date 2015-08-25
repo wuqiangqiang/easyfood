@@ -90,11 +90,22 @@ namespace FoodSafetyMonitoring.Manager
                 tabledisplay.Columns.Add(new DataColumn("任务完成率" + i));
                 MyColumns.Add("任务完成率" + i, new MyColumn("任务完成率" + i, "任务完成率") { BShow = true, Width = 10 });
             }
+
+            //当选择了检测项目作为查询条件时，不显示任务完成总量和任务总完成率
+            bool flag;
+            if (ItemId == "")
+            {
+                flag = true;
+            }
+            else
+            {
+                flag = false;
+            }
             //表格后面为合计列
             tabledisplay.Columns.Add(new DataColumn("任务完成总量"));
-            MyColumns.Add("任务完成总量", new MyColumn("任务完成总量", "任务完成总量") { BShow = true, Width = 10 });
+            MyColumns.Add("任务完成总量", new MyColumn("任务完成总量", "任务完成总量") { BShow = flag, Width = 10 });
             tabledisplay.Columns.Add(new DataColumn("任务总完成率"));
-            MyColumns.Add("任务总完成率", new MyColumn("任务总完成率", "任务总完成率") { BShow = true, Width = 10 });
+            MyColumns.Add("任务总完成率", new MyColumn("任务总完成率", "任务总完成率") { BShow = flag, Width = 10 });
 
             //为表中各行生成数据
             for (int i = 0; i < DeptNames.Length; i++)

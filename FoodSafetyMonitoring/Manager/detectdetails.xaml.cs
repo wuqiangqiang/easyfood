@@ -55,7 +55,8 @@ namespace FoodSafetyMonitoring.Manager
             _detectDate.Text = table.Rows[0][1].ToString();
             _detectUserName.Text = table.Rows[0][9].ToString();
             _detectTypeName.Text = table.Rows[0][0].ToString();
-            _cardbrand.Text = table.Rows[0][23].ToString(); 
+            _cardbrand.Text = table.Rows[0][23].ToString();
+            _cardno.Text = table.Rows[0][24].ToString();
         }
 
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)

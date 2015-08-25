@@ -25,6 +25,7 @@ namespace FoodSafetyMonitoring.Manager
     public partial class SysYearAnalysis : UserControl
     {
         private IDBOperation dbOperation;
+        private string page_url;
         private readonly List<string> year = new List<string>() { "2014",
             "2015", 
             "2016",
@@ -42,12 +43,20 @@ namespace FoodSafetyMonitoring.Manager
             _year.ItemsSource = year;
             _year.SelectedIndex = 1;
 
-            //_webBrowser.Source = new Uri(string.Format("http://www.zrodo.com:8040/ulsocialevent/getMapTesttt.do?user_id={0}", (Application.Current.Resources["User"] as UserInfo).ID));
+            //地址从数据库中获取
+            page_url = dbOperation.GetDbHelper().GetSingle("select yearreport from t_url ").ToString();
+            if (page_url == null)
+            {
+                page_url = "";
+            }
         }
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-
+            if (page_url != "")
+            {
+                _webBrowser.Source = new Uri(string.Format(page_url));
+            }
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)

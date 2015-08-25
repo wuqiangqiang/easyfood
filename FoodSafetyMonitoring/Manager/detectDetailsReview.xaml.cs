@@ -69,6 +69,15 @@ namespace FoodSafetyMonitoring.Manager
             _reviewReagent_text.Text = table.Rows[0][15].ToString();
             _reviewResult_text.Text = table.Rows[0][16].ToString();
             _reviewDate.Text = table.Rows[0][17].ToString();
+            _cardno.Text = table.Rows[0][24].ToString();
+            if(table.Rows[0][25].ToString() == "0")
+            {
+                chk_1.IsChecked = true;
+            }
+            else if (table.Rows[0][25].ToString() == "1")
+            {
+                chk_2.IsChecked = true;
+            }
         }
 
         private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)

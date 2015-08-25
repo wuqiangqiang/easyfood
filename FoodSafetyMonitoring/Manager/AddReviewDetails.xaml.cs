@@ -66,7 +66,8 @@ namespace FoodSafetyMonitoring.Manager
             _detectDate.Text = table.Rows[0][1].ToString();
             _detectUserName.Text = table.Rows[0][9].ToString();
             _detectTypeName.Text = table.Rows[0][0].ToString();
-            _cardbrand.Text = table.Rows[0][23].ToString(); 
+            _cardbrand.Text = table.Rows[0][23].ToString();
+            _cardno.Text = table.Rows[0][24].ToString(); 
 
 
             if (reviewflag == "1")
@@ -128,6 +129,12 @@ namespace FoodSafetyMonitoring.Manager
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            if (chk_1.IsChecked == false && chk_2.IsChecked == false)
+            {
+                txtMsg.Text = "*请选择原因";
+                return;
+            }
+
             if (_reviewReagent.SelectedIndex < 1)
             {
                 txtMsg.Text = "*请选择检查方法";
@@ -153,14 +160,24 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            string reasonid = "";
+            if(chk_1.IsChecked == true)
+            {
+                reasonid = "0";
+            }
+            else if(chk_2.IsChecked == true)
+            {
+                reasonid = "1";
+            }
+
             string strSql;
             string strSql2;
 
             strSql = string.Format(@"update t_detect_report set ReviewFlag= '1' where  ORDERID = '{0}'", orderid);
-            strSql2 = string.Format(@"insert into t_detect_review(DetectId,ReviewUserid,ReviewReagentid,ReviewResultid,ReviewDate,ReviewReason)
-                                      values('{0}','{1}','{2}','{3}','{4}','{5}')", orderid, (Application.Current.Resources["User"] as UserInfo).ID,
+            strSql2 = string.Format(@"insert into t_detect_review(DetectId,ReviewUserid,ReviewReagentid,ReviewResultid,ReviewDate,ReviewReason,reasonid)
+                                      values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", orderid, (Application.Current.Resources["User"] as UserInfo).ID,
                                       (_reviewReagent.SelectedItem as Label).Tag, (_reviewResult.SelectedItem as Label).Tag, DateTime.Now,
-                                      _reviewBz.Text);
+                                      _reviewBz.Text, reasonid);
             try
             {
 
@@ -173,6 +190,7 @@ namespace FoodSafetyMonitoring.Manager
                     _reviewReagent.IsEnabled = false;
                     _reviewResult.IsEnabled = false;
                     _reviewBz.IsEnabled = false;
+                    chk.IsEnabled = false;
                     return;
                 }
                 else
@@ -188,6 +206,18 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             txtMsg.Text = "";
+        }
+
+        private void _chk_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).Name == "chk_1")
+            {
+                chk_2.IsChecked = false;
+            }
+            else if ((sender as CheckBox).Name == "chk_2")
+            {
+                chk_1.IsChecked = false;
+            }
         }
     }
 }

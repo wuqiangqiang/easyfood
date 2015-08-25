@@ -322,6 +322,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\SysSetArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysTaskCheck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -595,6 +599,18 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UcSamplingReportCountry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcSamplingReportDept.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcSamplingReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcSetSamplingRate.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -949,6 +965,9 @@
     <Compile Include="Manager\SysSamplingReport.xaml.cs">
       <DependentUpon>SysSamplingReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysSetArea.xaml.cs">
+      <DependentUpon>SysSetArea.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysTaskCheck.xaml.cs">
       <DependentUpon>SysTaskCheck.xaml</DependentUpon>
     </Compile>
@@ -1002,6 +1021,15 @@
     </Compile>
     <Compile Include="Manager\UcReviewdetails.xaml.cs">
       <DependentUpon>UcReviewdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSamplingReportCountry.xaml.cs">
+      <DependentUpon>UcSamplingReportCountry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSamplingReportDept.xaml.cs">
+      <DependentUpon>UcSamplingReportDept.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSamplingReportDetails.xaml.cs">
+      <DependentUpon>UcSamplingReportDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcSetSamplingRate.xaml.cs">
       <DependentUpon>UcSetSamplingRate.xaml</DependentUpon>
@@ -1187,6 +1215,8 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="Manager\Images\export_normal.png" />
+    <Resource Include="Manager\Images\export_pressed.png" />
     <Resource Include="res\none.jpg" />
     <Resource Include="res\help_select.png" />
     <Resource Include="res\task_normal.png" />

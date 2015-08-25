@@ -284,6 +284,11 @@ namespace FoodSafetyMonitoring
                         temptb.Content = new SysLogManager();
                         flag = 1;
                         break;
+                    //系统管理->系统管理->产地设置
+                    case "70108": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysSetArea(mainWindow.dbOperation);
+                        flag = 1;
+                        break;
                     //系统管理->系统管理->权限管理
                     case "70103": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysRolePowerManager();

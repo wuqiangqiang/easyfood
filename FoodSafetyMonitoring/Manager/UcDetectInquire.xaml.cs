@@ -35,7 +35,7 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
             ProvinceCityTable = Application.Current.Resources["省市表"] as DataTable;
-            DataRow[] rows = ProvinceCityTable.Select("pid = '0001'");
+            DataRow[] rows = ProvinceCityTable.Select("pid = '0001'");            
 
             //画面初始化-检测单列表画面
             dtpStartDate.SelectedDate= DateTime.Now.AddDays(-1);
