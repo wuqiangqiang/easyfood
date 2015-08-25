@@ -1,0 +1,14 @@
+D:\20150707\zrdsys\AutoUpdate\bin\Release\AutoUpdate.exe.config
+D:\20150707\zrdsys\AutoUpdate\bin\Release\AutoUpdate.exe
+D:\20150707\zrdsys\AutoUpdate\bin\Release\AutoUpdate.pdb
+D:\20150707\zrdsys\AutoUpdate\bin\Release\ICSharpCode.SharpZipLib.dll
+D:\20150707\zrdsys\AutoUpdate\obj\Release\MainWindow.baml
+D:\20150707\zrdsys\AutoUpdate\obj\Release\MainWindow.g.cs
+D:\20150707\zrdsys\AutoUpdate\obj\Release\App.g.cs
+D:\20150707\zrdsys\AutoUpdate\obj\Release\AutoUpdate_MarkupCompile.cache
+D:\20150707\zrdsys\AutoUpdate\obj\Release\AutoUpdate.g.resources
+D:\20150707\zrdsys\AutoUpdate\obj\Release\AutoUpdate.Properties.Resources.resources
+D:\20150707\zrdsys\AutoUpdate\obj\Release\AutoUpdate.csproj.GenerateResource.Cache
+D:\20150707\zrdsys\AutoUpdate\obj\Release\AutoUpdate.exe
+D:\20150707\zrdsys\AutoUpdate\obj\Release\AutoUpdate.pdb
+D:\20150707\zrdsys\AutoUpdate\obj\Release\AutoUpdate.csprojResolveAssemblyReference.cache

@@ -1,0 +1,6 @@
+D:\20150707\zrdsys\DBUtility\bin\Release\DBUtility.dll
+D:\20150707\zrdsys\DBUtility\bin\Release\DBUtility.pdb
+D:\20150707\zrdsys\DBUtility\bin\Release\MySql.Data.dll
+D:\20150707\zrdsys\DBUtility\obj\Release\DBUtility.dll
+D:\20150707\zrdsys\DBUtility\obj\Release\DBUtility.pdb
+D:\20150707\zrdsys\DBUtility\obj\Release\DBUtility.csprojResolveAssemblyReference.cache
