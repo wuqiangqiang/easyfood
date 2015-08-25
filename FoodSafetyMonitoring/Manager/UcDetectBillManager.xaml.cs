@@ -144,6 +144,10 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*耳标号不能为空";
             }
+            else if (_object_label.Text.Trim().Length != 15)
+            {
+                msg = "*耳标号必须为15位";
+            }
             else if (_detect_item.SelectedIndex < 1)
             {
                 msg = "*请选择检查项目";
@@ -447,6 +451,12 @@ namespace FoodSafetyMonitoring.Manager
                     return false;
             }
             return true;
+        }
+
+        private void btnget_Click(object sender, RoutedEventArgs e)
+        {
+            string objectlable = dbOperation.GetSingle(string.Format("select f_create_objectlable('{0}')", deptid)).ToString();
+            _object_label.Text = objectlable;
         }
     }
 }

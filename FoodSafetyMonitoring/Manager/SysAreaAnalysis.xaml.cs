@@ -115,9 +115,10 @@ namespace FoodSafetyMonitoring.Manager
             chart.View3D = true;
             chart.Bevel = true;
             Title title = new Title();
-            title.Text = _analysis_theme.Text;
-            title.FontFamily = new FontFamily("楷体");
-            title.FontSize = 16;
+            title.Text = string.Format("{0}年{1}月{2}日到{3}年{4}月{5}日 {6}", dtpStartDate.SelectedDate.Value.Year, dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
+                         dtpEndDate.SelectedDate.Value.Year, dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day, _analysis_theme.Text);
+            title.FontFamily = new FontFamily("微软雅黑");
+            title.FontSize = 12;
             DataSeries dataSeries = new DataSeries();
             dataSeries.RenderAs = RenderAs.Pie;
 
@@ -128,8 +129,8 @@ namespace FoodSafetyMonitoring.Manager
                 point.YValue = Convert.ToDouble(table.Rows[i][1].ToString());
                 point.LabelStyle = LabelStyles.Inside;
                 point.LabelText = table.Rows[i][0].ToString();
-                point.LabelFontFamily = new FontFamily("楷体");
-                point.LabelFontSize = 14;
+                point.LabelFontFamily = new FontFamily("微软雅黑");
+                point.LabelFontSize = 12;
                 dataSeries.DataPoints.Add(point);
             }
             chart.Series.Add(dataSeries);
