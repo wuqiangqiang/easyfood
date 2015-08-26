@@ -45,10 +45,11 @@
                         <TextBox  x:Name="FileNameTextBox" MinWidth="400" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></TextBox>
                         <Button  Content="浏览" x:Name="_browse" Click="btBrowse_Click"  Height="25" Width="60" Margin="10,0,0,0"/>
                         <Button  Content="上传" x:Name="_update" Click="btUpdate_Click"  Height="25" Width="60" Margin="10,0,0,0"/>
+                        <TextBlock Width="300" Foreground="Red">（建议：图片小于 65KB ；格式为PNG）</TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <Image x:Name="image1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="68"></Image>
+                    <Image x:Name="image1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100" Margin="200,30,0,0"></Image>
                 </Grid>
             </Grid>
         </Border>

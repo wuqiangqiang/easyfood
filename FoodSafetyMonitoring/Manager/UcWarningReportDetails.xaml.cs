@@ -74,6 +74,9 @@ namespace FoodSafetyMonitoring.Manager
                               _tableview.RowMax)).Tables[0];
 
             _tableview.Table = table;
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = _tableview.RowTotal.ToString();
         }
 
         void _tableview_GetDataByPageNumberEvent()

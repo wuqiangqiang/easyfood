@@ -116,9 +116,9 @@ namespace FoodSafetyMonitoring.Manager
             GetData();
 
             
-            _sj.Visibility = Visibility.Visible;
-            _hj.Visibility = Visibility.Visible;
-            _title.Text = current_table.Rows.Count.ToString();
+            //_sj.Visibility = Visibility.Visible;
+            //_hj.Visibility = Visibility.Visible;
+            //_title.Text = current_table.Rows.Count.ToString();
 
             if (current_table.Rows.Count == 0)
             {

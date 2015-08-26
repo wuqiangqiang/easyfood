@@ -31,8 +31,9 @@ namespace FoodSafetyMonitoring.Manager
         public string DeptId { get; set; }
         public string ItemId { get; set; }
         public string ResultId { get; set; }
+        public string ObjectId { get; set; }
 
-        public UcYearReportDept(IDBOperation dbOperation, string kssj, string jssj, string deptId, string itemId, string resultId)
+        public UcYearReportDept(IDBOperation dbOperation, string kssj, string jssj, string deptId, string itemId, string resultId, string objectId)
         {
             InitializeComponent();
 
@@ -42,6 +43,7 @@ namespace FoodSafetyMonitoring.Manager
             this.DeptId = deptId;
             this.ItemId = itemId;
             this.ResultId = resultId;
+            this.ObjectId = objectId;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
             getdata();
@@ -51,8 +53,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void getdata()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_country('{0}','{1}','{2}','{3}','{4}')",
-                              Kssj, Jssj, DeptId, ItemId, ResultId)).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_country('{0}','{1}','{2}','{3}','{4}','{5}')",
+                              Kssj, Jssj, DeptId, ItemId, ResultId, ObjectId)).Tables[0];
 
             currenttable = table;
 
@@ -198,7 +200,7 @@ namespace FoodSafetyMonitoring.Manager
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
             dept_id = rows[0]["PART_ID"].ToString();
 
-            UcYearReportDetails daydetails = new UcYearReportDetails(dbOperation, Kssj, Jssj, dept_id, ItemId, ResultId);
+            UcYearReportDetails daydetails = new UcYearReportDetails(dbOperation, Kssj, Jssj, dept_id, ItemId, ResultId,ObjectId);
             daydetails.SetValue(Grid.RowProperty, 0);
             daydetails.SetValue(Grid.RowSpanProperty, 2);
 

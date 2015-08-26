@@ -74,8 +74,8 @@ namespace FoodSafetyMonitoring.Manager
             //"直属与企业检测点疑似阳性样本检出比较分析",
             "不同检测项目检测量占比分析",
             "不同检测项目阳性样本检测占比分析",
-            "不同检测项目疑似阳性样本检测占比分析",
-            "疑似阳性/阳性样本检出总量占比分析"};//初始化变量
+            "不同检测项目疑似阳性样本检测占比分析"};//初始化变量
+            //"疑似阳性/阳性样本检出总量占比分析"
 
             _analysis_theme.ItemsSource = analysisThemes;
             _analysis_theme.SelectedIndex = 0;

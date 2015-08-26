@@ -103,6 +103,12 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                     text.SetValue(TextBlock.ForegroundProperty, Brushes.Blue);
                 }
 
+                //当检测结果是疑似阳性或者阳性时，内容为红色
+                if (myColumns[c.ColumnName.ToLower()].Column_show == "疑似阳性样本" || myColumns[c.ColumnName.ToLower()].Column_show == "阳性样本")
+                {
+                    text.SetValue(TextBlock.ForegroundProperty, Brushes.Red);
+                }
+
                 DataTemplate dataTemplate = new DataTemplate() { VisualTree = text };
                 gvc.CellTemplate = dataTemplate;
                 gvc.Width = 12 * myColumns[c.ColumnName.ToLower()].Width;
@@ -119,6 +125,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 button_modify.AddHandler(Button.ClickEvent, new RoutedEventHandler(modify_Click));
                 button_modify.SetBinding(Button.TagProperty, new Binding(table.Columns[0].ColumnName));
                 button_modify.SetResourceReference(Button.StyleProperty, "ListSetImageButtonTemplate");
+                button_modify.SetBinding(Button.VisibilityProperty, new Binding(table.Columns[0].ColumnName) { Converter = new VisibleBtnConverter() });
                 DataTemplate dataTemplate_modify = new DataTemplate() { VisualTree = button_modify };
                 gvc_modify.CellTemplate = dataTemplate_modify;
                 _gridview.Columns.Add(gvc_modify);

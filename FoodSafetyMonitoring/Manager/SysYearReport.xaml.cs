@@ -73,6 +73,8 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             //检测结果
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag='1' ORDER BY id", "cxtj");
+            //检测对象
+            ComboboxTool.InitComboboxSource(_detect_object, "SELECT objectId,objectName FROM t_det_object WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
 
             //如果登录用户的部门是站点级别，则将查询条件检测单位赋上默认值
             if (isDept())
@@ -104,13 +106,14 @@ namespace FoodSafetyMonitoring.Manager
             grid_info.Children.Add(_tableview);
             MyColumns.Clear();
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year('{0}','{1}','{2}','{3}','{4}','{5}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
                               ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
-                               _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag)).Tables[0];
+                               _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag,
+                               _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag)).Tables[0];
             currenttable = table;
             list.Clear();
             for (int i = 0; i < table.Rows.Count; i++)
@@ -262,9 +265,9 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.MyColumns = MyColumns;
             _tableview.BShowDetails = true;
             _tableview.Table = tabledisplay;
-            _sj.Visibility = Visibility.Visible;
-            _hj.Visibility = Visibility.Visible;
-            _title.Text = row_count.ToString();
+            //_sj.Visibility = Visibility.Visible;
+            //_hj.Visibility = Visibility.Visible;
+            //_title.Text = row_count.ToString();
 
             if (row_count == 0)
             {
@@ -279,26 +282,28 @@ namespace FoodSafetyMonitoring.Manager
             string dept_id;
             string item_id;
             string result_id;
+            string object_id;
 
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
             dept_id = rows[0]["PART_ID"].ToString();
             item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
             result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
+            object_id = _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag.ToString();
 
             if (user_flag_tier == "3")
             {
                 grid_info.Children.Add(new UcYearReportDetails(dbOperation, ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
-                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id));
+                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id, object_id));
             }
             else if (user_flag_tier == "2")
             {
                 grid_info.Children.Add(new UcYearReportDept(dbOperation, ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
-                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id));
+                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id, object_id));
             }
             else
             {
                 grid_info.Children.Add(new UcYearReportCountry(dbOperation, ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
-                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id));
+                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id, object_id));
             }
         }
 

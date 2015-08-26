@@ -97,11 +97,11 @@
                 <Grid Grid.Row="6">
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock Width="60" Margin="0">西北地区：</TextBlock>
-                        <CheckBox x:Name="chk_27" Margin="30,0,0,0" Tag="51">陕西</CheckBox>
-                        <CheckBox x:Name="chk_28" Margin="30,0,0,0" Tag="50">甘肃</CheckBox>
-                        <CheckBox x:Name="chk_29" Margin="30,0,0,0" Tag="52">新疆</CheckBox>
-                        <CheckBox x:Name="chk_30" Margin="30,0,0,0" Tag="53">青海</CheckBox>
-                        <CheckBox x:Name="chk_31" Margin="30,0,0,0" Tag="54">宁夏</CheckBox>
+                        <CheckBox x:Name="chk_27" Margin="30,0,0,0" Tag="61">陕西</CheckBox>
+                        <CheckBox x:Name="chk_28" Margin="30,0,0,0" Tag="62">甘肃</CheckBox>
+                        <CheckBox x:Name="chk_29" Margin="30,0,0,0" Tag="65">新疆</CheckBox>
+                        <CheckBox x:Name="chk_30" Margin="30,0,0,0" Tag="63">青海</CheckBox>
+                        <CheckBox x:Name="chk_31" Margin="30,0,0,0" Tag="64">宁夏</CheckBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="7">

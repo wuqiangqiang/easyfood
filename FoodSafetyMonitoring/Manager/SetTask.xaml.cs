@@ -47,7 +47,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void createTask()
         {
-            tableHeaders = new List<string>() { "检测项目", deptname };
+            tableHeaders = new List<string>() { "检测项目", deptname ,"单位"};
             //清空控件区域
             _grid_detail.Children.Clear();
             _grid_detail.RowDefinitions.Clear();
@@ -58,7 +58,15 @@ namespace FoodSafetyMonitoring.Manager
             for (int i = 0; i < tableHeaders.Count; i++)
             {
                 _grid_detail.ColumnDefinitions.Add(new ColumnDefinition());
-                _grid_detail.ColumnDefinitions[i].Width = new GridLength(150, GridUnitType.Pixel);
+                if (i == tableHeaders.Count - 1)
+                {
+                    _grid_detail.ColumnDefinitions[i].Width = new GridLength(60, GridUnitType.Pixel);
+                }
+                else
+                {
+                    _grid_detail.ColumnDefinitions[i].Width = new GridLength(150, GridUnitType.Pixel);
+                }
+                
             }
 
             //画出标题
@@ -68,7 +76,15 @@ namespace FoodSafetyMonitoring.Manager
                 Border border = new Border();
                 border.BorderBrush = new SolidColorBrush(Color.FromRgb(228, 227, 225));
                 border.HorizontalAlignment = HorizontalAlignment.Center;
-                border.Width = 150;
+                if(i == tableHeaders.Count - 1)
+                {
+                    border.Width = 60;
+                }
+                else
+                {
+                    border.Width = 150;
+                }
+                
                 border.Background = new SolidColorBrush(Color.FromRgb(242, 247, 251));
                 if (i == tableHeaders.Count - 1)
                 {
@@ -105,7 +121,6 @@ namespace FoodSafetyMonitoring.Manager
                     Border border = new Border();
                     border.BorderBrush = new SolidColorBrush(Color.FromRgb(228, 227, 225));
                     border.HorizontalAlignment = HorizontalAlignment.Center;
-                    border.Width = 150;
 
                     if (j == tableHeaders.Count - 1)
                     {
@@ -134,12 +149,14 @@ namespace FoodSafetyMonitoring.Manager
                     textBox.Margin = new Thickness(0);
                     if (j == 0)
                     {
+                        border.Width = 150;
                         textBox.IsReadOnly = true;
                         textBox.Text = table.Rows[i][1].ToString();
                         textBox.Tag = table.Rows[i][0].ToString();
                     }
-                    else
+                    else if (j == 1)
                     {
+                        border.Width = 150;
                         if (table.Rows[i][2].ToString() == null || table.Rows[i][2].ToString() == "")
                         {
                             textBox.Text = "0";
@@ -155,6 +172,13 @@ namespace FoodSafetyMonitoring.Manager
                         textBox.MaxLength = 5;
                         textBox.Tag = (i + 1) + "," + j;
                         textBoxs.Add((i + 1) + "," + j, textBox);
+                    }
+                    else if (j == 2)
+                    {
+                        border.Width = 60;
+                        textBox.IsReadOnly = true;
+                        textBox.Text = "/份次";
+                        textBox.Tag = "/份次";
                     }
                     textBox.HorizontalAlignment = HorizontalAlignment.Center;
                     textBox.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -241,7 +265,7 @@ namespace FoodSafetyMonitoring.Manager
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 sb.Append(table.Rows[i][0].ToString() + ",");
-                for (int j = 1; j < tableHeaders.Count; j++)
+                for (int j = 1; j < tableHeaders.Count - 1; j++)
                 {
                     sb.Append(textBoxs[(i + 1) + "," + j].Text);
                     if (j != tableHeaders.Count - 1)

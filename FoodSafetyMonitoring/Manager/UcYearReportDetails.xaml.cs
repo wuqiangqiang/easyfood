@@ -29,8 +29,9 @@ namespace FoodSafetyMonitoring.Manager
         public string DeptId { get; set; }
         public string ItemId { get; set; }
         public string ResultId { get; set; }
+        public string ObjectId { get; set; }
 
-        public UcYearReportDetails(IDBOperation dbOperation, string kssj, string jssj, string deptId, string itemId, string resultId)
+        public UcYearReportDetails(IDBOperation dbOperation, string kssj, string jssj, string deptId, string itemId, string resultId, string objectId)
         {
             InitializeComponent();
 
@@ -40,11 +41,12 @@ namespace FoodSafetyMonitoring.Manager
             this.DeptId = deptId;
             this.ItemId = itemId;
             this.ResultId = resultId;
+            this.ObjectId = objectId;
 
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 8 });
             MyColumns.Add("detecttypename", new MyColumn("detecttypename", "信息来源") { BShow = true, Width = 8 });
             MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 18 });
-            MyColumns.Add("partname", new MyColumn("partname", "检测单位") { BShow = true, Width = 16 });
+            MyColumns.Add("partname", new MyColumn("partname", "检测单位") { BShow = true, Width = 18 });
             MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 10 });
             MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
             MyColumns.Add("samplename", new MyColumn("samplename", "检测样本") { BShow = true, Width = 8 });
@@ -67,12 +69,15 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details('{0}','{1}','{2}','{3}','{4}',{5},{6})",
-                                Kssj, Jssj, DeptId, ItemId, ResultId,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
+                                Kssj, Jssj, DeptId, ItemId, ResultId,ObjectId,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 
             _tableview.Table = table;
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = _tableview.RowTotal.ToString();
         }
 
         void _tableview_GetDataByPageNumberEvent()

@@ -28,6 +28,7 @@ namespace FoodSafetyMonitoring.Manager
         private IDBOperation dbOperation;
         private DataTable currenttable;
         private string user_flag_tier;
+        private string deptid;
         private List<DeptItem> list = new List<DeptItem>();
 
         public UcSetTask(IDBOperation dbOperation)
@@ -35,6 +36,7 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
+            deptid = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
             _tableview.ModifyRowEnvent += new UcTableOperableView_NoPages.ModifyRowEventHandler(_tableview_ModifyRowEnvent);
             Load_table();
@@ -120,6 +122,61 @@ namespace FoodSafetyMonitoring.Manager
                 tabledisplay.Rows.Add(row);
             }
 
+            if (table.Rows.Count != 0)
+            {
+                //表格最后添加合计行
+                tabledisplay.Rows.Add(tabledisplay.NewRow()[1] = "合计");
+                for (int j = 1; j < tabledisplay.Columns.Count; j++)
+                {
+                    int sum = 0;
+                    for (int i = 0; i < tabledisplay.Rows.Count - 1; i++)
+                    {
+                        sum += Convert.ToInt32(tabledisplay.Rows[i][j].ToString());
+                    }
+                    //sum_column += sum;
+                    tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = sum;
+                }
+
+                DataTable tasktable = dbOperation.GetDbHelper().GetDataSet("select t_det_item.ItemNAME,task "+
+                                      "from t_task_assign left JOIN t_det_item ON t_task_assign.iid = t_det_item.ItemID "+
+                                      "where t_task_assign.did = " + deptid).Tables[0];
+
+                List<ItemTask> listtask = new List<ItemTask>();
+                listtask.Clear();
+                for (int i = 0; i < tasktable.Rows.Count; i++)
+                {
+                    ItemTask task = new ItemTask();
+                    task.ItemName = tasktable.Rows[i][0].ToString();
+                    task.Task = tasktable.Rows[i][1].ToString();
+                    listtask.Add(task);
+                }
+
+                //表格最后添加上级分配任务量
+                tabledisplay.Rows.Add(tabledisplay.NewRow()[1] = "上级分配任务量");
+                for (int j = 1; j < tabledisplay.Columns.Count; j++)
+                {
+                    string task = listtask.Where(s => s.ItemName == tabledisplay.Columns[j].ColumnName.ToString()).Select(s => s.Task).FirstOrDefault();
+                    if (task == null || task == "")
+                    {
+                        task = '0'.ToString();
+                    }
+
+                    tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = task;
+                }
+
+                //表格最后添加未分配量
+                tabledisplay.Rows.Add(tabledisplay.NewRow()[1] = "未分配量");
+
+                for (int j = 1; j < tabledisplay.Columns.Count; j++)
+                {
+                    int rwl = Convert.ToInt32(tabledisplay.Rows[tabledisplay.Rows.Count - 2][j].ToString());
+                    int yfp = Convert.ToInt32(tabledisplay.Rows[tabledisplay.Rows.Count - 3][j].ToString());
+                    int wfp = rwl - yfp;
+                    tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = wfp;
+                }
+
+            }
+
             _tableview.BShowModify = true;
             _tableview.MyColumns = MyColumns;
             _tableview.Table = tabledisplay;
@@ -144,6 +201,12 @@ namespace FoodSafetyMonitoring.Manager
 
             //public string ItemId { get; set; }
 
+            public string ItemName { get; set; }
+
+            public string Task { get; set; }
+        }
+        public class ItemTask
+        {
             public string ItemName { get; set; }
 
             public string Task { get; set; }

@@ -94,13 +94,13 @@ namespace FoodSafetyMonitoring.Manager
 
         private void clear()
         {
-            this._province.SelectedIndex = 0;
-            this._city.SelectedIndex = 0;
-            this._region.SelectedIndex = 0;
-            this._source_company.SelectedIndex = 0;
-            this._detect_number.Text = "";
-            this._object_count.Text = "";
-            this._object_label.Text = "";
+            //this._province.SelectedIndex = 0;
+            //this._city.SelectedIndex = 0;
+            //this._region.SelectedIndex = 0;
+            //this._source_company.SelectedIndex = 0;
+            //this._detect_number.Text = "";
+            //this._object_count.Text = "";
+            //this._object_label.Text = "";
             //this._detect_trade.SelectedIndex = 1;
             this._detect_item.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
@@ -243,7 +243,23 @@ namespace FoodSafetyMonitoring.Manager
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            clear();
+            this._province.SelectedIndex = 0;
+            this._city.SelectedIndex = 0;
+            this._region.SelectedIndex = 0;
+            this._source_company.SelectedIndex = 0;
+            this._detect_number.Text = "";
+            this._object_count.Text = "";
+            this._object_label.Text = "";
+            this._detect_item.SelectedIndex = 0;
+            this._detect_method1.IsChecked = false;
+            this._detect_method2.IsChecked = false;
+            this._detect_method3.IsChecked = false;
+            this._detect_object.SelectedIndex = 0;
+            this._detect_sample.SelectedIndex = 0;
+            this._detect_sensitivity.SelectedIndex = 0;
+            this._detect_result.SelectedIndex = 0;
+            this._card_brand.SelectedIndex = 0;
+            this._entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
         }
 
         private void _detect_method1_Checked(object sender, RoutedEventArgs e)

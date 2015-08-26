@@ -1,4 +1,4 @@
-﻿D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\GeneratedInternalTypeHelper.g.cs
+﻿
 
 FD:\20150825\easyfood\FoodSafetyMonitoring\Frame.xaml;;
 FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\SysAreaAnalysis.xaml;;
@@ -26,6 +26,12 @@ FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\SysUserManager.xaml;;
 FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\SysWarningReport.xaml;;
 FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\SysYearAnalysis.xaml;;
 FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\Themes\ExpandDockPanel.xaml;;
+FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificate.xaml;;
+FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificatedetails.xaml;;
+FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificateProductDetails.xaml;;
+FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificateProductQuery.xaml;;
+FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificatequery.xaml;;
+FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificate_product.xaml;;
 FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcDayReportCountry.xaml;;
 FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcDayReportDept.xaml;;
 FD:\20150825\easyfood\FoodSafetyMonitoring\Manager\UcDayReportDetails.xaml;;

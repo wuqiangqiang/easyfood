@@ -282,9 +282,9 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.MyColumns = MyColumns;
             _tableview.BShowDetails = true;
             _tableview.Table = tabledisplay;
-            _sj.Visibility = Visibility.Visible;
-            _hj.Visibility = Visibility.Visible;
-            _title.Text = row_count.ToString();
+            //_sj.Visibility = Visibility.Visible;
+            //_hj.Visibility = Visibility.Visible;
+            //_title.Text = row_count.ToString();
 
             if (row_count == 0)
             {

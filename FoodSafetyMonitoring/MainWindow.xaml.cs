@@ -107,7 +107,7 @@ namespace FoodSafetyMonitoring
                 this._date.Text = DateTime.Now.ToLongDateString().ToString();
 
                 DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select companyName,phone from t_supplier where supplierId ='{0}'", (Application.Current.Resources["User"] as UserInfo).SupplierId == "" ? "zrd" : (Application.Current.Resources["User"] as UserInfo).SupplierId)).Tables[0];
-                this._bottom.Text = table.Rows[0][0].ToString() + "    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
+                this._bottom.Text = "版权所有:" + table.Rows[0][0].ToString() + "  软著登字第0814101号    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
 
                 //DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image from sys_client_sysdept where INFO_CODE ='{0}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).Tables[0];
                 DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image from sys_client_sysdept where INFO_CODE ='102'")).Tables[0];
