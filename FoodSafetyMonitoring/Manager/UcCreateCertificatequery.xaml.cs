@@ -69,12 +69,12 @@ namespace FoodSafetyMonitoring.Manager
 
         }
 
-        private void _btn_details_Click(object sender, RoutedEventArgs e)
-        {
-            string batch_no = (sender as Button).Tag.ToString();
+        //private void _btn_details_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string batch_no = (sender as Button).Tag.ToString();
 
-            grid_info.Children.Add(new UcCreateCertificatedetails(dbOperation, batch_no));
-        }
+        //    grid_info.Children.Add(new UcCreateCertificatedetails(dbOperation, batch_no));
+        //}
 
         private void _btn_card_Click(object sender, RoutedEventArgs e)
         {

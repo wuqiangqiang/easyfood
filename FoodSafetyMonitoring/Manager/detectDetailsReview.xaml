@@ -15,7 +15,7 @@
             <ImageBrush ImageSource="../res/details_big.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="7,7,7,0">

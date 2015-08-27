@@ -89,7 +89,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataColumn column = new DataColumn(ItemNames[i]);
                 tabledisplay.Columns.Add(column);
-                MyColumns.Add(ItemNames[i].ToString(), new MyColumn(ItemNames[i].ToString(), ItemNames[i].ToString()) { BShow = true, Width = 10 });
+                MyColumns.Add(ItemNames[i].ToString(), new MyColumn(ItemNames[i].ToString(), ItemNames[i].ToString() + "检测量") { BShow = true, Width = 10 });
                 tabledisplay.Columns.Add(new DataColumn("抽检率" + i));
                 MyColumns.Add("抽检率" + i, new MyColumn("抽检率" + i, "抽检率") { BShow = true, Width = 10 });
             }
@@ -108,8 +108,8 @@ namespace FoodSafetyMonitoring.Manager
             //表格后面为合计列
             tabledisplay.Columns.Add(new DataColumn("总抽检数"));
             MyColumns.Add("总抽检数", new MyColumn("总抽检数", "总抽检数") { BShow = flag, Width = 10 });
-            tabledisplay.Columns.Add(new DataColumn("总抽检率"));
-            MyColumns.Add("总抽检率", new MyColumn("总抽检率", "总抽检率") { BShow = flag, Width = 10 });
+            tabledisplay.Columns.Add(new DataColumn("综合平均抽检率"));
+            MyColumns.Add("综合平均抽检率", new MyColumn("综合平均抽检率", "综合平均抽检率") { BShow = flag, Width = 10 });
 
             //为表中各行生成数据
             for (int i = 0; i < DeptNames.Length; i++)

@@ -26,6 +26,7 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private string user_flag_tier;
+        private string item_id;
         private DataTable currenttable;
         private List<SamplingInfo> list = new List<SamplingInfo>();
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
@@ -92,6 +93,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
+            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
+
             grid_info.Children.Clear();
             grid_info.Children.Add(_tableview);
             MyColumns.Clear();
@@ -100,7 +103,7 @@ namespace FoodSafetyMonitoring.Manager
                               (Application.Current.Resources["User"] as UserInfo).ID,
                                _year.Text,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
-                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag)).Tables[0];
+                               item_id)).Tables[0];
             currenttable = table;
             list.Clear();
             for (int i = 0; i < table.Rows.Count; i++)
@@ -155,15 +158,14 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataColumn column = new DataColumn(ItemNames[i]);
                 tabledisplay.Columns.Add(column);
-                MyColumns.Add(ItemNames[i].ToString(), new MyColumn(ItemNames[i].ToString(), ItemNames[i].ToString()) { BShow = true, Width = 10 });
+                MyColumns.Add(ItemNames[i].ToString(), new MyColumn(ItemNames[i].ToString(), ItemNames[i].ToString() + "检测量") { BShow = true, Width = 10 });
                 tabledisplay.Columns.Add(new DataColumn("抽检率" + i));
                 MyColumns.Add("抽检率" + i, new MyColumn("抽检率" + i, "抽检率") { BShow = true, Width = 10 });
             }
 
             //当选择了检测项目作为查询条件时，不显示任务完成总量和任务总完成率
-            string item = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
             bool flag;
-            if (item == "")
+            if (item_id == "")
             {
                 flag = true;
             }
@@ -175,8 +177,8 @@ namespace FoodSafetyMonitoring.Manager
             //表格后面为合计列
             tabledisplay.Columns.Add(new DataColumn("总抽检数"));
             MyColumns.Add("总抽检数", new MyColumn("总抽检数", "总抽检数") { BShow = flag, Width = 10 });
-            tabledisplay.Columns.Add(new DataColumn("总抽检率"));
-            MyColumns.Add("总抽检率", new MyColumn("总抽检率", "总抽检率") { BShow = flag, Width = 10 });
+            tabledisplay.Columns.Add(new DataColumn("综合平均抽检率"));
+            MyColumns.Add("综合平均抽检率", new MyColumn("综合平均抽检率", "综合平均抽检率") { BShow = flag, Width = 10 });
 
             //为表中各行生成数据
             for (int i = 0; i < DeptNames.Length; i++)
@@ -237,9 +239,9 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.MyColumns = MyColumns;
             _tableview.BShowDetails = true;
             _tableview.Table = tabledisplay;
-            _sj.Visibility = Visibility.Visible;
-            _hj.Visibility = Visibility.Visible;
-            _title.Text = tabledisplay.Rows.Count.ToString();
+            //_sj.Visibility = Visibility.Visible;
+            //_hj.Visibility = Visibility.Visible;
+            //_title.Text = tabledisplay.Rows.Count.ToString();
 
             if (tabledisplay.Rows.Count == 0)
             {
@@ -251,11 +253,9 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_DetailsRowEnvent(string id)
         {
             string dept_id;
-            string item_id;
 
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
             dept_id = rows[0]["PART_ID"].ToString();
-            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
 
             if (user_flag_tier == "3")
             {

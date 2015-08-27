@@ -120,6 +120,7 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <Grid>
                 <!--<Grid.Background>
@@ -161,6 +162,10 @@
             <Grid Grid.Column="9" x:Name="_grid_7">
                 <Image x:Name="_image_7" />
                 <TextBlock x:Name="_text_7" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="9" x:Name="_grid_8">
+                <Image x:Name="_image_8" />
+                <TextBlock x:Name="_text_8" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="2" x:Name="grid_mainpage">

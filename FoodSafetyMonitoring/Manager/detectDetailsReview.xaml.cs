@@ -73,10 +73,19 @@ namespace FoodSafetyMonitoring.Manager
             if(table.Rows[0][25].ToString() == "0")
             {
                 chk_1.IsChecked = true;
+                chk_1.Visibility = Visibility.Visible;
+                chk_2.Visibility = Visibility.Hidden;
             }
             else if (table.Rows[0][25].ToString() == "1")
             {
                 chk_2.IsChecked = true;
+                chk_1.Visibility = Visibility.Hidden;
+                chk_2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                chk_1.Visibility = Visibility.Hidden;
+                chk_2.Visibility = Visibility.Hidden;
             }
         }
 

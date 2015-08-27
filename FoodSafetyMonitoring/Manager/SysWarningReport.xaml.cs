@@ -29,6 +29,8 @@ namespace FoodSafetyMonitoring.Manager
         private DataTable current_table;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         private string user_flag_tier;
+        private string item_id;
+        private string review_id;
         private string dept_name;
 
         public SysWarningReport(IDBOperation dbOperation)
@@ -97,8 +99,10 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("count", new MyColumn("count", "预警数合计") { BShow = true, Width = 12 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
-            string review_flag = _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag.ToString();
-            switch (review_flag)
+            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
+            review_id = _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag.ToString();
+
+            switch (review_id)
             {
                 case "0": MyColumns.Add("review_yes", new MyColumn("review_yes", "已复核数") { BShow = false, Width = 12 });
                     MyColumns.Add("review_no", new MyColumn("review_no", "未复核数") { BShow = true, Width = 12 });
@@ -132,8 +136,8 @@ namespace FoodSafetyMonitoring.Manager
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report('{0}','{1}','{2}','{3}','{4}','{5}')",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
-                              _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
-                              _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag)).Tables[0];
+                              item_id,
+                              review_id)).Tables[0];
             _tableview.Table = table;
             current_table = table;
         }
@@ -146,12 +150,8 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_DetailsRowEnvent(string id)
         {
             string dept_id;
-            string item_id;
-            string review_id;
 
             dept_id = id;
-            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
-            review_id = _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag.ToString();
 
             if (user_flag_tier == "3")
             {
@@ -174,8 +174,8 @@ namespace FoodSafetyMonitoring.Manager
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report('{0}','{1}','{2}','{3}','{4}','{5}')",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
-                              _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
-                              _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag)).Tables[0];
+                              item_id,
+                              review_id)).Tables[0];
 
             _tableview.ExportExcel();
         }

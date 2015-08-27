@@ -151,30 +151,32 @@ namespace FoodSafetyMonitoring.Manager
                     listtask.Add(task);
                 }
 
-                //表格最后添加上级分配任务量
-                tabledisplay.Rows.Add(tabledisplay.NewRow()[1] = "上级分配任务量");
-                for (int j = 1; j < tabledisplay.Columns.Count; j++)
+                if (user_flag_tier != "1")
                 {
-                    string task = listtask.Where(s => s.ItemName == tabledisplay.Columns[j].ColumnName.ToString()).Select(s => s.Task).FirstOrDefault();
-                    if (task == null || task == "")
+                    //表格最后添加上级分配任务量
+                    tabledisplay.Rows.Add(tabledisplay.NewRow()[1] = "上级下达任务量");
+                    for (int j = 1; j < tabledisplay.Columns.Count; j++)
                     {
-                        task = '0'.ToString();
+                        string task = listtask.Where(s => s.ItemName == tabledisplay.Columns[j].ColumnName.ToString()).Select(s => s.Task).FirstOrDefault();
+                        if (task == null || task == "")
+                        {
+                            task = '0'.ToString();
+                        }
+
+                        tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = task;
                     }
 
-                    tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = task;
+                    //表格最后添加未分配量
+                    tabledisplay.Rows.Add(tabledisplay.NewRow()[1] = "未分配量");
+
+                    for (int j = 1; j < tabledisplay.Columns.Count; j++)
+                    {
+                        int rwl = Convert.ToInt32(tabledisplay.Rows[tabledisplay.Rows.Count - 2][j].ToString());
+                        int yfp = Convert.ToInt32(tabledisplay.Rows[tabledisplay.Rows.Count - 3][j].ToString());
+                        int wfp = rwl - yfp;
+                        tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = wfp;
+                    }
                 }
-
-                //表格最后添加未分配量
-                tabledisplay.Rows.Add(tabledisplay.NewRow()[1] = "未分配量");
-
-                for (int j = 1; j < tabledisplay.Columns.Count; j++)
-                {
-                    int rwl = Convert.ToInt32(tabledisplay.Rows[tabledisplay.Rows.Count - 2][j].ToString());
-                    int yfp = Convert.ToInt32(tabledisplay.Rows[tabledisplay.Rows.Count - 3][j].ToString());
-                    int wfp = rwl - yfp;
-                    tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = wfp;
-                }
-
             }
 
             _tableview.BShowModify = true;

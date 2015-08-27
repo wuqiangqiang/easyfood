@@ -295,7 +295,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value.ToString() == "合计" || value.ToString() == "上级分配任务量" || value.ToString() == "未分配量")
+            if (value.ToString() == "合计" || value.ToString() == "上级下达任务量" || value.ToString() == "未分配量")
             {
                 return Visibility.Hidden;
             }

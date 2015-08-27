@@ -26,6 +26,9 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private string user_flag_tier;
+        private string item_id;
+        private string result_id;
+        private string object_id;
         private DataTable currenttable;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
 
@@ -102,6 +105,10 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
+            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
+            result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
+            object_id = _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag.ToString();
+
             grid_info.Children.Clear();
             grid_info.Children.Add(_tableview);
             MyColumns.Clear();
@@ -111,9 +118,9 @@ namespace FoodSafetyMonitoring.Manager
                               ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
                               ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
-                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
-                               _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag,
-                               _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag)).Tables[0];
+                               item_id,
+                               result_id,
+                               object_id)).Tables[0];
             currenttable = table;
             list.Clear();
             for (int i = 0; i < table.Rows.Count; i++)
@@ -172,7 +179,6 @@ namespace FoodSafetyMonitoring.Manager
             tabledisplay.Columns.Add(new DataColumn("合计"));
             MyColumns.Add("合计", new MyColumn("合计", "合计") { BShow = true, Width = 10 });
 
-            string result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
             switch (result_id)
             {
                 case "": tabledisplay.Columns.Add(new DataColumn("阴性样本"));
@@ -274,21 +280,14 @@ namespace FoodSafetyMonitoring.Manager
                 Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
         }
 
         void _tableview_DetailsRowEnvent(string id)
         {
-            string dept_id;
-            string item_id;
-            string result_id;
-            string object_id;
+            string dept_id;      
 
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
             dept_id = rows[0]["PART_ID"].ToString();
-            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
-            result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
-            object_id = _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag.ToString();
 
             if (user_flag_tier == "3")
             {

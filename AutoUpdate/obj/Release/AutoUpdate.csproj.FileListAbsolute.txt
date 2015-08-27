@@ -16,7 +16,6 @@ D:\20150825\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe.config
 D:\20150825\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe
 D:\20150825\easyfood\AutoUpdate\bin\Release\AutoUpdate.pdb
 D:\20150825\easyfood\AutoUpdate\bin\Release\ICSharpCode.SharpZipLib.dll
-D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.csprojResolveAssemblyReference.cache
 D:\20150825\easyfood\AutoUpdate\obj\Release\MainWindow.baml
 D:\20150825\easyfood\AutoUpdate\obj\Release\MainWindow.g.cs
 D:\20150825\easyfood\AutoUpdate\obj\Release\App.g.cs

@@ -98,7 +98,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
 
                 //当列为任务完成率和任务总完成率时，显示为红色
                 if (myColumns[c.ColumnName.ToLower()].Column_show == "任务完成率" || myColumns[c.ColumnName.ToLower()].Column_show == "任务总完成率"
-                    || myColumns[c.ColumnName.ToLower()].Column_show == "抽检率" || myColumns[c.ColumnName.ToLower()].Column_show == "总抽检率")
+                    || myColumns[c.ColumnName.ToLower()].Column_show == "抽检率" || myColumns[c.ColumnName.ToLower()].Column_show == "综合平均抽检率")
                 {
                     text.SetValue(TextBlock.ForegroundProperty, Brushes.Blue);
                 }

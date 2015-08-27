@@ -46,7 +46,7 @@ namespace FoodSafetyMonitoring.Manager
             //_province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
 
             //ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_provice_dept_hb('{0}','yz') ", userId), "lr");
-            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_wcz('{0}') ", userId), "lr");
+            //ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_wcz('{0}') ", userId), "lr");
             //_source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
             //_cdatetime.Text = string.Format("{0:g}", System.DateTime.Now);
             //_cperson.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
@@ -54,100 +54,51 @@ namespace FoodSafetyMonitoring.Manager
 
         }
 
-        //void _province_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        //private void _query_Click(object sender, RoutedEventArgs e)
         //{
-        //    if (_province.SelectedIndex > 0)
+        //    //判断是否有疑似阳性的数据
+        //    string i = dbOperation.GetDbHelper().GetSingle(string.Format("call p_company_czresult_check({0},'{1}')", userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).ToString();
+        //    if(int.Parse(i) > 0 )
         //    {
-        //        DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province.SelectedItem as Label).Tag.ToString() + "'");
-        //        ComboboxTool.InitComboboxSource(_city, rows, "lr");
-        //        _city.SelectionChanged += new SelectionChangedEventHandler(_city_SelectionChanged);
+        //        Toolkit.MessageBox.Show("该货主检测数据中存在疑似阳性数据，不能出证！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        return;
         //    }
-        //}
 
-
-        //void _city_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (_city.SelectedIndex > 0)
+        //    //先判断该批次是否满足抽检率
+        //    string flag = dbOperation.GetDbHelper().GetSingle(string.Format("call p_company_sampling_check({0},'{1}')", userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).ToString();
+        //    if (flag == "1")
         //    {
-        //        DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city.SelectedItem as Label).Tag.ToString() + "'");
-        //        ComboboxTool.InitComboboxSource(_region, rows, "lr");
-        //        _region.SelectionChanged += new SelectionChangedEventHandler(_region_SelectionChanged);
+        //        Toolkit.MessageBox.Show("该货主检测数据未达到抽检率，不能出证！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        return;
         //    }
-        //}
 
-        //void _region_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (_region.SelectedIndex > 0)
+
+        //    //根据条件查询出数据
+        //    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_create_certificate({0},'{1}')",
+        //                                     userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
+        //    if (table.Rows.Count == 0)
         //    {
-        //        ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID =" + (_region.SelectedItem as Label).Tag.ToString(), "lr");
-
+        //        Toolkit.MessageBox.Show("该货主还未做过出证检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        return;
         //    }
-        //}
-
-        //void _source_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    //来源单位下拉选择的是有效内容，则将自动带出抽检信息
-        //    if (_source_company.SelectedIndex >= 1)
+        //    else
         //    {
-        //        //清空列表
-        //        lvlist.DataContext = null;
+        //        company_id = (_source_company.SelectedItem as Label).Tag.ToString();
+        //        _company.Text = table.Rows[0][4].ToString();
+        //        _detect_object.Text = table.Rows[0][3].ToString();
+        //        _object_count.Text = table.Rows[0][1].ToString() ;
+        //        _object_type.Text =  "头";
+        //        batch_no = table.Rows[0][0].ToString();
+        //        _user_name.Text = username;
+        //        _nian.Text = DateTime.Now.Year.ToString();
+        //        _yue.Text = DateTime.Now.Month.ToString();
+        //        _day.Text = DateTime.Now.Day.ToString();
 
-        //        //根据条件查询出数据
-        //        DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_main('{0}')", (_source_company.SelectedItem as Label).Tag.ToString())).Tables[0];
-        //        current_table = table;
-        //        lvlist.DataContext = table;
         //    }
-        //}
-
-        private void _query_Click(object sender, RoutedEventArgs e)
-        {
-            if (_source_company.SelectedIndex == 0)
-            {
-                Toolkit.MessageBox.Show("货主不能为空", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            //判断是否有疑似阳性的数据
-            string i = dbOperation.GetDbHelper().GetSingle(string.Format("call p_company_czresult_check({0},'{1}')", userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).ToString();
-            if(int.Parse(i) > 0 )
-            {
-                Toolkit.MessageBox.Show("该货主检测数据中存在疑似阳性数据，不能出证！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            //先判断该批次是否满足抽检率
-            string flag = dbOperation.GetDbHelper().GetSingle(string.Format("call p_company_sampling_check({0},'{1}')", userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).ToString();
-            if (flag == "1")
-            {
-                Toolkit.MessageBox.Show("该货主检测数据未达到抽检率，不能出证！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-
-            //根据条件查询出数据
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_create_certificate({0},'{1}')",
-                                             userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
-            if (table.Rows.Count == 0)
-            {
-                Toolkit.MessageBox.Show("该货主还未做过出证检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            else
-            {
-                company_id = (_source_company.SelectedItem as Label).Tag.ToString();
-                _company.Text = table.Rows[0][4].ToString();
-                _detect_object.Text = table.Rows[0][3].ToString();
-                _object_count.Text = table.Rows[0][1].ToString() ;
-                _object_type.Text =  "头";
-                batch_no = table.Rows[0][0].ToString();
-                _user_name.Text = username;
-                _nian.Text = DateTime.Now.Year.ToString();
-                _yue.Text = DateTime.Now.Month.ToString();
-                _day.Text = DateTime.Now.Day.ToString();
-
-            }
             
             
-        }
+        //}
 
         private void _create_Click(object sender, RoutedEventArgs e)
         {
@@ -276,7 +227,6 @@ namespace FoodSafetyMonitoring.Manager
 
         private void clear()
         {
-            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_wcz('{0}') ", userId), "lr");
             _card_id.Text = "";
             _company.Text= "";
             _detect_object.Text= "";
@@ -356,51 +306,6 @@ namespace FoodSafetyMonitoring.Manager
             public double Height { get; set; }
 
             public int DPI { get; set; }
-        }
-
-        //private void _btn_create_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //生成检疫证号
-        //    string card_id = dbOperation.GetDbHelper().GetSingle(string.Format("select f_create_cardid('{0}')", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
-
-        //    string batch_no = (sender as Button).Tag.ToString();
-
-        //    string sql = string.Format("call p_insert_certificate('{0}','{1}','{2}','{3}','{4}')"
-        //                    , card_id, batch_no,
-        //                    (Application.Current.Resources["User"] as UserInfo).DepartmentID,
-        //                    (Application.Current.Resources["User"] as UserInfo).ID,
-        //                    System.DateTime.Now);
-
-
-        //    int i = dbOperation.GetDbHelper().ExecuteSql(sql);
-        //    if (i == 0)
-        //    {
-        //        Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        getdata();
-
-        //        CertificatePreview cer = new CertificatePreview();
-        //        cer.ShowDialog();
-        //    }
-        //    else
-        //    {
-        //        Toolkit.MessageBox.Show("电子出证单生成失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
-        //}
-
-        //private void _chk_Click(object sender, RoutedEventArgs e)
-        //{
-        //    CheckBox cb = sender as CheckBox;
-        //    string detectorder = cb.Tag.ToString(); //获取该行detectid   
-        //    if (cb.IsChecked == true)
-        //    {
-        //        selectdetect.Add(detectorder);  //如果选中就保存detectid   
-        //    }
-        //    else
-        //    {
-        //        selectdetect.Remove(detectorder);   //如果选中取消就删除里面的detectid   
-        //    }  
-        //}
-        
+        }  
     }
 }

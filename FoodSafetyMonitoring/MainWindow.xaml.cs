@@ -150,18 +150,19 @@ namespace FoodSafetyMonitoring
                             "FROM sys_sub s ,sys_rolepermission rp , sys_client_user u " +
                             "WHERE s.SUB_ID = rp.SUB_ID " +
                             "AND rp.ROLE_ID = u.ROLE_ID " +
-                            "AND u.RECO_PKID = " + (Application.Current.Resources["User"] as UserInfo).ID;
+                            "AND u.RECO_PKID = " + (Application.Current.Resources["User"] as UserInfo).ID +
+                            " order by s.SUB_ORDER asc";
 
             DataTable table = dbOperation.GetDbHelper().GetDataSet(strSql).Tables[0];
             //一级菜单
             DataRow[] row_mainmenu = table.Select("SUB_FATHER_ID = '0'");
             //定义数组存放：一级菜单图片控件和一级菜单文字控件
             Image[] images = new Image[] { _image_0,_image_1,_image_2,_image_3,_image_4,_image_5,_image_6,
-                                           _image_7};
+                                           _image_7,_image_8};
             TextBlock[] texts = new TextBlock[] { _text_0, _text_1, _text_2, _text_3, _text_4, _text_5, _text_6,
-                                                  _text_7};
+                                                  _text_7,_text_8};
             Grid[] grids = new Grid[] { _grid_0, _grid_1, _grid_2, _grid_3, _grid_4, _grid_5, _grid_6,
-                                                  _grid_7};
+                                                  _grid_7,_grid_8};
 
             int i = 0;
             foreach (DataRow row in row_mainmenu)
@@ -395,32 +396,30 @@ namespace FoodSafetyMonitoring
         {
             //if (Name == "首页" && Flag_Exits == 1)
 
-            //20150814首页加二级菜单后去掉----------begin
-            //if (Name == "首页" )
-            //{
-            //    int flag = 0;
-            //    foreach (TabItem item in mainWindow._tab.Items)
-            //    {
-            //        if (item.Tag.ToString() == "1")
-            //        {
-            //            mainWindow._tab.SelectedItem = item;
-            //            flag = 1;
-            //            break;
-            //        }
-            //    }
-            //    if (flag == 0)
-            //    {
-            //        TabItem temptb = new TabItem();
-            //        temptb.Header = Name;
-            //        temptb.Tag = "1";
-            //        temptb.Content = new UcMainPage();
+            if (Name == "首页")
+            {
+                int flag = 0;
+                foreach (TabItem item in mainWindow._tab.Items)
+                {
+                    if (item.Tag.ToString() == "1")
+                    {
+                        mainWindow._tab.SelectedItem = item;
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0)
+                {
+                    TabItem temptb = new TabItem();
+                    temptb.Header = Name;
+                    temptb.Tag = "1";
+                    temptb.Content = new UcMainPage();
 
-            //        mainWindow._tab.Items.Add(temptb);
-            //        mainWindow._tab.SelectedIndex = mainWindow._tab.Items.Count - 1;
-            //    }
-            //}
-            //20150814首页加二级菜单后去掉----------end
-
+                    mainWindow._tab.Items.Add(temptb);
+                    mainWindow._tab.SelectedIndex = mainWindow._tab.Items.Count - 1;
+                }
+            }
+            
             //mainWindow.IsEnbleMouseEnterLeave = true;
             //if (Flag_Exits == 1)
             //{

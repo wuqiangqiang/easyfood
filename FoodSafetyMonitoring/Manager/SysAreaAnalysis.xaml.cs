@@ -115,8 +115,8 @@ namespace FoodSafetyMonitoring.Manager
             chart.View3D = true;
             chart.Bevel = true;
             Title title = new Title();
-            title.Text = string.Format("{0}年{1}月{2}日到{3}年{4}月{5}日 {6}", dtpStartDate.SelectedDate.Value.Year, dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
-                         dtpEndDate.SelectedDate.Value.Year, dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day, _analysis_theme.Text);
+            title.Text = string.Format("数据统计时间：{0}年{1}月{2}日到{3}年{4}月{5}日", dtpStartDate.SelectedDate.Value.Year, dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
+                         dtpEndDate.SelectedDate.Value.Year, dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day);
             title.FontFamily = new FontFamily("微软雅黑");
             title.FontSize = 12;
             DataSeries dataSeries = new DataSeries();

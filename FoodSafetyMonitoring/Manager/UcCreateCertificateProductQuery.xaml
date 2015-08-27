@@ -117,28 +117,19 @@
                     <ListView  Name="lvlist" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                         <ListView.View>
                             <GridView >
-                                <!--<GridViewColumn Width="50" Header="选择">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox x:Name="_chk" Tag="{Binding detectorder}" Click="_chk_Click" IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}"></CheckBox>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>-->
                                 <GridViewColumn Width="140" Header="检疫证号" DisplayMemberBinding="{Binding CARDID}" ></GridViewColumn>
                                 <GridViewColumn Width="140" Header="出证时间" DisplayMemberBinding="{Binding cdate}" ></GridViewColumn>
                                 <GridViewColumn Width="120" Header="出证单位" DisplayMemberBinding="{Binding DeptName}" ></GridViewColumn>
                                 <GridViewColumn Width="100" Header="出证人" DisplayMemberBinding="{Binding username}" ></GridViewColumn>
                                 <GridViewColumn Width="140" Header="来源产地" DisplayMemberBinding="{Binding areaname}" ></GridViewColumn>
                                 <GridViewColumn Width="140" Header="货主" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
-                                <!--<GridViewColumn Width="110" Header="检测批次编码" DisplayMemberBinding="{Binding batchno}" ></GridViewColumn>-->
-                                <GridViewColumn Width="110" Header="检测信息详情">
+                                <!--<GridViewColumn Width="110" Header="检测信息详情">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content=">>" x:Name="_btn_details" Width="60" Tag="{Binding czcardid}" Click="_btn_details_Click"></Button>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <!--<GridViewColumn Width="100" Header="出证状态"   DisplayMemberBinding="{Binding cz_ok}"></GridViewColumn>-->
+                                </GridViewColumn>-->
                                 <GridViewColumn Width="100" Header="检疫证详情">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>

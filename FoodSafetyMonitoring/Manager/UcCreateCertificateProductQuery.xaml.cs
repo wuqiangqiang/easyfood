@@ -41,11 +41,6 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            //if (_card_no.Text.Trim().Length == 0 && _source_company.SelectedIndex == 0)
-            //{
-            //    Toolkit.MessageBox.Show("检疫证号和被检单位必须输入一个！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
 
             //清空列表
             lvlist.DataContext = null;
@@ -69,12 +64,12 @@ namespace FoodSafetyMonitoring.Manager
 
         }
 
-        private void _btn_details_Click(object sender, RoutedEventArgs e)
-        {
-            string czcard_id = (sender as Button).Tag.ToString();
+        //private void _btn_details_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string czcard_id = (sender as Button).Tag.ToString();
 
-            grid_info.Children.Add(new UcCreateCertificateProductDetails(dbOperation, czcard_id));
-        }
+        //    grid_info.Children.Add(new UcCreateCertificateProductDetails(dbOperation, czcard_id));
+        //}
 
         private void _btn_card_Click(object sender, RoutedEventArgs e)
         {

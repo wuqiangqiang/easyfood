@@ -38,45 +38,43 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
 
             this.dbOperation = dbOperation;
-
-            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_product_wcz('{0}') ", userId), "lr");
         }
 
-        private void _query_Click(object sender, RoutedEventArgs e)
-        {
-            if (_source_company.SelectedIndex == 0)
-            {
-                Toolkit.MessageBox.Show("货主不能为空", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+        //private void _query_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_source_company.SelectedIndex == 0)
+        //    {
+        //        Toolkit.MessageBox.Show("货主不能为空", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        return;
+        //    }
 
-            //根据条件查询出数据
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_create_certificate_product({0},'{1}')",
-                                             userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
-            if (table.Rows.Count == 0)
-            {
-                Toolkit.MessageBox.Show("该货主还未做过屠宰检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            else
-            {
-                company_id = (_source_company.SelectedItem as Label).Tag.ToString();
-                _company.Text = table.Rows[0][4].ToString();
-                _product_name.Text = table.Rows[0][3].ToString()+"胴体";
-                _object_count.Text = table.Rows[0][1].ToString();
-                _object_type.Text = "头";
-                _cz_cardid.Text = table.Rows[0][0].ToString();
-                _product_area.Text = table.Rows[0][7].ToString();
-                _dept_name.Text = table.Rows[0][5].ToString() + "              " +table.Rows[0][6].ToString();
-                dept_name = table.Rows[0][5].ToString();
-                dept_area = table.Rows[0][6].ToString();
-                _user_name.Text = username;
-                _nian.Text = DateTime.Now.Year.ToString();
-                _yue.Text = DateTime.Now.Month.ToString();
-                _day.Text = DateTime.Now.Day.ToString();
+        //    //根据条件查询出数据
+        //    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_create_certificate_product({0},'{1}')",
+        //                                     userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
+        //    if (table.Rows.Count == 0)
+        //    {
+        //        Toolkit.MessageBox.Show("该货主还未做过屠宰检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        company_id = (_source_company.SelectedItem as Label).Tag.ToString();
+        //        _company.Text = table.Rows[0][4].ToString();
+        //        _product_name.Text = table.Rows[0][3].ToString()+"胴体";
+        //        _object_count.Text = table.Rows[0][1].ToString();
+        //        _object_type.Text = "头";
+        //        _cz_cardid.Text = table.Rows[0][0].ToString();
+        //        _product_area.Text = table.Rows[0][7].ToString();
+        //        _dept_name.Text = table.Rows[0][5].ToString() + "              " +table.Rows[0][6].ToString();
+        //        dept_name = table.Rows[0][5].ToString();
+        //        dept_area = table.Rows[0][6].ToString();
+        //        _user_name.Text = username;
+        //        _nian.Text = DateTime.Now.Year.ToString();
+        //        _yue.Text = DateTime.Now.Month.ToString();
+        //        _day.Text = DateTime.Now.Day.ToString();
 
-            }
-        }
+        //    }
+        //}
 
         private void _create_Click(object sender, RoutedEventArgs e)
         {
@@ -111,11 +109,11 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (_product_area.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入产地！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_product_area.Text.Trim().Length == 0)
+            //{
+            //    Toolkit.MessageBox.Show("请输入产地！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
             if (_dept_name.Text.Trim().Length == 0)
             {
@@ -134,7 +132,7 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             string sql = string.Format("call p_insert_certificate_product('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}')"
-                            , _card_id.Text, company_id, _company.Text, _cz_cardid.Text, _product_name.Text, _object_count.Text + _object_type.Text, _product_area.Text,
+                            , _card_id.Text, company_id, _company.Text, _cz_cardid.Text, _product_name.Text, _object_count.Text + _object_type.Text, _dept_area.Text,
                             dept_name, dept_area, _mdd.Text, _bz.Text,
                             (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                             (Application.Current.Resources["User"] as UserInfo).ID,
@@ -144,7 +142,7 @@ namespace FoodSafetyMonitoring.Manager
             if (i >= 0)
             {
                 List<string> cer_details = new List<string>() {_card_id.Text,_company.Text,_cz_cardid.Text, _product_name.Text, _object_count.Text ,
-                             _object_type.Text, _product_area.Text,dept_name, dept_area, _mdd.Text, _bz.Text,username,
+                             _object_type.Text, _dept_area.Text,dept_name, dept_area, _mdd.Text, _bz.Text,username,
                             System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
                 UcCertificateProductDetails cer = new UcCertificateProductDetails(cer_details);
@@ -172,7 +170,6 @@ namespace FoodSafetyMonitoring.Manager
 
         private void clear()
         {
-            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_product_wcz('{0}') ", userId), "lr");
             _card_id.Text = "";
             _company.Text = "";
             _cz_cardid.Text = "";
@@ -180,7 +177,7 @@ namespace FoodSafetyMonitoring.Manager
             _product_name.Text = "";
             _dept_name.Text = "";
             _object_type.Text = "";
-            _product_area.Text = "";
+            _dept_area.Text = "";
             _mdd.Text = "";
             _bz.Text = "";
         }

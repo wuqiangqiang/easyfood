@@ -26,6 +26,7 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private string user_flag_tier;
+        private string item_id;
         private DataTable currenttable;
         private List<TaskInfo> list = new List<TaskInfo>();
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
@@ -92,6 +93,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
+            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
+
             grid_info.Children.Clear();
             grid_info.Children.Add(_tableview);
             MyColumns.Clear();
@@ -100,7 +103,7 @@ namespace FoodSafetyMonitoring.Manager
                               (Application.Current.Resources["User"] as UserInfo).ID,
                                _year.Text,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
-                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag)).Tables[0];
+                               item_id)).Tables[0];
             currenttable = table;
             list.Clear();
             for (int i = 0; i < table.Rows.Count; i++)
@@ -160,9 +163,8 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             //当选择了检测项目作为查询条件时，不显示任务完成总量和任务总完成率
-            string item = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
             bool flag;
-            if(item == "")
+            if(item_id == "")
             {
                 flag = true;
             }
@@ -228,9 +230,9 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.MyColumns = MyColumns;
             _tableview.BShowDetails = true;
             _tableview.Table = tabledisplay;
-            _sj.Visibility = Visibility.Visible;
-            _hj.Visibility = Visibility.Visible;
-            _title.Text = tabledisplay.Rows.Count.ToString();
+            //_sj.Visibility = Visibility.Visible;
+            //_hj.Visibility = Visibility.Visible;
+            //_title.Text = tabledisplay.Rows.Count.ToString();
 
             if (tabledisplay.Rows.Count == 0)
             {
@@ -242,11 +244,9 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_DetailsRowEnvent(string id)
         {
             string dept_id;
-            string item_id;
 
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
             dept_id = rows[0]["PART_ID"].ToString();
-            item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag.ToString();
 
             if (user_flag_tier == "3")
             {
