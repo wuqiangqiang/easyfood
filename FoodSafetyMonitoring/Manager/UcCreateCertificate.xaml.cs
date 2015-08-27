@@ -31,74 +31,57 @@ namespace FoodSafetyMonitoring.Manager
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         string username = (Application.Current.Resources["User"] as UserInfo).ShowName;
-        private string company_id;
-        private string batch_no;
-        //private List<string> selectdetect = new List<string>();
+        string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
         public UcCreateCertificate(IDBOperation dbOperation)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            //ProvinceCityTable = Application.Current.Resources["省市表"] as DataTable;
-            //DataRow[] rows = ProvinceCityTable.Select("pid = '0001'");
-            //ComboboxTool.InitComboboxSource(_province, rows, "lr");
-            //_province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
+            _user_name.Text = username;
+            _nian.Text = DateTime.Now.Year.ToString();
+            _yue.Text = DateTime.Now.Month.ToString();
+            _day.Text = DateTime.Now.Day.ToString();
 
-            //ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_provice_dept_hb('{0}','yz') ", userId), "lr");
-            //ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_wcz('{0}') ", userId), "lr");
-            //_source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
-            //_cdatetime.Text = string.Format("{0:g}", System.DateTime.Now);
-            //_cperson.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
-            //_cdept.Text = dbOperation.GetDbHelper().GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
-
+            //货主
+            ComboboxTool.InitComboboxSource(_shipper, "SELECT shipperid,shippername FROM t_shipper WHERE createdeptid =  " + deptId, "lr");
+            _shipper.SelectionChanged += new SelectionChangedEventHandler(_shipper_SelectionChanged);
+            //动物种类
+            ComboboxTool.InitComboboxSource(_object_id, "SELECT animalid,animalname FROM t_animal WHERE openflag = '1'", "lr");
+            _object_id.SelectionChanged += new SelectionChangedEventHandler(_object_id_SelectionChanged);
+            _object_id.SelectedIndex = 1;
+            //用途
+            ComboboxTool.InitComboboxSource(_for_use, "SELECT useid,usename FROM t_for_use WHERE openflag = '1'", "lr");
         }
 
+        public void refresh()
+        {
+            ComboboxTool.InitComboboxSource(_shipper, "SELECT shipperid,shippername FROM t_shipper WHERE createdeptid =  " + deptId, "lr");
+        }
 
-        //private void _query_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //判断是否有疑似阳性的数据
-        //    string i = dbOperation.GetDbHelper().GetSingle(string.Format("call p_company_czresult_check({0},'{1}')", userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).ToString();
-        //    if(int.Parse(i) > 0 )
-        //    {
-        //        Toolkit.MessageBox.Show("该货主检测数据中存在疑似阳性数据，不能出证！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
+        void _object_id_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_object_id.SelectedIndex > 0)
+            {
+                string object_type = dbOperation.GetDbHelper().GetSingle("select unit from t_animal where animalid =" + (_object_id.SelectedItem as Label).Tag.ToString()).ToString();
+                _object_type.Text = object_type;
+            }
+        }
 
-        //    //先判断该批次是否满足抽检率
-        //    string flag = dbOperation.GetDbHelper().GetSingle(string.Format("call p_company_sampling_check({0},'{1}')", userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).ToString();
-        //    if (flag == "1")
-        //    {
-        //        Toolkit.MessageBox.Show("该货主检测数据未达到抽检率，不能出证！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
+        void _shipper_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_shipper.SelectedIndex > 0)
+            {
+                string phone = dbOperation.GetDbHelper().GetSingle("select phone from t_shipper where shipperid =" + (_shipper.SelectedItem as Label).Tag.ToString()).ToString();
+                _phone.Text = phone;
+            }
+        }
 
-
-        //    //根据条件查询出数据
-        //    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_create_certificate({0},'{1}')",
-        //                                     userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
-        //    if (table.Rows.Count == 0)
-        //    {
-        //        Toolkit.MessageBox.Show("该货主还未做过出证检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        company_id = (_source_company.SelectedItem as Label).Tag.ToString();
-        //        _company.Text = table.Rows[0][4].ToString();
-        //        _detect_object.Text = table.Rows[0][3].ToString();
-        //        _object_count.Text = table.Rows[0][1].ToString() ;
-        //        _object_type.Text =  "头";
-        //        batch_no = table.Rows[0][0].ToString();
-        //        _user_name.Text = username;
-        //        _nian.Text = DateTime.Now.Year.ToString();
-        //        _yue.Text = DateTime.Now.Month.ToString();
-        //        _day.Text = DateTime.Now.Day.ToString();
-
-        //    }
-            
-            
-        //}
+        private void _add_Click(object sender, RoutedEventArgs e)
+        {
+            AddShipper ship = new AddShipper(dbOperation, this);
+            ship.ShowDialog();
+        }  
 
         private void _create_Click(object sender, RoutedEventArgs e)
         {
@@ -115,33 +98,27 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if(_company.Text.Trim().Length == 0)
+            if(_shipper.SelectedIndex < 1)
             {
-                Toolkit.MessageBox.Show("请输入货主！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请选择货主！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            if (_phone.Text.Trim().Length == 0)
+            if (_object_id.Text.Trim().Length == 0)
             {
-                Toolkit.MessageBox.Show("请输入联系电话！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            if (_detect_object.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入动物种类！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请选择动物种类！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             if (_object_count.Text.Trim().Length == 0)
             {
-                Toolkit.MessageBox.Show("请输入数量及单位！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请输入数量！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            if (_for_use.Text.Trim().Length == 0)
+            if (_for_use.SelectedIndex < 1)
             {
-                Toolkit.MessageBox.Show("请输入用途！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请选择用途！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -186,9 +163,15 @@ namespace FoodSafetyMonitoring.Manager
             //    return;
             //}
 
-            string sql = string.Format("call p_insert_certificate('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}')"
-                            , _card_id.Text, company_id, _company.Text, batch_no, _detect_object.Text, _object_count.Text + _object_type.Text, _phone.Text,
-                            _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
+            string sql = string.Format("INSERT INTO t_certificate(cardid,companyid,companyname,objectid,objectname,objectcount," +
+                                        "phone,foruseid,foruse,cityks,regionks,townks,villageks,cityjs,regionjs,townjs," +
+                                        "villagejs,objectlable,createdeptid,createuserid,createdate)" +
+                                        " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}')"
+                            , _card_id.Text, (_shipper.SelectedItem as Label).Tag.ToString(), _shipper.Text,
+                            (_object_id.SelectedItem as Label).Tag.ToString(), _object_id.Text, _object_count.Text + _object_type.Text,
+                            _phone.Text, (_for_use.SelectedItem as Label).Tag.ToString(), _for_use.Text, _city_ks.Text,
+                             _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
                             _town_js.Text, _village_js.Text, _object_lable.Text,
                             (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                             (Application.Current.Resources["User"] as UserInfo).ID,
@@ -197,24 +180,24 @@ namespace FoodSafetyMonitoring.Manager
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
-                List<string> cer_details = new List<string>() {_card_id.Text,_company.Text,_detect_object.Text, _object_count.Text,_object_type.Text, _phone.Text,
-                            _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
-                            _town_js.Text, _village_js.Text, _object_lable.Text,username,
-                            System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
+                //List<string> cer_details = new List<string>() {_card_id.Text,_shipper.Text,_object_id.Text, _object_count.Text,_object_type.Text, _phone.Text,
+                //            _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
+                //            _town_js.Text, _village_js.Text, _object_lable.Text,username,
+                //            System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
-                UcCertificateDetails cer = new UcCertificateDetails(cer_details);
+                //UcCertificateDetails cer = new UcCertificateDetails(cer_details);
 
-                PrintDialog dialog = new PrintDialog();
-                if (dialog.ShowDialog() == true)
-                {
-                    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
-                    cer.Measure(printSize);
-                    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+                //PrintDialog dialog = new PrintDialog();
+                //if (dialog.ShowDialog() == true)
+                //{
+                //    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                //    cer.Measure(printSize);
+                //    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
 
-                    dialog.PrintVisual(cer, "Print Test");
-                }
+                //    dialog.PrintVisual(cer, "Print Test");
+                //}
 
-                //Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 clear();
                 return;
             }
@@ -227,12 +210,10 @@ namespace FoodSafetyMonitoring.Manager
 
         private void clear()
         {
-            _card_id.Text = "";
-            _company.Text= "";
-            _detect_object.Text= "";
+            _card_id.Text = Convert.ToString(Convert.ToInt64(_card_id.Text) + 1);
+            _shipper.SelectedIndex = 0;
+            _phone.Text = "";
             _object_count.Text= "";
-            _object_type.Text = "";
-            _phone.Text= "";
             _for_use.Text= "";
             _city_ks.Text= "";
             _region_ks.Text= "";
@@ -245,67 +226,47 @@ namespace FoodSafetyMonitoring.Manager
             _object_lable.Text = "";
         }
 
-        public static PrintQueue GetPrinter(string printerName = null)
+        private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)
         {
-            try
+            if (e.DataObject.GetDataPresent(typeof(String)))
             {
-                PrintQueue selectedPrinter = null;
-                if (!string.IsNullOrEmpty(printerName))
-                {
-                    var printers = new LocalPrintServer().GetPrintQueues();
-                    selectedPrinter = printers.FirstOrDefault(p => p.Name == printerName);
-                }
-                else
-                {
-                    selectedPrinter = LocalPrintServer.GetDefaultPrintQueue();
-                }
-                return selectedPrinter;
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumberic(text))
+                { e.CancelCommand(); }
             }
-            catch
-            {
-                return null;
-            }
+            else { e.CancelCommand(); }
         }
 
-        private void _print_Click(object sender, RoutedEventArgs e)
+        private void Object_Count_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            List<string> list = new List<string> { };
-            UcCertificateDetails cer = new UcCertificateDetails(list);
-            //var printDialog = new PrintDialog();
-            //printDialog.PrintQueue = GetPrinter();
-            //printDialog.PrintVisual(cer, "1111");
-
-            PrintDialog dialog = new PrintDialog();
-
-            //var settings = new PrintSettings { Width = cer.Width, Height = cer.Height, DPI = 150 };
-            //var renderTarget = new RenderTargetBitmap((int)settings.Width, (int)settings.Height, settings.DPI, settings.DPI, PixelFormats.Default);
-            //dialog.PrintTicket = new PrintTicket();
-            //dialog.PrintTicket.PageMediaSize = new PageMediaSize(renderTarget.Width, renderTarget.Height);
-            //var capabilities = dialog.PrintQueue.GetPrintCapabilities(dialog.PrintTicket);
-            //double scale = Math.Max(capabilities.PageImageableArea.ExtentWidth / cer.Width, capabilities.PageImageableArea.ExtentHeight / cer.Height);
-            //cer.LayoutTransform = new ScaleTransform(scale, scale);
-            //Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
-            //cer.Measure(sz);
-            //cer.Arrange(new Rect(new Point(0, 0), sz));
-
-            if (dialog.ShowDialog() == true)
-            {
-                Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
-                cer.Measure(printSize);
-                cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
-
-                dialog.PrintVisual(cer, "Print Test");
-            }
-
+            if (e.Key == Key.Space)
+                e.Handled = true;
         }
 
-        public class PrintSettings
+        private void Object_Count_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            public double Width { get; set; }
+            if (!isNumberic(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
+        }
 
-            public double Height { get; set; }
+        //isDigit是否是数字
+        public static bool isNumberic(string _string)
+        {
+            if (string.IsNullOrEmpty(_string))
 
-            public int DPI { get; set; }
-        }  
+                return false;
+            foreach (char c in _string)
+            {
+                if (!char.IsDigit(c))
+                    //if(c<'0' c="">'9')//最好的方法,在下面测试数据中再加一个0，然后这种方法效率会搞10毫秒左右
+                    return false;
+            }
+            return true;
+        }
+        
     }
 }

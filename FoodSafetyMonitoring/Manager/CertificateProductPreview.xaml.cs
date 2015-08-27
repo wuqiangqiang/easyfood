@@ -50,6 +50,12 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
+        private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            this.Left += e.HorizontalChange;
+            this.Top += e.VerticalChange;
+        }
+
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

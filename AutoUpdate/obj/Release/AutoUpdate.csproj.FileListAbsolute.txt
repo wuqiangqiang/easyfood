@@ -25,3 +25,4 @@ D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.Properties.Resources.reso
 D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.csproj.GenerateResource.Cache
 D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.exe
 D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.pdb
+D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.csprojResolveAssemblyReference.cache

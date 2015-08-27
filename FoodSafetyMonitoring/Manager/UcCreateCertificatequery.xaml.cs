@@ -28,25 +28,21 @@ namespace FoodSafetyMonitoring.Manager
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
 
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
+        string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
         public UcCreateCertificatequery(IDBOperation dbOperation)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_source_company, "select DISTINCT t_certificate.companyid ,t_company.COMPANYNAME"+
-                                             " FROM t_certificate left join t_company ON t_certificate.companyid = t_company.COMPANYID", "cxtj");
+            ComboboxTool.InitComboboxSource(_source_company, string.Format("select DISTINCT t_certificate.companyid ,t_shipper.shippername" +
+                                             " FROM t_certificate left join t_shipper ON t_certificate.companyid = t_shipper.shipperid" +
+                                             " WHERE t_certificate.createdeptid like '{0}%' ", deptId), "cxtj");
         }
 
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            //if (_card_no.Text.Trim().Length == 0 && _source_company.SelectedIndex == 0)
-            //{
-            //    Toolkit.MessageBox.Show("检疫证号和被检单位必须输入一个！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
-
             //清空列表
             lvlist.DataContext = null;
 

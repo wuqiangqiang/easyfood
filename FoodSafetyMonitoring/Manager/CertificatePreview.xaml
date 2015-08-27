@@ -25,6 +25,7 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="../res/certificate.png"/>
             </Canvas.Background>
+            <Thumb Width="800" Height="60" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
             <Image Canvas.Left="803" Canvas.Top="12" Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <TextBlock Canvas.Left="623" Canvas.Top="72" x:Name="_card_id" Width="120" Margin="0" ></TextBlock>
             <TextBlock Canvas.Left="150" Canvas.Top="109" x:Name="_company" Width="323" Margin="0" IsEnabled="False" ></TextBlock>

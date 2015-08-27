@@ -28,14 +28,16 @@ namespace FoodSafetyMonitoring.Manager
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
 
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
+        string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
         public UcCreateCertificateProductQuery(IDBOperation dbOperation)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_source_company, "select DISTINCT t_certificate_product.companyid ,t_company.COMPANYNAME" +
-                                             " FROM t_certificate_product left join t_company ON t_certificate_product.companyid = t_company.COMPANYID", "cxtj");
+            ComboboxTool.InitComboboxSource(_source_company, string.Format("select DISTINCT t_certificate_product.companyid ,t_shipper.shippername" +
+                                             " FROM t_certificate_product left join t_shipper ON t_certificate_product.companyid = t_shipper.shipperid" +
+                                             " WHERE t_certificate_product.createdeptid like '{0}%' " ,deptId ), "cxtj");
         }
 
 
@@ -45,7 +47,7 @@ namespace FoodSafetyMonitoring.Manager
             //清空列表
             lvlist.DataContext = null;
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_product({0},'{1}','{2}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_product_new({0},'{1}','{2}')",
                    (Application.Current.Resources["User"] as UserInfo).ID,
                    _card_no.Text,
                    _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];

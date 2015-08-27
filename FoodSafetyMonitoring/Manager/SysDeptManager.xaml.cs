@@ -669,10 +669,11 @@ namespace FoodSafetyMonitoring.Manager
         private void _edit_Click(object sender, RoutedEventArgs e)
         {
             _detail_info.IsEnabled = true;
-            _station_property.IsEnabled = false;
+            //_station_property.IsEnabled = false;
             state = "edit";
             _edit.IsEnabled = false;
             _station_flag.Text = "(必填)";
+            _station_property_flag.Text = "(必填)";
 
             Department department = _edit.Tag as Department;
             //对应湖北省级有3个部门（101 湖北畜安处，102 湖北动监处，103 湖北屠宰办），数据库中存在下级部门的是102

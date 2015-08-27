@@ -761,3 +761,7 @@ D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcCreateCertificat
 D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcCreateCertificateProductQuery.baml
 D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcCreateCertificatequery.baml
 D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcCreateCertificate_product.baml
+D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\AddShipper.baml
+D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\AddShipper.g.cs
+D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\AddShipper_product.baml
+D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\AddShipper_product.g.cs
