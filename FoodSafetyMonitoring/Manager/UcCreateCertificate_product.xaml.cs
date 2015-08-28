@@ -157,23 +157,23 @@ namespace FoodSafetyMonitoring.Manager
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
-                //List<string> cer_details = new List<string>() {_card_id.Text,_shipper.Text,_cz_cardid.Text, _product_name.Text, _object_count.Text ,
-                //             _object_type.Text, _dept_area.Text,_dept_name.Text, _dept_address.Text, _mdd.Text, _bz.Text,username,
-                //            System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
+                List<string> cer_details = new List<string>() {_card_id.Text,_shipper.Text,_cz_cardid.Text, _product_name.Text, _object_count.Text ,
+                             _object_type.Text, _dept_area.Text,_dept_name.Text, _dept_address.Text, _mdd.Text, _bz.Text,username,
+                            System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
-                //UcCertificateProductDetails cer = new UcCertificateProductDetails(cer_details);
+                UcCertificateProductDetails cer = new UcCertificateProductDetails(cer_details);
 
-                //PrintDialog dialog = new PrintDialog();
-                //if (dialog.ShowDialog() == true)
-                //{
-                //    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
-                //    cer.Measure(printSize);
-                //    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+                PrintDialog dialog = new PrintDialog();
+                if (dialog.ShowDialog() == true)
+                {
+                    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                    cer.Measure(printSize);
+                    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
 
-                //    dialog.PrintVisual(cer, "Print Test");
-                //}
+                    dialog.PrintVisual(cer, "Print Test");
+                }
 
-                Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                //Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 clear();
                 return;
             }

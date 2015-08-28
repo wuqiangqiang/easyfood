@@ -41,7 +41,7 @@
                         <Button Name="_create" Width="120" Height="32" Style="{StaticResource PrintImageButtonTemplate}" Click="_create_Click" Margin="560,0,0,0"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="1"  >
+                <Grid Grid.Row="1"  x:Name="grid_info">
                     <Canvas Width="844" Height="419"  VerticalAlignment="Center" HorizontalAlignment="Left">
                         <Canvas.Background>
                             <ImageBrush ImageSource="/res/certificate_product.png"></ImageBrush>

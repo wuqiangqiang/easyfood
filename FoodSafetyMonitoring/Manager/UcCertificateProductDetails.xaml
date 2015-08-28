@@ -6,21 +6,21 @@
             <!--<Canvas.Background>
                 <ImageBrush ImageSource="/res/certificate_product.png"></ImageBrush>
             </Canvas.Background>-->
-            <TextBlock Canvas.Left="587" Canvas.Top="17" x:Name="_card_id" Width="120" Margin="0" FontSize="14" Visibility="Hidden">111</TextBlock>
-            <TextBlock Canvas.Left="184" Canvas.Top="80" x:Name="_company" Width="248" Margin="0" FontSize="14">222</TextBlock>
-            <TextBlock Canvas.Left="539" Canvas.Top="80" x:Name="_product_name" Width="248" Margin="0" FontSize="14">333</TextBlock>
-            <TextBlock Canvas.Left="184" Canvas.Top="122" x:Name="_object_count" Width="248" Margin="0" FontSize="14">444</TextBlock>
+            <TextBlock Canvas.Left="587" Canvas.Top="17" x:Name="_card_id" Width="120" Margin="0" FontSize="16" Visibility="Hidden">111</TextBlock>
+            <TextBlock Canvas.Left="184" Canvas.Top="80" x:Name="_company" Width="248" Margin="0" FontSize="16">222</TextBlock>
+            <TextBlock Canvas.Left="539" Canvas.Top="80" x:Name="_product_name" Width="248" Margin="0" FontSize="16">333</TextBlock>
+            <TextBlock Canvas.Left="184" Canvas.Top="122" x:Name="_object_count" Width="248" Margin="0" FontSize="16">444</TextBlock>
             <!--<TextBlock Canvas.Left="336" Canvas.Top="132" x:Name="_object_type" Width="96" Margin="0" FontSize="14">555</TextBlock>-->
-            <TextBlock Canvas.Left="539" Canvas.Top="122" x:Name="_product_area" Width="248" Margin="0" FontSize="14">666</TextBlock>
-            <TextBlock Canvas.Left="179" Canvas.Top="161" x:Name="_dept_name" Width="267" FontSize="14">777</TextBlock>
-            <TextBlock Canvas.Left="479" Canvas.Top="161" x:Name="_dept_area" Width="267" FontSize="14">777</TextBlock>
-            <TextBlock Canvas.Left="179" Canvas.Top="202" x:Name="_mdd" Width="603" FontSize="14">888</TextBlock>
-            <TextBlock Canvas.Left="179" Canvas.Top="242" x:Name="_cz_cardid" Width="603" FontSize="14">999</TextBlock>
-            <TextBlock Canvas.Left="179" Canvas.Top="285" x:Name="_bz" Width="603" FontSize="14">111</TextBlock>
-            <TextBlock Canvas.Left="491" Canvas.Top="352" x:Name="_user_name" Width="150" Margin="0" FontSize="14">222</TextBlock>
-            <TextBlock  Canvas.Left="447" Canvas.Top="379" Width="40" x:Name="_nian" FontSize="14">333</TextBlock>
-            <TextBlock  Canvas.Left="514" Canvas.Top="379" Width="30" x:Name="_yue" FontSize="14">444</TextBlock>
-            <TextBlock  Canvas.Left="578" Canvas.Top="379" Width="30" x:Name="_day" FontSize="14">555</TextBlock>
+            <TextBlock Canvas.Left="539" Canvas.Top="122" x:Name="_product_area" Width="248" Margin="0" FontSize="16">666</TextBlock>
+            <TextBlock Canvas.Left="179" Canvas.Top="161" x:Name="_dept_name" Width="267" FontSize="16">777</TextBlock>
+            <TextBlock Canvas.Left="479" Canvas.Top="161" x:Name="_dept_area" Width="267" FontSize="16">777</TextBlock>
+            <TextBlock Canvas.Left="179" Canvas.Top="202" x:Name="_mdd" Width="603" FontSize="16">888</TextBlock>
+            <TextBlock Canvas.Left="179" Canvas.Top="242" x:Name="_cz_cardid" Width="603" FontSize="16">999</TextBlock>
+            <TextBlock Canvas.Left="179" Canvas.Top="281.594" x:Name="_bz" Width="603" FontSize="16">111</TextBlock>
+            <TextBlock Canvas.Left="491" Canvas.Top="331.594" x:Name="_user_name" Width="150" Margin="0" FontSize="16">222</TextBlock>
+            <TextBlock  Canvas.Left="440" Canvas.Top="370.594" Width="60" x:Name="_nian" FontSize="16">333</TextBlock>
+            <TextBlock  Canvas.Left="527" Canvas.Top="370.594" Width="30" x:Name="_yue" FontSize="16">444</TextBlock>
+            <TextBlock  Canvas.Left="591" Canvas.Top="370.594" Width="50" x:Name="_day" FontSize="16">555</TextBlock>
         </Canvas>
     </Grid>
 </UserControl>
