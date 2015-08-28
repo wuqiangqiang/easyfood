@@ -113,7 +113,7 @@ namespace FoodSafetyMonitoring.Manager
             grid_info.Children.Add(_tableview);
             MyColumns.Clear();
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_new('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
                               ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),

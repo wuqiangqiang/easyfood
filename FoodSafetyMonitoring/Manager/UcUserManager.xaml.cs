@@ -209,7 +209,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_cmbRoleType.SelectedIndex > 0)
             {
-                _subDetails.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '{0}' and SUB_FATHER_ID = '0'", (_cmbRoleType.SelectedItem as Label).Tag.ToString())).ToString();
+                _subDetails.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details_new where ROLE_ID = '{0}' and SUB_FATHER_ID = '0'", (_cmbRoleType.SelectedItem as Label).Tag.ToString())).ToString();
             }
         }
 

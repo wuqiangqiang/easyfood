@@ -69,7 +69,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details_new('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
                                 Kssj, Jssj, DeptId, ItemId, ResultId,ObjectId,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];

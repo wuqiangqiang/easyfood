@@ -133,7 +133,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report('{0}','{1}','{2}','{3}','{4}','{5}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_new('{0}','{1}','{2}','{3}','{4}','{5}')",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                               item_id,
@@ -171,7 +171,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report('{0}','{1}','{2}','{3}','{4}','{5}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_new('{0}','{1}','{2}','{3}','{4}','{5}')",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                               item_id,

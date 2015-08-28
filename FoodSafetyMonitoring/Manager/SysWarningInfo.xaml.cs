@@ -121,7 +121,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_info({0},{1},{2})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_info_new({0},{1},{2})",
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
@@ -180,7 +180,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_info({0},{1},{2})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_info_new({0},{1},{2})",
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               0,
                               _tableview.RowTotal)).Tables[0];

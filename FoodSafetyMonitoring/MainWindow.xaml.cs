@@ -147,7 +147,7 @@ namespace FoodSafetyMonitoring
 
             //用户的查看权限
             string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID,s.SUB_URL,s.SUB_SELECT_URL " +
-                            "FROM sys_sub s ,sys_rolepermission rp , sys_client_user u " +
+                            "FROM sys_sub_new s ,sys_rolepermission_new rp , sys_client_user u " +
                             "WHERE s.SUB_ID = rp.SUB_ID " +
                             "AND rp.ROLE_ID = u.ROLE_ID " +
                             "AND u.RECO_PKID = " + (Application.Current.Resources["User"] as UserInfo).ID +

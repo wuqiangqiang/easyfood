@@ -62,7 +62,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_details('{0}','{1}','{2}',{3},{4})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_details_new('{0}','{1}','{2}',{3},{4})",
                                 DeptId, ItemId, ObjectId,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];

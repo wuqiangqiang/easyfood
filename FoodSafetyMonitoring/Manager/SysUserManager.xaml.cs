@@ -126,28 +126,28 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     case "0": _cmbRoleType.Text = "省级管理员";
                         _cmbRoleType.IsEnabled = false;
-                        _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '79' and SUB_FATHER_ID = '0'").ToString();
+                        _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details_new where ROLE_ID = '79' and SUB_FATHER_ID = '0'").ToString();
                         break;
                     case "1": _cmbRoleType.Text = "市(州)级管理员";
                         _cmbRoleType.IsEnabled = false;
-                        _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '76' and SUB_FATHER_ID = '0'").ToString();
+                        _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details_new where ROLE_ID = '76' and SUB_FATHER_ID = '0'").ToString();
                         break;
                     case "2": _cmbRoleType.Text = "区县级管理员";
                         _cmbRoleType.IsEnabled = false;
-                        _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '77' and SUB_FATHER_ID = '0'").ToString();
+                        _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details_new where ROLE_ID = '77' and SUB_FATHER_ID = '0'").ToString();
                         break;
                     case "3": string flag = dbHelper.GetSingle(string.Format("SELECT FLAG_TIER FROM sys_client_sysdept where INFO_CODE ='{0}'",(_department.SelectedItem as Label).Tag)).ToString();
                         if (flag == "3")
                         {
                             _cmbRoleType.Text = "复核检测师";
                             _cmbRoleType.IsEnabled = false;
-                            _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '80' and SUB_FATHER_ID = '0'").ToString();
+                            _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details_new where ROLE_ID = '80' and SUB_FATHER_ID = '0'").ToString();
                         }
                         else if (flag == "4")
                         {
                             _cmbRoleType.Text = "检测师";
                             _cmbRoleType.IsEnabled = false;
-                            _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '60' and SUB_FATHER_ID = '0'").ToString();
+                            _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details_new where ROLE_ID = '60' and SUB_FATHER_ID = '0'").ToString();
                         }
                         //ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where NUMB_ROLE = '60' or NUMB_ROLE = '80'", "lr");
                         //_cmbRoleType.SelectionChanged += new SelectionChangedEventHandler(_cmbRoleType_SelectionChanged);

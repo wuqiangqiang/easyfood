@@ -98,7 +98,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log('{0}','{1}','{2}','{3}','{4}',{5},{6})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log_new('{0}','{1}','{2}','{3}','{4}',{5},{6})",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
@@ -121,7 +121,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log('{0}','{1}','{2}','{3}','{4}',{5},{6})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log_new('{0}','{1}','{2}','{3}','{4}',{5},{6})",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
