@@ -92,7 +92,7 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             string sql = "SELECT ItemID,ItemNAME,t.samplingrate FROM t_det_item i" +
-                         " left join t_task_assign t on i.ItemID = t.iid " +
+                         " left join t_task_assign_new t on i.ItemID = t.iid " +
                          "and t.did = '" + deptid + "' " +
                          "WHERE  (tradeId ='1' or ifnull(tradeId,'') = '') and OPENFLAG = '1' ";
 

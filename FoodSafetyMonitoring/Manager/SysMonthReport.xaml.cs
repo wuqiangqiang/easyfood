@@ -372,7 +372,7 @@ namespace FoodSafetyMonitoring.Manager
                     item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag.ToString();
                     result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
 
-                    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_month_details_nopages('{0}','{1}','{2}','{3}')",
+                    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call  p_report_month_details_nopages('{0}','{1}','{2}','{3}')",
                                 _year.Text + "-" + _month.Text, dept_id, item_id, result_id)).Tables[0];
 
                     string header = "检测单编号,信息来源,检测时间,检测单位,检测项目,检测对象,检测样本,检测灵敏度,检测方法,检测结果,检测师,来源产地,被检单位";

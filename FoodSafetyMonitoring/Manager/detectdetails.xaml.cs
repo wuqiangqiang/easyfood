@@ -57,6 +57,16 @@ namespace FoodSafetyMonitoring.Manager
             _detectTypeName.Text = table.Rows[0][0].ToString();
             _cardbrand.Text = table.Rows[0][23].ToString();
             _cardno.Text = table.Rows[0][24].ToString();
+
+            //检测结果为疑似阳性变红
+            if (_resultName.Text == "疑似阳性" || _resultName.Text == "确证阳性")
+            {
+                _resultName.Foreground = Brushes.Red;
+            }
+            else
+            {
+                _resultName.Foreground = Brushes.Black;
+            }
         }
 
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)

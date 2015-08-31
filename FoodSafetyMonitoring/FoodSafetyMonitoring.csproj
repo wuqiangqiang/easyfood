@@ -237,6 +237,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\SysCertificateDayReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysCertificateMonthReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysCertificateYearReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Manager\SysComparisonAndAnalysis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -972,6 +984,15 @@
     </Compile>
     <Compile Include="Manager\SysAreaAnalysis.xaml.cs">
       <DependentUpon>SysAreaAnalysis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysCertificateDayReport.xaml.cs">
+      <DependentUpon>SysCertificateDayReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysCertificateMonthReport.xaml.cs">
+      <DependentUpon>SysCertificateMonthReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysCertificateYearReport.xaml.cs">
+      <DependentUpon>SysCertificateYearReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysComparisonAndAnalysis.xaml.cs">
       <DependentUpon>SysComparisonAndAnalysis.xaml</DependentUpon>

@@ -138,8 +138,8 @@ namespace FoodSafetyMonitoring.Manager
                 }
 
                 DataTable tasktable = dbOperation.GetDbHelper().GetDataSet("select t_det_item.ItemNAME,task "+
-                                      "from t_task_assign left JOIN t_det_item ON t_task_assign.iid = t_det_item.ItemID "+
-                                      "where t_task_assign.did = " + deptid).Tables[0];
+                                      "from t_task_assign_new left JOIN t_det_item ON t_task_assign_new.iid = t_det_item.ItemID " +
+                                      "where t_task_assign_new.did = " + deptid).Tables[0];
 
                 List<ItemTask> listtask = new List<ItemTask>();
                 listtask.Clear();

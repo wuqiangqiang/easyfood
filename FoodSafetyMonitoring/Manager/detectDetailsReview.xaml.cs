@@ -70,22 +70,28 @@ namespace FoodSafetyMonitoring.Manager
             _reviewResult_text.Text = table.Rows[0][16].ToString();
             _reviewDate.Text = table.Rows[0][17].ToString();
             _cardno.Text = table.Rows[0][24].ToString();
-            if(table.Rows[0][25].ToString() == "0")
+
+            //检测结果为疑似阳性变红
+            if (_resultName.Text == "疑似阳性" || _resultName.Text == "确证阳性")
             {
-                chk_1.IsChecked = true;
-                chk_1.Visibility = Visibility.Visible;
-                chk_2.Visibility = Visibility.Hidden;
-            }
-            else if (table.Rows[0][25].ToString() == "1")
-            {
-                chk_2.IsChecked = true;
-                chk_1.Visibility = Visibility.Hidden;
-                chk_2.Visibility = Visibility.Visible;
+                _resultName.Foreground = Brushes.Red;
             }
             else
             {
-                chk_1.Visibility = Visibility.Hidden;
-                chk_2.Visibility = Visibility.Hidden;
+                _resultName.Foreground = Brushes.Black;
+            }
+
+            if(table.Rows[0][25].ToString() == "0")
+            {
+                _result_id.Text = "检测卡假阳性";
+            }
+            else if (table.Rows[0][25].ToString() == "1")
+            {
+                _result_id.Text = "确证阳性";
+            }
+            else
+            {
+                _result_id.Text = "";
             }
         }
 

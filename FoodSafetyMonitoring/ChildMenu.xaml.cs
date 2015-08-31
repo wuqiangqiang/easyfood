@@ -169,19 +169,34 @@ namespace FoodSafetyMonitoring
                         temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
                         flag = 1;
                         break;
-                    //数据统计->日报表
-                    case "30101": temptb.Header = (sender as Button).Content.ToString();
+                    //数据统计->检测数据统计->日报表
+                    case "30101": temptb.Header = (sender as Button).Content.ToString() + "(检测数据)";
                         temptb.Content = new SysDayReport(mainWindow.dbOperation); 
                         flag = 1;
                         break;
-                    //数据统计->月报表
-                    case "30102": temptb.Header = (sender as Button).Content.ToString();
+                    //数据统计->检测数据统计->月报表
+                    case "30102": temptb.Header = (sender as Button).Content.ToString() + "(检测数据)";
                         temptb.Content = new SysMonthReport(mainWindow.dbOperation); 
                         flag = 1;
                         break;
-                    //数据统计->自定义报表
-                    case "30103": temptb.Header = (sender as Button).Content.ToString();
+                    //数据统计->检测数据统计->自定义报表
+                    case "30103": temptb.Header = (sender as Button).Content.ToString() + "(检测数据)";
                         temptb.Content = new SysYearReport(mainWindow.dbOperation); 
+                        flag = 1;
+                        break;
+                    //数据统计->电子出证统计->日报表
+                    case "30201": temptb.Header = (sender as Button).Content.ToString() + "(出证数据)";
+                        temptb.Content = new SysCertificateDayReport(mainWindow.dbOperation);
+                        flag = 1;
+                        break;
+                    //数据统计->电子出证统计->月报表
+                    case "30202": temptb.Header = (sender as Button).Content.ToString() + "(出证数据)";
+                        temptb.Content = new SysCertificateMonthReport(mainWindow.dbOperation);
+                        flag = 1;
+                        break;
+                    //数据统计->电子出证统计->自定义报表
+                    case "30203": temptb.Header = (sender as Button).Content.ToString() + "(出证数据)";
+                        temptb.Content = new SysCertificateYearReport(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //数据分析->对比分析
@@ -310,17 +325,17 @@ namespace FoodSafetyMonitoring
                         flag = 1;
                         break;
                     //电子出证->电子出证->新建检疫证单(产品)
-                    case "90103": temptb.Header = (sender as Button).Content.ToString();
+                    case "90102": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcCreateCertificate_product(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //电子出证->电子出证->电子证查询(动物)
-                    case "90102": temptb.Header = (sender as Button).Content.ToString();
+                    case "90201": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcCreateCertificatequery(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //电子出证->电子出证->电子证查询(产品)
-                    case "90104": temptb.Header = (sender as Button).Content.ToString();
+                    case "90202": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcCreateCertificateProductQuery(mainWindow.dbOperation);
                         flag = 1;
                         break;

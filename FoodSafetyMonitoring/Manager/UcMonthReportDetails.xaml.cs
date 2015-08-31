@@ -65,7 +65,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_month_details('{0}','{1}','{2}','{3}',{4},{5})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call  p_report_month_details_new('{0}','{1}','{2}','{3}',{4},{5})",
                                 Sj, DeptId, ItemId, ResultId,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
