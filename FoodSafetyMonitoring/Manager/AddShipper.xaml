@@ -32,26 +32,32 @@
                 <RowDefinition Height="37"/>
                 <RowDefinition Height="37"/>
                 <RowDefinition Height="37"/>
+                <RowDefinition Height="37"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Width="40">代码：</TextBlock>
+                    <TextBox Width="240" x:Name="_id" MaxLength="30" IsEnabled="False"></TextBox>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Width="40">姓名：</TextBlock>
                     <TextBox Width="240" x:Name="_name" MaxLength="5"></TextBox>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Width="40">电话：</TextBlock>
                     <TextBox Width="240" x:Name="_phone" MaxLength="11" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="_phone_Pasting" PreviewKeyDown="_phone_PreviewKeyDown"  PreviewTextInput="_phone_PreviewTextInput"></TextBox>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Width="40">地址：</TextBlock>
                     <TextBox Width="240" x:Name="_address" MaxLength="30"></TextBox>
                 </StackPanel>
             </Grid>
-
         </Grid>
         <Grid Grid.Row="2" Margin="13,0,13,50">
             <Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" />

@@ -24,15 +24,14 @@ namespace FoodSafetyMonitoring.Manager
     public partial class AddShipper : Window
     {
         private IDBOperation dbOperation;
-        UcCreateCertificate Pro;
         private string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         private string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
-        public AddShipper(IDBOperation dbOperation,UcCreateCertificate pro)
+        public AddShipper(IDBOperation dbOperation)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
-            this.Pro = pro;
+            this._id.Text = dbOperation.GetDbHelper().GetSingle("select f_create_shipper()").ToString();
            
         }
 
@@ -56,8 +55,16 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            string sql = string.Format("insert into t_shipper(shippername,phone,address,createuserid,createdate,createdeptid) values('{0}','{1}','{2}','{3}','{4}','{5}')"
-                            , _name.Text, _phone.Text, _address.Text, userId,
+            //判断货主代码是否存在，若存在则必须重新打开画面
+            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(shipperid) from t_shipper where shipperid ='{0}'", _id.Text));
+            if (exit_flag)
+            {
+                Toolkit.MessageBox.Show("该货主代码已存在，请先关闭本画面再打开，重新添加！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            string sql = string.Format("insert into t_shipper(shipperid,shippername,phone,address,createuserid,createdate,createdeptid) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
+                            ,_id.Text, _name.Text, _phone.Text, _address.Text, userId,
                             System.DateTime.Now, deptId);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
@@ -65,7 +72,6 @@ namespace FoodSafetyMonitoring.Manager
             {
                 Toolkit.MessageBox.Show("货主信息添加成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
-                Pro.refresh();
                 return;
             }
             else
@@ -86,7 +92,6 @@ namespace FoodSafetyMonitoring.Manager
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.Close();
-                Pro.refresh();
             }
         }
 

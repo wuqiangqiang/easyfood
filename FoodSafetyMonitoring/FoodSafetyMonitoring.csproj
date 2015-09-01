@@ -189,10 +189,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Manager\AddShipper_product.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Manager\CertificatePreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -352,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\SysSetArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysShipperQuery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -955,9 +955,6 @@
     <Compile Include="Manager\AddShipper.xaml.cs">
       <DependentUpon>AddShipper.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Manager\AddShipper_product.xaml.cs">
-      <DependentUpon>AddShipper_product.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Manager\AlarmData.cs" />
     <Compile Include="Manager\CertificatePreview.xaml.cs">
       <DependentUpon>CertificatePreview.xaml</DependentUpon>
@@ -1050,6 +1047,9 @@
     </Compile>
     <Compile Include="Manager\SysSetArea.xaml.cs">
       <DependentUpon>SysSetArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysShipperQuery.xaml.cs">
+      <DependentUpon>SysShipperQuery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysTaskCheck.xaml.cs">
       <DependentUpon>SysTaskCheck.xaml</DependentUpon>

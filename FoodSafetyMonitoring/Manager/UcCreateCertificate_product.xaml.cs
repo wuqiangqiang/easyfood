@@ -37,13 +37,10 @@ namespace FoodSafetyMonitoring.Manager
 
             this.dbOperation = dbOperation;
             _user_name.Text = username;
-            _nian.Text = DateTime.Now.Year.ToString();
-            _yue.Text = DateTime.Now.Month.ToString();
-            _day.Text = DateTime.Now.Day.ToString();
+            _nian.Text = ConvertStr.convert_nian(DateTime.Now.Year.ToString());
+            _yue.Text = ConvertStr.convert_yue(DateTime.Now.Month.ToString());
+            _day.Text = ConvertStr.convert_day(DateTime.Now.Day.ToString());
 
-            //货主
-            ComboboxTool.InitComboboxSource(_shipper, "SELECT shipperid,shippername FROM t_shipper WHERE createdeptid =  " + deptId, "lr");
-            _shipper.SelectionChanged += new SelectionChangedEventHandler(_shipper_SelectionChanged);
             //产品名称
             ComboboxTool.InitComboboxSource(_product_name, "SELECT productid,productname FROM t_product WHERE openflag = '1'", "lr");
             _product_name.SelectionChanged += new SelectionChangedEventHandler(_product_name_SelectionChanged);
@@ -51,11 +48,6 @@ namespace FoodSafetyMonitoring.Manager
             //生产单位
             ComboboxTool.InitComboboxSource(_dept_name, string.Format("call p_get_dept_tz({0})", userId), "lr");
             _dept_name.SelectionChanged += new SelectionChangedEventHandler(_dept_name_SelectionChanged);
-        }
-
-        public void refresh()
-        {
-            ComboboxTool.InitComboboxSource(_shipper, "SELECT shipperid,shippername FROM t_shipper WHERE createdeptid =  " + deptId, "lr");
         }
 
         void _product_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,12 +59,17 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
-        void _shipper_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (_shipper.SelectedIndex > 0)
+            if (e.Key == Key.Enter)
             {
-                string address = dbOperation.GetDbHelper().GetSingle("select address from t_shipper where shipperid =" + (_shipper.SelectedItem as Label).Tag.ToString()).ToString();
-                _mdd.Text = address;
+                DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper where shipperid =" + _shipper_id.Text).Tables[0];
+                if(table.Rows.Count != 0)
+                {
+                    _shipper.Text = table.Rows[0][0].ToString();
+                    _mdd.Text = table.Rows[0][1].ToString();
+                }
+                
             }
         }
 
@@ -91,7 +88,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _add_Click(object sender, RoutedEventArgs e)
         {
-            AddShipper_product ship = new AddShipper_product(dbOperation, this);
+            AddShipper ship = new AddShipper(dbOperation);
             ship.ShowDialog();
         }
 
@@ -110,9 +107,9 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (_shipper.SelectedIndex < 1)
+            if (_shipper_id.Text.Trim().Length == 0)
             {
-                Toolkit.MessageBox.Show("请选择货主！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请输入货主代码！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -145,7 +142,7 @@ namespace FoodSafetyMonitoring.Manager
                                         "deptarea,destinationarea,bz,createdeptid,createuserid,createdate)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
                                         "'{10}','{11}','{12}','{13}','{14}','{15}')"
-                                        ,_card_id.Text, (_shipper.SelectedItem as Label).Tag.ToString(), _shipper.Text,
+                                        ,_card_id.Text, _shipper_id.Text, _shipper.Text,
                                         _cz_cardid.Text, (_product_name.SelectedItem as Label).Tag.ToString(), _product_name.Text, 
                                         _object_count.Text + _object_type.Text, _dept_area.Text,
                                         (_dept_name.SelectedItem as Label).Tag.ToString(), _dept_name.Text, 
@@ -187,7 +184,8 @@ namespace FoodSafetyMonitoring.Manager
         private void clear()
         {
             _card_id.Text = Convert.ToString( Convert.ToInt64(_card_id.Text) + 1);
-            _shipper.SelectedIndex = 0;
+            _shipper_id.Text = "";
+            _shipper.Text = "";
             _cz_cardid.Text = "";
             _object_count.Text = "";
             _mdd.Text = "";
@@ -234,8 +232,6 @@ namespace FoodSafetyMonitoring.Manager
                     return false;
             }
             return true;
-        }
-
-        
+        }        
     }
 }

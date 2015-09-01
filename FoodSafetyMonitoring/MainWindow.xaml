@@ -163,7 +163,7 @@
                 <Image x:Name="_image_7" />
                 <TextBlock x:Name="_text_7" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="9" x:Name="_grid_8">
+            <Grid Grid.Column="10" x:Name="_grid_8">
                 <Image x:Name="_image_8" />
                 <TextBlock x:Name="_text_8" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
