@@ -46,6 +46,8 @@
                         <Canvas.Background>
                             <ImageBrush ImageSource="/res/certificate_product.png"></ImageBrush>
                         </Canvas.Background>
+                        <TextBlock Canvas.Left="98" Canvas.Top="45" Width="60" >协检员 :</TextBlock>
+                        <ComboBox Canvas.Left="185" Canvas.Top="40" x:Name="_help_user" Width="100" Margin="0" ></ComboBox>
                         <TextBlock Canvas.Left="98" Canvas.Top="80" Width="60" >货主代码 :</TextBlock>
                         <TextBox Canvas.Left="180" Canvas.Top="74" x:Name="_shipper_id" Width="100" MaxLength="4" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput" KeyDown="TextBox_KeyDown"></TextBox>
                         <TextBox Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0" MaxLength="10" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
@@ -59,7 +61,8 @@
                         <TextBox Canvas.Left="179" Canvas.Top="190" x:Name="_mdd" Width="603" MaxLength="50" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="179" Canvas.Top="219" x:Name="_cz_cardid" Width="603" MaxLength="10"></TextBox>
                         <TextBox Canvas.Left="179" Canvas.Top="249" x:Name="_bz" Width="603" MaxLength="50"></TextBox>
-                        <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="150" Margin="0"></TextBlock>
+                        <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="80" Margin="0"></TextBlock>
+                        <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0"></TextBlock>
                         <TextBlock  Canvas.Left="560" Canvas.Top="318" Width="50" x:Name="_nian"></TextBlock>
                         <TextBlock  Canvas.Left="630" Canvas.Top="318" Width="30" x:Name="_yue"></TextBlock>
                         <TextBlock  Canvas.Left="680" Canvas.Top="318" Width="30" x:Name="_day"></TextBlock>

@@ -18,6 +18,25 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid >
+        <Grid.Resources>
+            <control:BackGroundConverter x:Key="_converter"/>
+            <Style x:Key="_style_listviewItem" TargetType="ListViewItem">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <Binding RelativeSource="{RelativeSource Self}" Converter="{ StaticResource ResourceKey=_converter}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="Black">
+                </Setter>
+                <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>-->
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="微软雅黑"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Height" Value="35" />
+                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                <Setter Property="BorderBrush" Value="#e0e0e0" />
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="106"/>
             <RowDefinition />
@@ -99,7 +118,7 @@
             </Grid>
             <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
                 <Grid  x:Name="grid_info">
-                    <ListView  Name="lvlist" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <ListView  Name="lvlist" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}">
                         <ListView.View>
                             <GridView >
                                 <GridViewColumn Width="140" Header="检疫证号" DisplayMemberBinding="{Binding CARDID}" ></GridViewColumn>

@@ -47,6 +47,8 @@
                         <Canvas.Background>
                             <ImageBrush ImageSource="/res/certificate.png"></ImageBrush>
                         </Canvas.Background>
+                        <TextBlock Canvas.Left="68" Canvas.Top="45" Width="60" >协检员 :</TextBlock>
+                        <ComboBox Canvas.Left="150" Canvas.Top="40" x:Name="_help_user" Width="100" Margin="0" ></ComboBox>
                         <TextBlock Canvas.Left="68" Canvas.Top="80" Width="60" >货主代码 :</TextBlock>
                         <TextBox Canvas.Left="145" Canvas.Top="74" x:Name="_shipper_id" Width="100" MaxLength="4" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput" KeyDown="TextBox_KeyDown"></TextBox>
                         <TextBox Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0" MaxLength="10" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
@@ -63,9 +65,10 @@
                         <TextBox Canvas.Left="144" Canvas.Top="205" x:Name="_city_js" Width="74" MaxLength="5"></TextBox>
                         <TextBox Canvas.Left="280" Canvas.Top="205" x:Name="_region_js" Width="190" Height="20" MaxLength="10"></TextBox>
                         <TextBox Canvas.Left="555" Canvas.Top="205" x:Name="_town_js" Width="154" Height="20" MaxLength="10"></TextBox>
-                        <TextBox Canvas.Left="325" Canvas.Top="226" x:Name="_village_js" Width="294" Height="20" Margin="0" MaxLength="10"></TextBox>
+                        <TextBox Canvas.Left="325" Canvas.Top="226" x:Name="_village_js" Width="294" Height="20" Margin="0" MaxLength="10" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="144" Canvas.Top="250" x:Name="_object_lable" Width="634" MaxLength="50"></TextBox>
-                        <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="150" Margin="0" ></TextBlock>
+                        <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="80" Margin="0" ></TextBlock>
+                        <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0"></TextBlock>
                         <TextBlock  Canvas.Left="560" Canvas.Top="318" Width="50" x:Name="_nian"></TextBlock>
                         <TextBlock  Canvas.Left="630" Canvas.Top="318" Width="30" x:Name="_yue"></TextBlock>
                         <TextBlock  Canvas.Left="680" Canvas.Top="318" Width="30" x:Name="_day"></TextBlock>

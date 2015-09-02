@@ -1054,3 +1054,7 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\检测监管系统.g.resources
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\FoodSafetyMonitoring.Properties.Resources.resources
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\FoodSafetyMonitoring.csproj.GenerateResource.Cache
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\ModifyShipper.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\ModifyShipper.g.cs

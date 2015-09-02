@@ -37,10 +37,16 @@ namespace FoodSafetyMonitoring.Manager
 
             this.dbOperation = dbOperation;
             _user_name.Text = username;
+            _user_id.Text = userId;
             _nian.Text = ConvertStr.convert_nian(DateTime.Now.Year.ToString());
             _yue.Text = ConvertStr.convert_yue(DateTime.Now.Month.ToString());
             _day.Text = ConvertStr.convert_day(DateTime.Now.Day.ToString());
 
+            //产品检疫证号
+            string product_cardid = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_productcardid('{0}')", deptId)).ToString();
+            _card_id.Text = product_cardid;
+            //协检员
+            ComboboxTool.InitComboboxSource(_help_user, string.Format("call p_user_helpuser({0})", userId), "lr");
             //产品名称
             ComboboxTool.InitComboboxSource(_product_name, "SELECT productid,productname FROM t_product WHERE openflag = '1'", "lr");
             _product_name.SelectionChanged += new SelectionChangedEventHandler(_product_name_SelectionChanged);
@@ -107,6 +113,12 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            if (_help_user.SelectedIndex < 1)
+            {
+                Toolkit.MessageBox.Show("请选择协检员！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             if (_shipper_id.Text.Trim().Length == 0)
             {
                 Toolkit.MessageBox.Show("请输入货主代码！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -139,23 +151,21 @@ namespace FoodSafetyMonitoring.Manager
 
             string sql = string.Format("INSERT INTO t_certificate_product(productcardid,companyid,companyname," +
                                         "cardid,objectid,objectname,objectcount,productarea,deptid,deptname," +
-                                        "deptarea,destinationarea,bz,createdeptid,createuserid,createdate)" +
+                                        "deptarea,destinationarea,bz,createdeptid,createuserid,createdate,helpuserid)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
-                                        "'{10}','{11}','{12}','{13}','{14}','{15}')"
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}')"
                                         ,_card_id.Text, _shipper_id.Text, _shipper.Text,
                                         _cz_cardid.Text, (_product_name.SelectedItem as Label).Tag.ToString(), _product_name.Text, 
                                         _object_count.Text + _object_type.Text, _dept_area.Text,
                                         (_dept_name.SelectedItem as Label).Tag.ToString(), _dept_name.Text, 
                                         _dept_address.Text, _mdd.Text, _bz.Text,
-                                        (Application.Current.Resources["User"] as UserInfo).DepartmentID,
-                                        (Application.Current.Resources["User"] as UserInfo).ID,
-                                        System.DateTime.Now);
+                                        deptId, userId, System.DateTime.Now, (_help_user.SelectedItem as Label).Tag.ToString());
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
                 List<string> cer_details = new List<string>() {_card_id.Text,_shipper.Text,_cz_cardid.Text, _product_name.Text, _object_count.Text ,
-                             _object_type.Text, _dept_area.Text,_dept_name.Text, _dept_address.Text, _mdd.Text, _bz.Text,username,
+                             _object_type.Text, _dept_area.Text,_dept_name.Text, _dept_address.Text, _mdd.Text, _bz.Text,username,userId,
                             System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
                 UcCertificateProductDetails cer = new UcCertificateProductDetails(cer_details);

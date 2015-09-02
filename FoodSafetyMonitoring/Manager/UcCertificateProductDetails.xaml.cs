@@ -37,9 +37,10 @@ namespace FoodSafetyMonitoring.Manager
             _cz_cardid.Text = Cer_details[2];
             _bz.Text = Cer_details[10];
             _user_name.Text = Cer_details[11];
-            _nian.Text = ConvertStr.convert_nian(Cer_details[12]);
-            _yue.Text = ConvertStr.convert_yue(Cer_details[13]);
-            _day.Text = ConvertStr.convert_day(Cer_details[14]);
+            _user_id.Text = Cer_details[12];
+            _nian.Text = ConvertStr.convert_nian(Cer_details[13]);
+            _yue.Text = ConvertStr.convert_yue(Cer_details[14]);
+            _day.Text = ConvertStr.convert_day(Cer_details[15]);
         }
 
     }

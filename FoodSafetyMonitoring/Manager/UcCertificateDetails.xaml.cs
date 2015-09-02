@@ -42,9 +42,10 @@ namespace FoodSafetyMonitoring.Manager
             _village_js.Text = Cer_details[14];
             _object_lable.Text = Cer_details[15];
             _user_name.Text = Cer_details[16];
-            _nian.Text = ConvertStr.convert_nian(Cer_details[17]);
-            _yue.Text = ConvertStr.convert_yue(Cer_details[18]);
-            _day.Text = ConvertStr.convert_day(Cer_details[19]);
+            _user_id.Text = Cer_details[17];
+            _nian.Text = ConvertStr.convert_nian(Cer_details[18]);
+            _yue.Text = ConvertStr.convert_yue(Cer_details[19]);
+            _day.Text = ConvertStr.convert_day(Cer_details[20]);
         }
     }
 }

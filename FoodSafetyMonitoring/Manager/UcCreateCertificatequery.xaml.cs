@@ -46,7 +46,7 @@ namespace FoodSafetyMonitoring.Manager
             //清空列表
             lvlist.DataContext = null;
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate({0},'{1}','{2}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_new({0},'{1}','{2}')",
                    (Application.Current.Resources["User"] as UserInfo).ID,
                    _card_no.Text,
                    _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];

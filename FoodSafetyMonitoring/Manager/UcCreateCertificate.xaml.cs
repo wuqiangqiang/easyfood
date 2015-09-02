@@ -39,10 +39,16 @@ namespace FoodSafetyMonitoring.Manager
             this.dbOperation = dbOperation;
 
             _user_name.Text = username;
+            _user_id.Text = userId;
             _nian.Text = ConvertStr.convert_nian(DateTime.Now.Year.ToString());
             _yue.Text = ConvertStr.convert_yue(DateTime.Now.Month.ToString());
             _day.Text = ConvertStr.convert_day(DateTime.Now.Day.ToString());
 
+            //检疫证号
+            string card_id = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_cardid('{0}')", deptId)).ToString();
+            _card_id.Text = card_id;
+            //协检员
+            ComboboxTool.InitComboboxSource(_help_user, string.Format("call p_user_helpuser({0})", userId), "lr");
             //动物种类
             ComboboxTool.InitComboboxSource(_object_id, "SELECT animalid,animalname FROM t_animal WHERE openflag = '1'", "lr");
             _object_id.SelectionChanged += new SelectionChangedEventHandler(_object_id_SelectionChanged);
@@ -67,7 +73,7 @@ namespace FoodSafetyMonitoring.Manager
                 if (table.Rows.Count != 0)
                 {
                     _shipper.Text = table.Rows[0][0].ToString();
-                    //_mdd.Text = table.Rows[0][1].ToString();
+                    _village_js.Text = table.Rows[0][1].ToString();
                 }
             }
         }
@@ -90,6 +96,12 @@ namespace FoodSafetyMonitoring.Manager
             if (exit_flag)
             {
                 Toolkit.MessageBox.Show("检疫证号已存在，请重新输入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_help_user.SelectedIndex < 1)
+            {
+                Toolkit.MessageBox.Show("请选择协检员！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -160,24 +172,22 @@ namespace FoodSafetyMonitoring.Manager
 
             string sql = string.Format("INSERT INTO t_certificate(cardid,companyid,companyname,objectid,objectname,objectcount," +
                                         "phone,foruseid,foruse,cityks,regionks,townks,villageks,cityjs,regionjs,townjs," +
-                                        "villagejs,objectlable,createdeptid,createuserid,createdate)" +
+                                        "villagejs,objectlable,createdeptid,createuserid,createdate,helpuserid)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
-                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}')"
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}')"
                             , _card_id.Text, _shipper_id.Text, _shipper.Text,
                             (_object_id.SelectedItem as Label).Tag.ToString(), _object_id.Text, _object_count.Text + _object_type.Text,
                             _phone.Text, (_for_use.SelectedItem as Label).Tag.ToString(), _for_use.Text, _city_ks.Text,
                              _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
-                            _town_js.Text, _village_js.Text, _object_lable.Text,
-                            (Application.Current.Resources["User"] as UserInfo).DepartmentID,
-                            (Application.Current.Resources["User"] as UserInfo).ID,
-                            System.DateTime.Now);
+                            _town_js.Text, _village_js.Text, _object_lable.Text, deptId, userId,
+                            System.DateTime.Now, (_help_user.SelectedItem as Label).Tag.ToString());
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
                 List<string> cer_details = new List<string>() {_card_id.Text,_shipper.Text,_object_id.Text, _object_count.Text,_object_type.Text, _phone.Text,
                             _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
-                            _town_js.Text, _village_js.Text, _object_lable.Text,username,
+                            _town_js.Text, _village_js.Text, _object_lable.Text,username,userId,
                             System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
                 UcCertificateDetails cer = new UcCertificateDetails(cer_details);

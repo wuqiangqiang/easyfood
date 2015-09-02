@@ -213,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\ModifyShipper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SetSampling.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -970,6 +974,9 @@
     </Compile>
     <Compile Include="Manager\IClickChildMenuInitUserControlUI.cs" />
     <Compile Include="Manager\LoadWindow.xaml.cs" />
+    <Compile Include="Manager\ModifyShipper.xaml.cs">
+      <DependentUpon>ModifyShipper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SetSampling.xaml.cs">
       <DependentUpon>SetSampling.xaml</DependentUpon>
     </Compile>
