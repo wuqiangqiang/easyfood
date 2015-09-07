@@ -49,7 +49,8 @@ namespace FoodSafetyMonitoring.Manager
                 _town_js.Text = table.Rows[0][14].ToString();
                 _village_js.Text = table.Rows[0][15].ToString();
                 _object_lable.Text = table.Rows[0][16].ToString();
-                _user_name.Text = table.Rows[0][17].ToString(); 
+                _user_name.Text = table.Rows[0][17].ToString();
+                _user_id.Text = table.Rows[0][21].ToString();
                 _nian.Text = table.Rows[0][18].ToString();
                 _yue.Text = table.Rows[0][19].ToString();
                 _day.Text = table.Rows[0][20].ToString();

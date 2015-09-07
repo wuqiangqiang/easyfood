@@ -44,6 +44,7 @@ namespace FoodSafetyMonitoring.Manager
                 _mdd.Text = table.Rows[0][9].ToString();
                 _bz.Text = table.Rows[0][10].ToString();
                 _user_name.Text = table.Rows[0][11].ToString();
+                _user_id.Text = table.Rows[0][15].ToString();
                 _nian.Text = table.Rows[0][12].ToString();
                 _yue.Text = table.Rows[0][13].ToString();
                 _day.Text = table.Rows[0][14].ToString();

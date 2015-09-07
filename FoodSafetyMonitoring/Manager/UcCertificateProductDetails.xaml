@@ -19,7 +19,7 @@
             <TextBlock Canvas.Left="179" Canvas.Top="281.594" x:Name="_bz" Width="603" FontSize="16">111</TextBlock>
             <TextBlock Canvas.Left="491" Canvas.Top="331.594" x:Name="_user_name" Width="100" Margin="0" FontSize="16">222</TextBlock>
             <TextBlock Canvas.Left="600" Canvas.Top="331.594" x:Name="_user_id" Width="100" Margin="0" FontSize="16">222</TextBlock>
-            <TextBlock  Canvas.Left="440" Canvas.Top="370.594" Width="60" x:Name="_nian" FontSize="16">333</TextBlock>
+            <TextBlock  Canvas.Left="440" Canvas.Top="370.594" Width="70" x:Name="_nian" FontSize="16">333</TextBlock>
             <TextBlock  Canvas.Left="527" Canvas.Top="370.594" Width="30" x:Name="_yue" FontSize="16">444</TextBlock>
             <TextBlock  Canvas.Left="591" Canvas.Top="370.594" Width="50" x:Name="_day" FontSize="16">555</TextBlock>
         </Canvas>

@@ -329,9 +329,14 @@ namespace FoodSafetyMonitoring
                         temptb.Content = new UcCreateCertificate_product(mainWindow.dbOperation);
                         flag = 1;
                         break;
-                    //电子出证->电子出证->货主信息
+                    //电子出证->电子出证->货主信息(动物)
                     case "90103": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysShipperQuery(mainWindow.dbOperation);
+                        flag = 1;
+                        break;
+                    //电子出证->电子出证->货主信息(产品)
+                    case "90104": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysShipperQuery_product(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //电子出证->电子出证->电子证查询(动物)

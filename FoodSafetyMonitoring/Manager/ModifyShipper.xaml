@@ -33,6 +33,8 @@
                 <RowDefinition Height="37"/>
                 <RowDefinition Height="37"/>
                 <RowDefinition Height="37"/>
+                <RowDefinition Height="37"/>
+                <RowDefinition Height="37"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel VerticalAlignment="Center">
@@ -54,8 +56,20 @@
             </Grid>
             <Grid Grid.Row="3">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Width="40">地址：</TextBlock>
-                    <TextBox Width="240" x:Name="_address" MaxLength="30"></TextBox>
+                    <TextBlock Width="40">县(区)：</TextBlock>
+                    <TextBox Width="240" x:Name="_region" MaxLength="30"></TextBox>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="4">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Width="40">乡(镇)：</TextBlock>
+                    <TextBox Width="240" x:Name="_town" MaxLength="30"></TextBox>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="5">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Width="40">村(场)：</TextBlock>
+                    <TextBox Width="240" x:Name="_village" MaxLength="30"></TextBox>
                 </StackPanel>
             </Grid>
         </Grid>

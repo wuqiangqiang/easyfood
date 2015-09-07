@@ -25,24 +25,28 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private string shipperId;
+        private string shipperFlag;
         SysShipperQuery ship;
         private string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         private string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
-        public ModifyShipper(IDBOperation dbOperation, string shipper_id, SysShipperQuery ship_query)
+        public ModifyShipper(IDBOperation dbOperation, string shipper_id,string shipperflag, SysShipperQuery ship_query)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
             this.shipperId = shipper_id;
             this._id.Text = shipperId;
             this.ship = ship_query;
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shippername,phone,address from t_shipper " +
-                               "where shipperid = '{0}'", shipperId)).Tables[0];
+            this.shipperFlag = shipperflag;
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shippername,phone,region,town,village from t_shipper " +
+                               "where shipperid = '{0}' and shipperflag = '{1}'", shipperId, shipperFlag)).Tables[0];
             if(table.Rows.Count != 0)
             {
                 this._name.Text = table.Rows[0][0].ToString();
                 this._phone.Text = table.Rows[0][1].ToString();
-                this._address.Text = table.Rows[0][2].ToString();
+                this._region.Text = table.Rows[0][2].ToString();
+                this._town.Text = table.Rows[0][3].ToString();
+                this._village.Text = table.Rows[0][4].ToString();
             }
 
         }
@@ -61,14 +65,27 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (_address.Text.Trim().Length == 0)
+            if (_region.Text.Trim().Length == 0)
             {
-                Toolkit.MessageBox.Show("请输入地址！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请输入县(区)！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            string sql = string.Format("update t_shipper set shippername = '{0}',phone = '{1}',address = '{2}' where shipperid = '{3}'"
-                            ,_name.Text, _phone.Text, _address.Text, _id.Text);
+            if (_town.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入乡(镇)！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_village.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入村(场)！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            string sql = string.Format("update t_shipper set shippername = '{0}',phone = '{1}',region = '{2}',town = '{3}'," +
+                                         "village = '{4}' where shipperid = '{5}' and shipperflag = '{6}'"
+                            , _name.Text, _phone.Text, _region.Text, _town.Text, _village.Text, _id.Text, shipperFlag);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i > 0)

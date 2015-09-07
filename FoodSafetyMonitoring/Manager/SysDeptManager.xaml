@@ -136,7 +136,7 @@
                         <Grid Grid.Row ="4">
                             <StackPanel x:Name="_station_property" Visibility="Hidden" VerticalAlignment="Center" >
                                 <TextBlock Width="80">检测点性质:</TextBlock>
-                                <CheckBox x:Name="_direct_station"  Checked="_detect_method1_Checked">直属检测站</CheckBox>
+                                <CheckBox x:Name="_direct_station"  Checked="_detect_method1_Checked">检疫站</CheckBox>
                                 <CheckBox x:Name="_direct_station_2"  Checked="_detect_method1_Checked">加工企业</CheckBox>
                                 <CheckBox x:Name="_cultivate_station" Checked="_detect_method1_Checked">养殖场</CheckBox>
                                 <CheckBox x:Name="_slaughter_station" Checked="_detect_method1_Checked">屠宰场</CheckBox>

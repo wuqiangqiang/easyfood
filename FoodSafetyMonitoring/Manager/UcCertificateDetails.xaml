@@ -23,7 +23,7 @@
             <TextBlock Canvas.Left="128" Canvas.Top="276" x:Name="_object_lable" Width="634" FontSize="16">666</TextBlock>
             <TextBlock Canvas.Left="463" Canvas.Top="339" x:Name="_user_name" Width="100" Margin="0" FontSize="16">777</TextBlock>
             <TextBlock Canvas.Left="570" Canvas.Top="339" x:Name="_user_id" Width="100" Margin="0" FontSize="16">777</TextBlock>
-            <TextBlock  Canvas.Left="417.594" Canvas.Top="377" Width="60" x:Name="_nian" FontSize="16">888</TextBlock>
+            <TextBlock  Canvas.Left="417.594" Canvas.Top="377" Width="70" x:Name="_nian" FontSize="16">888</TextBlock>
             <TextBlock  Canvas.Left="506" Canvas.Top="377" Width="40" x:Name="_yue" FontSize="16">999</TextBlock>
             <TextBlock  Canvas.Left="563.594" Canvas.Top="377" Width="50" x:Name="_day" FontSize="16">111</TextBlock>
         </Canvas>

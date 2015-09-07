@@ -26,6 +26,7 @@ namespace FoodSafetyMonitoring.Manager
         private IDBOperation dbOperation;
         private string deptId;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
+        private string shipperflag;
 
         public SysShipperQuery(IDBOperation dbOperation)
         {
@@ -33,6 +34,10 @@ namespace FoodSafetyMonitoring.Manager
 
             this.dbOperation = dbOperation;
             deptId =  (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+
+            shipperflag = dbOperation.GetDbHelper().GetSingle("select ifnull(a.shipperflag,'') as shipperflag " +
+                                    " from sys_client_sysdept a " +
+                                    " where INFO_CODE = " + deptId).ToString();
         }
 
 
@@ -42,13 +47,13 @@ namespace FoodSafetyMonitoring.Manager
             DataTable table;
             if(_shipper_id.Text.Trim().Length == 0)
             {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,address from t_shipper " +
-                               "where createdeptid like '{0}%'", deptId)).Tables[0];
+                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
+                               "where shipperflag = '{0}'", shipperflag)).Tables[0];
             }
             else
             {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,address from t_shipper " +
-                               "where shipperid = '{0}' and createdeptid like '{1}%'", _shipper_id.Text, deptId)).Tables[0];
+                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
+                               "where shipperid = '{0}' and shipperflag = '{1}'", _shipper_id.Text, shipperflag)).Tables[0];
             }
             
             lvlist.DataContext = table;
@@ -69,13 +74,13 @@ namespace FoodSafetyMonitoring.Manager
             DataTable table;
             if (_shipper_id.Text.Trim().Length == 0)
             {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,address from t_shipper " +
-                               "where createdeptid like '{0}%'", deptId)).Tables[0];
+                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
+                               "where shipperflag = '{0}'", shipperflag)).Tables[0];
             }
             else
             {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,address from t_shipper " +
-                               "where shipperid = '{0}' and createdeptid like '{1}%'", _shipper_id.Text, deptId)).Tables[0];
+                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
+                               "where shipperid = '{0}' and shipperflag = '{1}'", _shipper_id.Text, shipperflag)).Tables[0];
             }
 
             lvlist.DataContext = table;
@@ -84,7 +89,7 @@ namespace FoodSafetyMonitoring.Manager
         private void _btn_modify_Click(object sender, RoutedEventArgs e)
         {
             string shipper_id = (sender as Button).Tag.ToString();
-            ModifyShipper ship = new ModifyShipper(dbOperation, shipper_id,this);
+            ModifyShipper ship = new ModifyShipper(dbOperation, shipper_id, shipperflag,this);
             ship.ShowDialog();
         }
     }

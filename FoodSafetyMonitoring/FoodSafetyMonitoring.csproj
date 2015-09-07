@@ -189,6 +189,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\AddShipper_product.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\CertificatePreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -214,6 +218,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Manager\ModifyShipper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\ModifyShipper_product.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -356,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\SysShipperQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysShipperQuery_product.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -959,6 +971,9 @@
     <Compile Include="Manager\AddShipper.xaml.cs">
       <DependentUpon>AddShipper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\AddShipper_product.xaml.cs">
+      <DependentUpon>AddShipper_product.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\AlarmData.cs" />
     <Compile Include="Manager\CertificatePreview.xaml.cs">
       <DependentUpon>CertificatePreview.xaml</DependentUpon>
@@ -976,6 +991,9 @@
     <Compile Include="Manager\LoadWindow.xaml.cs" />
     <Compile Include="Manager\ModifyShipper.xaml.cs">
       <DependentUpon>ModifyShipper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ModifyShipper_product.xaml.cs">
+      <DependentUpon>ModifyShipper_product.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SetSampling.xaml.cs">
       <DependentUpon>SetSampling.xaml</DependentUpon>
@@ -1057,6 +1075,9 @@
     </Compile>
     <Compile Include="Manager\SysShipperQuery.xaml.cs">
       <DependentUpon>SysShipperQuery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysShipperQuery_product.xaml.cs">
+      <DependentUpon>SysShipperQuery_product.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysTaskCheck.xaml.cs">
       <DependentUpon>SysTaskCheck.xaml</DependentUpon>

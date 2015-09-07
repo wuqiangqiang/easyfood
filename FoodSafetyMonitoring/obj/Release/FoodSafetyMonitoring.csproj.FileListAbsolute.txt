@@ -792,7 +792,6 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.xml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OOXML.xml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OpenXml4Net.xml
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\FoodSafetyMonitoring.csprojResolveAssemblyReference.cache
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\AniControl.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ChildMenu.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\LoginWindow.baml
@@ -1058,3 +1057,10 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\ModifyShipper.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\ModifyShipper.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\AddShipper_product.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\ModifyShipper_product.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\AddShipper_product.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\ModifyShipper_product.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery_product.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery_product.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\FoodSafetyMonitoring.csprojResolveAssemblyReference.cache

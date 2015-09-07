@@ -56,10 +56,10 @@
                         <TextBox Canvas.Left="184" Canvas.Top="132" x:Name="_object_count" Width="150" Margin="0" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                         <TextBox Canvas.Left="336" Canvas.Top="132" x:Name="_object_type" Width="96" Margin="0" MaxLength="5" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="539" Canvas.Top="132" x:Name="_dept_area" Width="248" Margin="0" MaxLength="10" IsEnabled="False"></TextBox>
-                        <ComboBox Canvas.Left="185" Canvas.Top="161" x:Name="_dept_name" Width="295"></ComboBox>
+                        <TextBox Canvas.Left="185" Canvas.Top="161" x:Name="_dept_name" Width="295" Margin="0" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="479" Canvas.Top="161" x:Name="_dept_address" Width="303" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="179" Canvas.Top="190" x:Name="_mdd" Width="603" MaxLength="50" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="179" Canvas.Top="219" x:Name="_cz_cardid" Width="603" MaxLength="10"></TextBox>
+                        <TextBox Canvas.Left="179" Canvas.Top="219" x:Name="_cz_cardid" Width="603" MaxLength="10" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="179" Canvas.Top="249" x:Name="_bz" Width="603" MaxLength="50"></TextBox>
                         <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="80" Margin="0"></TextBlock>
                         <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0"></TextBlock>

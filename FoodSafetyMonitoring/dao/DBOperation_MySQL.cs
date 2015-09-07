@@ -30,7 +30,7 @@ namespace FoodSafetyMonitoring.dao
         {
             UserInfo userInfo = new UserInfo();
 
-            string sql = string.Format("select reco_pkid uid, INFO_USER uname, fk_dept deptid,FLAG_TIER flagtier,supplierId, SUB_NAME menu " +
+            string sql = string.Format("select reco_pkid uid, INFO_USER uname, fk_dept deptid,FLAG_TIER flagtier,supplierId, SUB_NAME menu,NUMB_USER " +
                                        "from v_user_sub " +
                                        "where NUMB_USER ='{0}' and  INFO_PASSWORD = '{1}'", loginName, password);
 
@@ -47,6 +47,7 @@ namespace FoodSafetyMonitoring.dao
                     userInfo.FlagTier = table.Rows[0][3].ToString();
                     userInfo.SupplierId = table.Rows[0][4].ToString();
                     userInfo.Menus.AddRange(table.Rows[0][5].ToString().Split(new char[] { ',' }));
+                    userInfo.LoginName = table.Rows[0][6].ToString();
                 }
                 return userInfo;
             }

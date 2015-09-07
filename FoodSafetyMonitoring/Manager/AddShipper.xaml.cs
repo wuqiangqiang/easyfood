@@ -26,12 +26,14 @@ namespace FoodSafetyMonitoring.Manager
         private IDBOperation dbOperation;
         private string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         private string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+        private string shipperFlag;
 
-        public AddShipper(IDBOperation dbOperation)
+        public AddShipper(IDBOperation dbOperation,string shipperflag)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
-            this._id.Text = dbOperation.GetDbHelper().GetSingle("select f_create_shipper()").ToString();
+            this.shipperFlag = shipperflag;
+            this._id.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select f_create_shipper('{0}')", shipperFlag)).ToString();
            
         }
 
@@ -49,23 +51,35 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (_address.Text.Trim().Length == 0)
+            if (_region.Text.Trim().Length == 0)
             {
-                Toolkit.MessageBox.Show("请输入地址！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请输入县(区)！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_town.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入乡(镇)！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_village.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入村(场)！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             //判断货主代码是否存在，若存在则必须重新打开画面
-            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(shipperid) from t_shipper where shipperid ='{0}'", _id.Text));
+            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(shipperid) from t_shipper where shipperid ='{0}' and shipperflag = '{1}'", _id.Text, shipperFlag));
             if (exit_flag)
             {
                 Toolkit.MessageBox.Show("该货主代码已存在，请先关闭本画面再打开，重新添加！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            string sql = string.Format("insert into t_shipper(shipperid,shippername,phone,address,createuserid,createdate,createdeptid) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
-                            ,_id.Text, _name.Text, _phone.Text, _address.Text, userId,
-                            System.DateTime.Now, deptId);
+            string sql = string.Format("insert into t_shipper(shipperid,shippername,phone,region,town,village,createuserid,createdate,createdeptid,shipperflag) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')"
+                            , _id.Text, _name.Text, _phone.Text, _region.Text,_town.Text,_village.Text, userId,
+                            System.DateTime.Now, deptId, shipperFlag);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i > 0)

@@ -30,8 +30,11 @@ namespace FoodSafetyMonitoring.Manager
         public IDBOperation dbOperation = null;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
+        string loginid = (Application.Current.Resources["User"] as UserInfo).LoginName;
         string username = (Application.Current.Resources["User"] as UserInfo).ShowName;
         string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+        private string cityname;
+        private string shipperflag;
 
         public UcCreateCertificate(IDBOperation dbOperation)
         {
@@ -39,10 +42,27 @@ namespace FoodSafetyMonitoring.Manager
             this.dbOperation = dbOperation;
 
             _user_name.Text = username;
-            _user_id.Text = userId;
+            _user_id.Text = loginid;
             _nian.Text = ConvertStr.convert_nian(DateTime.Now.Year.ToString());
             _yue.Text = ConvertStr.convert_yue(DateTime.Now.Month.ToString());
             _day.Text = ConvertStr.convert_day(DateTime.Now.Day.ToString());
+
+            //出证人所属的市级单位,及出证人所属部门货主信息flag,赋值启运地点
+            DataTable table = dbOperation.GetDbHelper().GetDataSet("select sys_city.name as city,b.name as country,ifnull(a.shipperflag,'') as shipperflag," +
+                                    " tzcname,tzcaddress" +
+                                    " from sys_client_sysdept a LEFT JOIN sys_city ON a.city = sys_city.id" +
+                                    " LEFT JOIN sys_city b ON a.country = b.id" +
+                                    " where INFO_CODE = " + deptId).Tables[0];
+            if(table.Rows.Count != 0)
+            {
+                cityname = table.Rows[0][0].ToString();
+                shipperflag = table.Rows[0][2].ToString();
+
+                _city_ks.Text = table.Rows[0][0].ToString();
+                _region_ks.Text = table.Rows[0][1].ToString();
+                _town_ks.Text = table.Rows[0][4].ToString();
+                _village_ks.Text = table.Rows[0][3].ToString();
+            }            
 
             //检疫证号
             string card_id = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_cardid('{0}')", deptId)).ToString();
@@ -69,18 +89,23 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.Key == Key.Enter)
             {
-                DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper where shipperid =" + _shipper_id.Text).Tables[0];
+                DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,phone,region,town,village from t_shipper where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
                 if (table.Rows.Count != 0)
                 {
                     _shipper.Text = table.Rows[0][0].ToString();
-                    _village_js.Text = table.Rows[0][1].ToString();
+                    _phone.Text = table.Rows[0][1].ToString();
+                    _region_js.Text = table.Rows[0][2].ToString();
+                    _town_js.Text = table.Rows[0][3].ToString();
+                    _village_js.Text = table.Rows[0][4].ToString();
+                    _city_js.Text = cityname;
                 }
+
             }
         }
 
         private void _add_Click(object sender, RoutedEventArgs e)
         {
-            AddShipper ship = new AddShipper(dbOperation);
+            AddShipper ship = new AddShipper(dbOperation, shipperflag);
             ship.ShowDialog();
         }  
 
@@ -172,26 +197,26 @@ namespace FoodSafetyMonitoring.Manager
 
             string sql = string.Format("INSERT INTO t_certificate(cardid,companyid,companyname,objectid,objectname,objectcount," +
                                         "phone,foruseid,foruse,cityks,regionks,townks,villageks,cityjs,regionjs,townjs," +
-                                        "villagejs,objectlable,createdeptid,createuserid,createdate,helpuserid)" +
+                                        "villagejs,objectlable,createdeptid,createuserid,createdate,createloginid,helpuserid)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
-                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}')"
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}')"
                             , _card_id.Text, _shipper_id.Text, _shipper.Text,
                             (_object_id.SelectedItem as Label).Tag.ToString(), _object_id.Text, _object_count.Text + _object_type.Text,
                             _phone.Text, (_for_use.SelectedItem as Label).Tag.ToString(), _for_use.Text, _city_ks.Text,
                              _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
                             _town_js.Text, _village_js.Text, _object_lable.Text, deptId, userId,
-                            System.DateTime.Now, (_help_user.SelectedItem as Label).Tag.ToString());
+                            System.DateTime.Now, loginid,(_help_user.SelectedItem as Label).Tag.ToString());
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
                 List<string> cer_details = new List<string>() {_card_id.Text,_shipper.Text,_object_id.Text, _object_count.Text,_object_type.Text, _phone.Text,
                             _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
-                            _town_js.Text, _village_js.Text, _object_lable.Text,username,userId,
+                            _town_js.Text, _village_js.Text, _object_lable.Text,username,loginid,
                             System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
                 UcCertificateDetails cer = new UcCertificateDetails(cer_details);
-
+                //grid_info.Children.Add(cer);
                 PrintDialog dialog = new PrintDialog();
                 if (dialog.ShowDialog() == true)
                 {

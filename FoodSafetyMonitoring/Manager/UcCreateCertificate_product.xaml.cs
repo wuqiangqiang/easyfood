@@ -27,8 +27,10 @@ namespace FoodSafetyMonitoring.Manager
     {
         public IDBOperation dbOperation = null;
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
+        string loginid = (Application.Current.Resources["User"] as UserInfo).LoginName;
         string username = (Application.Current.Resources["User"] as UserInfo).ShowName;
         string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+        private string shipperflag;
 
 
         public UcCreateCertificate_product(IDBOperation dbOperation)
@@ -37,10 +39,25 @@ namespace FoodSafetyMonitoring.Manager
 
             this.dbOperation = dbOperation;
             _user_name.Text = username;
-            _user_id.Text = userId;
+            _user_id.Text = loginid;
             _nian.Text = ConvertStr.convert_nian(DateTime.Now.Year.ToString());
             _yue.Text = ConvertStr.convert_yue(DateTime.Now.Month.ToString());
             _day.Text = ConvertStr.convert_day(DateTime.Now.Day.ToString());
+
+            //出证人所属部门货主信息flag,生产单位信息
+            DataTable table = dbOperation.GetDbHelper().GetDataSet("select ifnull(a.shipperflag,'') as shipperflag, " +
+                                    " tzcname,tzcarea,tzcaddress,tzccardid "+
+                                    " from sys_client_sysdept a " +
+                                    " where INFO_CODE = " + deptId ).Tables[0];
+
+            if (table.Rows.Count != 0)
+            {
+                shipperflag = table.Rows[0][0].ToString();
+                _dept_area.Text = table.Rows[0][2].ToString();
+                _dept_address.Text = table.Rows[0][3].ToString();
+                _dept_name.Text = table.Rows[0][1].ToString();
+                _cz_cardid.Text = table.Rows[0][4].ToString();
+            }
 
             //产品检疫证号
             string product_cardid = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_productcardid('{0}')", deptId)).ToString();
@@ -52,8 +69,8 @@ namespace FoodSafetyMonitoring.Manager
             _product_name.SelectionChanged += new SelectionChangedEventHandler(_product_name_SelectionChanged);
             _product_name.SelectedIndex = 1;
             //生产单位
-            ComboboxTool.InitComboboxSource(_dept_name, string.Format("call p_get_dept_tz({0})", userId), "lr");
-            _dept_name.SelectionChanged += new SelectionChangedEventHandler(_dept_name_SelectionChanged);
+            //ComboboxTool.InitComboboxSource(_dept_name, string.Format("call p_get_dept_tz({0})", userId), "lr");
+            //_dept_name.SelectionChanged += new SelectionChangedEventHandler(_dept_name_SelectionChanged);
         }
 
         void _product_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,7 +86,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.Key == Key.Enter)
             {
-                DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper where shipperid =" + _shipper_id.Text).Tables[0];
+                DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper_product where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'" ).Tables[0];
                 if(table.Rows.Count != 0)
                 {
                     _shipper.Text = table.Rows[0][0].ToString();
@@ -79,22 +96,22 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
-        void _dept_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_dept_name.SelectedIndex > 0)
-            {
-                DataTable table = dbOperation.GetDbHelper().GetDataSet("select sys_city.name as city,b.name as country,address" + 
-                                    " from sys_client_sysdept a LEFT JOIN sys_city ON a.city = sys_city.id"+
-                                    " LEFT JOIN sys_city b ON a.country = b.id"+
-                                    " where INFO_CODE = " + (_dept_name.SelectedItem as Label).Tag.ToString()).Tables[0];
-                _dept_area.Text = table.Rows[0][0].ToString() + "市" + table.Rows[0][1].ToString();
-                _dept_address.Text = table.Rows[0][2].ToString();
-            }
-        }
+        //void _dept_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (_dept_name.SelectedIndex > 0)
+        //    {
+        //        DataTable table = dbOperation.GetDbHelper().GetDataSet("select sys_city.name as city,b.name as country,address" + 
+        //                            " from sys_client_sysdept a LEFT JOIN sys_city ON a.city = sys_city.id"+
+        //                            " LEFT JOIN sys_city b ON a.country = b.id"+
+        //                            " where INFO_CODE = " + (_dept_name.SelectedItem as Label).Tag.ToString()).Tables[0];
+        //        _dept_area.Text = table.Rows[0][0].ToString() + "市" + table.Rows[0][1].ToString();
+        //        _dept_address.Text = table.Rows[0][2].ToString();
+        //    }
+        //}
 
         private void _add_Click(object sender, RoutedEventArgs e)
         {
-            AddShipper ship = new AddShipper(dbOperation);
+            AddShipper_product ship = new AddShipper_product(dbOperation, shipperflag);
             ship.ShowDialog();
         }
 
@@ -137,9 +154,9 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (_dept_name.SelectedIndex < 1)
+            if (_dept_name.Text.Trim().Length == 0)
             {
-                Toolkit.MessageBox.Show("请选择生产单位！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请输入生产单位！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -150,25 +167,27 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             string sql = string.Format("INSERT INTO t_certificate_product(productcardid,companyid,companyname," +
-                                        "cardid,objectid,objectname,objectcount,productarea,deptid,deptname," +
-                                        "deptarea,destinationarea,bz,createdeptid,createuserid,createdate,helpuserid)" +
+                                        "cardid,objectid,objectname,objectcount,productarea,deptname," +
+                                        "deptarea,destinationarea,bz,createdeptid,createuserid,createdate,createloginid,helpuserid)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
                                         "'{10}','{11}','{12}','{13}','{14}','{15}','{16}')"
                                         ,_card_id.Text, _shipper_id.Text, _shipper.Text,
                                         _cz_cardid.Text, (_product_name.SelectedItem as Label).Tag.ToString(), _product_name.Text, 
                                         _object_count.Text + _object_type.Text, _dept_area.Text,
-                                        (_dept_name.SelectedItem as Label).Tag.ToString(), _dept_name.Text, 
+                                        _dept_name.Text, 
                                         _dept_address.Text, _mdd.Text, _bz.Text,
-                                        deptId, userId, System.DateTime.Now, (_help_user.SelectedItem as Label).Tag.ToString());
+                                        deptId, userId, System.DateTime.Now, loginid,(_help_user.SelectedItem as Label).Tag.ToString());
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
                 List<string> cer_details = new List<string>() {_card_id.Text,_shipper.Text,_cz_cardid.Text, _product_name.Text, _object_count.Text ,
-                             _object_type.Text, _dept_area.Text,_dept_name.Text, _dept_address.Text, _mdd.Text, _bz.Text,username,userId,
+                             _object_type.Text, _dept_area.Text,_dept_name.Text, _dept_address.Text, _mdd.Text, _bz.Text,username,loginid,
                             System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
                 UcCertificateProductDetails cer = new UcCertificateProductDetails(cer_details);
+
+                //grid_info.Children.Add(cer);
 
                 PrintDialog dialog = new PrintDialog();
                 if (dialog.ShowDialog() == true)

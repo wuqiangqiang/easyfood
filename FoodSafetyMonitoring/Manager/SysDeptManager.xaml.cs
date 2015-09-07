@@ -87,33 +87,33 @@ namespace FoodSafetyMonitoring.Manager
                     department1.Parent = department;
                     department1.Row = row1;
                     department1.Name = row1["INFO_NAME"].ToString();
-                    //rows = table.Select("FK_CODE_DEPT='" + row1["INFO_CODE"].ToString() + "'");
-                    //foreach (DataRow row2 in rows)
-                    //{
-                    //    Department department2 = new Department();
-                    //    department2.Parent = department1;
-                    //    department2.Row = row2;
-                    //    department2.Name = row2["INFO_NAME"].ToString();
-                    //    rows = table.Select("FK_CODE_DEPT='" + row2["INFO_CODE"].ToString() + "'");
-                    //    foreach (DataRow row3 in rows)
-                    //    {
-                    //        Department department3 = new Department();
-                    //        department3.Parent = department2;
-                    //        department3.Row = row3;
-                    //        department3.Name = row3["INFO_NAME"].ToString();
-                    //        rows = table.Select("FK_CODE_DEPT='" + row3["INFO_CODE"].ToString() + "'");
-                    //        foreach (DataRow row4 in rows)
-                    //        {
-                    //            Department department4 = new Department();
-                    //            department4.Parent = department3;
-                    //            department4.Row = row4;
-                    //            department4.Name = row4["INFO_NAME"].ToString();
-                    //            department3.Children.Add(department4);
-                    //        }
-                    //        department2.Children.Add(department3);
-                    //    }
-                    //    department1.Children.Add(department2);
-                    //}
+                    rows = table.Select("FK_CODE_DEPT='" + row1["INFO_CODE"].ToString() + "'");
+                    foreach (DataRow row2 in rows)
+                    {
+                        Department department2 = new Department();
+                        department2.Parent = department1;
+                        department2.Row = row2;
+                        department2.Name = row2["INFO_NAME"].ToString();
+                        rows = table.Select("FK_CODE_DEPT='" + row2["INFO_CODE"].ToString() + "'");
+                        foreach (DataRow row3 in rows)
+                        {
+                            Department department3 = new Department();
+                            department3.Parent = department2;
+                            department3.Row = row3;
+                            department3.Name = row3["INFO_NAME"].ToString();
+                            rows = table.Select("FK_CODE_DEPT='" + row3["INFO_CODE"].ToString() + "'");
+                            foreach (DataRow row4 in rows)
+                            {
+                                Department department4 = new Department();
+                                department4.Parent = department3;
+                                department4.Row = row4;
+                                department4.Name = row4["INFO_NAME"].ToString();
+                                department3.Children.Add(department4);
+                            }
+                            department2.Children.Add(department3);
+                        }
+                        department1.Children.Add(department2);
+                    }
                     department.Children.Add(department1);
                 }
 
@@ -275,21 +275,27 @@ namespace FoodSafetyMonitoring.Manager
                 //row["title"] = _title.Text;
                 //row["INFO_NOTE"] = _note.Text;
 
+                //获取画面上的检测点类型
+                string type = "";
                 if (_direct_station.IsChecked == true)
                 {
                     row["type"] = "2";
+                    type = "2";
                 }
                 else if (_cultivate_station.IsChecked == true)
                 {
                     row["type"] = "1";
+                    type = "1";
                 }
                 else if (_slaughter_station.IsChecked == true)
                 {
                     row["type"] = "0";
+                    type = "0";
                 }
                 else if (_direct_station_2.IsChecked == true)
                 {
                     row["type"] = "3";
+                    type = "3";
                 }
 
                 if (row["type"].ToString() == ""   && row["FLAG_TIER"].ToString() == "4")
@@ -429,6 +435,7 @@ namespace FoodSafetyMonitoring.Manager
                 department.Row["phone"] = _contact_number.Text;
                 department.Row["supplierId"] = (_Supplier.SelectedItem as Label).Tag.ToString();
                 department.Row["isdept"] = is_dept;
+                department.Row["type"] = type;
                 _edit.IsEnabled = true;
 
 
@@ -549,19 +556,34 @@ namespace FoodSafetyMonitoring.Manager
             {
                 _station_name.Text = "部门名称:";
             }
-            if (user_flag_tier == row["FLAG_TIER"].ToString())
+
+            //部门放开后，不可再用此控制
+            //if (user_flag_tier == row["FLAG_TIER"].ToString())
+            //{
+            //    _add.Visibility = Visibility.Visible;
+            //    _delete.Visibility = Visibility.Hidden;
+            //    _edit.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    _add.Visibility = Visibility.Hidden;
+            //    _delete.Visibility = Visibility.Visible;
+            //    _edit.Visibility = Visibility.Visible;
+            //}
+
+            _add.Visibility = Visibility.Visible;
+            _edit.Visibility = Visibility.Visible;
+            //如果存在下级部门则不出现删除按钮，否则出现
+            bool result3 = dbOperation.GetDbHelper().Exists(string.Format("select count(INFO_CODE) from sys_client_sysdept where FK_CODE_DEPT = '{0}'", row["INFO_CODE"].ToString()));
+            if (result3)
             {
-                _add.Visibility = Visibility.Visible;
                 _delete.Visibility = Visibility.Hidden;
-                _edit.Visibility = Visibility.Visible;
             }
             else
             {
-                _add.Visibility = Visibility.Hidden;
                 _delete.Visibility = Visibility.Visible;
-                _edit.Visibility = Visibility.Visible;
             }
-
+            
             if (_regional_level.Text == "检测单位")
             {
                 _add.Visibility = Visibility.Hidden;
@@ -598,7 +620,7 @@ namespace FoodSafetyMonitoring.Manager
             _lower_area.SelectedIndex = -1;
 
             //下级单位全部均已添加完，则不出现添加下级按钮
-            if (_lower_area.Items.Count == 0 && user_flag_tier != "3")
+            if (_lower_area.Items.Count == 0 && row["FLAG_TIER"].ToString() != "3")
             {
                 _add.Visibility = Visibility.Hidden;
             }

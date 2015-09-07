@@ -35,9 +35,9 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_source_company, string.Format("select DISTINCT t_certificate_product.companyid ,t_shipper.shippername" +
-                                             " FROM t_certificate_product left join t_shipper ON t_certificate_product.companyid = t_shipper.shipperid" +
-                                             " WHERE t_certificate_product.createdeptid like '{0}%' " ,deptId ), "cxtj");
+            //ComboboxTool.InitComboboxSource(_source_company, string.Format("select DISTINCT t_certificate_product.companyid ,t_shipper_product.shippername" +
+            //                                 " FROM t_certificate_product left join t_shipper_product ON t_certificate_product.companyid = t_shipper_product.shipperid" +
+            //                                 " WHERE t_certificate_product.createdeptid like '{0}%' " ,deptId ), "cxtj");
         }
 
 
@@ -50,7 +50,7 @@ namespace FoodSafetyMonitoring.Manager
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_product_new({0},'{1}','{2}')",
                    (Application.Current.Resources["User"] as UserInfo).ID,
                    _card_no.Text,
-                   _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
+                   _source_company.Text)).Tables[0];
 
             lvlist.DataContext = table;
 

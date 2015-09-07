@@ -113,7 +113,9 @@
                                 <GridViewColumn Width="100" Header="货主代码" DisplayMemberBinding="{Binding shipperid}" ></GridViewColumn>
                                 <GridViewColumn Width="140" Header="货主" DisplayMemberBinding="{Binding shippername}" ></GridViewColumn>
                                 <GridViewColumn Width="180" Header="电话" DisplayMemberBinding="{Binding phone}" ></GridViewColumn>
-                                <GridViewColumn Width="220" Header="地址" DisplayMemberBinding="{Binding address}" ></GridViewColumn>
+                                <GridViewColumn Width="120" Header="县(区)" DisplayMemberBinding="{Binding region}" ></GridViewColumn>
+                                <GridViewColumn Width="120" Header="乡(镇)" DisplayMemberBinding="{Binding town}" ></GridViewColumn>
+                                <GridViewColumn Width="120" Header="村(场)" DisplayMemberBinding="{Binding village}" ></GridViewColumn>
                                 <GridViewColumn Width="100" Header="修改">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>

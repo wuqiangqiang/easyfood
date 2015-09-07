@@ -340,25 +340,25 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>AutoUpdate.exe</td><td>{CF8BC9C0-37EF-4EFA-8DEF-C2A780B664B5}</td><td>INSTALLDIR</td><td>2</td><td/><td>autoupdate.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Component</td><td>{7DEC92DA-F920-497D-9059-37FF586FBEB2}</td><td>INSTALLDIR</td><td>2</td><td/><td>File</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Component.exe</td><td>{A260FCE9-0F7E-4A6E-828B-1C2C3B26B5A1}</td><td>INSTALLDIR</td><td>2</td><td/><td>File.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Component.exe1</td><td>{762AD318-DE52-4377-917D-6A39A3BB9227}</td><td>INSTALLDIR</td><td>2</td><td/><td>File.exe1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Component1</td><td>{3D76A5D4-D294-450D-84A5-4AC7963472E1}</td><td>INSTALLDIR</td><td>2</td><td/><td>File1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DBUtility.dll</td><td>{E2C45EA0-51E8-4F96-AF0C-743B13AE6CEE}</td><td>INSTALLDIR</td><td>2</td><td/><td>dbutility.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ICSharpCode.SharpZipLib.dll</td><td>{AE3C9117-8D1E-41DE-A693-69EBB1633630}</td><td>INSTALLDIR</td><td>2</td><td/><td>icsharpcode.sharpziplib.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>AutoUpdate.exe</td><td>{D17DD506-6681-4353-8660-EDD3875EB237}</td><td>INSTALLDIR</td><td>2</td><td/><td>autoupdate.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component</td><td>{D84E3186-2787-4A02-A7A6-75708139DB9E}</td><td>INSTALLDIR</td><td>2</td><td/><td>File</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component.exe</td><td>{86A30DFC-8FE9-4D90-A383-00746F147566}</td><td>INSTALLDIR</td><td>2</td><td/><td>File.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component.exe1</td><td>{6C67A5CC-FAC3-4771-BEFD-B1DEC28CCAB1}</td><td>INSTALLDIR</td><td>2</td><td/><td>File.exe1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component1</td><td>{02F82F13-31E7-4F23-A1EA-4C43D56583BF}</td><td>INSTALLDIR</td><td>2</td><td/><td>File1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DBUtility.dll</td><td>{5259AE84-67FE-4DBC-8DDA-C2BADCCB0145}</td><td>INSTALLDIR</td><td>2</td><td/><td>dbutility.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ICSharpCode.SharpZipLib.dll</td><td>{DA588572-1D0C-49DD-8EE5-D3EBE7EC6FEE}</td><td>INSTALLDIR</td><td>2</td><td/><td>icsharpcode.sharpziplib.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{08913FED-1649-4884-B66C-EA3E1F6053C1}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>MySql.Data.dll</td><td>{5EBD3BEB-4D3D-4970-A8E8-3D180C3BC2F4}</td><td>INSTALLDIR</td><td>2</td><td/><td>mysql.data.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>NPOI.OOXML.dll</td><td>{0595EB85-2F05-4729-8211-44039CB930DD}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.ooxml.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>NPOI.OpenXml4Net.dll</td><td>{A198D2F3-CEA6-47A4-81C2-818E6B4CF4C1}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.openxml4net.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>NPOI.OpenXmlFormats.dll</td><td>{D60FF685-A6B7-4BD6-B66E-E5BD56E56FBF}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.openxmlformats.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>NPOI.dll</td><td>{B2F44137-EC13-448E-AB56-9B99A38EC0CE}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>MySql.Data.dll</td><td>{59311039-62A7-4509-8293-50FBCAF613EF}</td><td>INSTALLDIR</td><td>2</td><td/><td>mysql.data.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>NPOI.OOXML.dll</td><td>{AE01CBDE-52D1-41E2-B825-8DFE5073CCA5}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.ooxml.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>NPOI.OpenXml4Net.dll</td><td>{7D3A7EB6-BC5C-4C13-96C7-3A35426A8C79}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.openxml4net.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>NPOI.OpenXmlFormats.dll</td><td>{BE03F72F-18F3-4D07-A9F0-A1D9EC87F1D8}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.openxmlformats.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>NPOI.dll</td><td>{8B511C8F-9E73-4935-9699-2048A228BB5F}</td><td>INSTALLDIR</td><td>2</td><td/><td>npoi.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>NewComponent1</td><td>{BB81ACEB-2B1A-49F3-830B-D55CF53607F0}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>WCFFrameWork.dll</td><td>{8CF4F818-1BF4-4F3A-A129-4069C11D71C8}</td><td>INSTALLDIR</td><td>2</td><td/><td>wcfframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>WPFToolkit.Extended.dll</td><td>{F7295BBA-40DF-4028-B184-B1F199C4C48B}</td><td>INSTALLDIR</td><td>2</td><td/><td>wpftoolkit.extended.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>WPFToolkit.dll</td><td>{BB2F9ACE-5AC3-40F1-8E55-96734A16189C}</td><td>INSTALLDIR</td><td>2</td><td/><td>wpftoolkit.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>WPFVisifire.Charts.dll</td><td>{593F2EB0-C494-4A0A-8329-FF39A7BE3E08}</td><td>INSTALLDIR</td><td>2</td><td/><td>wpfvisifire.charts.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>WWTFrameWork.dll</td><td>{10496E13-A51F-425D-937A-728E118A1D93}</td><td>INSTALLDIR</td><td>2</td><td/><td>wwtframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WCFFrameWork.dll</td><td>{2AA93511-4407-46E6-840C-6E55E50FCF4D}</td><td>INSTALLDIR</td><td>2</td><td/><td>wcfframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WPFToolkit.Extended.dll</td><td>{CEC35326-9D96-4125-B354-1A93AB147E5A}</td><td>INSTALLDIR</td><td>2</td><td/><td>wpftoolkit.extended.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WPFToolkit.dll</td><td>{9AA2E4D7-B1B8-4153-9F21-5983D37E3D2F}</td><td>INSTALLDIR</td><td>2</td><td/><td>wpftoolkit.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WPFVisifire.Charts.dll</td><td>{63475725-70E1-461D-B7AE-09602F4CD330}</td><td>INSTALLDIR</td><td>2</td><td/><td>wpfvisifire.charts.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WWTFrameWork.dll</td><td>{A001382B-05A1-4D94-B9FC-992F57C50F12}</td><td>INSTALLDIR</td><td>2</td><td/><td>wwtframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1914,32 +1914,32 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>File</td><td>Component</td><td>FoodSafetyMonitoring.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;FoodSafetyMonitoring&gt;|Built</td><td>3</td><td/></row>
-		<row><td>File.config</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.CON|检测监管系统.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe.config</td><td>1</td><td/></row>
-		<row><td>File.config1</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.CON|检测监管系统.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.vshost.exe.config</td><td>1</td><td/></row>
-		<row><td>File.exe</td><td>Component.exe</td><td>检测监~1.EXE|检测监管系统.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe</td><td>1</td><td/></row>
-		<row><td>File.exe1</td><td>Component.exe1</td><td>检测监~1.EXE|检测监管系统.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.vshost.exe</td><td>1</td><td/></row>
-		<row><td>File.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.MAN|检测监管系统.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.vshost.exe.manifest</td><td>1</td><td/></row>
-		<row><td>File.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.PDB|检测监管系统.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.pdb</td><td>1</td><td/></row>
+		<row><td>File.config</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.CON|检测监管系统.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe.config</td><td>1</td><td/></row>
+		<row><td>File.config1</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.CON|检测监管系统.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.vshost.exe.config</td><td>1</td><td/></row>
+		<row><td>File.exe</td><td>Component.exe</td><td>检测监~1.EXE|检测监管系统.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe</td><td>1</td><td/></row>
+		<row><td>File.exe1</td><td>Component.exe1</td><td>检测监~1.EXE|检测监管系统.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.vshost.exe</td><td>1</td><td/></row>
+		<row><td>File.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.MAN|检测监管系统.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.vshost.exe.manifest</td><td>1</td><td/></row>
+		<row><td>File.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>检测监~1.PDB|检测监管系统.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.pdb</td><td>1</td><td/></row>
 		<row><td>File1</td><td>Component1</td><td>AutoUpdate.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoUpdate&gt;|Built</td><td>3</td><td/></row>
-		<row><td>autoupdate.exe</td><td>AutoUpdate.exe</td><td>AUTOUP~1.EXE|AutoUpdate.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe</td><td>1</td><td/></row>
-		<row><td>autoupdate.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>AUTOUP~1.CON|AutoUpdate.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe.config</td><td>1</td><td/></row>
-		<row><td>autoupdate.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>AUTOUP~1.PDB|AutoUpdate.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\AutoUpdate\bin\Release\AutoUpdate.pdb</td><td>1</td><td/></row>
-		<row><td>dbutility.dll</td><td>DBUtility.dll</td><td>DBUTIL~1.DLL|DBUtility.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\DBUtility.dll</td><td>1</td><td/></row>
-		<row><td>dbutility.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>DBUTIL~1.PDB|DBUtility.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\DBUtility.pdb</td><td>1</td><td/></row>
-		<row><td>icsharpcode.sharpziplib.dll</td><td>ICSharpCode.SharpZipLib.dll</td><td>ICSHAR~1.DLL|ICSharpCode.SharpZipLib.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\ICSharpCode.SharpZipLib.dll</td><td>1</td><td/></row>
-		<row><td>mysql.data.dll</td><td>MySql.Data.dll</td><td>MYSQLD~1.DLL|MySql.Data.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\MySql.Data.dll</td><td>1</td><td/></row>
-		<row><td>npoi.dll</td><td>NPOI.dll</td><td>NPOI.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.dll</td><td>1</td><td/></row>
-		<row><td>npoi.ooxml.dll</td><td>NPOI.OOXML.dll</td><td>NPOIOO~1.DLL|NPOI.OOXML.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OOXML.dll</td><td>1</td><td/></row>
-		<row><td>npoi.ooxml.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NPOIOO~1.XML|NPOI.OOXML.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OOXML.xml</td><td>1</td><td/></row>
-		<row><td>npoi.openxml4net.dll</td><td>NPOI.OpenXml4Net.dll</td><td>NPOIOP~1.DLL|NPOI.OpenXml4Net.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OpenXml4Net.dll</td><td>1</td><td/></row>
-		<row><td>npoi.openxml4net.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NPOIOP~1.XML|NPOI.OpenXml4Net.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OpenXml4Net.xml</td><td>1</td><td/></row>
-		<row><td>npoi.openxmlformats.dll</td><td>NPOI.OpenXmlFormats.dll</td><td>NPOIOP~1.DLL|NPOI.OpenXmlFormats.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OpenXmlFormats.dll</td><td>1</td><td/></row>
-		<row><td>npoi.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NPOI.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.xml</td><td>1</td><td/></row>
-		<row><td>wcfframework.dll</td><td>WCFFrameWork.dll</td><td>WCFFRA~1.DLL|WCFFrameWork.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\WCFFrameWork.dll</td><td>1</td><td/></row>
-		<row><td>wpftoolkit.dll</td><td>WPFToolkit.dll</td><td>WPFTOO~1.DLL|WPFToolkit.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\WPFToolkit.dll</td><td>1</td><td/></row>
-		<row><td>wpftoolkit.extended.dll</td><td>WPFToolkit.Extended.dll</td><td>WPFTOO~1.DLL|WPFToolkit.Extended.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\WPFToolkit.Extended.dll</td><td>1</td><td/></row>
-		<row><td>wpfvisifire.charts.dll</td><td>WPFVisifire.Charts.dll</td><td>WPFVIS~1.DLL|WPFVisifire.Charts.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\WPFVisifire.Charts.dll</td><td>1</td><td/></row>
-		<row><td>wwtframework.dll</td><td>WWTFrameWork.dll</td><td>WWTFRA~1.DLL|WWTFrameWork.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\WWTFrameWork.dll</td><td>1</td><td/></row>
+		<row><td>autoupdate.exe</td><td>AutoUpdate.exe</td><td>AUTOUP~1.EXE|AutoUpdate.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe</td><td>1</td><td/></row>
+		<row><td>autoupdate.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>AUTOUP~1.CON|AutoUpdate.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe.config</td><td>1</td><td/></row>
+		<row><td>autoupdate.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>AUTOUP~1.PDB|AutoUpdate.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.pdb</td><td>1</td><td/></row>
+		<row><td>dbutility.dll</td><td>DBUtility.dll</td><td>DBUTIL~1.DLL|DBUtility.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\DBUtility.dll</td><td>1</td><td/></row>
+		<row><td>dbutility.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>DBUTIL~1.PDB|DBUtility.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\DBUtility.pdb</td><td>1</td><td/></row>
+		<row><td>icsharpcode.sharpziplib.dll</td><td>ICSharpCode.SharpZipLib.dll</td><td>ICSHAR~1.DLL|ICSharpCode.SharpZipLib.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\ICSharpCode.SharpZipLib.dll</td><td>1</td><td/></row>
+		<row><td>mysql.data.dll</td><td>MySql.Data.dll</td><td>MYSQLD~1.DLL|MySql.Data.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\MySql.Data.dll</td><td>1</td><td/></row>
+		<row><td>npoi.dll</td><td>NPOI.dll</td><td>NPOI.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.dll</td><td>1</td><td/></row>
+		<row><td>npoi.ooxml.dll</td><td>NPOI.OOXML.dll</td><td>NPOIOO~1.DLL|NPOI.OOXML.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OOXML.dll</td><td>1</td><td/></row>
+		<row><td>npoi.ooxml.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NPOIOO~1.XML|NPOI.OOXML.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OOXML.xml</td><td>1</td><td/></row>
+		<row><td>npoi.openxml4net.dll</td><td>NPOI.OpenXml4Net.dll</td><td>NPOIOP~1.DLL|NPOI.OpenXml4Net.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OpenXml4Net.dll</td><td>1</td><td/></row>
+		<row><td>npoi.openxml4net.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NPOIOP~1.XML|NPOI.OpenXml4Net.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OpenXml4Net.xml</td><td>1</td><td/></row>
+		<row><td>npoi.openxmlformats.dll</td><td>NPOI.OpenXmlFormats.dll</td><td>NPOIOP~1.DLL|NPOI.OpenXmlFormats.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.OpenXmlFormats.dll</td><td>1</td><td/></row>
+		<row><td>npoi.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NPOI.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\NPOI.xml</td><td>1</td><td/></row>
+		<row><td>wcfframework.dll</td><td>WCFFrameWork.dll</td><td>WCFFRA~1.DLL|WCFFrameWork.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\WCFFrameWork.dll</td><td>1</td><td/></row>
+		<row><td>wpftoolkit.dll</td><td>WPFToolkit.dll</td><td>WPFTOO~1.DLL|WPFToolkit.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\WPFToolkit.dll</td><td>1</td><td/></row>
+		<row><td>wpftoolkit.extended.dll</td><td>WPFToolkit.Extended.dll</td><td>WPFTOO~1.DLL|WPFToolkit.Extended.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\WPFToolkit.Extended.dll</td><td>1</td><td/></row>
+		<row><td>wpfvisifire.charts.dll</td><td>WPFVisifire.Charts.dll</td><td>WPFVIS~1.DLL|WPFVisifire.Charts.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\WPFVisifire.Charts.dll</td><td>1</td><td/></row>
+		<row><td>wwtframework.dll</td><td>WWTFrameWork.dll</td><td>WWTFRA~1.DLL|WWTFrameWork.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\WWTFrameWork.dll</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2084,25 +2084,25 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>AutoUpdate.exe</td><td/><td/><td>_2138F666_EC4C_4DB9_8843_808AC94F2342_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Component</td><td/><td/><td>_6CB46786_5B48_4323_8FBC_4499C0C7415F_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Component.exe</td><td/><td/><td>_5A58AFC2_C720_4D60_B340_479EB755568D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Component.exe1</td><td/><td/><td>_5D66969F_DF8C_43F1_8626_EA027B82161C_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Component1</td><td/><td/><td>_A2B2801B_CEDB_4C6D_9FD7_9400BD3A27A4_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DBUtility.dll</td><td/><td/><td>_BDF728AA_35A1_48F2_B54B_E329CB5AE19E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ICSharpCode.SharpZipLib.dll</td><td/><td/><td>_57FBCB06_F5A5_4F0E_97A8_5B657996EC5B_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>AutoUpdate.exe</td><td/><td/><td>_37F1B4A2_8DBE_4FB0_B9F1_EC4DC56BFC80_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component</td><td/><td/><td>_4222E65C_0C16_4565_BF90_ED681BD9E3CC_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component.exe</td><td/><td/><td>_116809D3_8CBC_4FC7_A982_9FFD827E808A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component.exe1</td><td/><td/><td>_B6139CD9_1306_4DA3_A611_72B27A2BB995_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component1</td><td/><td/><td>_3379E09F_E209_448E_B634_432E83EB0F50_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DBUtility.dll</td><td/><td/><td>_FEDDA21C_3169_424C_9851_02B223264F52_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ICSharpCode.SharpZipLib.dll</td><td/><td/><td>_45B552D4_0648_4E9D_9FD6_FB27C056B9EC_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_891CC19A_03D6_4C52_BB92_4B7388537AC8_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>MySql.Data.dll</td><td/><td/><td>_97D77438_6E5F_44B4_B0B1_703905D99AFA_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>NPOI.OOXML.dll</td><td/><td/><td>_C18FFAFA_11D1_44E5_958A_E1642C3DD9F2_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>NPOI.OpenXml4Net.dll</td><td/><td/><td>_34FB82B7_5086_479A_8BDE_AC100104B2E8_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>NPOI.OpenXmlFormats.dll</td><td/><td/><td>_A1D1D1A0_390B_419A_9956_206FF09F3E61_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>NPOI.dll</td><td/><td/><td>_12214713_5202_428D_ABE2_7E655BF8AE80_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>MySql.Data.dll</td><td/><td/><td>_0F5D51F7_AE13_4EDF_B356_1DFA850F9535_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>NPOI.OOXML.dll</td><td/><td/><td>_F78F0857_98E4_4385_A328_8B7F0C21C11F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>NPOI.OpenXml4Net.dll</td><td/><td/><td>_B00A693C_54B1_44D5_AF17_2CF04F5CCB11_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>NPOI.OpenXmlFormats.dll</td><td/><td/><td>_0EAB4AF4_4618_49F3_9385_5F282E70F36E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>NPOI.dll</td><td/><td/><td>_E6AF41D2_E130_4882_9F64_4DDF5E308518_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>NewComponent1</td><td/><td/><td>_D914AE23_DAB0_4009_B8A0_ABE62E3197DC_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>WCFFrameWork.dll</td><td/><td/><td>_0DD1C7B3_817D_441A_8215_8C4E9DB292FE_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>WPFToolkit.Extended.dll</td><td/><td/><td>_43CFC099_7BAF_4AA8_8030_41DCF82F8F32_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>WPFToolkit.dll</td><td/><td/><td>_2AD7CD14_3A3D_4D16_B6A1_FA7823A92285_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>WPFVisifire.Charts.dll</td><td/><td/><td>_F62BB83E_4C0F_48D6_AA7F_FE347F49468C_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>WWTFrameWork.dll</td><td/><td/><td>_4471EE13_C26C_44F1_92FA_E1DF5B7D0C3D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WCFFrameWork.dll</td><td/><td/><td>_BE4C6B97_C531_4465_8CDD_FC2E5FFE757D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WPFToolkit.Extended.dll</td><td/><td/><td>_E53E488E_C91A_490B_BE15_BBD32F127BC4_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WPFToolkit.dll</td><td/><td/><td>_10AB2FB7_20F2_4BCC_A44A_CB7CCB9DA377_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WPFVisifire.Charts.dll</td><td/><td/><td>_C35C9BF9_5F78_4354_8859_14FD2D6DE2FC_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WWTFrameWork.dll</td><td/><td/><td>_1135A91A_00D4_4C79_8FDC_11DF76A8B305_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2722,7 +2722,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-735854799</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>883123984</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>-735881423</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>2052</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>-735881423</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION35SP1</td><td>1033</td><td>Microsoft .NET Framework 3.5 SP1 needs to be installed for this installation to continue.</td><td>0</td><td/><td>-735842511</td></row>
@@ -3544,6 +3544,12 @@
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>2052</td><td>LAUNCH~1.EXE|Launch AutoUpdate.exe</td><td>0</td><td/><td>-735862959</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>卸载检测监管系统测试版</td><td>0</td><td/><td>-735893647</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>2052</td><td>卸载检测监管系统(测试版)</td><td>0</td><td/><td>-735867023</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME5</td><td>1033</td><td/><td>0</td><td/><td>883103536</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME5</td><td>2052</td><td>检测监管系统(测试版)</td><td>0</td><td/><td>883132208</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME6</td><td>1033</td><td/><td>0</td><td/><td>883103536</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME6</td><td>2052</td><td>LAUNCH~1.EXE|Launch 检测监管系统.vshost.exe</td><td>0</td><td/><td>883103536</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME7</td><td>1033</td><td/><td>0</td><td/><td>883111728</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME7</td><td>2052</td><td>LAUNCH~1.EXE|Launch AutoUpdate.exe</td><td>0</td><td/><td>883111728</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>2052</td><td>从以下服务器列表中选择要连接的数据库服务器。</td><td>0</td><td/><td>-735881423</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>2052</td><td>从以下的编录名称列表中，选择您希望将其作为目标的数据库编录。</td><td>0</td><td/><td>-735881423</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>2052</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-735881423</td></row>
@@ -3832,12 +3838,14 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>2052</td><td>对于运行 [ProductName] 处理器不足。</td><td>0</td><td/><td>-735881423</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>2052</td><td>对于运行 [ProductName] 内存量不足。</td><td>0</td><td/><td>-735881423</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>2052</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>-735881423</td></row>
-		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ZRD.com</td><td>0</td><td/><td>-735854799</td></row>
-		<row><td>ID_STRING2</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-735854799</td></row>
+		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ZRD.com</td><td>0</td><td/><td>883123984</td></row>
+		<row><td>ID_STRING2</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>883123984</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>ZRDSystem</td><td>0</td><td/><td>-735856847</td></row>
 		<row><td>ID_STRING3</td><td>2052</td><td>ZRDSystem</td><td>0</td><td/><td>-735856847</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>检测监管系统(测试版)</td><td>0</td><td/><td>-735864975</td></row>
 		<row><td>ID_STRING4</td><td>2052</td><td>检测监管系统(测试版)</td><td>0</td><td/><td>-735864975</td></row>
+		<row><td>ID_STRING5</td><td>1033</td><td>检测监管系统(测试版)</td><td>0</td><td/><td>883134256</td></row>
+		<row><td>ID_STRING5</td><td>2052</td><td>检测监管系统(测试版)</td><td>0</td><td/><td>883134256</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>2052</td><td>系统将不安装此功能。</td><td>0</td><td/><td>-735881423</td></row>
 	</table>
 
@@ -3947,6 +3955,8 @@
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
 		<row><td>Shortcut.exe1_3C351606B4084A83979D87160C89C287.exe</td><td/><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe</td><td>0</td></row>
+		<row><td>Shortcut.exe1_6F2123EFFD2F4175892D2207BAAE4738.exe</td><td/><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe</td><td>0</td></row>
+		<row><td>Shortcut.exe_6A4209DE27844FAB80EE30849C40155B.exe</td><td/><td>D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe</td><td>0</td></row>
 		<row><td>Shortcut.exe_C4AB07FCC1F84EB0B263F212750B1B7D.exe</td><td/><td>D:\20150825\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe</td><td>0</td></row>
 		<row><td>UNINST_Uninstall_Z_C939962C7F0C4FC9AFB8241C9B1B34C1.exe</td><td/><td>C:\Program Files (x86)\InstallShield\2013LE\Redist\Language Independent\OS Independent\uninstall.ico</td><td>0</td></row>
 	</table>
@@ -4532,8 +4542,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>Component.exe</td><td/><td>zrd</td><td>2</td></row>
-		<row><td>FileKey2</td><td>Component.exe</td><td/><td>zrdsys_1_zrdsystemtest</td><td>2</td></row>
 		<row><td>Shortcut.exe</td><td>Component.exe</td><td/><td>zrdsys_1_zrdsystemtest</td><td>2</td></row>
 		<row><td>UNINST_Uninstall_ZRDSystemTest</td><td>NewComponent1</td><td/><td>zrdsys_1_zrdsystemtest</td><td>2</td></row>
 	</table>
@@ -4621,8 +4629,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>Shortcut.exe</td><td>zrdsys_1_zrdsystemtest</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>Component.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Shortcut.exe_C4AB07FCC1F84EB0B263F212750B1B7D.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>Shortcut.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>Component.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Shortcut.exe1_3C351606B4084A83979D87160C89C287.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>Shortcut.exe</td><td>zrdsys_1_zrdsystemtest</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>Component.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Shortcut.exe_6A4209DE27844FAB80EE30849C40155B.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>Shortcut.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>Component.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Shortcut.exe1_6F2123EFFD2F4175892D2207BAAE4738.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 		<row><td>UNINST_Uninstall_ZRDSystemTest</td><td>zrdsys_1_zrdsystemtest</td><td>##IDS_SHORTCUT_DISPLAY_NAME4##</td><td>NewComponent1</td><td>[SystemFolder]msiexec.exe</td><td>/x {ED023E02-D59B-46AE-AF72-E73B1E8FA6EE}</td><td/><td/><td>UNINST_Uninstall_Z_C939962C7F0C4FC9AFB8241C9B1B34C1.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 

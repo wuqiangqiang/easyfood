@@ -26,3 +26,17 @@ D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.csproj.GenerateResource.C
 D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.exe
 D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.pdb
 D:\20150825\easyfood\AutoUpdate\obj\Release\AutoUpdate.csprojResolveAssemblyReference.cache
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe.config
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.pdb
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\ICSharpCode.SharpZipLib.dll
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate.csprojResolveAssemblyReference.cache
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\MainWindow.baml
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\MainWindow.g.cs
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\App.g.cs
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate_MarkupCompile.cache
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate.g.resources
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate.Properties.Resources.resources
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate.csproj.GenerateResource.Cache
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate.exe
+D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate.pdb
