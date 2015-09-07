@@ -129,7 +129,7 @@
                 <Image x:Name="_logo" Source="/res/title_logo.png" Margin ="32,10,0,10" Width="100" Height="100" HorizontalAlignment="Left" Visibility="Hidden"/>
                 <TextBlock x:Name="_title_dept" FontFamily="楷体" FontSize="22" FontWeight="600" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Foreground="White" Margin="100,0,0,75"></TextBlock>
                 <TextBlock x:Name="_title_1" FontFamily="楷体" FontSize="30" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="100,10,0,0" Visibility="Hidden">检测监管系统</TextBlock>
-                <TextBlock x:Name="_title_2" FontFamily="楷体" FontSize="14" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="280,60,0,0" Visibility="Hidden">-屠宰环节瘦肉精</TextBlock>
+                <TextBlock x:Name="_title_2" FontFamily="楷体" FontSize="14" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="280,60,0,0" Visibility="Hidden">--屠宰环节瘦肉精</TextBlock>
             </Grid>
             <Grid Grid.Column="2" x:Name="_grid_0">
                 <Image x:Name="_image_0" />

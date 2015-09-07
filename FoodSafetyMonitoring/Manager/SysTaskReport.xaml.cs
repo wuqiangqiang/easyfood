@@ -137,8 +137,8 @@ namespace FoodSafetyMonitoring.Manager
                 case "0": tabledisplay.Columns.Add(new DataColumn("省名称"));
                     MyColumns.Add("省名称", new MyColumn("省名称", "省名称") { BShow = true, Width = 16 });
                     break;
-                case "1": tabledisplay.Columns.Add(new DataColumn("市(州)名称"));
-                    MyColumns.Add("市(州)名称", new MyColumn("市(州)名称", "市(州)名称") { BShow = true, Width = 16 });
+                case "1": tabledisplay.Columns.Add(new DataColumn("市(州)单位名称"));
+                    MyColumns.Add("市(州)单位名称", new MyColumn("市(州)单位名称", "市(州)单位名称") { BShow = true, Width = 16 });
                     break;
                 case "2": tabledisplay.Columns.Add(new DataColumn("区县名称"));
                     MyColumns.Add("区县名称", new MyColumn("区县名称", "区县名称") { BShow = true, Width = 16 });

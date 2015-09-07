@@ -45,11 +45,11 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (_phone.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入电话！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_phone.Text.Trim().Length == 0)
+            //{
+            //    Toolkit.MessageBox.Show("请输入电话！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
             if (_address.Text.Trim().Length == 0)
             {

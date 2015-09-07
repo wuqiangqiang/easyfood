@@ -1064,3 +1064,6 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery_product.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery_product.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\FoodSafetyMonitoring.csprojResolveAssemblyReference.cache
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\Microsoft.Office.Interop.Excel.dll
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\office.dll
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\Microsoft.Vbe.Interop.dll

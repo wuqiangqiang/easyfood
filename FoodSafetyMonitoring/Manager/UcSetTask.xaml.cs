@@ -17,6 +17,8 @@ using System.Data;
 using FoodSafetyMonitoring.Common;
 using FoodSafetyMonitoring.Manager.UserControls;
 using Toolkit = Microsoft.Windows.Controls;
+using System.Data.Odbc;
+using Microsoft.Office.Interop.Excel;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -26,7 +28,7 @@ namespace FoodSafetyMonitoring.Manager
     public partial class UcSetTask : UserControl
     {
         private IDBOperation dbOperation;
-        private DataTable currenttable;
+        private System.Data.DataTable currenttable;
         private string user_flag_tier;
         private string deptid;
         private List<DeptItem> list = new List<DeptItem>();
@@ -35,8 +37,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
-            user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
-            deptid = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+            user_flag_tier = (System.Windows.Application.Current.Resources["User"] as UserInfo).FlagTier;
+            deptid = (System.Windows.Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
             _tableview.ModifyRowEnvent += new UcTableOperableView_NoPages.ModifyRowEventHandler(_tableview_ModifyRowEnvent);
             Load_table();
@@ -46,8 +48,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_details({0})",
-                              (Application.Current.Resources["User"] as UserInfo).ID)).Tables[0];
+            System.Data.DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_details({0})",
+                              (System.Windows.Application.Current.Resources["User"] as UserInfo).ID)).Tables[0];
 
             currenttable = table;
 
@@ -68,7 +70,7 @@ namespace FoodSafetyMonitoring.Manager
             string[] ItemNames = list.Select(t => t.ItemName).Distinct().ToArray();
 
             //创建DataTable
-            DataTable tabledisplay = new DataTable();
+            System.Data.DataTable tabledisplay = new System.Data.DataTable();
 
             //表中第一行第一列交叉处一般显示为第1列标题
             //tabledisplay.Columns.Add(new DataColumn("序号"));
@@ -78,8 +80,8 @@ namespace FoodSafetyMonitoring.Manager
                 case "0": tabledisplay.Columns.Add(new DataColumn("省名称"));
                     MyColumns.Add("省名称", new MyColumn("省名称", "省名称") { BShow = true, Width = 20 });
                     break;
-                case "1": tabledisplay.Columns.Add(new DataColumn("市(州)名称"));
-                    MyColumns.Add("市(州)名称", new MyColumn("市(州)名称", "市(州)名称") { BShow = true, Width = 20 });
+                case "1": tabledisplay.Columns.Add(new DataColumn("市(州)单位名称"));
+                    MyColumns.Add("市(州)单位名称", new MyColumn("市(州)单位名称", "市(州)单位名称") { BShow = true, Width = 20 });
                     break;
                 case "2": tabledisplay.Columns.Add(new DataColumn("区县名称"));
                     MyColumns.Add("区县名称", new MyColumn("区县名称", "区县名称") { BShow = true, Width = 20 });
@@ -137,7 +139,7 @@ namespace FoodSafetyMonitoring.Manager
                     tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = sum;
                 }
 
-                DataTable tasktable = dbOperation.GetDbHelper().GetDataSet("select t_det_item.ItemNAME,task "+
+                System.Data.DataTable tasktable = dbOperation.GetDbHelper().GetDataSet("select t_det_item.ItemNAME,task " +
                                       "from t_task_assign_new left JOIN t_det_item ON t_task_assign_new.iid = t_det_item.ItemID " +
                                       "where t_task_assign_new.did = " + deptid).Tables[0];
 
@@ -213,5 +215,107 @@ namespace FoodSafetyMonitoring.Manager
 
             public string Task { get; set; }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Data.DataTable dt = LoadExcel("D:\\111"); //通过路径获取到的数据  
+
+            //此时我们就可以用这数据进行处理了，比如绑定到显示数据的控件当中去  
+            MessageBox.Show("导入成功");
+        }
+
+        //获取表格中的数据  
+        public System.Data.DataTable LoadExcel(string pPath)
+        {
+
+            string connString = "Driver={Driver do Microsoft Excel(*.xls)};DriverId=790;SafeTransactions=0;ReadOnly=1;MaxScanRows=16;Threads=3;MaxBufferSize=2024;UserCommitSync=Yes;FIL=excel 8.0;PageTimeout=5;";  //连接字符串    
+
+            //简单解释下这个连续字符串，Driver={Driver do Microsoft Excel(*.xls)} 这种连接写法不需要创建一个数据源DSN，DRIVERID表示驱动ID，Excel2003后都使用790，  
+
+            //FIL表示Excel文件类型，Excel2007用excel 8.0，MaxBufferSize表示缓存大小， 如果你的文件是2010版本的，也许会报错，所以要找到合适版本的参数设置。  
+
+            connString += "DBQ=" + pPath; //DBQ表示读取Excel的文件名（全路径）  
+            OdbcConnection conn = new OdbcConnection(connString);
+            OdbcCommand cmd = new OdbcCommand();
+            cmd.Connection = conn;
+            //获取Excel中第一个Sheet名称，作为查询时的表名  
+            string sheetName = this.GetExcelSheetName(pPath);
+            string sql = "select * from [" + sheetName.Replace('.', '#') + "$]";
+            cmd.CommandText = sql;
+            OdbcDataAdapter da = new OdbcDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            try
+            {
+                da.Fill(ds);
+                return ds.Tables[0];    //返回Excel数据中的内容，保存在DataTable中  
+            }
+            catch (Exception x)
+            {
+                ds = null;
+                throw new Exception("从Excel文件中获取数据时发生错误！可能是Excel版本问题，可以考虑降低版本或者修改连接字符串值");
+            }
+            finally
+            {
+                cmd.Dispose();
+                cmd = null;
+                da.Dispose();
+                da = null;
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn = null;
+            }
+        }
+
+        // 获取工作表名称  
+        private string GetExcelSheetName(string pPath)
+        {
+            //打开一个Excel应用  
+            Microsoft.Office.Interop.Excel.Application excelApp;
+            Workbook excelWB;//创建工作簿（WorkBook：即Excel文件主体本身）  
+            Workbooks excelWBs;
+            Worksheet excelWS;//创建工作表（即Excel里的子表sheet）  
+
+            Sheets excelSts;
+
+            excelApp = new Microsoft.Office.Interop.Excel.Application();
+            if (excelApp == null)
+            {
+                throw new Exception("打开Excel应用时发生错误！");
+            }
+            excelWBs = excelApp.Workbooks;
+            //打开一个现有的工作薄  
+            excelWB = excelWBs.Add(pPath);
+            excelSts = excelWB.Sheets;
+            //选择第一个Sheet页  
+            //excelWS = excelSts.get_Item(1);
+            string sheetName = "111";
+
+            //ReleaseCOM(excelWS);
+            ReleaseCOM(excelSts);
+            ReleaseCOM(excelWB);
+            ReleaseCOM(excelWBs);
+            excelApp.Quit();
+            ReleaseCOM(excelApp);
+            return sheetName;
+        }
+
+        // 释放资源  
+        private void ReleaseCOM(object pObj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(pObj);
+            }
+            catch
+            {
+                throw new Exception("释放资源时发生错误！");
+            }
+            finally
+            {
+                pObj = null;
+            }
+        } 
     }
 }

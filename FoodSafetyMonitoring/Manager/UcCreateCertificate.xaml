@@ -50,7 +50,7 @@
                         <TextBlock Canvas.Left="68" Canvas.Top="45" Width="60" >协检员 :</TextBlock>
                         <ComboBox Canvas.Left="150" Canvas.Top="40" x:Name="_help_user" Width="100" Margin="0" ></ComboBox>
                         <TextBlock Canvas.Left="68" Canvas.Top="80" Width="60" >货主代码 :</TextBlock>
-                        <TextBox Canvas.Left="145" Canvas.Top="74" x:Name="_shipper_id" Width="100" MaxLength="4" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput" KeyDown="TextBox_KeyDown"></TextBox>
+                        <TextBox Canvas.Left="145" Canvas.Top="74" x:Name="_shipper_id" Width="100" MaxLength="4" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput" KeyDown="TextBox_KeyDown" LostFocus="_shipper_id_LostFocus"></TextBox>
                         <TextBox Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0" MaxLength="10" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                         <TextBox Canvas.Left="150" Canvas.Top="104" x:Name="_shipper" Width="323" Margin="0" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="569" Canvas.Top="103" x:Name="_phone" Width="219" Margin="0" IsEnabled="False"></TextBox>

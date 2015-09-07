@@ -69,7 +69,7 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            string sql = string.Format("update t_shipper set shippername = '{0}',phone = '{1}',address = '{2}' where shipperid = '{3}' and shipperflag = '{4}'"
+            string sql = string.Format("update t_shipper_product set shippername = '{0}',phone = '{1}',address = '{2}' where shipperid = '{3}' and shipperflag = '{4}'"
                             , _name.Text, _phone.Text, _address.Text, _id.Text, shipperFlag);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);

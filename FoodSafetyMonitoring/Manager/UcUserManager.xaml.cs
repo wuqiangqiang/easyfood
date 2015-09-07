@@ -197,7 +197,7 @@ namespace FoodSafetyMonitoring.Manager
                         ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where NUMB_ROLE = 77 or NUMB_ROLE = 80", "lr");
                         break;
                     case "4": _cmbRoleType.IsEnabled = true;
-                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where NUMB_ROLE = 60 or NUMB_ROLE = 50", "lr");
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where NUMB_ROLE = 60 or NUMB_ROLE = 50 or NUMB_ROLE = 51", "lr");
                         break;
                     default: break;
                 }

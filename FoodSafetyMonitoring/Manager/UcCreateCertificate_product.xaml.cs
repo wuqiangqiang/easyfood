@@ -65,7 +65,7 @@ namespace FoodSafetyMonitoring.Manager
             //协检员
             ComboboxTool.InitComboboxSource(_help_user, string.Format("call p_user_helpuser({0})", userId), "lr");
             //产品名称
-            ComboboxTool.InitComboboxSource(_product_name, "SELECT productid,productname FROM t_product WHERE openflag = '1'", "lr");
+            ComboboxTool.InitComboboxSource(_product_name, "SELECT productid,productname FROM t_product WHERE openflag = '1' and deptflag = '" + shipperflag + "'", "lr");
             _product_name.SelectionChanged += new SelectionChangedEventHandler(_product_name_SelectionChanged);
             _product_name.SelectedIndex = 1;
             //生产单位
@@ -92,9 +92,33 @@ namespace FoodSafetyMonitoring.Manager
                     _shipper.Text = table.Rows[0][0].ToString();
                     _mdd.Text = table.Rows[0][1].ToString();
                 }
+                else
+                {
+                    Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    _shipper.Text = "";
+                    _mdd.Text = "";
+                    return;
+                }
                 
             }
         }
+
+        private void _shipper_id_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper_product where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
+            if (table.Rows.Count != 0)
+            {
+                _shipper.Text = table.Rows[0][0].ToString();
+                _mdd.Text = table.Rows[0][1].ToString();
+            }
+            else
+            {
+                Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                _shipper.Text = "";
+                _mdd.Text = "";
+                return;
+            }
+        } 
 
         //void _dept_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
@@ -190,14 +214,18 @@ namespace FoodSafetyMonitoring.Manager
                 //grid_info.Children.Add(cer);
 
                 PrintDialog dialog = new PrintDialog();
-                if (dialog.ShowDialog() == true)
-                {
-                    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                //if (dialog.ShowDialog() == true)
+                //{
+                    dialog.PrintQueue = GetPrinter();
+                    //Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                    //cer.Measure(printSize);
+                    //cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+                    Size printSize = new Size(793, 529);
                     cer.Measure(printSize);
-                    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+                    cer.Arrange(new Rect(0, 0, 793, 529));
 
-                    dialog.PrintVisual(cer, "Print Test");
-                }
+                    dialog.PrintVisual(cer, "产品检疫证");
+                //}
 
                 //Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 clear();
@@ -210,12 +238,33 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
+        public static PrintQueue GetPrinter(string printerName = null)
+        {
+            try
+            {
+                PrintQueue selectedPrinter = null;
+                if (!string.IsNullOrEmpty(printerName))
+                {
+                    var printers = new LocalPrintServer().GetPrintQueues();
+                    selectedPrinter = printers.FirstOrDefault(p => p.Name == printerName);
+                }
+                else
+                {
+                    selectedPrinter = LocalPrintServer.GetDefaultPrintQueue();
+                }
+                return selectedPrinter;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private void clear()
         {
             _card_id.Text = Convert.ToString( Convert.ToInt64(_card_id.Text) + 1);
             _shipper_id.Text = "";
             _shipper.Text = "";
-            _cz_cardid.Text = "";
             _object_count.Text = "";
             _mdd.Text = "";
             _bz.Text = "";
@@ -261,6 +310,8 @@ namespace FoodSafetyMonitoring.Manager
                     return false;
             }
             return true;
-        }        
+        }
+
+               
     }
 }

@@ -99,7 +99,43 @@ namespace FoodSafetyMonitoring.Manager
                     _village_js.Text = table.Rows[0][4].ToString();
                     _city_js.Text = cityname;
                 }
+                else
+                {
+                    Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    _shipper.Text = "";
+                    _phone.Text = "";
+                    _region_js.Text = "";
+                    _town_js.Text = "";
+                    _village_js.Text = "";
+                    _city_js.Text = "";
+                    return;
+                }
 
+            }
+        }
+
+        private void _shipper_id_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,phone,region,town,village from t_shipper where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
+            if (table.Rows.Count != 0)
+            {
+                _shipper.Text = table.Rows[0][0].ToString();
+                _phone.Text = table.Rows[0][1].ToString();
+                _region_js.Text = table.Rows[0][2].ToString();
+                _town_js.Text = table.Rows[0][3].ToString();
+                _village_js.Text = table.Rows[0][4].ToString();
+                _city_js.Text = cityname;
+            }
+            else
+            {
+                Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                _shipper.Text = "";
+                _phone.Text = "";
+                _region_js.Text = "";
+                _town_js.Text = "";
+                _village_js.Text = "";
+                _city_js.Text = "";
+                return;
             }
         }
 
@@ -218,14 +254,18 @@ namespace FoodSafetyMonitoring.Manager
                 UcCertificateDetails cer = new UcCertificateDetails(cer_details);
                 //grid_info.Children.Add(cer);
                 PrintDialog dialog = new PrintDialog();
-                if (dialog.ShowDialog() == true)
-                {
-                    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                //if (dialog.ShowDialog() == true)
+                //{
+                    dialog.PrintQueue = GetPrinter();
+                    //Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                    //cer.Measure(printSize);
+                    //cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+                    Size printSize = new Size(793, 529);
                     cer.Measure(printSize);
-                    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+                    cer.Arrange(new Rect(0, 0, 793, 529));
 
-                    dialog.PrintVisual(cer, "Print Test");
-                }
+                    dialog.PrintVisual(cer, "动物检疫证");
+                //}
 
                 //Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 clear();
@@ -235,6 +275,28 @@ namespace FoodSafetyMonitoring.Manager
             {
                 Toolkit.MessageBox.Show("电子出证单生成失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
+            }
+        }
+
+        public static PrintQueue GetPrinter(string printerName = null)
+        {
+            try
+            {
+                PrintQueue selectedPrinter = null;
+                if (!string.IsNullOrEmpty(printerName))
+                {
+                    var printers = new LocalPrintServer().GetPrintQueues();
+                    selectedPrinter = printers.FirstOrDefault(p => p.Name == printerName);
+                }
+                else
+                {
+                    selectedPrinter = LocalPrintServer.GetDefaultPrintQueue();
+                }
+                return selectedPrinter;
+            }
+            catch
+            {
+                return null;
             }
         }
 
@@ -298,6 +360,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             return true;
         }
-        
+
+                
     }
 }
