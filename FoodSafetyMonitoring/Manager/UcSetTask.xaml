@@ -26,7 +26,8 @@
                 <StackPanel>
                     <TextBlock Margin="20,0,0,0" VerticalAlignment="Center">任务量设置</TextBlock>
                     <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
-                    <!--<Button Width="60" Height="26" Click="Button_Click">导入</Button>-->
+                    <Button Width="60" Height="26" Click="BtnImport_Click" Margin="80,0,0,0">导入</Button>
+                    <Button Width="60" Height="26" Click="BtnExport_Click" Margin="40,0,0,0">导出</Button>
                 </StackPanel>
             </Grid>
             <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc" >

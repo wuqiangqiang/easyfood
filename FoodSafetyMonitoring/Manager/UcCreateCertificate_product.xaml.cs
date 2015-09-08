@@ -86,8 +86,37 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.Key == Key.Enter)
             {
-                DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper_product where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'" ).Tables[0];
-                if(table.Rows.Count != 0)
+                if (_shipper_id.Text.Trim().Length != 0)
+                {
+                    DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper_product where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
+                    if (table.Rows.Count != 0)
+                    {
+                        _shipper.Text = table.Rows[0][0].ToString();
+                        _mdd.Text = table.Rows[0][1].ToString();
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        _shipper.Text = "";
+                        _mdd.Text = "";
+                        return;
+                    }
+                }
+                else
+                {
+                    _shipper.Text = "";
+                    _mdd.Text = "";
+                }
+                
+            }
+        }
+
+        private void _shipper_id_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(_shipper_id.Text.Trim().Length != 0)
+            {
+                DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper_product where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
+                if (table.Rows.Count != 0)
                 {
                     _shipper.Text = table.Rows[0][0].ToString();
                     _mdd.Text = table.Rows[0][1].ToString();
@@ -99,25 +128,13 @@ namespace FoodSafetyMonitoring.Manager
                     _mdd.Text = "";
                     return;
                 }
-                
-            }
-        }
-
-        private void _shipper_id_LostFocus(object sender, RoutedEventArgs e)
-        {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,address from t_shipper_product where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
-            if (table.Rows.Count != 0)
-            {
-                _shipper.Text = table.Rows[0][0].ToString();
-                _mdd.Text = table.Rows[0][1].ToString();
             }
             else
             {
-                Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 _shipper.Text = "";
                 _mdd.Text = "";
-                return;
             }
+            
         } 
 
         //void _dept_name_SelectionChanged(object sender, SelectionChangedEventArgs e)

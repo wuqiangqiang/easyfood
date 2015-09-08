@@ -48,20 +48,21 @@ namespace FoodSafetyMonitoring.Manager
             _day.Text = ConvertStr.convert_day(DateTime.Now.Day.ToString());
 
             //出证人所属的市级单位,及出证人所属部门货主信息flag,赋值启运地点
-            DataTable table = dbOperation.GetDbHelper().GetDataSet("select sys_city.name as city,b.name as country,ifnull(a.shipperflag,'') as shipperflag," +
-                                    " tzcname,tzcaddress" +
+            DataTable table = dbOperation.GetDbHelper().GetDataSet("select sys_city.name as city,ifnull(a.shipperflag,'') as shipperflag," +
+                                    " tzcname,tzcarea,tzcaddress" +
                                     " from sys_client_sysdept a LEFT JOIN sys_city ON a.city = sys_city.id" +
-                                    " LEFT JOIN sys_city b ON a.country = b.id" +
                                     " where INFO_CODE = " + deptId).Tables[0];
             if(table.Rows.Count != 0)
             {
                 cityname = table.Rows[0][0].ToString();
-                shipperflag = table.Rows[0][2].ToString();
+                shipperflag = table.Rows[0][1].ToString();
 
-                _city_ks.Text = table.Rows[0][0].ToString();
-                _region_ks.Text = table.Rows[0][1].ToString();
-                _town_ks.Text = table.Rows[0][4].ToString();
-                _village_ks.Text = table.Rows[0][3].ToString();
+                string tzcarea = table.Rows[0][3].ToString();
+
+                _city_ks.Text = tzcarea.Substring(0,2).ToString();
+                _region_ks.Text = tzcarea.Substring(3, 3).ToString();
+                //_town_ks.Text = table.Rows[0][4].ToString();
+                _village_ks.Text = table.Rows[0][2].ToString();
             }            
 
             //检疫证号
@@ -75,6 +76,7 @@ namespace FoodSafetyMonitoring.Manager
             _object_id.SelectedIndex = 1;
             //用途
             ComboboxTool.InitComboboxSource(_for_use, "SELECT useid,usename FROM t_for_use WHERE openflag = '1'", "lr");
+            _for_use.SelectedIndex = 1;
         }
 
         void _object_id_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,6 +90,47 @@ namespace FoodSafetyMonitoring.Manager
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
+            {
+                if(_shipper_id.Text.Trim().Length != 0)
+                {
+                    DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,phone,region,town,village from t_shipper where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
+                    if (table.Rows.Count != 0)
+                    {
+                        _shipper.Text = table.Rows[0][0].ToString();
+                        _phone.Text = table.Rows[0][1].ToString();
+                        _region_js.Text = table.Rows[0][2].ToString();
+                        _town_js.Text = table.Rows[0][3].ToString();
+                        _village_js.Text = table.Rows[0][4].ToString();
+                        _city_js.Text = cityname;
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        _shipper.Text = "";
+                        _phone.Text = "";
+                        _region_js.Text = "";
+                        _town_js.Text = "";
+                        _village_js.Text = "";
+                        _city_js.Text = "";
+                        return;
+                    }
+                }
+                else
+                {
+                    _shipper.Text = "";
+                    _phone.Text = "";
+                    _region_js.Text = "";
+                    _town_js.Text = "";
+                    _village_js.Text = "";
+                    _city_js.Text = "";
+                }
+               
+            }
+        }
+
+        private void _shipper_id_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(_shipper_id.Text.Trim().Length != 0)
             {
                 DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,phone,region,town,village from t_shipper where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
                 if (table.Rows.Count != 0)
@@ -110,33 +153,17 @@ namespace FoodSafetyMonitoring.Manager
                     _city_js.Text = "";
                     return;
                 }
-
-            }
-        }
-
-        private void _shipper_id_LostFocus(object sender, RoutedEventArgs e)
-        {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet("select shippername,phone,region,town,village from t_shipper where shipperid =" + _shipper_id.Text + " and shipperflag = '" + shipperflag + "'").Tables[0];
-            if (table.Rows.Count != 0)
-            {
-                _shipper.Text = table.Rows[0][0].ToString();
-                _phone.Text = table.Rows[0][1].ToString();
-                _region_js.Text = table.Rows[0][2].ToString();
-                _town_js.Text = table.Rows[0][3].ToString();
-                _village_js.Text = table.Rows[0][4].ToString();
-                _city_js.Text = cityname;
             }
             else
             {
-                Toolkit.MessageBox.Show("该货主不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 _shipper.Text = "";
                 _phone.Text = "";
                 _region_js.Text = "";
                 _town_js.Text = "";
                 _village_js.Text = "";
                 _city_js.Text = "";
-                return;
             }
+            
         }
 
         private void _add_Click(object sender, RoutedEventArgs e)
@@ -200,36 +227,36 @@ namespace FoodSafetyMonitoring.Manager
                 Toolkit.MessageBox.Show("请输入启运地点:县（市、区）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            if (_town_ks.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入启运地点:乡（镇）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            //if (_village_ks.Text.Trim().Length == 0)
+            //if (_town_ks.Text.Trim().Length == 0)
             //{
-            //    Toolkit.MessageBox.Show("请输入启运地点:村（养殖场、交易市场）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    Toolkit.MessageBox.Show("请输入启运地点:乡（镇）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
             //    return;
             //}
+            if (_village_ks.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入启运地点:村（养殖场、交易市场）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             if (_city_js.Text.Trim().Length == 0)
             {
                 Toolkit.MessageBox.Show("请输入到达地点:市（州）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            if (_region_js.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入到达地点:县（市、区）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            if (_town_js.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入到达地点:乡（镇）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            //if (_village_js.Text.Trim().Length == 0)
+            //if (_region_js.Text.Trim().Length == 0)
             //{
-            //    Toolkit.MessageBox.Show("请输入到达地点:村（养殖场、交易市场）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    Toolkit.MessageBox.Show("请输入到达地点:县（市、区）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
             //    return;
             //}
+            //if (_town_js.Text.Trim().Length == 0)
+            //{
+            //    Toolkit.MessageBox.Show("请输入到达地点:乡（镇）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
+            if (_village_js.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入到达地点:村（养殖场、交易市场）！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
             string sql = string.Format("INSERT INTO t_certificate(cardid,companyid,companyname,objectid,objectname,objectcount," +
                                         "phone,foruseid,foruse,cityks,regionks,townks,villageks,cityjs,regionjs,townjs," +
@@ -307,11 +334,6 @@ namespace FoodSafetyMonitoring.Manager
             _shipper.Text = "";
             _phone.Text = "";
             _object_count.Text= "";
-            _for_use.Text= "";
-            _city_ks.Text= "";
-            _region_ks.Text= "";
-            _town_ks.Text= "";
-            _village_ks.Text= "";
             _city_js.Text= "";
             _region_js.Text= "";
             _town_js.Text= "";

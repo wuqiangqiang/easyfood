@@ -30,7 +30,6 @@ D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpda
 D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.exe
 D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\AutoUpdate.pdb
 D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\bin\Release\ICSharpCode.SharpZipLib.dll
-D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\AutoUpdate.csprojResolveAssemblyReference.cache
 D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\MainWindow.baml
 D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\MainWindow.g.cs
 D:\湖北老平台新版本连正式库\easyfood\AutoUpdate\obj\Release\App.g.cs

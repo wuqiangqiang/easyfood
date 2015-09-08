@@ -61,7 +61,7 @@
                         <TextBox Canvas.Left="144" Canvas.Top="165" x:Name="_city_ks" Width="74" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="285" Canvas.Top="162" x:Name="_region_ks" Width="190" Height="20" Margin="0" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="560" Canvas.Top="162" x:Name="_town_ks" Width="154" Height="20" Margin="0" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="325" Canvas.Top="182" x:Name="_village_ks" Width="294" Height="20" Margin="0" IsEnabled="False"></TextBox>
+                        <TextBox Canvas.Left="325" Canvas.Top="182" x:Name="_village_ks" Width="294" Height="20" Margin="0" MaxLength="20"></TextBox>
                         <TextBox Canvas.Left="144" Canvas.Top="205" x:Name="_city_js" Width="74" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="280" Canvas.Top="205" x:Name="_region_js" Width="190" Height="20" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="555" Canvas.Top="205" x:Name="_town_js" Width="154" Height="20" IsEnabled="False"></TextBox>

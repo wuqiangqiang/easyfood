@@ -19,16 +19,18 @@ using FoodSafetyMonitoring.Manager.UserControls;
 using Toolkit = Microsoft.Windows.Controls;
 using System.Data.Odbc;
 using Microsoft.Office.Interop.Excel;
+using System.Windows.Forms;
 
 namespace FoodSafetyMonitoring.Manager
 {
     /// <summary>
     /// UcSetSamplingRate.xaml 的交互逻辑
     /// </summary>
-    public partial class UcSetTask : UserControl
+    public partial class UcSetTask : System.Windows.Controls.UserControl
     {
         private IDBOperation dbOperation;
         private System.Data.DataTable currenttable;
+        private System.Data.DataTable exporttable;
         private string user_flag_tier;
         private string deptid;
         private List<DeptItem> list = new List<DeptItem>();
@@ -57,9 +59,9 @@ namespace FoodSafetyMonitoring.Manager
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 DeptItem info = new DeptItem();
-                //info.DeptId = table.Rows[i][0].ToString();
+                info.DeptId = table.Rows[i][0].ToString();
                 info.DeptName = table.Rows[i][1].ToString();
-                //info.ItemId = table.Rows[i][2].ToString();
+                info.ItemId = table.Rows[i][2].ToString();
                 info.ItemName = table.Rows[i][3].ToString();
                 info.Task = table.Rows[i][4].ToString();
                 list.Add(info);
@@ -181,6 +183,7 @@ namespace FoodSafetyMonitoring.Manager
                 }
             }
 
+            exporttable = tabledisplay;
             _tableview.BShowModify = true;
             _tableview.MyColumns = MyColumns;
             _tableview.Table = tabledisplay;
@@ -199,11 +202,11 @@ namespace FoodSafetyMonitoring.Manager
 
         public class DeptItem
         {
-            //public string DeptId { get; set; }
+            public string DeptId { get; set; }
 
             public string DeptName { get; set; }
 
-            //public string ItemId { get; set; }
+            public string ItemId { get; set; }
 
             public string ItemName { get; set; }
 
@@ -216,106 +219,241 @@ namespace FoodSafetyMonitoring.Manager
             public string Task { get; set; }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnImport_Click(object sender, RoutedEventArgs e)
         {
-            System.Data.DataTable dt = LoadExcel("D:\\111"); //通过路径获取到的数据  
+           System.Data.DataTable importdt = new System.Data.DataTable();
+           importdt = GetDataFromExcelByCom();
+           if(importdt.Rows.Count != 0)
+           {
+               string str;
 
-            //此时我们就可以用这数据进行处理了，比如绑定到显示数据的控件当中去  
-            MessageBox.Show("导入成功");
+               for (int i = 0; i < importdt.Rows.Count; i++)
+               {
+                   str = "";
+                   string dept_id = list.Where(t => t.DeptName == importdt.Rows[i][0].ToString()).Select(t => t.DeptId).FirstOrDefault();
+
+                   for (int j = 1; j < importdt.Columns.Count; j++)
+                   {
+                       string item_id = list.Where(t => t.ItemName == importdt.Columns[j].ColumnName).Select(t => t.ItemId).FirstOrDefault();
+                       string item = importdt.Rows[i][j].ToString();
+                       str = str + item_id + "," + item + ",";
+
+                       if (j != importdt.Columns.Count)
+                       {
+                           str = str + "#";
+                       }
+                   }
+
+                   try
+                   {
+                       int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("call p_set_task ('{0}','{1}')",
+                                                           dept_id, str));
+
+                       if (result == 1)
+                       {
+
+                       }
+                       else
+                       {
+                           Toolkit.MessageBox.Show("任务量设置失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                           return;
+                       }
+                   }
+                   catch (Exception ex)
+                   {
+                       Toolkit.MessageBox.Show("任务量设置失败2！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                       return;
+                   }
+               }
+               Toolkit.MessageBox.Show("任务导入设置成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+               Load_table();
+               return;
+           }
         }
 
-        //获取表格中的数据  
-        public System.Data.DataTable LoadExcel(string pPath)
+        //读取Excel中的内容
+        System.Data.DataTable GetDataFromExcelByCom(bool hasTitle = true)
         {
+            //打开对话框
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Excel(*.xls)|*.xls|Excel(*.xlsx)|*.xlsx";
+            openFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFile.Multiselect = false;
+            if (openFile.ShowDialog() == DialogResult.Cancel)
+            {
+                return null;
+            }
+            var excelFilePath = openFile.FileName;
 
-            string connString = "Driver={Driver do Microsoft Excel(*.xls)};DriverId=790;SafeTransactions=0;ReadOnly=1;MaxScanRows=16;Threads=3;MaxBufferSize=2024;UserCommitSync=Yes;FIL=excel 8.0;PageTimeout=5;";  //连接字符串    
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            Sheets sheets;
+            object oMissiong = System.Reflection.Missing.Value;
+            Workbook workbook = null;//创建工作簿
+            System.Data.DataTable dt = new System.Data.DataTable();
 
-            //简单解释下这个连续字符串，Driver={Driver do Microsoft Excel(*.xls)} 这种连接写法不需要创建一个数据源DSN，DRIVERID表示驱动ID，Excel2003后都使用790，  
-
-            //FIL表示Excel文件类型，Excel2007用excel 8.0，MaxBufferSize表示缓存大小， 如果你的文件是2010版本的，也许会报错，所以要找到合适版本的参数设置。  
-
-            connString += "DBQ=" + pPath; //DBQ表示读取Excel的文件名（全路径）  
-            OdbcConnection conn = new OdbcConnection(connString);
-            OdbcCommand cmd = new OdbcCommand();
-            cmd.Connection = conn;
-            //获取Excel中第一个Sheet名称，作为查询时的表名  
-            string sheetName = this.GetExcelSheetName(pPath);
-            string sql = "select * from [" + sheetName.Replace('.', '#') + "$]";
-            cmd.CommandText = sql;
-            OdbcDataAdapter da = new OdbcDataAdapter(cmd);
-            DataSet ds = new DataSet();
             try
             {
-                da.Fill(ds);
-                return ds.Tables[0];    //返回Excel数据中的内容，保存在DataTable中  
+                if (app == null)
+                {
+                    return null;
+                }
+                workbook = app.Workbooks.Open(excelFilePath, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong,
+                    oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong);
+
+                sheets = workbook.Worksheets;
+
+                //将数据读入到DataTable中
+                Worksheet worksheet = (Worksheet)sheets.get_Item(1);//读取第一张表  
+                if (worksheet == null)
+                {
+                    return null;
+                }
+                    
+                int iRowCount = worksheet.UsedRange.Rows.Count;
+                int iColCount = worksheet.UsedRange.Columns.Count;
+                //生成列头
+                for (int i = 0; i < iColCount; i++)
+                {
+                    var name = "column" + i;
+                    if (hasTitle)
+                    {
+                        var txt = ((Range)worksheet.Cells[1, i + 1]).Text.ToString();
+                        if (!string.IsNullOrEmpty(txt)) 
+                        {
+                            name = txt;
+                        }
+                    }
+                    while (dt.Columns.Contains(name))
+                    {
+                        name = name + "_1";//重复行名称会报错。
+                    }
+                    dt.Columns.Add(new DataColumn(name, typeof(string)));
+                }
+                //生成行数据
+                Range range;
+                int rowIdx = hasTitle ? 2 : 1;
+                for (int iRow = rowIdx; iRow <= iRowCount; iRow++)
+                {
+                    DataRow dr = dt.NewRow();
+                    for (int iCol = 1; iCol <= iColCount; iCol++)
+                    {
+                        range = (Range)worksheet.Cells[iRow, iCol];
+                        dr[iCol - 1] = (range.Value2 == null) ? "" : range.Text.ToString();
+                    }
+                    dt.Rows.Add(dr);
+                }
+                return dt;
             }
-            catch (Exception x)
-            {
-                ds = null;
-                throw new Exception("从Excel文件中获取数据时发生错误！可能是Excel版本问题，可以考虑降低版本或者修改连接字符串值");
-            }
+            catch { return null; }
             finally
             {
-                cmd.Dispose();
-                cmd = null;
-                da.Dispose();
-                da = null;
-                if (conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-                conn = null;
+                workbook.Close(false, oMissiong, oMissiong);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                workbook = null;
+                app.Workbooks.Close();
+                app.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                app = null;
             }
         }
 
-        // 获取工作表名称  
-        private string GetExcelSheetName(string pPath)
+       
+
+        private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
-            //打开一个Excel应用  
-            Microsoft.Office.Interop.Excel.Application excelApp;
-            Workbook excelWB;//创建工作簿（WorkBook：即Excel文件主体本身）  
-            Workbooks excelWBs;
-            Worksheet excelWS;//创建工作表（即Excel里的子表sheet）  
-
-            Sheets excelSts;
-
-            excelApp = new Microsoft.Office.Interop.Excel.Application();
-            if (excelApp == null)
+            //打开对话框
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Excel(*.xls)|*.xls|Excel(*.xlsx)|*.xlsx";
+            saveFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            if (saveFile.ShowDialog() == DialogResult.Cancel)
             {
-                throw new Exception("打开Excel应用时发生错误！");
+                return;
             }
-            excelWBs = excelApp.Workbooks;
-            //打开一个现有的工作薄  
-            excelWB = excelWBs.Add(pPath);
-            excelSts = excelWB.Sheets;
-            //选择第一个Sheet页  
-            //excelWS = excelSts.get_Item(1);
-            string sheetName = "111";
+            var excelFilePath = saveFile.FileName;
+            if (excelFilePath != "")
+            {
+                if (System.IO.File.Exists(excelFilePath))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(excelFilePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        Toolkit.MessageBox.Show("导出文件时出错,文件可能正被打开！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                    
+                }
 
-            //ReleaseCOM(excelWS);
-            ReleaseCOM(excelSts);
-            ReleaseCOM(excelWB);
-            ReleaseCOM(excelWBs);
-            excelApp.Quit();
-            ReleaseCOM(excelApp);
-            return sheetName;
+                //创建Excel  
+                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                if (excelApp == null)
+                {
+                    Toolkit.MessageBox.Show("无法创建Excel对象，可能您的机子未安装Excel程序！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                Workbook excelWB = excelApp.Workbooks.Add(System.Type.Missing);    //创建工作簿（WorkBook：即Excel文件主体本身）  
+                Worksheet excelWS = (Worksheet)excelWB.Worksheets[1];   //创建工作表（即Excel里的子表sheet） 1表示在子表sheet1里进行数据导出 
+                excelWS.Name = "任务量";
+
+                //excelWS.Cells.NumberFormat = "@";     //  如果数据中存在数字类型 可以让它变文本格式显示  
+                //导出列名
+                for (int j = 0; j < exporttable.Columns.Count; j++)
+                {
+                    excelWS.Cells[1, j + 1] = exporttable.Columns[j].ColumnName.ToString();
+                }
+
+
+                //将数据导入到工作表的单元格  
+                for (int i = 0; i < exporttable.Rows.Count; i++)
+                {
+                    for (int j = 0; j < exporttable.Columns.Count; j++)
+                    {
+                        excelWS.Cells[i + 2, j + 1] = exporttable.Rows[i][j].ToString();
+                    }
+                }
+
+                Range range = null;
+                range = (Range)excelWS.get_Range("A1","D1"); //获取Excel多个单元格区域
+                range.ColumnWidth = 20; //设置单元格的宽度  
+
+                excelWB.SaveAs(excelFilePath);  //将其进行保存到指定的路径  
+                excelWB.Close();
+                excelApp.Quit();
+                KillAllExcel(excelApp); //释放可能还没释放的进程  
+                Toolkit.MessageBox.Show("文件导出成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
-        // 释放资源  
-        private void ReleaseCOM(object pObj)
+        public bool KillAllExcel(Microsoft.Office.Interop.Excel.Application excelApp)
         {
             try
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(pObj);
+                if (excelApp != null)
+                {
+                    excelApp.Quit();
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+                    //释放COM组件，其实就是将其引用计数减1     
+                    //System.Diagnostics.Process theProc;     
+                    foreach (System.Diagnostics.Process theProc in System.Diagnostics.Process.GetProcessesByName("EXCEL"))
+                    {
+                        //先关闭图形窗口。如果关闭失败.有的时候在状态里看不到图形窗口的excel了，     
+                        //但是在进程里仍然有EXCEL.EXE的进程存在，那么就需要释放它     
+                        if (theProc.CloseMainWindow() == false)
+                        {
+                            theProc.Kill();
+                        }
+                    }
+                    excelApp = null;
+                    return true;
+                }
             }
             catch
             {
-                throw new Exception("释放资源时发生错误！");
+                return false;
             }
-            finally
-            {
-                pObj = null;
-            }
-        } 
+            return true;
+        }  
     }
 }

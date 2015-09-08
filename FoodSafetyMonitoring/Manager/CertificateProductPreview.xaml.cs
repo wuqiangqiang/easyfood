@@ -45,9 +45,9 @@ namespace FoodSafetyMonitoring.Manager
                 _bz.Text = table.Rows[0][10].ToString();
                 _user_name.Text = table.Rows[0][11].ToString();
                 _user_id.Text = table.Rows[0][15].ToString();
-                _nian.Text = table.Rows[0][12].ToString();
-                _yue.Text = table.Rows[0][13].ToString();
-                _day.Text = table.Rows[0][14].ToString();
+                _nian.Text = ConvertStr.convert_nian(table.Rows[0][12].ToString());
+                _yue.Text = ConvertStr.convert_yue(table.Rows[0][13].ToString());
+                _day.Text = ConvertStr.convert_day(table.Rows[0][14].ToString());
             }
         }
 
