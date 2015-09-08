@@ -159,6 +159,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             }
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
             sfd.Filter = "导出文件 (*.csv)|*.csv";
+            //sfd.Filter = "Excel(*.xls)|*.xls|Excel(*.xlsx)|*.xlsx";
             sfd.FilterIndex = 0;
             sfd.RestoreDirectory = true;
             sfd.Title = "导出文件保存路径";

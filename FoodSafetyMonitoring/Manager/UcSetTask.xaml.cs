@@ -223,51 +223,69 @@ namespace FoodSafetyMonitoring.Manager
         {
            System.Data.DataTable importdt = new System.Data.DataTable();
            importdt = GetDataFromExcelByCom();
-           if(importdt.Rows.Count != 0)
+           if(importdt != null)
            {
-               string str;
-
-               for (int i = 0; i < importdt.Rows.Count; i++)
+               if (importdt.Rows.Count != 0)
                {
-                   str = "";
-                   string dept_id = list.Where(t => t.DeptName == importdt.Rows[i][0].ToString()).Select(t => t.DeptId).FirstOrDefault();
+                   string str;
 
-                   for (int j = 1; j < importdt.Columns.Count; j++)
+                   for (int i = 0; i < importdt.Rows.Count; i++)
                    {
-                       string item_id = list.Where(t => t.ItemName == importdt.Columns[j].ColumnName).Select(t => t.ItemId).FirstOrDefault();
-                       string item = importdt.Rows[i][j].ToString();
-                       str = str + item_id + "," + item + ",";
+                       str = "";
+                       string dept_id = list.Where(t => t.DeptName == importdt.Rows[i][0].ToString()).Select(t => t.DeptId).FirstOrDefault();
 
-                       if (j != importdt.Columns.Count)
+                       if(dept_id == null || dept_id == "")
                        {
-                           str = str + "#";
+                           Toolkit.MessageBox.Show(importdt.Rows[i][0].ToString() + "不是正确的下级部门，请确认后重新导入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                           return;
                        }
-                   }
 
-                   try
-                   {
-                       int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("call p_set_task ('{0}','{1}')",
-                                                           dept_id, str));
-
-                       if (result == 1)
+                       for (int j = 1; j < importdt.Columns.Count; j++)
                        {
+                           string item_id = list.Where(t => t.ItemName == importdt.Columns[j].ColumnName).Select(t => t.ItemId).FirstOrDefault();
+                           if (item_id == null || item_id == "")
+                           {
+                               Toolkit.MessageBox.Show(importdt.Columns[j].ColumnName + "不是正确的检测项目，请确认后重新导入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                           string num = importdt.Rows[i][j].ToString();
+                           if (num == null || num == "")
+                           {
+                               num = '0'.ToString();
+                           }
+                           str = str + item_id + "," + num + ",";
 
+                           if (j != importdt.Columns.Count - 1)
+                           {
+                               str = str + "#";
+                           }
                        }
-                       else
+
+                       try
                        {
-                           Toolkit.MessageBox.Show("任务量设置失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                           int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("call p_set_task ('{0}','{1}')",
+                                                               dept_id, str));
+
+                           if (result == 1)
+                           {
+
+                           }
+                           else
+                           {
+                               Toolkit.MessageBox.Show("任务量设置失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                       }
+                       catch (Exception ex)
+                       {
+                           Toolkit.MessageBox.Show("任务量设置失败2！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                            return;
                        }
                    }
-                   catch (Exception ex)
-                   {
-                       Toolkit.MessageBox.Show("任务量设置失败2！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                       return;
-                   }
+                   Toolkit.MessageBox.Show("任务导入设置成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                   Load_table();
+                   return;
                }
-               Toolkit.MessageBox.Show("任务导入设置成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-               Load_table();
-               return;
            }
         }
 
