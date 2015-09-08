@@ -303,78 +303,86 @@ namespace FoodSafetyMonitoring.Manager
             }
             var excelFilePath = openFile.FileName;
 
-            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-            Sheets sheets;
-            object oMissiong = System.Reflection.Missing.Value;
-            Workbook workbook = null;//创建工作簿
-            System.Data.DataTable dt = new System.Data.DataTable();
-
             try
             {
-                if (app == null)
-                {
-                    return null;
-                }
-                workbook = app.Workbooks.Open(excelFilePath, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong,
-                    oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong);
+                Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+                Sheets sheets;
+                object oMissiong = System.Reflection.Missing.Value;
+                Workbook workbook = null;//创建工作簿
+                System.Data.DataTable dt = new System.Data.DataTable();
 
-                sheets = workbook.Worksheets;
-
-                //将数据读入到DataTable中
-                Worksheet worksheet = (Worksheet)sheets.get_Item(1);//读取第一张表  
-                if (worksheet == null)
+                try
                 {
-                    return null;
-                }
-                    
-                int iRowCount = worksheet.UsedRange.Rows.Count;
-                int iColCount = worksheet.UsedRange.Columns.Count;
-                //生成列头
-                for (int i = 0; i < iColCount; i++)
-                {
-                    var name = "column" + i;
-                    if (hasTitle)
+                    if (app == null)
                     {
-                        var txt = ((Range)worksheet.Cells[1, i + 1]).Text.ToString();
-                        if (!string.IsNullOrEmpty(txt)) 
+                        return null;
+                    }
+                    workbook = app.Workbooks.Open(excelFilePath, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong,
+                        oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong);
+
+                    sheets = workbook.Worksheets;
+
+                    //将数据读入到DataTable中
+                    Worksheet worksheet = (Worksheet)sheets.get_Item(1);//读取第一张表  
+                    if (worksheet == null)
+                    {
+                        return null;
+                    }
+
+                    int iRowCount = worksheet.UsedRange.Rows.Count;
+                    int iColCount = worksheet.UsedRange.Columns.Count;
+                    //生成列头
+                    for (int i = 0; i < iColCount; i++)
+                    {
+                        var name = "column" + i;
+                        if (hasTitle)
                         {
-                            name = txt;
+                            var txt = ((Range)worksheet.Cells[1, i + 1]).Text.ToString();
+                            if (!string.IsNullOrEmpty(txt))
+                            {
+                                name = txt;
+                            }
                         }
+                        while (dt.Columns.Contains(name))
+                        {
+                            name = name + "_1";//重复行名称会报错。
+                        }
+                        dt.Columns.Add(new DataColumn(name, typeof(string)));
                     }
-                    while (dt.Columns.Contains(name))
+                    //生成行数据
+                    Range range;
+                    int rowIdx = hasTitle ? 2 : 1;
+                    for (int iRow = rowIdx; iRow <= iRowCount; iRow++)
                     {
-                        name = name + "_1";//重复行名称会报错。
+                        DataRow dr = dt.NewRow();
+                        for (int iCol = 1; iCol <= iColCount; iCol++)
+                        {
+                            range = (Range)worksheet.Cells[iRow, iCol];
+                            dr[iCol - 1] = (range.Value2 == null) ? "" : range.Text.ToString();
+                        }
+                        dt.Rows.Add(dr);
                     }
-                    dt.Columns.Add(new DataColumn(name, typeof(string)));
+                    return dt;
                 }
-                //生成行数据
-                Range range;
-                int rowIdx = hasTitle ? 2 : 1;
-                for (int iRow = rowIdx; iRow <= iRowCount; iRow++)
+                catch { return null; }
+                finally
                 {
-                    DataRow dr = dt.NewRow();
-                    for (int iCol = 1; iCol <= iColCount; iCol++)
-                    {
-                        range = (Range)worksheet.Cells[iRow, iCol];
-                        dr[iCol - 1] = (range.Value2 == null) ? "" : range.Text.ToString();
-                    }
-                    dt.Rows.Add(dr);
+                    workbook.Close(false, oMissiong, oMissiong);
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                    workbook = null;
+                    app.Workbooks.Close();
+                    app.Quit();
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                    app = null;
                 }
-                return dt;
+
             }
-            catch { return null; }
-            finally
+            catch
             {
-                workbook.Close(false, oMissiong, oMissiong);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
-                workbook = null;
-                app.Workbooks.Close();
-                app.Quit();
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
-                app = null;
+                Toolkit.MessageBox.Show("无法导入，可能您的机子Office版本有问题！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return null;
             }
         }
-
        
 
         private void BtnExport_Click(object sender, RoutedEventArgs e)
@@ -404,43 +412,53 @@ namespace FoodSafetyMonitoring.Manager
                     
                 }
 
-                //创建Excel  
-                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
-                if (excelApp == null)
+                try
                 {
-                    Toolkit.MessageBox.Show("无法创建Excel对象，可能您的机子未安装Excel程序！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                     //创建Excel  
+                     Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+
+                     if (excelApp == null)
+                     {
+                         Toolkit.MessageBox.Show("无法创建Excel对象，可能您的机子未安装Excel程序！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                         return;
+                     }
+                     Workbook excelWB = excelApp.Workbooks.Add(System.Type.Missing);    //创建工作簿（WorkBook：即Excel文件主体本身）  
+                     Worksheet excelWS = (Worksheet)excelWB.Worksheets[1];   //创建工作表（即Excel里的子表sheet） 1表示在子表sheet1里进行数据导出 
+                     excelWS.Name = "任务量";
+
+                     //excelWS.Cells.NumberFormat = "@";     //  如果数据中存在数字类型 可以让它变文本格式显示  
+                     //导出列名
+                     for (int j = 0; j < exporttable.Columns.Count; j++)
+                     {
+                         excelWS.Cells[1, j + 1] = exporttable.Columns[j].ColumnName.ToString();
+                     }
+
+
+                     //将数据导入到工作表的单元格  
+                     for (int i = 0; i < exporttable.Rows.Count; i++)
+                     {
+                         for (int j = 0; j < exporttable.Columns.Count; j++)
+                         {
+                             excelWS.Cells[i + 2, j + 1] = exporttable.Rows[i][j].ToString();
+                         }
+                     }
+
+                     Range range = null;
+                     range = (Range)excelWS.get_Range("A1", "D1"); //获取Excel多个单元格区域
+                     range.ColumnWidth = 20; //设置单元格的宽度  
+
+                     excelWB.SaveAs(excelFilePath);  //将其进行保存到指定的路径  
+                     excelWB.Close();
+                     excelApp.Quit();
+                     KillAllExcel(excelApp); //释放可能还没释放的进程  
+                     Toolkit.MessageBox.Show("文件导出成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch
+                {
+                    Toolkit.MessageBox.Show("无法创建Excel对象，可能您的机子Office版本有问题！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
-                Workbook excelWB = excelApp.Workbooks.Add(System.Type.Missing);    //创建工作簿（WorkBook：即Excel文件主体本身）  
-                Worksheet excelWS = (Worksheet)excelWB.Worksheets[1];   //创建工作表（即Excel里的子表sheet） 1表示在子表sheet1里进行数据导出 
-                excelWS.Name = "任务量";
-
-                //excelWS.Cells.NumberFormat = "@";     //  如果数据中存在数字类型 可以让它变文本格式显示  
-                //导出列名
-                for (int j = 0; j < exporttable.Columns.Count; j++)
-                {
-                    excelWS.Cells[1, j + 1] = exporttable.Columns[j].ColumnName.ToString();
-                }
-
-
-                //将数据导入到工作表的单元格  
-                for (int i = 0; i < exporttable.Rows.Count; i++)
-                {
-                    for (int j = 0; j < exporttable.Columns.Count; j++)
-                    {
-                        excelWS.Cells[i + 2, j + 1] = exporttable.Rows[i][j].ToString();
-                    }
-                }
-
-                Range range = null;
-                range = (Range)excelWS.get_Range("A1","D1"); //获取Excel多个单元格区域
-                range.ColumnWidth = 20; //设置单元格的宽度  
-
-                excelWB.SaveAs(excelFilePath);  //将其进行保存到指定的路径  
-                excelWB.Close();
-                excelApp.Quit();
-                KillAllExcel(excelApp); //释放可能还没释放的进程  
-                Toolkit.MessageBox.Show("文件导出成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+              
             }
         }
 
