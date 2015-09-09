@@ -110,8 +110,7 @@
                 <SolidColorBrush Color="#1956a2" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="410"/>
-                <ColumnDefinition/>
+                <ColumnDefinition MinWidth="460" Width="2.4*"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
@@ -121,49 +120,50 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid>
+            <Grid >
                 <!--<Grid.Background>
                     <ImageBrush ImageSource="/res/title.jpg"/>
                 </Grid.Background>-->
                 <Image x:Name="_logo" Source="/res/title_logo.png" Margin ="32,10,0,10" Width="100" Height="100" HorizontalAlignment="Left" Visibility="Hidden"/>
-                <TextBlock x:Name="_title_dept" FontFamily="楷体" FontSize="22" FontWeight="600" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Foreground="White" Margin="100,0,0,75"></TextBlock>
-                <TextBlock x:Name="_title_1" FontFamily="楷体" FontSize="30" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="100,10,0,0" Visibility="Hidden">检测监管系统</TextBlock>
-                <TextBlock x:Name="_title_2" FontFamily="楷体" FontSize="14" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="280,60,0,0" Visibility="Hidden">--屠宰环节瘦肉精</TextBlock>
+                <TextBlock x:Name="_title_dept" FontFamily="楷体" FontSize="22" FontWeight="600" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Foreground="White" Margin="135,0,0,75"></TextBlock>
+                <TextBlock x:Name="_title_1" FontFamily="楷体" FontSize="30" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" Margin="150,10,0,0" Visibility="Hidden">检测监管系统</TextBlock>
+                <TextBlock x:Name="_title_2" FontFamily="楷体" FontSize="14" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" Margin="280,60,0,0" Visibility="Hidden">--屠宰环节瘦肉精</TextBlock>
             </Grid>
-            <Grid Grid.Column="2" x:Name="_grid_0">
+            <Grid Grid.Column="1" x:Name="_grid_0">
                 <Image x:Name="_image_0" />
                 <TextBlock x:Name="_text_0" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="3" x:Name="_grid_1">
+            <Grid Grid.Column="2" x:Name="_grid_1">
                 <Image x:Name="_image_1" />
                 <TextBlock x:Name="_text_1" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="4" x:Name="_grid_2">
+            <Grid Grid.Column="3" x:Name="_grid_2">
                 <Image x:Name="_image_2" />
                 <TextBlock x:Name="_text_2" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="5" x:Name="_grid_3">
+            <Grid Grid.Column="4" x:Name="_grid_3">
                 <Image x:Name="_image_3" />
                 <TextBlock x:Name="_text_3" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="6" x:Name="_grid_4">
+            <Grid Grid.Column="5" x:Name="_grid_4">
                 <Image x:Name="_image_4" />
                 <TextBlock x:Name="_text_4" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="7" x:Name="_grid_5">
+            <Grid Grid.Column="6" x:Name="_grid_5">
                 <Image x:Name="_image_5" />
                 <TextBlock x:Name="_text_5" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="8" x:Name="_grid_6">
+            <Grid Grid.Column="7" x:Name="_grid_6">
                 <Image x:Name="_image_6" />
                 <TextBlock x:Name="_text_6" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="9" x:Name="_grid_7">
+            <Grid Grid.Column="8" x:Name="_grid_7">
                 <Image x:Name="_image_7" />
                 <TextBlock x:Name="_text_7" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
-            <Grid Grid.Column="10" x:Name="_grid_8">
+            <Grid Grid.Column="9" x:Name="_grid_8">
                 <Image x:Name="_image_8" />
                 <TextBlock x:Name="_text_8" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>

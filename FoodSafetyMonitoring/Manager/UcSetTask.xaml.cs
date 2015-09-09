@@ -34,6 +34,7 @@ namespace FoodSafetyMonitoring.Manager
         private string user_flag_tier;
         private string deptid;
         private List<DeptItem> list = new List<DeptItem>();
+        Importing_window load ;
 
         public UcSetTask(IDBOperation dbOperation)
         {
@@ -236,6 +237,7 @@ namespace FoodSafetyMonitoring.Manager
 
                        if(dept_id == null || dept_id == "")
                        {
+                           load.Close();
                            Toolkit.MessageBox.Show(importdt.Rows[i][0].ToString() + "不是正确的下级部门，请确认后重新导入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                            return;
                        }
@@ -245,6 +247,7 @@ namespace FoodSafetyMonitoring.Manager
                            string item_id = list.Where(t => t.ItemName == importdt.Columns[j].ColumnName).Select(t => t.ItemId).FirstOrDefault();
                            if (item_id == null || item_id == "")
                            {
+                               load.Close();
                                Toolkit.MessageBox.Show(importdt.Columns[j].ColumnName + "不是正确的检测项目，请确认后重新导入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                return;
                            }
@@ -272,16 +275,20 @@ namespace FoodSafetyMonitoring.Manager
                            }
                            else
                            {
+                               load.Close();
                                Toolkit.MessageBox.Show("任务量设置失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                return;
                            }
                        }
                        catch (Exception ex)
                        {
+                           load.Close();
                            Toolkit.MessageBox.Show("任务量设置失败2！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                            return;
                        }
                    }
+
+                   load.Close();
                    Toolkit.MessageBox.Show("任务导入设置成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                    Load_table();
                    return;
@@ -305,6 +312,10 @@ namespace FoodSafetyMonitoring.Manager
 
             try
             {
+                load = new Importing_window();
+                load.Show();
+                //this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
                 Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
                 Sheets sheets;
                 object oMissiong = System.Reflection.Missing.Value;

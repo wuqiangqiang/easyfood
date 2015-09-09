@@ -234,12 +234,12 @@ namespace FoodSafetyMonitoring.Manager
                 //if (dialog.ShowDialog() == true)
                 //{
                     dialog.PrintQueue = GetPrinter();
-                    //Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
-                    //cer.Measure(printSize);
-                    //cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
-                    Size printSize = new Size(793, 529);
+                    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
                     cer.Measure(printSize);
-                    cer.Arrange(new Rect(0, 0, 793, 529));
+                    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+                    //Size printSize = new Size(793, 529);
+                    //cer.Measure(printSize);
+                    //cer.Arrange(new Rect(0, 0, 793, 529));
 
                     dialog.PrintVisual(cer, "产品检疫证");
                 //}

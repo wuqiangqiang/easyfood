@@ -217,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\Importing_window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\LoadWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -992,7 +996,12 @@
       <DependentUpon>detectDetailsReview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\IClickChildMenuInitUserControlUI.cs" />
-    <Compile Include="Manager\LoadWindow.xaml.cs" />
+    <Compile Include="Manager\Importing_window.xaml.cs">
+      <DependentUpon>Importing_window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\LoadWindow.xaml.cs">
+      <DependentUpon>LoadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\ModifyShipper.xaml.cs">
       <DependentUpon>ModifyShipper.xaml</DependentUpon>
     </Compile>

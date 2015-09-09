@@ -67,7 +67,7 @@
                         <TextBox Canvas.Left="555" Canvas.Top="205" x:Name="_town_js" Width="154" Height="20" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="325" Canvas.Top="226" x:Name="_village_js" Width="294" Height="20" Margin="0" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="144" Canvas.Top="250" x:Name="_object_lable" Width="634" MaxLength="50"></TextBox>
-                        <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="80" Margin="0" ></TextBlock>
+                        <TextBlock Canvas.Left="634" Canvas.Top="290" x:Name="_user_name" Width="60" Margin="0" ></TextBlock>
                         <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0"></TextBlock>
                         <TextBlock  Canvas.Left="560" Canvas.Top="318" Width="50" x:Name="_nian"></TextBlock>
                         <TextBlock  Canvas.Left="630" Canvas.Top="318" Width="30" x:Name="_yue"></TextBlock>

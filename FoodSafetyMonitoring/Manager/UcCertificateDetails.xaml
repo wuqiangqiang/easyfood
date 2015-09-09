@@ -7,25 +7,25 @@
                 <ImageBrush ImageSource="/res/certificate.png"></ImageBrush>
             </Canvas.Background>-->
             <TextBlock x:Name="_card_id" Width="120" Margin="0" Canvas.Left="581" Canvas.Top="21" FontSize="16" Visibility="Hidden">111</TextBlock>
-            <TextBlock Canvas.Left="119" Canvas.Top="84" x:Name="_company" Width="323" Margin="0" IsEnabled="False" FontSize="16">222</TextBlock>
-            <TextBlock Canvas.Left="523" Canvas.Top="84" x:Name="_phone" Width="219" Margin="0" FontSize="16">333</TextBlock>
+            <TextBlock Canvas.Left="119" Canvas.Top="86" x:Name="_company" Width="323" Margin="0" IsEnabled="False" FontSize="16">222</TextBlock>
+            <TextBlock Canvas.Left="523" Canvas.Top="86" x:Name="_phone" Width="219" Margin="0" FontSize="16">333</TextBlock>
             <TextBlock Canvas.Left="118" Canvas.Top="130" x:Name="_detect_object" Width="124" Margin="0" FontSize="16">444</TextBlock>
-            <TextBlock Canvas.Left="365" Canvas.Top="130" x:Name="_object_count" Width="174" Margin="0" FontSize="16">555</TextBlock>
-            <TextBlock Canvas.Left="603" Canvas.Top="130" x:Name="_for_use" Width="184" Margin="0" FontSize="16">666</TextBlock>
+            <TextBlock Canvas.Left="350" Canvas.Top="130" x:Name="_object_count" Width="174" Margin="0" FontSize="16">555</TextBlock>
+            <TextBlock Canvas.Left="590" Canvas.Top="130" x:Name="_for_use" Width="184" Margin="0" FontSize="16">666</TextBlock>
             <TextBlock Canvas.Left="128" Canvas.Top="163" x:Name="_city_ks" Width="74" FontSize="16">777</TextBlock>
             <TextBlock Canvas.Left="273" Canvas.Top="162" x:Name="_region_ks" Width="190" Height="20" Margin="0" FontSize="16">888</TextBlock>
             <TextBlock Canvas.Left="515" Canvas.Top="162" x:Name="_town_ks" Width="154" Height="20" Margin="0" FontSize="16">999</TextBlock>
-            <TextBlock Canvas.Left="325" Canvas.Top="182" x:Name="_village_ks" Width="294" Height="20" Margin="0" FontSize="16">111</TextBlock>
-            <TextBlock Canvas.Left="128" Canvas.Top="205" x:Name="_city_js" Width="74" FontSize="16">222</TextBlock>
-            <TextBlock Canvas.Left="280" Canvas.Top="205" x:Name="_region_js" Width="190" Height="20" FontSize="16">333</TextBlock>
-            <TextBlock Canvas.Left="516" Canvas.Top="205" x:Name="_town_js" Width="154" Height="20" FontSize="16">444</TextBlock>
-            <TextBlock Canvas.Left="325" Canvas.Top="235" x:Name="_village_js" Width="294" Height="20" Margin="0" FontSize="16">555</TextBlock>
+            <TextBlock Canvas.Left="325" Canvas.Top="187" x:Name="_village_ks" Width="294" Height="20" Margin="0" FontSize="16">111</TextBlock>
+            <TextBlock Canvas.Left="128" Canvas.Top="213" x:Name="_city_js" Width="74" FontSize="16">222</TextBlock>
+            <TextBlock Canvas.Left="280" Canvas.Top="213" x:Name="_region_js" Width="190" Height="20" FontSize="16">333</TextBlock>
+            <TextBlock Canvas.Left="516" Canvas.Top="213" x:Name="_town_js" Width="154" Height="20" FontSize="16">444</TextBlock>
+            <TextBlock Canvas.Left="325" Canvas.Top="238" x:Name="_village_js" Width="294" Height="20" Margin="0" FontSize="16">555</TextBlock>
             <TextBlock Canvas.Left="128" Canvas.Top="276" x:Name="_object_lable" Width="634" FontSize="16">666</TextBlock>
-            <TextBlock Canvas.Left="463" Canvas.Top="339" x:Name="_user_name" Width="100" Margin="0" FontSize="16">777</TextBlock>
-            <TextBlock Canvas.Left="570" Canvas.Top="339" x:Name="_user_id" Width="100" Margin="0" FontSize="16">777</TextBlock>
-            <TextBlock  Canvas.Left="417.594" Canvas.Top="377" Width="70" x:Name="_nian" FontSize="16">888</TextBlock>
-            <TextBlock  Canvas.Left="506" Canvas.Top="377" Width="40" x:Name="_yue" FontSize="16">999</TextBlock>
-            <TextBlock  Canvas.Left="563.594" Canvas.Top="377" Width="50" x:Name="_day" FontSize="16">111</TextBlock>
+            <TextBlock Canvas.Left="465" Canvas.Top="333" x:Name="_user_name" Width="60" Margin="0" FontSize="16">777</TextBlock>
+            <TextBlock Canvas.Left="530" Canvas.Top="333" x:Name="_user_id" Width="100" Margin="0" FontSize="16">777</TextBlock>
+            <TextBlock  Canvas.Left="420" Canvas.Top="371" Width="70" x:Name="_nian" FontSize="16">888</TextBlock>
+            <TextBlock  Canvas.Left="514" Canvas.Top="371" Width="40" x:Name="_yue" FontSize="16">999</TextBlock>
+            <TextBlock  Canvas.Left="572" Canvas.Top="371" Width="50" x:Name="_day" FontSize="16">111</TextBlock>
         </Canvas>
     </Grid>
 </UserControl>

@@ -38,6 +38,8 @@ namespace FoodSafetyMonitoring
         public IDBOperation dbOperation = null;
         public List<MainMenuItem> mainMenus = new List<MainMenuItem>();
         private Rect rcnormal;//定义一个全局rect记录还原状态下窗口的位置和大小。
+        private string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+
 
         public MainWindow(IDBOperation dbOperation)
         {
@@ -110,10 +112,14 @@ namespace FoodSafetyMonitoring
                 this._bottom.Text = "版权所有:" + table.Rows[0][0].ToString() + "  软著登字第0814101号    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
 
                 //DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image from sys_client_sysdept where INFO_CODE ='{0}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).Tables[0];
-                DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image from sys_client_sysdept where INFO_CODE ='102'")).Tables[0];
+                DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image,INFO_NAME from sys_client_sysdept where INFO_CODE ='{0}'",deptId.Substring(0,3).ToString())).Tables[0];
                 if (dt.Rows[0][0].ToString() != "")
                 {
                     this._title_dept.Text = dt.Rows[0][0].ToString();
+                }
+                else if (dt.Rows[0][2].ToString() != "")
+                {
+                    this._title_dept.Text = dt.Rows[0][2].ToString();
                 }
 
                 if (dt.Rows[0][1].ToString() != null && dt.Rows[0][1].ToString() != "")
