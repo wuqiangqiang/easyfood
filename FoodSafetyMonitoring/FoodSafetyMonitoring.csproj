@@ -601,9 +601,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcCertificateDayReportCountry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCertificateDayReportDept.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCertificateDayReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcCertificateDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UcCertificateMonthReportCountry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCertificateMonthReportDept.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCertificateMonthReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcCertificateProductDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1116,8 +1140,26 @@
     <Compile Include="Manager\Themes\UcChooseDataTime.xaml.cs">
       <DependentUpon>UcChooseDataTime.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcCertificateDayReportCountry.xaml.cs">
+      <DependentUpon>UcCertificateDayReportCountry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateDayReportDept.xaml.cs">
+      <DependentUpon>UcCertificateDayReportDept.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateDayReportDetails.xaml.cs">
+      <DependentUpon>UcCertificateDayReportDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcCertificateDetails.xaml.cs">
       <DependentUpon>UcCertificateDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateMonthReportCountry.xaml.cs">
+      <DependentUpon>UcCertificateMonthReportCountry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateMonthReportDept.xaml.cs">
+      <DependentUpon>UcCertificateMonthReportDept.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateMonthReportDetails.xaml.cs">
+      <DependentUpon>UcCertificateMonthReportDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcCertificateProductDetails.xaml.cs">
       <DependentUpon>UcCertificateProductDetails.xaml</DependentUpon>
