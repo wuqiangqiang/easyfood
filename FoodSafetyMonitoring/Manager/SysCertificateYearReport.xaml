@@ -56,7 +56,7 @@
                             <ComboBox Name="_detect_dept" Background="White" MaxDropDownHeight="200" Width="240" />
                             <TextBlock  xml:space="preserve" MinWidth="10" >选择电子证类型:</TextBlock>
                             <ComboBox Name="_cer_type" Background="White" MaxDropDownHeight="200" Width="120" />
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="100,0,0,0" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="80,0,0,0" />
                             <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
                         </StackPanel>
                     </Grid>

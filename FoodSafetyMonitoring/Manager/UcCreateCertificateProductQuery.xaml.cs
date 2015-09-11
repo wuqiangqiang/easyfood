@@ -16,6 +16,7 @@ using System.Data;
 using FoodSafetyMonitoring.Common;
 using Toolkit = Microsoft.Windows.Controls;
 using FoodSafetyMonitoring.Manager.UserControls;
+using System.IO;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -25,6 +26,7 @@ namespace FoodSafetyMonitoring.Manager
     public partial class UcCreateCertificateProductQuery : UserControl
     {
         public IDBOperation dbOperation = null;
+        private DataTable current_table;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
 
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
@@ -47,11 +49,13 @@ namespace FoodSafetyMonitoring.Manager
             //清空列表
             lvlist.DataContext = null;
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_product_new({0},'{1}','{2}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_product_new_new({0},'{1}','{2}','{3}')",
                    (Application.Current.Resources["User"] as UserInfo).ID,
                    _card_no.Text,
-                   _source_company.Text)).Tables[0];
+                   _source_company.Text,
+                   _source_name.Text)).Tables[0];
 
+            current_table = table;
             lvlist.DataContext = table;
 
             _sj.Visibility = Visibility.Visible;
@@ -78,6 +82,46 @@ namespace FoodSafetyMonitoring.Manager
             string card_id = (sender as Button).Tag.ToString();
             CertificateProductPreview cer = new CertificateProductPreview(dbOperation, card_id);
             cer.ShowDialog();
+        }
+
+        private void _export_Click(object sender, RoutedEventArgs e)
+        {
+            if (current_table == null)
+            {
+                return;
+            }
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            sfd.Filter = "导出文件 (*.csv)|*.csv";
+            sfd.FilterIndex = 0;
+            sfd.RestoreDirectory = true;
+            sfd.Title = "导出文件保存路径";
+            sfd.ShowDialog();
+            string strFilePath = sfd.FileName;
+            if (strFilePath != "")
+            {
+                if (File.Exists(strFilePath))
+                {
+                    File.Delete(strFilePath);
+                }
+                StreamWriter sw = new StreamWriter(new FileStream(strFilePath, FileMode.CreateNew), Encoding.Default);
+                string tableHeader = "检疫证号" + "," + "出证时间" + "," + "检疫分站" + "," + "检疫员" + "," + "货主" + "," + "生产单位";
+                //sw.WriteLine("");
+                sw.WriteLine(tableHeader);
+
+                for (int j = 0; j < current_table.Rows.Count; j++)
+                {
+                    DataRow row = current_table.Rows[j];
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < current_table.Columns.Count; i++)
+                    {
+                        sb.Append(row[i]);
+                        sb.Append(",");
+                    }
+                    sw.WriteLine(sb);
+                }
+                sw.Close();
+                Toolkit.MessageBox.Show("文件导出成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
     }

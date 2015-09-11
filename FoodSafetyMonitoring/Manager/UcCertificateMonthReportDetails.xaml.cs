@@ -40,32 +40,43 @@ namespace FoodSafetyMonitoring.Manager
             this.CerType = certype;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
-            getdata();
+            MyColumns.Add("cardid", new MyColumn("cardid", "检疫证号") { BShow = true, Width = 12 });
+            MyColumns.Add("cdate", new MyColumn("cdate", "出证时间") { BShow = true, Width = 16 });
+            MyColumns.Add("createdeptid", new MyColumn("createdeptid", "出证部门id") { BShow = false });
+            MyColumns.Add("info_name", new MyColumn("info_name", "出证部门") { BShow = true, Width = 16 });
+            MyColumns.Add("createuserid", new MyColumn("createuserid", "检疫员id") { BShow = false });
+            MyColumns.Add("info_user", new MyColumn("info_user", "检疫员") { BShow = true, Width = 12 });
+            MyColumns.Add("companyid", new MyColumn("companyid", "货主id") { BShow = false });
+            MyColumns.Add("companyname", new MyColumn("companyname", "货主") { BShow = true, Width = 12 });
+            MyColumns.Add("objectcount", new MyColumn("objectcount", "检疫头数") { BShow = true, Width = 12 });
+            MyColumns.Add("type", new MyColumn("type", "检疫证类型") { BShow = true, Width = 12 });
+            MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
+            _tableview.MyColumns = MyColumns;
+            _tableview.BShowDetails = true;
+            _tableview.GetDataByPageNumberEvent += new UcTableOperableView_NoTitle.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             _tableview.DetailsRowEnvent += new UcTableOperableView_NoTitle.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
+            _tableview.PageIndex = 1;
+
+            getdata();
         }
 
         private void getdata()
         {
-            MyColumns.Add("cardid", new MyColumn("cardid", "检疫证号") { BShow = true, Width = 12 });
-            MyColumns.Add("cdate", new MyColumn("cdate", "出证时间") { BShow = true, Width = 16 });
-            MyColumns.Add("createdeptid", new MyColumn("createdeptid", "出证部门id") { BShow = false });
-            MyColumns.Add("info_name", new MyColumn("info_name", "出证部门") { BShow = true, Width = 10 });
-            MyColumns.Add("createuserid", new MyColumn("createuserid", "检疫员id") { BShow = false });
-            MyColumns.Add("info_user", new MyColumn("info_user", "检疫员") { BShow = true, Width = 10 });
-            MyColumns.Add("companyid", new MyColumn("companyid", "货主id") { BShow = false });
-            MyColumns.Add("companyname", new MyColumn("companyname", "货主") { BShow = true, Width = 10 });
-            MyColumns.Add("objectcount", new MyColumn("objectcount", "检疫头数") { BShow = true, Width = 10 });
-            MyColumns.Add("type", new MyColumn("type", "检疫证类型") { BShow = true, Width = 10 });
-
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_report_month_details('{0}','{1}','{2}')",
-                                Sj, DeptId, CerType)).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_report_month_details('{0}','{1}','{2}',{3},{4})",
+                                Sj, DeptId, CerType, (_tableview.PageIndex - 1) * _tableview.RowMax,
+                              _tableview.RowMax)).Tables[0];
 
             currenttable = table;
-
-            _tableview.MyColumns = MyColumns;
-            _tableview.BShowDetails = true;
             _tableview.Table = table;
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = _tableview.RowTotal.ToString();
+        }
+
+        void _tableview_GetDataByPageNumberEvent()
+        {
+            getdata();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

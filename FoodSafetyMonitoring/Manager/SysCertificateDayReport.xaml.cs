@@ -151,7 +151,7 @@ namespace FoodSafetyMonitoring.Manager
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
             dept_id = rows[0]["PART_ID"].ToString();
 
-            if (user_flag_tier == "3")
+            if (user_flag_tier == "3" || user_flag_tier == "4")
             {
                 grid_info.Children.Add(new UcCertificateDayReportDetails(dbOperation, report_day.ToString(), dept_id, cer_type));
             }

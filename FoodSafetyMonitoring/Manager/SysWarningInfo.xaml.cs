@@ -164,7 +164,7 @@ namespace FoodSafetyMonitoring.Manager
             item_id = current_table.Rows[selectrow - 1][3].ToString();
             object_id = current_table.Rows[selectrow - 1][5].ToString();
 
-            if (user_flag_tier == "3")
+            if (user_flag_tier == "3" || user_flag_tier == "4")
             {
                 grid_info.Children.Add(new UcWarningdetails(dbOperation, dept_id, item_id, object_id));
             }

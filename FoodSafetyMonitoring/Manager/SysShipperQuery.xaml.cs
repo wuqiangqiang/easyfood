@@ -43,18 +43,14 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            //string dept = deptId.Substring(0,5);
-            DataTable table;
-            if(_shipper_id.Text.Trim().Length == 0)
-            {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
-                               "where shipperflag = '{0}'", shipperflag)).Tables[0];
-            }
-            else
-            {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
-                               "where shipperid = '{0}' and shipperflag = '{1}'", _shipper_id.Text, shipperflag)).Tables[0];
-            }
+            string shipper_id = _shipper_id.Text.Trim();
+            string shipper_name = _shipper_name.Text.Trim();
+
+
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
+                               "where shipperflag = '{0}' and (shipperid = '{1}' or '{2}' = '') and (shippername like '{3}%' or '{4}' = '')",
+                               shipperflag, shipper_id, shipper_id, shipper_name,shipper_name)).Tables[0];
+
             
             lvlist.DataContext = table;
 
@@ -71,17 +67,13 @@ namespace FoodSafetyMonitoring.Manager
 
         public void refresh()
         {
-            DataTable table;
-            if (_shipper_id.Text.Trim().Length == 0)
-            {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
-                               "where shipperflag = '{0}'", shipperflag)).Tables[0];
-            }
-            else
-            {
-                table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
-                               "where shipperid = '{0}' and shipperflag = '{1}'", _shipper_id.Text, shipperflag)).Tables[0];
-            }
+            string shipper_id = _shipper_id.Text.Trim();
+            string shipper_name = _shipper_name.Text.Trim();
+
+
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select shipperid,shippername,phone,region,town,village from t_shipper " +
+                               "where shipperflag = '{0}' and (shipperid = '{1}' or '{2}' = '') and (shippername like '{3}%' or '{4}' = '')",
+                               shipperflag, shipper_id, shipper_id, shipper_name, shipper_name)).Tables[0];
 
             lvlist.DataContext = table;
         }

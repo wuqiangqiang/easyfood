@@ -289,7 +289,7 @@ namespace FoodSafetyMonitoring.Manager
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
             dept_id = rows[0]["PART_ID"].ToString();
 
-            if (user_flag_tier == "3")
+            if (user_flag_tier == "3" || user_flag_tier == "4")
             {
                 grid_info.Children.Add(new UcYearReportDetails(dbOperation, ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
                               ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id, object_id));

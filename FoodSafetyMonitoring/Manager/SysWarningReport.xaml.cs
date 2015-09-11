@@ -153,7 +153,7 @@ namespace FoodSafetyMonitoring.Manager
 
             dept_id = id;
 
-            if (user_flag_tier == "3")
+            if (user_flag_tier == "3" || user_flag_tier == "4")
             {
                 grid_info.Children.Add(new UcWarningReportDetails(dbOperation, reportDate_kssj.SelectedDate.ToString(), reportDate_jssj.SelectedDate.ToString(), dept_id, item_id, review_id));
             }

@@ -15,3 +15,4 @@ D:\湖北老平台新版本连正式库\easyfood\DBUtility\bin\Release\DBUtility
 D:\湖北老平台新版本连正式库\easyfood\DBUtility\bin\Release\MySql.Data.dll
 D:\湖北老平台新版本连正式库\easyfood\DBUtility\obj\Release\DBUtility.dll
 D:\湖北老平台新版本连正式库\easyfood\DBUtility\obj\Release\DBUtility.pdb
+D:\湖北老平台新版本连正式库\easyfood\DBUtility\obj\Release\DBUtility.csprojResolveAssemblyReference.cache

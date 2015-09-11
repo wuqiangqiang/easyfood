@@ -633,6 +633,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcCertificateYearReportCountry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCertificateYearReportDept.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCertificateYearReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcCreateCertificate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1163,6 +1175,15 @@
     </Compile>
     <Compile Include="Manager\UcCertificateProductDetails.xaml.cs">
       <DependentUpon>UcCertificateProductDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateYearReportCountry.xaml.cs">
+      <DependentUpon>UcCertificateYearReportCountry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateYearReportDept.xaml.cs">
+      <DependentUpon>UcCertificateYearReportDept.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateYearReportDetails.xaml.cs">
+      <DependentUpon>UcCertificateYearReportDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcCreateCertificate.xaml.cs">
       <DependentUpon>UcCreateCertificate.xaml</DependentUpon>

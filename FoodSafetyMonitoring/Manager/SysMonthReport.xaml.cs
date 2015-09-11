@@ -303,9 +303,9 @@ namespace FoodSafetyMonitoring.Manager
             string dept_id;
 
             DataRow[] rows = currenttable.Select("PART_NAME = '" + id + "'");
-            dept_id = rows[0]["PART_ID"].ToString();        
+            dept_id = rows[0]["PART_ID"].ToString();
 
-            if (user_flag_tier == "3")
+            if (user_flag_tier == "3" || user_flag_tier == "4")
             {
                 grid_info.Children.Add(new UcMonthReportDetails(dbOperation, _year.Text + "-" + _month.Text, dept_id, item_id, result_id));
             }

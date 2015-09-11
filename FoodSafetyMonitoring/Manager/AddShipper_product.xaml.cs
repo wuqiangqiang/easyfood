@@ -65,8 +65,22 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            //判断货主信息是否重复，若重复则不能录入
+            string shipper_name = _name.Text;
+            string shipper_phone = _phone.Text;
+            string shipper_address = _address.Text;
+
+            bool exit_flag2 = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(shipperid) from t_shipper_product where shippername ='{0}' "+ 
+                              " and phone = '{1}' and address = '{2}' and shipperflag = '{3}'",
+                              shipper_name,shipper_phone,shipper_address, shipperFlag));
+            if (exit_flag2)
+            {
+                Toolkit.MessageBox.Show("该货主信息已录入过，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             string sql = string.Format("insert into t_shipper_product(shipperid,shippername,phone,address,createuserid,createdate,createdeptid,shipperflag) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')"
-                            , _id.Text, _name.Text, _phone.Text, _address.Text, userId,
+                            , _id.Text, shipper_name, shipper_phone, shipper_address, userId,
                             System.DateTime.Now, deptId, shipperFlag);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);

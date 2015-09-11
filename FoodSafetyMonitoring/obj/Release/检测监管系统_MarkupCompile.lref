@@ -31,6 +31,15 @@ FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\S
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysWarningReport.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysYearAnalysis.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\Themes\ExpandDockPanel.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateDayReportCountry.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateDayReportDept.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateDayReportDetails.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateMonthReportCountry.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateMonthReportDept.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateMonthReportDetails.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateYearReportCountry.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateYearReportDept.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateYearReportDetails.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificate.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificatedetails.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCreateCertificateProductDetails.xaml;;
@@ -77,10 +86,4 @@ FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\U
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcUserManager.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UserControls\UcTableView_NoTitle.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\UcHeaderTitle.xaml;;
-FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateDayReportCountry.xaml;;
-FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateDayReportDept.xaml;;
-FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateDayReportDetails.xaml;;
-FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateMonthReportCountry.xaml;;
-FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateMonthReportDept.xaml;;
-FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcCertificateMonthReportDetails.xaml;;
 
