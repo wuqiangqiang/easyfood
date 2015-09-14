@@ -83,7 +83,8 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
-                            <Button Content="添加下级" x:Name="_add" Click="_add_Click"  Height="25" Width="80" Visibility="Hidden"/>
+                            <Button Content="导入" x:Name="_import" Click="_import_Click"  Height="25" Width="80" Visibility="Hidden"/>
+                            <Button Content="添加下级" Margin="15,0,0,0" x:Name="_add" Click="_add_Click"  Height="25" Width="80" Visibility="Hidden"/>
                             <Button Content="删除" Margin="15,0,0,0" x:Name="_delete" Click="_delete_Click" Height="25" Width="60" Visibility="Hidden"/>
                             <Button Content="修改" Margin="15,0,0,0" x:Name="_edit" Click="_edit_Click" Height="25" Width="60" Visibility="Hidden"/>
                         </StackPanel>

@@ -104,6 +104,12 @@ namespace FoodSafetyMonitoring.Manager
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            if (_title.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("标题不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             string sql = String.Format("update sys_client_sysdept set title = '{0}' where INFO_CODE='{1}'", _title.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID);
             int count = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (count == 1)

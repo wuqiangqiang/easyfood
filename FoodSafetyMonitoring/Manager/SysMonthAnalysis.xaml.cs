@@ -26,6 +26,7 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private string page_url;
+        private string user_id;
         private readonly List<string> year = new List<string>() { "2014",
             "2015", 
             "2016",
@@ -34,15 +35,15 @@ namespace FoodSafetyMonitoring.Manager
             "2019",
             "2020"};//初始化变量
 
-        private readonly List<string> month = new List<string>() { "01",
-            "02", 
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
+        private readonly List<string> month = new List<string>() { "1",
+            "2", 
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
             "10",
             "11",
             "12"};//初始化变量
@@ -50,12 +51,13 @@ namespace FoodSafetyMonitoring.Manager
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
+            user_id = (Application.Current.Resources["User"] as UserInfo).ID.ToString();
 
             _year.ItemsSource = year;
             _year.SelectedIndex = 1;
 
             _month.ItemsSource = month;
-            _month.SelectedIndex = 7;
+            _month.SelectedIndex = 8;
 
             //地址从数据库中获取
             page_url = dbOperation.GetDbHelper().GetSingle("select monthreport from t_url ").ToString();
@@ -70,7 +72,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (page_url != "")
             {
-                _webBrowser.Source = new Uri(string.Format(page_url));
+                _webBrowser.Source = new Uri(string.Format(page_url, user_id, "3", _month.Text, _year.Text));
             }
             
         }

@@ -26,6 +26,7 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private string page_url;
+        private string user_id;
         private readonly List<string> year = new List<string>() { "2014",
             "2015", 
             "2016",
@@ -39,6 +40,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
+            user_id = (Application.Current.Resources["User"] as UserInfo).ID.ToString();
 
             _year.ItemsSource = year;
             _year.SelectedIndex = 1;
@@ -55,7 +57,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (page_url != "")
             {
-                _webBrowser.Source = new Uri(string.Format(page_url));
+                _webBrowser.Source = new Uri(string.Format(page_url, user_id, "1", _year.Text));
             }
         }
 

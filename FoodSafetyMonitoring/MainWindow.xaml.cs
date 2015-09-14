@@ -39,6 +39,7 @@ namespace FoodSafetyMonitoring
         public List<MainMenuItem> mainMenus = new List<MainMenuItem>();
         private Rect rcnormal;//定义一个全局rect记录还原状态下窗口的位置和大小。
         private string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+        public string last_name = "首页";//最后一次点击的主菜单名字，默认是首页
 
 
         public MainWindow(IDBOperation dbOperation)
@@ -400,8 +401,23 @@ namespace FoodSafetyMonitoring
 
         void img_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //if (Name == "首页" && Flag_Exits == 1)
+            //鼠标点在另外的主菜单上，打开的tab页全部关闭
+            if(mainWindow.last_name != Name)
+            {
+                List<TabItem> items = new List<TabItem> { };
+                foreach (TabItem item in mainWindow._tab.Items)
+                {
+                    items.Add(item);
+                }
+                foreach (TabItem item in items)
+                {
+                    mainWindow._tab.Items.Remove(item);
+                }
 
+                mainWindow.last_name = Name;
+            }
+            
+            //if (Name == "首页" && Flag_Exits == 1)
             if (Name == "首页")
             {
                 int flag = 0;
@@ -436,6 +452,7 @@ namespace FoodSafetyMonitoring
             }
             this.grid_Menu.Children.Add(childMenu);
             //}
+
             if (Name == "首页")
             {
                 grid_Menu.Background = Brushes.White;

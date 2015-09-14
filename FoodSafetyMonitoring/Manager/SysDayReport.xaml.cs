@@ -19,7 +19,7 @@ using FoodSafetyMonitoring.Manager.UserControls;
 using Toolkit = Microsoft.Windows.Controls;
 
 namespace FoodSafetyMonitoring.Manager
-{
+{ 
     /// <summary>
     /// UserControl1.xaml 的交互逻辑
     /// </summary>

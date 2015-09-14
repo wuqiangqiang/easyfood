@@ -18,6 +18,9 @@ using FoodSafetyMonitoring.Common;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using FoodSafetyMonitoring.dao;
+using System.Data.Odbc;
+using Microsoft.Office.Interop.Excel;
+using System.Windows.Forms;
  
 
 namespace FoodSafetyMonitoring.Manager
@@ -25,23 +28,24 @@ namespace FoodSafetyMonitoring.Manager
     /// <summary>
     /// Test.xaml 的交互逻辑
     /// </summary>
-    public partial class SysDeptManager : UserControl, IClickChildMenuInitUserControlUI
+    public partial class SysDeptManager : System.Windows.Controls.UserControl, IClickChildMenuInitUserControlUI
     {
         FamilyTreeViewModel departmentViewModel;
         private IDBOperation dbOperation;
 
         readonly Dictionary<string, string> cityLevelDictionary = new Dictionary<string, string>() { { "0", "国家" }, { "1", "省级" }, { "2", "市(州)" }, { "3", "区县" }, { "4", "检测单位" } };
         private Department department;
-        private DataTable ProvinceCityTable = null;
+        private System.Data.DataTable ProvinceCityTable = null;
         private string user_flag_tier;
-        private DataTable SupplierTable;
+        private System.Data.DataTable SupplierTable;
+        Importing_window load;
 
         public SysDeptManager(IDBOperation dbOperation)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
-            ProvinceCityTable = Application.Current.Resources["省市表"] as DataTable;
-            user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier.ToString();
+            ProvinceCityTable = System.Windows.Application.Current.Resources["省市表"] as System.Data.DataTable;
+            user_flag_tier = (System.Windows.Application.Current.Resources["User"] as UserInfo).FlagTier.ToString();
             SupplierTable = dbOperation.GetDbHelper().GetDataSet("select supplierId,supplierName from t_supplier").Tables[0];
             InitUserControlUI();
         }
@@ -58,7 +62,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             flag_init = 1;
 
-            DataTable table = dbOperation.GetDepartment();
+            System.Data.DataTable table = dbOperation.GetDepartment();
             if (table != null)
             {
                 department = new Department();
@@ -126,25 +130,25 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _detect_method1_Checked(object sender, RoutedEventArgs e)
         {
-            if ((sender as CheckBox).Name == "_direct_station")
+            if ((sender as System.Windows.Controls.CheckBox).Name == "_direct_station")
             {
                 _direct_station_2.IsChecked = false;
                 _cultivate_station.IsChecked = false;
                 _slaughter_station.IsChecked = false;
             }
-            else if ((sender as CheckBox).Name == "_direct_station_2")
+            else if ((sender as System.Windows.Controls.CheckBox).Name == "_direct_station_2")
             {
                 _direct_station.IsChecked = false;
                 _cultivate_station.IsChecked = false;
                 _slaughter_station.IsChecked = false;
             }
-            else if ((sender as CheckBox).Name == "_cultivate_station")
+            else if ((sender as System.Windows.Controls.CheckBox).Name == "_cultivate_station")
             {
                 _direct_station_2.IsChecked = false;
                 _direct_station.IsChecked = false;
                 _slaughter_station.IsChecked = false;
             }
-            else if ((sender as CheckBox).Name == "_slaughter_station")
+            else if ((sender as System.Windows.Controls.CheckBox).Name == "_slaughter_station")
             {
                 _direct_station_2.IsChecked = false;
                 _direct_station.IsChecked = false;
@@ -161,7 +165,7 @@ namespace FoodSafetyMonitoring.Manager
             //新增
             if (state == "add")
             {
-                DataTable dt = new DataTable();
+                System.Data.DataTable dt = new System.Data.DataTable();
                 DataRow row = department.Row.Table.NewRow();
                 row.ItemArray = (object[])department.Row.ItemArray.Clone();
                 row["FK_CODE_DEPT"] = row["INFO_CODE"];
@@ -271,7 +275,7 @@ namespace FoodSafetyMonitoring.Manager
                 row["CONTACTER"] = _principal_name.Text;
                 row["tel"] = _phone.Text;
                 row["phone"] = _contact_number.Text;
-                row["supplierId"] = (_Supplier.SelectedItem as Label).Tag.ToString();
+                row["supplierId"] = (_Supplier.SelectedItem as System.Windows.Controls.Label).Tag.ToString();
                 //row["title"] = _title.Text;
                 //row["INFO_NOTE"] = _note.Text;
 
@@ -332,7 +336,7 @@ namespace FoodSafetyMonitoring.Manager
                         //    }
                         //}
                         Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Common.SysLogEntry.WriteLog("部门管理", (Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "新增部门信息");
+                        Common.SysLogEntry.WriteLog("部门管理", (System.Windows.Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "新增部门信息");
                     }
                     else
                     {
@@ -390,7 +394,7 @@ namespace FoodSafetyMonitoring.Manager
                 }
 
                 string sql = String.Format("UPDATE sys_client_sysdept set INFO_NAME='{0}',ADDRESS='{1}',CONTACTER='{2}',TEL='{3}',PHONE='{4}',TYPE='{5}',supplierId = '{6}',isdept = '{7}'  where INFO_CODE='{8}';"
-                , _station.Text, _address.Text, _principal_name.Text, _phone.Text, _contact_number.Text, type, (_Supplier.SelectedItem as Label).Tag, is_dept, department.Row["INFO_CODE"]);
+                , _station.Text, _address.Text, _principal_name.Text, _phone.Text, _contact_number.Text, type, (_Supplier.SelectedItem as System.Windows.Controls.Label).Tag, is_dept, department.Row["INFO_CODE"]);
 
                 try
                 {
@@ -410,7 +414,7 @@ namespace FoodSafetyMonitoring.Manager
                         //}
 
                         Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Common.SysLogEntry.WriteLog("部门管理", (Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "修改部门信息");
+                        Common.SysLogEntry.WriteLog("部门管理", (System.Windows.Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "修改部门信息");
                     }
                     else
                     {
@@ -433,7 +437,7 @@ namespace FoodSafetyMonitoring.Manager
                 department.Row["contacter"] = _principal_name.Text;
                 department.Row["tel"] = _phone.Text;
                 department.Row["phone"] = _contact_number.Text;
-                department.Row["supplierId"] = (_Supplier.SelectedItem as Label).Tag.ToString();
+                department.Row["supplierId"] = (_Supplier.SelectedItem as System.Windows.Controls.Label).Tag.ToString();
                 department.Row["isdept"] = is_dept;
                 department.Row["type"] = type;
                 _edit.IsEnabled = true;
@@ -454,6 +458,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             _detail_info.IsEnabled = false;
             _add.IsEnabled = true;
+            _import.IsEnabled = true;
             _edit.IsEnabled = true; 
             //刷新部门详细信息
             Department department = _add.Tag as Department;
@@ -500,7 +505,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             List<string> list = new List<string>();
             //DataRow[] rows = ProvinceCityTable.Select("pid='" + code + "'");
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_area('{0}','{1}')", code, dept_flag)).Tables[0];
+            System.Data.DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_area('{0}','{1}')", code, dept_flag)).Tables[0];
             DataRow[] rows = table.Select(); 
             foreach (DataRow row in rows)
             {
@@ -520,6 +525,7 @@ namespace FoodSafetyMonitoring.Manager
                 text_treeView = sender as TextBlock;
                 Department department = (sender as TextBlock).Tag as Department;
                 _add.Tag = department;
+                _import.Tag = department;
                 _edit.Tag = department;
                 DataRow row = department.Row;
 
@@ -548,6 +554,8 @@ namespace FoodSafetyMonitoring.Manager
             _lower_area.Visibility = Visibility.Hidden;
             _edit.IsEnabled = true;
             _add.IsEnabled = true;
+            _import.IsEnabled = true;
+            
             if (row["FLAG_TIER"].ToString() == "4")
             {
                 _station_name.Text = "检测单位名称:";
@@ -572,6 +580,7 @@ namespace FoodSafetyMonitoring.Manager
             //}
 
             _add.Visibility = Visibility.Visible;
+            _import.Visibility = Visibility.Visible;
             _edit.Visibility = Visibility.Visible;
             //如果存在下级部门则不出现删除按钮，否则出现
             bool result3 = dbOperation.GetDbHelper().Exists(string.Format("select count(INFO_CODE) from sys_client_sysdept where FK_CODE_DEPT = '{0}'", row["INFO_CODE"].ToString()));
@@ -587,6 +596,7 @@ namespace FoodSafetyMonitoring.Manager
             if (_regional_level.Text == "检测单位")
             {
                 _add.Visibility = Visibility.Hidden;
+                _import.Visibility = Visibility.Hidden;
                 _station_property.Visibility = Visibility.Visible;
                 //显示是否直属
                 _is_dept.Visibility = Visibility.Visible;
@@ -623,6 +633,7 @@ namespace FoodSafetyMonitoring.Manager
             if (_lower_area.Items.Count == 0 && row["FLAG_TIER"].ToString() != "3")
             {
                 _add.Visibility = Visibility.Hidden;
+                _import.Visibility = Visibility.Hidden;
             }
 
             _phone.Text = row["tel"].ToString();
@@ -802,6 +813,259 @@ namespace FoodSafetyMonitoring.Manager
 
         }
 
+        private void _import_Click(object sender, RoutedEventArgs e)
+        {
+           System.Data.DataTable importdt = new System.Data.DataTable();
+           importdt = GetDataFromExcelByCom();
+           if (importdt != null)
+           {
+               if (importdt.Rows.Count != 0)
+               {
+                   //获取当前部门的信息
+                   Department department = _import.Tag as Department;
+                   DataRow row = department.Row.Table.NewRow();
+                   row.ItemArray = (object[])department.Row.ItemArray.Clone();
+                   row["FK_CODE_DEPT"] = row["INFO_CODE"];
+                   row["FLAG_TIER"] = (Convert.ToInt32(department.Row["FLAG_TIER"].ToString()) + 1);
+                   row["supplierId"] = row["supplierId"];
+                   //PROVINCE,CITY,COUNTRY
+
+                   for (int i = 0; i < importdt.Rows.Count; i++)
+                   {
+                       //
+                       int maxID = 0;
+
+                       if (department.Children.Count == 0)
+                       {
+                           maxID = Convert.ToInt32(row["INFO_CODE"].ToString() + "01");
+                           row["INFO_CODE"] = maxID;
+                       }
+                       else
+                       {
+                           for (int j = 0; j < department.Children.Count; j++)
+                           {
+                               int v = Convert.ToInt32(department.Children[j].Row["INFO_CODE"].ToString());
+                               if (maxID < v)
+                               {
+                                   maxID = v;
+                               }
+                           }
+                           row["INFO_CODE"] = maxID + 1;
+                       }
+
+                       row["INFO_NAME"] =importdt.Rows[i][0].ToString();
+                       row["address"] = importdt.Rows[i][9].ToString();
+                       row["CONTACTER"] = importdt.Rows[i][6].ToString();
+                       row["tel"] = importdt.Rows[i][8].ToString();
+                       row["phone"] = importdt.Rows[i][7].ToString();
+
+                       string city_flag = importdt.Rows[i][5].ToString();
+                       if (city_flag == "是")
+                       {
+                           row["isdept"] = "1";
+                       }
+                       else
+                       {
+                           row["isdept"] = "0";
+                       }
+
+                       string type = importdt.Rows[i][4].ToString();
+                       if (type == "屠宰场")
+                       {
+                           row["type"] = "0";
+                           type = "2";
+                       }
+                       else if (type == "养殖场")
+                       {
+                           row["type"] = "1";
+                           type = "1";
+                       }
+                       else if (type == "检疫站")
+                       {
+                           row["type"] = "2";
+                           type = "0";
+                       }
+                       else if (type == "加工企业")
+                       {
+                           row["type"] = "3";
+                           type = "3";
+                       }
+
+                       //根据当前部门的级别来赋省，市，区的值
+                       string provice = importdt.Rows[i][1].ToString();
+                       string city = importdt.Rows[i][2].ToString();
+                       string country = importdt.Rows[i][3].ToString();
+                       
+                       switch (row["FLAG_TIER"].ToString())
+                       {
+                           case "0": row["Province"] = "";
+                               row["City"] = "";
+                               row["Country"] = "";
+                               break;
+                           case "1":  
+                               row["Province"] = ProvinceCityTable.Select("name='" + provice + "'")[0]["id"].ToString();
+                               row["City"] = "";
+                               row["Country"] = "";
+                               break;
+                           case "2": 
+                               row["Province"] = ProvinceCityTable.Select("name='" + provice + "'")[0]["id"].ToString();
+                               row["City"] = ProvinceCityTable.Select("name='" + city + "' and pid = '" + row["Province"] + "'")[0]["id"].ToString();
+                               row["Country"] = "";
+                               break;
+                           case "3": 
+                               row["Province"] = ProvinceCityTable.Select("name='" + provice + "'")[0]["id"].ToString();
+                               row["City"] = ProvinceCityTable.Select("name='" + city + "' and pid = '" + row["Province"] + "'")[0]["id"].ToString();
+                               row["Country"] = ProvinceCityTable.Select("name='" + country + "' and pid = '" + row["City"] + "'")[0]["id"].ToString();
+                               break;
+                           case "4":
+                               row["Province"] = ProvinceCityTable.Select("name='" + provice + "'")[0]["id"].ToString();
+                               row["City"] = ProvinceCityTable.Select("name='" + city + "' and pid = '" + row["Province"] + "'")[0]["id"].ToString();
+                               row["Country"] = ProvinceCityTable.Select("name='" + country + "' and pid = '" + row["City"] + "'")[0]["id"].ToString();
+                               break;
+                           default: break;
+                       }
+
+                       Department newDepartment = new Department();
+                       newDepartment.Parent = department;
+                       newDepartment.Name = _station.Text;
+                       newDepartment.Row = row;
+
+                       string sql = String.Format("insert into sys_client_sysdept (INFO_CODE,INFO_NAME,FLAG_TIER,FK_CODE_DEPT,PROVINCE,CITY,COUNTRY,ADDRESS,CONTACTER,TEL,PHONE,TYPE,supplierId,isdept) values " +
+                           "('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}');"
+                     , row["INFO_CODE"], row["INFO_NAME"], row["FLAG_TIER"], row["FK_CODE_DEPT"]
+                     , row["PROVINCE"], row["CITY"], row["COUNTRY"], row["ADDRESS"], row["CONTACTER"], row["TEL"], row["PHONE"], row["TYPE"], row["supplierId"], row["isdept"]);
+
+                       try
+                       {
+                           int count = dbOperation.GetDbHelper().ExecuteSql(sql);
+                           if (count == 1)
+                           {
+                               Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               Common.SysLogEntry.WriteLog("部门管理", (System.Windows.Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "新增部门信息");
+                           }
+                           else
+                           {
+                               Toolkit.MessageBox.Show("保存失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                       }
+                       catch (Exception ee)
+                       {
+                           System.Diagnostics.Debug.WriteLine("SysDeptManager.btnSave_Click" + ee.Message);
+                           Toolkit.MessageBox.Show("数据更新失败!稍后尝试!");
+                           return;
+                       }
+                       state = "view";
+
+                       department.Children.Add(newDepartment);
+                       departmentViewModel = new FamilyTreeViewModel(this.department);
+
+                       departmentViewModel.SearchText = _station.Text;
+                       departmentViewModel.SearchCommand.Execute(null);
+                   } 
+               }
+           }
+        }
+
+        //读取Excel中的内容
+        System.Data.DataTable GetDataFromExcelByCom(bool hasTitle = true)
+        {
+            //打开对话框
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Excel(*.xls)|*.xls|Excel(*.xlsx)|*.xlsx";
+            openFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFile.Multiselect = false;
+            if (openFile.ShowDialog() == DialogResult.Cancel)
+            {
+                return null;
+            }
+            var excelFilePath = openFile.FileName;
+
+            try
+            {
+                load = new Importing_window();
+                load.Show();
+                //this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+                Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+                Sheets sheets;
+                object oMissiong = System.Reflection.Missing.Value;
+                Workbook workbook = null;//创建工作簿
+                System.Data.DataTable dt = new System.Data.DataTable();
+
+                try
+                {
+                    if (app == null)
+                    {
+                        return null;
+                    }
+                    workbook = app.Workbooks.Open(excelFilePath, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong,
+                        oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong, oMissiong);
+
+                    sheets = workbook.Worksheets;
+
+                    //将数据读入到DataTable中
+                    Worksheet worksheet = (Worksheet)sheets.get_Item(1);//读取第一张表  
+                    if (worksheet == null)
+                    {
+                        return null;
+                    }
+
+                    int iRowCount = worksheet.UsedRange.Rows.Count;
+                    int iColCount = worksheet.UsedRange.Columns.Count;
+                    //生成列头
+                    for (int i = 0; i < iColCount; i++)
+                    {
+                        var name = "column" + i;
+                        if (hasTitle)
+                        {
+                            var txt = ((Range)worksheet.Cells[1, i + 1]).Text.ToString();
+                            if (!string.IsNullOrEmpty(txt))
+                            {
+                                name = txt;
+                            }
+                        }
+                        while (dt.Columns.Contains(name))
+                        {
+                            name = name + "_1";//重复行名称会报错。
+                        }
+                        dt.Columns.Add(new DataColumn(name, typeof(string)));
+                    }
+                    //生成行数据
+                    Range range;
+                    int rowIdx = hasTitle ? 2 : 1;
+                    for (int iRow = rowIdx; iRow <= iRowCount; iRow++)
+                    {
+                        DataRow dr = dt.NewRow();
+                        for (int iCol = 1; iCol <= iColCount; iCol++)
+                        {
+                            range = (Range)worksheet.Cells[iRow, iCol];
+                            dr[iCol - 1] = (range.Value2 == null) ? "" : range.Text.ToString();
+                        }
+                        dt.Rows.Add(dr);
+                    }
+                    return dt;
+                }
+                catch { return null; }
+                finally
+                {
+                    workbook.Close(false, oMissiong, oMissiong);
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                    workbook = null;
+                    app.Workbooks.Close();
+                    app.Quit();
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+            }
+            catch
+            {
+                Toolkit.MessageBox.Show("无法导入，可能您的机子Office版本有问题！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return null;
+            }
+        }
+
         private void _delete_Click(object sender, RoutedEventArgs e)
         {
             Department department = _add.Tag as Department;
@@ -844,7 +1108,7 @@ namespace FoodSafetyMonitoring.Manager
                         //    }
                         //}
                         Toolkit.MessageBox.Show("删除成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Common.SysLogEntry.WriteLog("部门管理", (Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "删除部门信息");
+                        Common.SysLogEntry.WriteLog("部门管理", (System.Windows.Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "删除部门信息");
                     }
                     else
                     {
@@ -901,7 +1165,7 @@ namespace FoodSafetyMonitoring.Manager
             else { e.CancelCommand(); }
         }
 
-        private void Phone_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Phone_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
@@ -928,7 +1192,7 @@ namespace FoodSafetyMonitoring.Manager
             else { e.CancelCommand(); }
         }
 
-        private void Contact_Number_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Contact_Number_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
@@ -958,6 +1222,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             return true;
         }
+
     }
 
 
@@ -1101,7 +1366,7 @@ namespace FoodSafetyMonitoring.Manager
 
             if (!_matchingPeopleEnumerator.MoveNext())
             {
-                MessageBox.Show(
+                System.Windows.MessageBox.Show(
                     "No matching names were found.",
                     "Try Again",
                     MessageBoxButton.OK,
