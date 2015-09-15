@@ -156,11 +156,11 @@
     <!--</SnippetLightBrush>-->
 
     <!--<SnippetDisabledForegroundBrush>-->
-    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#666" />
     <!--</SnippetDisabledForegroundBrush>-->
 
     <!--<SnippetDisabledBackgroundBrush>-->
-    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#f2f2f2" />
     <!--</SnippetDisabledBackgroundBrush>-->
 
     <!--<SnippetWindowBackgroundBrush>-->

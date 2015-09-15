@@ -341,6 +341,33 @@ namespace FoodSafetyMonitoring.Manager
             _object_lable.Text = "";
         }
 
+        private void Card_Id_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumberic(text))
+                { e.CancelCommand(); }
+            }
+            else { e.CancelCommand(); }
+        }
+
+        private void Card_Id_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void Card_Id_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!isNumberic(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
+        }
+
         private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof(String)))
@@ -381,8 +408,6 @@ namespace FoodSafetyMonitoring.Manager
                     return false;
             }
             return true;
-        }
-
-                
+        }        
     }
 }

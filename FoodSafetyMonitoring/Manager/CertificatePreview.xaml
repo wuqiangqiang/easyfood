@@ -27,23 +27,23 @@
             </Canvas.Background>
             <Thumb Width="800" Height="60" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
             <Image Canvas.Left="803" Canvas.Top="12" Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Canvas.Left="623" Canvas.Top="72" x:Name="_card_id" Width="120" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="150" Canvas.Top="109" x:Name="_company" Width="323" Margin="0" IsEnabled="False" ></TextBlock>
-            <TextBlock Canvas.Left="569" Canvas.Top="110" x:Name="_phone" Width="219" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="149" Canvas.Top="140" x:Name="_detect_object" Width="124" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="365" Canvas.Top="138" x:Name="_object_count" Width="174" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="603" Canvas.Top="139" x:Name="_for_use" Width="184" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="152" Canvas.Top="165" x:Name="_city_ks" Width="74" Margin="0" TextAlignment="Right"></TextBlock>
-            <TextBlock Canvas.Left="285" Canvas.Top="162" x:Name="_region_ks" Width="190" Height="20" Margin="0" TextAlignment="Right" ></TextBlock>
-            <TextBlock Canvas.Left="560" Canvas.Top="162" x:Name="_town_ks" Width="154" Height="20" Margin="0" TextAlignment="Right"></TextBlock>
-            <TextBlock Canvas.Left="325" Canvas.Top="182" x:Name="_village_ks" Width="294" Height="20" Margin="0" TextAlignment="Right"></TextBlock>
-            <TextBlock Canvas.Left="153" Canvas.Top="205" x:Name="_city_js" Width="74" Margin="0" TextAlignment="Right"></TextBlock>
-            <TextBlock Canvas.Left="289" Canvas.Top="205" x:Name="_region_js" Width="190" Height="20" Margin="0" TextAlignment="Right"></TextBlock>
-            <TextBlock Canvas.Left="565" Canvas.Top="205" x:Name="_town_js" Width="154" Height="20" Margin="0" TextAlignment="Right"></TextBlock>
-            <TextBlock Canvas.Left="325" Canvas.Top="226" x:Name="_village_js" Width="294" Height="20" Margin="0" TextAlignment="Right"></TextBlock>
-            <TextBlock Canvas.Left="154" Canvas.Top="254" x:Name="_object_lable" Width="634" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="80" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0"></TextBlock>
+            <TextBlock Canvas.Left="623" Canvas.Top="68" x:Name="_card_id" Width="120" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="150" Canvas.Top="107" x:Name="_company" Width="323" Margin="0" IsEnabled="False" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="569" Canvas.Top="107" x:Name="_phone" Width="219" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="149" Canvas.Top="136" x:Name="_detect_object" Width="124" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="365" Canvas.Top="136" x:Name="_object_count" Width="174" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="603" Canvas.Top="136" x:Name="_for_use" Width="184" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="152" Canvas.Top="165" x:Name="_city_ks" Width="74" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="285" Canvas.Top="162" x:Name="_region_ks" Width="190" Height="20" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="560" Canvas.Top="162" x:Name="_town_ks" Width="154" Height="20" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="325" Canvas.Top="184" x:Name="_village_ks" Width="294" Height="20" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="153" Canvas.Top="210" x:Name="_city_js" Width="74" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="289" Canvas.Top="210" x:Name="_region_js" Width="190" Height="20" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="565" Canvas.Top="210" x:Name="_town_js" Width="154" Height="20" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="325" Canvas.Top="230" x:Name="_village_js" Width="294" Height="20" Margin="0" TextAlignment="Right" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="154" Canvas.Top="258" x:Name="_object_lable" Width="634" Margin="0"  FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="614" Canvas.Top="288" x:Name="_user_name" Width="80" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="700" Canvas.Top="288" x:Name="_user_id" Width="80" Margin="0" FontSize="15"></TextBlock>
             <TextBlock  Canvas.Left="560" Canvas.Top="318" Width="50" x:Name="_nian" HorizontalAlignment="Center"></TextBlock>
             <TextBlock  Canvas.Left="626" Canvas.Top="318" Width="35" x:Name="_yue" HorizontalAlignment="Center"></TextBlock>
             <TextBlock  Canvas.Left="673" Canvas.Top="318" Width="38" x:Name="_day" HorizontalAlignment="Center"></TextBlock>

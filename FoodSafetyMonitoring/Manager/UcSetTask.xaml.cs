@@ -293,6 +293,18 @@ namespace FoodSafetyMonitoring.Manager
                    Load_table();
                    return;
                }
+               else
+               {
+                   load.Close();
+                   Toolkit.MessageBox.Show("导入excel内容为空，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                   return;
+               }
+           }
+           else
+           {
+               load.Close();
+               Toolkit.MessageBox.Show("导入excel内容有错，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+               return;
            }
         }
 

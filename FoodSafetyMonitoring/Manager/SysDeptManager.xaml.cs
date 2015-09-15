@@ -357,6 +357,9 @@ namespace FoodSafetyMonitoring.Manager
 
                 departmentViewModel.SearchText = _station.Text;
                 departmentViewModel.SearchCommand.Execute(null);
+                _add.Tag = newDepartment;
+                _import.Tag = newDepartment;
+                _edit.Tag = newDepartment;
 
 
 
@@ -745,6 +748,7 @@ namespace FoodSafetyMonitoring.Manager
 
             _add.IsEnabled = false;
             _add.Visibility = Visibility.Hidden;
+            _import.Visibility = Visibility.Hidden;
             _edit.Visibility = Visibility.Hidden;
             _detail_info.IsEnabled = true;
             _station_property.IsEnabled = true;
@@ -823,15 +827,14 @@ namespace FoodSafetyMonitoring.Manager
                {
                    //获取当前部门的信息
                    Department department = _import.Tag as Department;
-                   DataRow row = department.Row.Table.NewRow();
-                   row.ItemArray = (object[])department.Row.ItemArray.Clone();
-                   row["FK_CODE_DEPT"] = row["INFO_CODE"];
-                   row["FLAG_TIER"] = (Convert.ToInt32(department.Row["FLAG_TIER"].ToString()) + 1);
-                   row["supplierId"] = row["supplierId"];
-                   //PROVINCE,CITY,COUNTRY
-
+                   
                    for (int i = 0; i < importdt.Rows.Count; i++)
                    {
+                       DataRow row = department.Row.Table.NewRow();
+                       row.ItemArray = (object[])department.Row.ItemArray.Clone();
+                       row["FK_CODE_DEPT"] = row["INFO_CODE"];
+                       row["FLAG_TIER"] = (Convert.ToInt32(department.Row["FLAG_TIER"].ToString()) + 1);
+
                        //
                        int maxID = 0;
 
@@ -854,47 +857,102 @@ namespace FoodSafetyMonitoring.Manager
                        }
 
                        row["INFO_NAME"] =importdt.Rows[i][0].ToString();
+                       if (row["INFO_NAME"].ToString() == "")
+                       {
+                           load.Close();
+                           Toolkit.MessageBox.Show("检测单位名称不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                           return;
+                       }
                        row["address"] = importdt.Rows[i][9].ToString();
                        row["CONTACTER"] = importdt.Rows[i][6].ToString();
                        row["tel"] = importdt.Rows[i][8].ToString();
                        row["phone"] = importdt.Rows[i][7].ToString();
 
                        string city_flag = importdt.Rows[i][5].ToString();
-                       if (city_flag == "是")
+                       if (row["FLAG_TIER"].ToString() == "4")
                        {
-                           row["isdept"] = "1";
-                       }
-                       else
-                       {
-                           row["isdept"] = "0";
+                           if (city_flag == "")
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("是否直属不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                           else
+                           {
+                               if (city_flag == "是")
+                               {
+                                   row["isdept"] = "1";
+                               }
+                               else
+                               {
+                                   row["isdept"] = "0";
+                               }
+                           }
                        }
 
                        string type = importdt.Rows[i][4].ToString();
-                       if (type == "屠宰场")
+                       if (row["FLAG_TIER"].ToString() == "4")
                        {
-                           row["type"] = "0";
-                           type = "2";
+                           if (city_flag == "")
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("检测站点性质不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                           else
+                           {
+                               if (type == "屠宰场")
+                               {
+                                   row["type"] = "0";
+                               }
+                               else if (type == "养殖场")
+                               {
+                                   row["type"] = "1";
+                               }
+                               else if (type == "检疫站")
+                               {
+                                   row["type"] = "2";
+                               }
+                               else if (type == "加工企业")
+                               {
+                                   row["type"] = "3";
+                               }
+                           }
                        }
-                       else if (type == "养殖场")
-                       {
-                           row["type"] = "1";
-                           type = "1";
-                       }
-                       else if (type == "检疫站")
-                       {
-                           row["type"] = "2";
-                           type = "0";
-                       }
-                       else if (type == "加工企业")
-                       {
-                           row["type"] = "3";
-                           type = "3";
-                       }
+                      
 
                        //根据当前部门的级别来赋省，市，区的值
                        string provice = importdt.Rows[i][1].ToString();
                        string city = importdt.Rows[i][2].ToString();
                        string country = importdt.Rows[i][3].ToString();
+
+                       if (row["FLAG_TIER"].ToString() == "4" || row["FLAG_TIER"].ToString() == "3")
+                       { 
+                           if(provice == "" || city == "" || country == "")
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("省市区不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                       }
+                       else if (row["FLAG_TIER"].ToString() == "2")
+                       {
+                           if (provice == "" || city == "" )
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("省市不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                       }
+                       else if (row["FLAG_TIER"].ToString() == "1")
+                       {
+                           if (provice == "" )
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("省不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                       }
                        
                        switch (row["FLAG_TIER"].ToString())
                        {
@@ -927,7 +985,7 @@ namespace FoodSafetyMonitoring.Manager
 
                        Department newDepartment = new Department();
                        newDepartment.Parent = department;
-                       newDepartment.Name = _station.Text;
+                       newDepartment.Name = row["INFO_NAME"].ToString();
                        newDepartment.Row = row;
 
                        string sql = String.Format("insert into sys_client_sysdept (INFO_CODE,INFO_NAME,FLAG_TIER,FK_CODE_DEPT,PROVINCE,CITY,COUNTRY,ADDRESS,CONTACTER,TEL,PHONE,TYPE,supplierId,isdept) values " +
@@ -940,17 +998,19 @@ namespace FoodSafetyMonitoring.Manager
                            int count = dbOperation.GetDbHelper().ExecuteSql(sql);
                            if (count == 1)
                            {
-                               Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               //Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                Common.SysLogEntry.WriteLog("部门管理", (System.Windows.Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "新增部门信息");
                            }
                            else
                            {
+                               load.Close();
                                Toolkit.MessageBox.Show("保存失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                return;
                            }
                        }
                        catch (Exception ee)
                        {
+                           load.Close();
                            System.Diagnostics.Debug.WriteLine("SysDeptManager.btnSave_Click" + ee.Message);
                            Toolkit.MessageBox.Show("数据更新失败!稍后尝试!");
                            return;
@@ -958,12 +1018,36 @@ namespace FoodSafetyMonitoring.Manager
                        state = "view";
 
                        department.Children.Add(newDepartment);
-                       departmentViewModel = new FamilyTreeViewModel(this.department);
 
-                       departmentViewModel.SearchText = _station.Text;
-                       departmentViewModel.SearchCommand.Execute(null);
-                   } 
+                       if (i == importdt.Rows.Count - 1)
+                       {
+                           load.Close();
+                           Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                           departmentViewModel = new FamilyTreeViewModel(this.department);
+                           load_DeptDetails(row);
+                           departmentViewModel.SearchText = row["INFO_NAME"].ToString();
+                           departmentViewModel.SearchCommand.Execute(null);
+                           _treeView.DataContext = null;
+                           _treeView.DataContext = departmentViewModel;
+                           _add.Tag = newDepartment;
+                           _import.Tag = newDepartment;
+                           _edit.Tag = newDepartment;
+                       }
+                   }
                }
+               else
+               {
+                   load.Close();
+                   Toolkit.MessageBox.Show("导入excel内容为空，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                   return;
+               }
+           }
+           else
+           {
+               load.Close();
+               Toolkit.MessageBox.Show("导入excel内容有错，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+               return;
            }
         }
 
@@ -1135,11 +1219,14 @@ namespace FoodSafetyMonitoring.Manager
             string searchTxt = "";
             if (department.Parent.Children.Count == 0)
             {
-                searchTxt = department.Name;
+                searchTxt = department.Parent.Name;
                 
                 //详细信息刷新
-                DataRow row = department.Row;
+                DataRow row = department.Parent.Row;
                 load_DeptDetails(row);
+                _add.Tag = department.Parent;
+                _import.Tag = department.Parent;
+                _edit.Tag = department.Parent;
             }
             else
             {
@@ -1148,9 +1235,12 @@ namespace FoodSafetyMonitoring.Manager
                 //详细信息刷新
                 DataRow row = department.Parent.Children[0].Row;
                 load_DeptDetails(row);
+                _add.Tag = department.Parent.Children[0];
+                _import.Tag = department.Parent.Children[0];
+                _edit.Tag = department.Parent.Children[0];
             }
             departmentViewModel.SearchText = searchTxt;
-            departmentViewModel.SearchCommand.Execute(null);
+            departmentViewModel.SearchCommand.Execute(null);   
         }
 
 

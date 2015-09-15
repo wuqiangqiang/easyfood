@@ -27,17 +27,17 @@
             </Canvas.Background>
             <Thumb Width="800" Height="60" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
             <Image Canvas.Left="803" Canvas.Top="12" Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBlock Canvas.Left="620" Canvas.Top="71" x:Name="_card_id" Width="120" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="184" Canvas.Top="105" x:Name="_company" Width="248" Margin="0"  IsEnabled="False"></TextBlock>
-            <TextBlock Canvas.Left="539" Canvas.Top="105" x:Name="_product_name" Width="248" Margin="0"  IsEnabled="False"></TextBlock>
-            <TextBlock Canvas.Left="184" Canvas.Top="134" x:Name="_object_count" Width="248" Margin="0"  IsEnabled="False"></TextBlock>
-            <TextBlock Canvas.Left="539" Canvas.Top="134" x:Name="_product_area" Width="248" Margin="0"  IsEnabled="False"></TextBlock>
-            <TextBlock Canvas.Left="184" Canvas.Top="166" x:Name="_dept_name" Width="603"  IsEnabled="False" Margin="0"></TextBlock>
-            <TextBlock Canvas.Left="184" Canvas.Top="195" x:Name="_mdd" Width="603" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="183" Canvas.Top="224" x:Name="_cz_cardid" Width="603"  IsEnabled="False" Margin="0"></TextBlock>
-            <TextBlock Canvas.Left="184" Canvas.Top="253" x:Name="_bz" Width="603" Margin="0" ></TextBlock>
-            <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="80" Margin="0"></TextBlock>
-            <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0"></TextBlock>
+            <TextBlock Canvas.Left="620" Canvas.Top="68" x:Name="_card_id" Width="120" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="184" Canvas.Top="105" x:Name="_company" Width="248" Margin="0"  IsEnabled="False" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="539" Canvas.Top="105" x:Name="_product_name" Width="248" Margin="0"  IsEnabled="False" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="184" Canvas.Top="135" x:Name="_object_count" Width="248" Margin="0"  IsEnabled="False" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="539" Canvas.Top="135" x:Name="_product_area" Width="248" Margin="0"  IsEnabled="False" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="184" Canvas.Top="164" x:Name="_dept_name" Width="603"  IsEnabled="False" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="184" Canvas.Top="193" x:Name="_mdd" Width="603" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="183" Canvas.Top="222" x:Name="_cz_cardid" Width="603"  IsEnabled="False" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="184" Canvas.Top="252" x:Name="_bz" Width="603" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="614" Canvas.Top="288" x:Name="_user_name" Width="80" Margin="0" FontSize="15"></TextBlock>
+            <TextBlock Canvas.Left="700" Canvas.Top="288" x:Name="_user_id" Width="80" Margin="0" FontSize="15"></TextBlock>
             <TextBlock  Canvas.Left="560" Canvas.Top="318" Width="50" x:Name="_nian" HorizontalAlignment="Center"></TextBlock>
             <TextBlock  Canvas.Left="626" Canvas.Top="318" Width="35" x:Name="_yue" HorizontalAlignment="Center"></TextBlock>
             <TextBlock  Canvas.Left="673" Canvas.Top="318" Width="38" x:Name="_day" HorizontalAlignment="Center"></TextBlock>

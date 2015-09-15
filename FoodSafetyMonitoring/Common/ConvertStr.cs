@@ -140,12 +140,13 @@ namespace FoodSafetyMonitoring.Common
             return strUpper;
         }
 
-        //转换头数
+        //转换头数（整数）
         public static string convert_object(string str_object)
         {
             int i = 1;
             string strUpper = "";
             string strUpart = "";
+
             while (i <= str_object.Length)
             {
                 if (i == 1)
@@ -296,7 +297,129 @@ namespace FoodSafetyMonitoring.Common
             strUpper = strUpper.Replace("万零零", "万零");
 
             if (str_object.Length == 2)
-            { 
+            {
+                strUpper = strUpper.Replace("壹拾", "拾");
+            }
+            return strUpper;
+        }
+
+        //转换头数（小数）
+        public static string convert_object_dot(string str_object)
+        {
+            int i = 1;
+            string strUpper = "";
+            string strUpart = "";
+            
+            while (i <= str_object.Length)
+            {
+                if (i == 1)
+                {
+                    switch (str_object.Substring(str_object.Length - i, 1))
+                    {
+                        case "5": strUpart = "半";
+                            break;
+                        default: break;
+                    }
+                }
+                else if (i == 2)
+                {
+                    switch (str_object.Substring(str_object.Length - i, 1))
+                    {
+                        case ".": strUpart = "点";
+                            break;
+                        default: break;
+                    }
+                }
+                else if (i == 3)
+                {
+                    switch (str_object.Substring(str_object.Length - i, 1))
+                    {
+                        case "0": strUpart = "零";
+                            break;
+                        case "1": strUpart = "壹";
+                            break;
+                        case "2": strUpart = "贰";
+                            break;
+                        case "3": strUpart = "叁";
+                            break;
+                        case "4": strUpart = "肆";
+                            break;
+                        case "5": strUpart = "伍";
+                            break;
+                        case "6": strUpart = "陆";
+                            break;
+                        case "7": strUpart = "柒";
+                            break;
+                        case "8": strUpart = "捌";
+                            break;
+                        case "9": strUpart = "玖";
+                            break;
+                        default: break;
+                    }
+                }
+                else if (i == 4)
+                {
+                    switch (str_object.Substring(str_object.Length - i, 1))
+                    {
+                        case "0": strUpart = "零";
+                            break;
+                        case "1": strUpart = "壹拾";
+                            break;
+                        case "2": strUpart = "贰拾";
+                            break;
+                        case "3": strUpart = "叁拾";
+                            break;
+                        case "4": strUpart = "肆拾";
+                            break;
+                        case "5": strUpart = "伍拾";
+                            break;
+                        case "6": strUpart = "陆拾";
+                            break;
+                        case "7": strUpart = "柒拾";
+                            break;
+                        case "8": strUpart = "捌拾";
+                            break;
+                        case "9": strUpart = "玖拾";
+                            break;
+                        default: break;
+                    }
+                }
+                else if (i == 5)
+                {
+                    switch (str_object.Substring(str_object.Length - i, 1))
+                    {
+                        case "0": strUpart = "零";
+                            break;
+                        case "1": strUpart = "壹佰";
+                            break;
+                        case "2": strUpart = "贰佰";
+                            break;
+                        case "3": strUpart = "叁佰";
+                            break;
+                        case "4": strUpart = "肆佰";
+                            break;
+                        case "5": strUpart = "伍佰";
+                            break;
+                        case "6": strUpart = "陆佰";
+                            break;
+                        case "7": strUpart = "柒佰";
+                            break;
+                        case "8": strUpart = "捌佰";
+                            break;
+                        case "9": strUpart = "玖佰";
+                            break;
+                        default: break;
+                    }
+                }
+                i = i + 1;
+                strUpper = strUpart + strUpper;
+            }
+
+            strUpper = strUpper.Replace("拾零", "拾");
+            strUpper = strUpper.Replace("佰零零", "佰");
+
+            if (str_object.Length == 4)
+            {
                 strUpper = strUpper.Replace("壹拾", "拾");
             }
 

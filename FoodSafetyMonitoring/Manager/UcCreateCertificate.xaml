@@ -47,28 +47,28 @@
                         <Canvas.Background>
                             <ImageBrush ImageSource="/res/certificate.png"></ImageBrush>
                         </Canvas.Background>
-                        <TextBlock Canvas.Left="68" Canvas.Top="45" Width="60" >协检员 :</TextBlock>
-                        <ComboBox Canvas.Left="150" Canvas.Top="40" x:Name="_help_user" Width="100" Margin="0" ></ComboBox>
-                        <TextBlock Canvas.Left="68" Canvas.Top="80" Width="60" >货主代码 :</TextBlock>
-                        <TextBox Canvas.Left="145" Canvas.Top="74" x:Name="_shipper_id" Width="100" MaxLength="4" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput" KeyDown="TextBox_KeyDown" LostFocus="_shipper_id_LostFocus"></TextBox>
-                        <TextBox Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0" MaxLength="10" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
-                        <TextBox Canvas.Left="150" Canvas.Top="104" x:Name="_shipper" Width="323" Margin="0" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="569" Canvas.Top="103" x:Name="_phone" Width="219" Margin="0" IsEnabled="False"></TextBox>
-                        <ComboBox Canvas.Left="149" Canvas.Top="134" x:Name="_object_id" Width="124" Margin="0"></ComboBox>
-                        <TextBox Canvas.Left="365" Canvas.Top="133" x:Name="_object_count" Width="100" Margin="0" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
-                        <TextBox Canvas.Left="466" Canvas.Top="133" x:Name="_object_type" Width="74" Margin="0" MaxLength="5" IsEnabled="False"></TextBox>
-                        <ComboBox Canvas.Left="603" Canvas.Top="133" x:Name="_for_use" Width="184" Margin="0"></ComboBox>
-                        <TextBox Canvas.Left="144" Canvas.Top="165" x:Name="_city_ks" Width="74" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="285" Canvas.Top="162" x:Name="_region_ks" Width="190" Height="20" Margin="0" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="560" Canvas.Top="162" x:Name="_town_ks" Width="154" Height="20" Margin="0" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="325" Canvas.Top="182" x:Name="_village_ks" Width="294" Height="20" Margin="0" MaxLength="20"></TextBox>
-                        <TextBox Canvas.Left="144" Canvas.Top="205" x:Name="_city_js" Width="74" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="280" Canvas.Top="205" x:Name="_region_js" Width="190" Height="20" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="555" Canvas.Top="205" x:Name="_town_js" Width="154" Height="20" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="325" Canvas.Top="226" x:Name="_village_js" Width="294" Height="20" Margin="0" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="144" Canvas.Top="250" x:Name="_object_lable" Width="634" MaxLength="50"></TextBox>
-                        <TextBlock Canvas.Left="634" Canvas.Top="290" x:Name="_user_name" Width="60" Margin="0" ></TextBlock>
-                        <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0"></TextBlock>
+                        <TextBlock Canvas.Left="68" Canvas.Top="41" Width="60" FontSize="15">协检员 :</TextBlock>
+                        <ComboBox Canvas.Left="150" Canvas.Top="40" x:Name="_help_user" Width="100" Margin="0" FontSize="15"></ComboBox>
+                        <TextBlock Canvas.Left="53" Canvas.Top="74" Width="75" FontSize="15">货主代码 :</TextBlock>
+                        <TextBox Canvas.Left="145" Canvas.Top="72" x:Name="_shipper_id" Width="100" MaxLength="4" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Card_Id_Pasting" PreviewKeyDown="Card_Id_PreviewKeyDown"  PreviewTextInput="Card_Id_PreviewTextInput" KeyDown="TextBox_KeyDown" LostFocus="_shipper_id_LostFocus" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0" MaxLength="10" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Card_Id_Pasting" PreviewKeyDown="Card_Id_PreviewKeyDown"  PreviewTextInput="Card_Id_PreviewTextInput" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="150" Canvas.Top="104" x:Name="_shipper" Width="323" Margin="0" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="569" Canvas.Top="103" x:Name="_phone" Width="219" Margin="0" IsEnabled="False" FontSize="15"></TextBox>
+                        <ComboBox Canvas.Left="149" Canvas.Top="133" x:Name="_object_id" Width="124" Margin="0" FontSize="15"></ComboBox>
+                        <TextBox Canvas.Left="365" Canvas.Top="133" x:Name="_object_count" Width="100" Margin="0" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="466" Canvas.Top="133" x:Name="_object_type" Width="74" Margin="0" MaxLength="5" IsEnabled="False" FontSize="15"></TextBox>
+                        <ComboBox Canvas.Left="603" Canvas.Top="133" x:Name="_for_use" Width="184" Margin="0" FontSize="15"></ComboBox>
+                        <TextBox Canvas.Left="144" Canvas.Top="163" x:Name="_city_ks" Width="74" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="285" Canvas.Top="161" x:Name="_region_ks" Width="190" Height="22" Margin="0" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="560" Canvas.Top="161" x:Name="_town_ks" Width="154" Height="22" Margin="0" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="325" Canvas.Top="184" x:Name="_village_ks" Width="294" Height="22" Margin="0" MaxLength="20" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="144" Canvas.Top="210" x:Name="_city_js" Width="74" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="280" Canvas.Top="207" x:Name="_region_js" Width="190" Height="22" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="555" Canvas.Top="207" x:Name="_town_js" Width="154" Height="22" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="325" Canvas.Top="230" x:Name="_village_js" Width="294" Height="22" Margin="0" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox Canvas.Left="144" Canvas.Top="255" x:Name="_object_lable" Width="634" MaxLength="50" FontSize="15"></TextBox>
+                        <TextBlock Canvas.Left="634" Canvas.Top="290" x:Name="_user_name" Width="60" Margin="0" FontSize="15"></TextBlock>
+                        <TextBlock Canvas.Left="700" Canvas.Top="290" x:Name="_user_id" Width="80" Margin="0" FontSize="15"></TextBlock>
                         <TextBlock  Canvas.Left="560" Canvas.Top="318" Width="50" x:Name="_nian" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock  Canvas.Left="626" Canvas.Top="318" Width="35" x:Name="_yue" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock  Canvas.Left="673" Canvas.Top="318" Width="38" x:Name="_day" HorizontalAlignment="Center"></TextBlock>

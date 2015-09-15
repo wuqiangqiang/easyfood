@@ -29,7 +29,31 @@ namespace FoodSafetyMonitoring.Manager
             _card_id.Text = Cer_details[0];
             _company.Text = Cer_details[1];
             _product_name.Text = Cer_details[3];
-            _object_count.Text = ConvertStr.convert_object(Cer_details[4]) + Cer_details[5];
+            //针对清真存在.5的情况，判断如下：
+            //判断输入的是否为小数
+            bool flag = true;
+            string object_count = Cer_details[4];
+            foreach (char c in object_count)
+            {
+                if (c == '.')
+                {
+                    flag = false;
+                }
+            }
+
+            if(flag == true)
+            {
+                _object_count.Text = ConvertStr.convert_object(object_count) + Cer_details[5];
+            }
+            else
+            {
+                string count_dot = ConvertStr.convert_object_dot(object_count);
+                count_dot = count_dot.Replace("零点半", "半" + Cer_details[5]);
+                count_dot = count_dot.Replace("点", Cer_details[5]);
+
+                _object_count.Text = count_dot;
+            }
+            
             _product_area.Text = Cer_details[6];
             _dept_name.Text = Cer_details[7];
             _dept_area.Text = Cer_details[8];

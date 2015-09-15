@@ -287,7 +287,7 @@ namespace FoodSafetyMonitoring.Manager
             _bz.Text = "";
         }
 
-        private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)
+        private void Card_Id_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof(String)))
             {
@@ -298,13 +298,13 @@ namespace FoodSafetyMonitoring.Manager
             else { e.CancelCommand(); }
         }
 
-        private void Object_Count_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Card_Id_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
         }
 
-        private void Object_Count_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void Card_Id_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!isNumberic(e.Text))
             {
@@ -329,6 +329,47 @@ namespace FoodSafetyMonitoring.Manager
             return true;
         }
 
+        private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumbericOrDot(text))
+                { e.CancelCommand(); }
+            }
+            else { e.CancelCommand(); }
+        }
+
+        private void Object_Count_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void Object_Count_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!isNumbericOrDot(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
+        }
+
+        //isDigit是否是数字
+        public static bool isNumbericOrDot(string _string)
+        {
+            if (string.IsNullOrEmpty(_string))
+
+                return false;
+            foreach (char c in _string)
+            {
+                if (!(char.IsDigit(c) || c == '.'))
+                    //if(c<'0' c="">'9')//最好的方法,在下面测试数据中再加一个0，然后这种方法效率会搞10毫秒左右
+                    return false;
+            }
+            return true;
+        }
                
     }
 }
