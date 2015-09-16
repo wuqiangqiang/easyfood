@@ -17,102 +17,105 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="906" Height="479">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="966" Height="552">
             <Grid.Background>
                 <ImageBrush ImageSource="/res/detect_back.png" Stretch="Fill"></ImageBrush>
             </Grid.Background>
-            <Grid Margin="30,20,50,30">
+            <Grid Margin="50,20,50,20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock FontSize="20" Text="屠宰检疫工作情况日记录表" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
+                    <TextBlock FontSize="20" Text="屠宰检疫工作情况日记录表(产品)" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1">
                     <StackPanel >
-                        <TextBlock Width="100" FontSize="15">货主代码:</TextBlock>
-                        <TextBox Width="100" x:Name="_shipper_id" FontSize="15" Margin="0"></TextBox>
-                        <TextBlock Width="100" FontSize="15">货主姓名:</TextBlock>
-                        <TextBox Width="100" x:Name="_shipper_name" FontSize="15" Margin="0"></TextBox>
-                        <TextBlock  Width="70" Margin="10,0,0,0" FontSize="15">产地:</TextBlock>
-                        <TextBox Width="200" x:Name="_address" FontSize="15"></TextBox>
+                        <TextBlock Width="100" FontSize="15">申报人姓名:</TextBlock>
+                        <ComboBox Width="106" x:Name="_shipper_name" FontSize="15" IsEditable="True"></ComboBox>
+                        <TextBlock Width="100" FontSize="15">屠宰动物种类:</TextBlock>
+                        <ComboBox Width="112" x:Name="_animal" FontSize="15"></ComboBox>
+                        <TextBlock  Width="120" FontSize="15">产地:</TextBlock>
+                        <ComboBox Width="202" x:Name="_address" FontSize="15" Margin="5,0,0,0" IsEditable="True"></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="2">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Width="100" FontSize="15">屠宰动物种类:</TextBlock>
-                        <ComboBox Width="100" x:Name="_animal" FontSize="15"></ComboBox>
                         <TextBlock Width="100" FontSize="15">入场数量:</TextBlock>
-                        <!--<TextBox Width="100" x:Name="_object_count" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>-->
-                        <ComboBox Width="100" x:Name="_object_type" FontSize="15"></ComboBox>
+                        <TextBox Width="75" x:Name="_object_count" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                        <TextBox Width="30" x:Name="_object_type" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
+                        <TextBlock  Width="100" FontSize="15">官方兽医姓名:</TextBlock>
+                        <TextBox  x:Name="_user_name" Margin="0" Width="112" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBlock  Width="120" FontSize="15">协检员:</TextBlock>
+                        <ComboBox  x:Name="_help_user" Margin="5,0,0,0" Width="202" FontSize="15"></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <GroupBox Header="入场监督查验">
+                    <GroupBox Header="入场监督查验" FontSize="15" Margin="0,5,0,0">
                         <StackPanel >
                             <TextBlock Width="95" FontSize="15">临床情况:</TextBlock>
-                            <ComboBox Width="100" x:Name="_quater"></ComboBox>
+                            <ComboBox Width="106" x:Name="_quater" FontSize="15"></ComboBox>
                             <TextBlock Width="100" TextWrapping="Wrap" FontSize="15">是否佩戴规定的畜禽标识:</TextBlock>
-                            <ComboBox Width="100" x:Name="_object_flag" ></ComboBox>
-                            <TextBlock Width="100" TextWrapping="Wrap">回收《动物检疫合格证明》编号:</TextBlock>
-                            <TextBox Width="130" x:Name="_card_id" ></TextBox>
+                            <ComboBox Width="112" x:Name="_object_flag" FontSize="15"></ComboBox>
+                            <TextBlock Width="120" TextWrapping="Wrap" FontSize="15">回收《动物检疫合格证明》编号:</TextBlock>
+                            <TextBox Width="202" x:Name="_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False"></TextBox>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <GroupBox Header="宰前检查">
+                    <GroupBox Header="宰前检查" FontSize="15" Margin="0,5,0,0">
                         <StackPanel >
                             <TextBlock Width="95" FontSize="15">合格数:</TextBlock>
-                            <TextBox Width="100" x:Name="_ok_zq" Margin="0"></TextBox>
-                            <ComboBox Width="100" x:Name="_object_type_zq" ></ComboBox>
-                            <TextBlock Width="70">不合格数:</TextBlock>
-                            <TextBox Width="130" x:Name="_no_zq" ></TextBox>
-                            <ComboBox Width="100" x:Name="_object_type_zq2" ></ComboBox>
+                            <TextBox Width="75" x:Name="_ok_zq" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                            <TextBox Width="30" x:Name="_object_type_zq" Margin="1,0,0,0" FontSize="15" IsEnabled="False"></TextBox>
+                            <TextBlock Width="100" FontSize="15">不合格数:</TextBlock>
+                            <TextBox Width="80" x:Name="_no_zq" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                            <TextBox Width="30" x:Name="_object_type_zq2" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
                 <Grid Grid.Row="5">
-                    <GroupBox Header="同步检疫">
+                    <GroupBox Header="同步检疫" FontSize="15" Margin="0,5,0,0">
                         <StackPanel >
-                            <TextBlock Width="70" FontSize="15">合格数:</TextBlock>
-                            <TextBox Width="100" x:Name="_ok_tb"></TextBox>
-                            <ComboBox Width="100" x:Name="_object_type_tb" ></ComboBox>
-                            <TextBlock Width="100" TextWrapping="Wrap">出具《动物检疫合格证明》编号:</TextBlock>
-                            <TextBox Width="130" x:Name="_card_id_tb" ></TextBox>
-                            <TextBlock Width="100" TextWrapping="Wrap">不合格数:</TextBlock>
-                            <TextBox Width="130" x:Name="_no_tb" ></TextBox>
-                            <ComboBox Width="100" x:Name="_object_type_tb2" ></ComboBox>
+                            <TextBlock Width="95" FontSize="15">合格数:</TextBlock>
+                            <TextBox Width="75" x:Name="_ok_tb" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                            <TextBox Width="30" x:Name="_object_type_tb" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
+                            <TextBlock Width="100" TextWrapping="Wrap" FontSize="15">不合格数:</TextBlock>
+                            <TextBox Width="80" x:Name="_no_tb" FontSize="15" Margin="0" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                            <TextBox Width="30" x:Name="_object_type_tb2" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
+                            <TextBlock Width="120" TextWrapping="Wrap" FontSize="15">出具《动物检疫合格证明》编号:</TextBlock>
+                            <TextBox Width="202" x:Name="_card_id_tb" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False"></TextBox>
+                            
                         </StackPanel>
                     </GroupBox>
                 </Grid>
                 <Grid Grid.Row="6">
                     <StackPanel >
-                        <TextBlock  Width="100" FontSize="15">官方兽医姓名:</TextBlock>
-                        <TextBox  x:Name="_user_name" Margin="0,0,0,0" Width="90" IsEnabled="False"></TextBox>
-                        <TextBlock  Width="70">协检员:</TextBlock>
-                        <TextBox  x:Name="_help_user" Margin="0,0,0,0" Width="90" IsEnabled="False"></TextBox>
-                        <TextBlock  Width="70">检疫分站:</TextBlock>
-                        <TextBox  x:Name="_detect_site" Margin="0,0,0,0" Width="230" IsEnabled="False"></TextBox>
-                        <TextBlock  Width="70">屠宰场名称:</TextBlock>
-                        <TextBox  x:Name="_slaughter_site" Margin="0,0,0,0" Width="230" IsEnabled="False"></TextBox>
-                        <TextBlock  Width="60">录入时间:</TextBlock>
-                        <TextBox  x:Name="_entering_datetime" Margin="0,0,0,0" Width="210" IsEnabled="False"></TextBox>
+                        <TextBlock  Width="100" FontSize="15">备注:</TextBlock>
+                        <TextBox  x:Name="_bz" Margin="0" Width="348" FontSize="15"></TextBox>
+                        <TextBlock  Width="120" FontSize="15">录入时间:</TextBlock>
+                        <TextBox  x:Name="_entering_datetime"  Width="202" IsEnabled="False" FontSize="15"></TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="7">
                     <StackPanel >
-                        <TextBlock Name="txtMsg" Width="200" Foreground="Red" FontSize="14" FontFamily="宋体"  HorizontalAlignment="Center" ></TextBlock>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <!--<Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="30,0,20,0"/>
-                            <Button Name="btnCancel" Width="120" Height="32" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="20,0,0,0"  />-->
-                        </StackPanel>
+                        <TextBlock  Width="100" FontSize="15">检疫分站:</TextBlock>
+                        <TextBox  x:Name="_detect_site" Margin="0,0,0,0" Width="348" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBlock  Width="120" FontSize="15">屠宰场名称:</TextBlock>
+                        <TextBox  x:Name="_slaughter_site" Width="202" IsEnabled="False" FontSize="15"></TextBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="8">
+                    <StackPanel HorizontalAlignment="Center">
+                        <Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="0,0,50,0"/>
+                        <Button Name="btnCancel" Width="120" Height="32" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="50,0,0,0"  />
                     </StackPanel>
                 </Grid>
             </Grid>

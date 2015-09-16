@@ -71,7 +71,7 @@ namespace FoodSafetyMonitoring.Manager
             //协检员
             ComboboxTool.InitComboboxSource(_help_user, string.Format("call p_user_helpuser({0})", userId), "lr");
             //动物种类
-            ComboboxTool.InitComboboxSource(_object_id, "SELECT animalid,animalname FROM t_animal WHERE openflag = '1'", "lr");
+            ComboboxTool.InitComboboxSource(_object_id, "SELECT animalid,animalname FROM t_animal_new WHERE openflag = '1' and deptflag = '" + shipperflag + "'", "lr");
             _object_id.SelectionChanged += new SelectionChangedEventHandler(_object_id_SelectionChanged);
             _object_id.SelectedIndex = 1;
             //用途
@@ -83,7 +83,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_object_id.SelectedIndex > 0)
             {
-                string object_type = dbOperation.GetDbHelper().GetSingle("select unit from t_animal where animalid =" + (_object_id.SelectedItem as Label).Tag.ToString()).ToString();
+                string object_type = dbOperation.GetDbHelper().GetSingle("select unit from t_animal_new where animalid =" + (_object_id.SelectedItem as Label).Tag.ToString()).ToString();
                 _object_type.Text = object_type;
             }
         }
