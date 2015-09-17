@@ -175,17 +175,17 @@ namespace FoodSafetyMonitoring
                         flag = 1;
                         break;
                     //屠宰情况->检疫日记录表
-                    case "20203": temptb.Header = (sender as Button).Content.ToString();
+                    case "20202": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
                         flag = 1;
                         break;
-                    //屠宰情况->无害化情况录入（产品）
-                    case "20204": temptb.Header = (sender as Button).Content.ToString();
+                    //屠宰情况->无害化情况录入
+                    case "20203": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcInnocentTreatmentRecord(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //屠宰情况->无害化日统计表
-                    case "20206": temptb.Header = (sender as Button).Content.ToString();
+                    case "20204": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
                         flag = 1;
                         break;

@@ -695,6 +695,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcInnocentTreatmentQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcInnocentTreatmentRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -718,6 +722,10 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UcQuarantineQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcQuarantineRecord.xaml">
       <SubType>Designer</SubType>
@@ -1226,6 +1234,9 @@
     <Compile Include="Manager\UcDetectInquire.xaml.cs">
       <DependentUpon>UcDetectInquire.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcInnocentTreatmentQuery.xaml.cs">
+      <DependentUpon>UcInnocentTreatmentQuery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcInnocentTreatmentRecord.xaml.cs">
       <DependentUpon>UcInnocentTreatmentRecord.xaml</DependentUpon>
     </Compile>
@@ -1240,6 +1251,9 @@
     </Compile>
     <Compile Include="Manager\UcMonthReportDetails.xaml.cs">
       <DependentUpon>UcMonthReportDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcQuarantineQuery.xaml.cs">
+      <DependentUpon>UcQuarantineQuery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcQuarantineRecord.xaml.cs">
       <DependentUpon>UcQuarantineRecord.xaml</DependentUpon>

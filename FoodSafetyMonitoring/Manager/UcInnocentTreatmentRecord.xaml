@@ -24,77 +24,71 @@
             <Grid Margin="50,20,50,20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="70"/>
-                    <RowDefinition Height="65"/>
                     <RowDefinition Height="70"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock FontSize="20" Text="屠宰检疫无害化处理情况日汇总表(产品)" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
+                    <TextBlock FontSize="20" Text="屠宰检疫无害化处理情况日记录表" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1">
                     <StackPanel >
-                        <TextBlock Width="100" FontSize="15">申报人姓名:</TextBlock>
-                        <ComboBox Width="106" x:Name="_shipper_name" FontSize="15" IsEditable="True"></ComboBox>
-                        <TextBlock  Width="120" FontSize="15">产地:</TextBlock>
-                        <ComboBox Width="202" x:Name="_address" FontSize="15" Margin="5,0,0,0" IsEditable="True"></ComboBox>
+                        <TextBlock  Width="100" FontSize="15" TextWrapping="Wrap">《检疫处理通知单》编号:</TextBlock>
+                        <TextBox Width="130" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False" KeyDown="TextBox_KeyDown" LostFocus="_card_id_LostFocus"></TextBox>
+                        <TextBlock Width="110" FontSize="15" Margin="25,0,10,0">申报人姓名:</TextBlock>
+                        <TextBox Width="100" x:Name="_shipper_name" FontSize="15" IsEnabled="False" Margin="0,0,0,0"></TextBox>
+                        <TextBlock  Width="80" FontSize="15" Margin="30,0,10,0" xml:space="preserve">产      地:</TextBlock>
+                        <TextBox Width="212" x:Name="_address" FontSize="15" Margin="0" IsEnabled="False"></TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock  Width="100" FontSize="15" TextWrapping="Wrap">《检疫处理通知单》编号:</TextBlock>
-                        <TextBox  x:Name="_card_id" Margin="0" Width="112" IsEnabled="False" FontSize="15"></TextBox>
-                        <TextBlock  Width="100" FontSize="15" TextWrapping="Wrap">《检疫处理通知单》编号:</TextBlock>
-                        <TextBox  x:Name="_user_name" Margin="0" Width="112" IsEnabled="False" FontSize="15"></TextBox>
-                        <TextBlock  Width="120" FontSize="15">协检员:</TextBlock>
-                        <ComboBox  x:Name="_help_user" Margin="5,0,0,0" Width="202" FontSize="15"></ComboBox>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="3">
                     <GroupBox Header="宰前检查" FontSize="15" Margin="0,5,0,0">
                         <StackPanel >
-                            <TextBlock Width="95" FontSize="15">合格数:</TextBlock>
-                            <TextBox Width="75" x:Name="_ok_zq" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
-                            <TextBox Width="30" x:Name="_object_type_zq" Margin="1,0,0,0" FontSize="15" IsEnabled="False"></TextBox>
                             <TextBlock Width="100" FontSize="15">不合格数:</TextBlock>
                             <TextBox Width="80" x:Name="_no_zq" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
-                            <TextBox Width="30" x:Name="_object_type_zq2" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
+                            <TextBox Width="47" x:Name="_object_type_zq" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
+                            <TextBlock Width="110" FontSize="15" Margin="30,0,10,0" >无害化处理方式:</TextBlock>
+                            <ComboBox Width="100" x:Name="_function_zq" FontSize="15"></ComboBox>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <GroupBox Header="同步检疫" FontSize="15" Margin="0,5,0,0">
+                        <StackPanel >
+                            <TextBlock Width="100" TextWrapping="Wrap" FontSize="15">不合格数:</TextBlock>
+                            <TextBox Width="80" x:Name="_no_tb" FontSize="15" Margin="0" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                            <TextBox Width="47" x:Name="_object_type_tb" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
+                            <TextBlock Width="110" FontSize="15" Margin="30,0,10,0">无害化处理方式:</TextBlock>
+                            <ComboBox Width="100" x:Name="_function_tb" FontSize="15"></ComboBox>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <GroupBox Header="同步检疫" FontSize="15" Margin="0,5,0,0">
-                        <StackPanel >
-                            <TextBlock Width="95" FontSize="15">合格数:</TextBlock>
-                            <TextBox Width="75" x:Name="_ok_tb" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
-                            <TextBox Width="30" x:Name="_object_type_tb" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
-                            <TextBlock Width="100" TextWrapping="Wrap" FontSize="15">不合格数:</TextBlock>
-                            <TextBox Width="80" x:Name="_no_tb" FontSize="15" Margin="0" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
-                            <TextBox Width="30" x:Name="_object_type_tb2" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
-                            <TextBlock Width="120" TextWrapping="Wrap" FontSize="15">出具《动物检疫合格证明》编号:</TextBlock>
-                            <TextBox Width="202" x:Name="_card_id_tb" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False"></TextBox>
-
-                        </StackPanel>
-                    </GroupBox>
+                    <StackPanel >
+                        <TextBlock  Width="100" FontSize="15">备注:</TextBlock>
+                        <TextBox  x:Name="_bz" Width="380" FontSize="15"></TextBox>
+                    </StackPanel>
                 </Grid>
                 <Grid Grid.Row="5">
                     <StackPanel >
-                        <TextBlock  Width="100" FontSize="15">备注:</TextBlock>
-                        <TextBox  x:Name="_bz" Margin="0" Width="348" FontSize="15"></TextBox>
-                        <TextBlock  Width="120" FontSize="15">录入时间:</TextBlock>
-                        <TextBox  x:Name="_entering_datetime"  Width="202" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBlock  Width="100" FontSize="15" TextWrapping="Wrap">官方兽医姓名:</TextBlock>
+                        <TextBox  x:Name="_user_name" Width="130" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBlock  Width="110" FontSize="15" Margin="25,0,5,0" xml:space="preserve">协   检   员:</TextBlock>
+                        <ComboBox  x:Name="_help_user" Margin="5,0,0,0" Width="100" FontSize="15"></ComboBox>
+                        <TextBlock  Width="80" FontSize="15" Margin="30,0,10,0">录入时间:</TextBlock>
+                        <TextBox  x:Name="_entering_datetime"  Width="212" IsEnabled="False" FontSize="15" Margin="0"></TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="6">
                     <StackPanel >
                         <TextBlock  Width="100" FontSize="15">检疫分站:</TextBlock>
-                        <TextBox  x:Name="_detect_site" Margin="0,0,0,0" Width="348" IsEnabled="False" FontSize="15"></TextBox>
-                        <TextBlock  Width="120" FontSize="15">屠宰场名称:</TextBlock>
-                        <TextBox  x:Name="_slaughter_site" Width="202" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBox  x:Name="_detect_site" Width="380" IsEnabled="False" FontSize="15"></TextBox>
+                        <TextBlock  Width="80" FontSize="15" Margin="25,0,10,0">屠宰场名称:</TextBlock>
+                        <TextBox  x:Name="_slaughter_site" Width="212" IsEnabled="False" FontSize="15" Margin="0"></TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="7">

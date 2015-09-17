@@ -30,6 +30,9 @@ namespace FoodSafetyMonitoring.Manager
         string username = (Application.Current.Resources["User"] as UserInfo).ShowName;
         string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
         private string shipperflag;
+        private string sbrid;
+        private string areaid;
+        private string animalid;
 
         public UcInnocentTreatmentRecord(IDBOperation dbOperation)
         {
@@ -48,77 +51,117 @@ namespace FoodSafetyMonitoring.Manager
                 _detect_site.Text = table.Rows[0][2].ToString();
                 _slaughter_site.Text = table.Rows[0][1].ToString();
             }
-            //申报人姓名
-            ComboboxTool.InitComboboxSource(_shipper_name, string.Format("SELECT sbrid,sbrname FROM t_record_sbr WHERE openflag = '1' and createdeptid = '{0}'", deptId), "lr");
-            //产地
-            ComboboxTool.InitComboboxSource(_address, string.Format("SELECT areaid,areaname FROM t_record_area WHERE openflag = '1' and createdeptid = '{0}'", deptId), "lr");
             //协检员
             ComboboxTool.InitComboboxSource(_help_user, string.Format("call p_user_helpuser({0})", userId), "lr");
             //官方兽医姓名
             _user_name.Text = username;
             //录入时间
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
-            //屠宰动物种类
-            ComboboxTool.InitComboboxSource(_animal, "SELECT animalid,animalname FROM t_animal_new WHERE openflag = '1' and deptflag = '" + shipperflag + "'", "lr");
-            _animal.SelectionChanged += new SelectionChangedEventHandler(_animal_SelectionChanged);
-            _animal.SelectedIndex = 1;
-            //临床情况
-            DataTable dt_quater = new DataTable();
-            dt_quater.Columns.Add(new DataColumn("quaterid"));
-            dt_quater.Columns.Add(new DataColumn("quatername"));
-            var row = dt_quater.NewRow();
-            row["quaterid"] = "0";
-            row["quatername"] = "良好";
-            dt_quater.Rows.Add(row);
-            var row2 = dt_quater.NewRow();
-            row2["quaterid"] = "1";
-            row2["quatername"] = "异常";
-            dt_quater.Rows.Add(row2);
-            ComboboxTool.InitComboboxSource(_quater, dt_quater, "lr");
-
-            //是否佩戴规定的畜禽标识
-            DataTable dt_object_flag = new DataTable();
-            dt_object_flag.Columns.Add(new DataColumn("flagid"));
-            dt_object_flag.Columns.Add(new DataColumn("flagname"));
-            var row3 = dt_object_flag.NewRow();
-            row3["flagid"] = "1";
-            row3["flagname"] = "是";
-            dt_object_flag.Rows.Add(row3);
-            var row4 = dt_object_flag.NewRow();
-            row4["flagid"] = "0";
-            row4["flagname"] = "否";
-            dt_object_flag.Rows.Add(row4);
-            ComboboxTool.InitComboboxSource(_object_flag, dt_object_flag, "lr");
-
+            //无害化处理方式
+            ComboboxTool.InitComboboxSource(_function_zq, string.Format("select functionid,functionname from t_function where openflag = '1'"), "lr");
+            ComboboxTool.InitComboboxSource(_function_tb, string.Format("select functionid,functionname from t_function where openflag = '1'"), "lr");
         }
 
-        void _animal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (_animal.SelectedIndex > 0)
+            if (e.Key == Key.Enter)
             {
-                string object_type = dbOperation.GetDbHelper().GetSingle("select unit from t_animal where animalid =" + (_animal.SelectedItem as Label).Tag.ToString()).ToString();
-                _object_type.Text = object_type;
-                _object_type_zq.Text = object_type;
-                _object_type_zq2.Text = object_type;
-                _object_type_tb.Text = object_type;
-                _object_type_tb2.Text = object_type;
+                if (_qua_card_id.Text.Trim().Length != 0)
+                {
+                    DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
+                    if (table.Rows.Count != 0)
+                    {
+                        sbrid = table.Rows[0][0].ToString();
+                        _shipper_name.Text = table.Rows[0][1].ToString();
+                        areaid = table.Rows[0][2].ToString();
+                        _address.Text = table.Rows[0][3].ToString();
+                        _object_type_zq.Text = table.Rows[0][4].ToString();
+                        animalid = table.Rows[0][5].ToString();
+
+                        if (animalid == "1")//动物种类是鸡
+                        {
+                            _object_type_tb.Text = "羽";
+                        }
+                        else
+                        {
+                            _object_type_tb.Text = "公斤";
+                        }
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("该检疫处理通知单不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        _shipper_name.Text = "";
+                        _address.Text = "";
+                        _object_type_zq.Text = "";
+                        _object_type_tb.Text = "";
+                        return;
+                    }
+                }
+                else
+                {
+                    _shipper_name.Text = "";
+                    _address.Text = "";
+                    _object_type_zq.Text = "";
+                    _object_type_tb.Text = "";
+                }
+
             }
+        }
+
+        private void _card_id_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (_qua_card_id.Text.Trim().Length != 0)
+            {
+                DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
+                if (table.Rows.Count != 0)
+                {
+                    sbrid = table.Rows[0][0].ToString();
+                    _shipper_name.Text = table.Rows[0][1].ToString();
+                    areaid = table.Rows[0][2].ToString();
+                    _address.Text = table.Rows[0][3].ToString();
+                    _object_type_zq.Text = table.Rows[0][4].ToString();
+                    animalid = table.Rows[0][5].ToString();
+
+                    if (animalid == "1")//动物种类是鸡
+                    {
+                        _object_type_tb.Text = "羽";
+                    }
+                    else
+                    {
+                        _object_type_tb.Text = "公斤";
+                    }
+                }
+                else
+                {
+                    Toolkit.MessageBox.Show("该检疫处理通知单不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    _shipper_name.Text = "";
+                    _address.Text = "";
+                    _object_type_zq.Text = "";
+                    _object_type_tb.Text = "";
+                    return;
+                }
+            }
+            else
+            {
+                _shipper_name.Text = "";
+                _address.Text = "";
+                _object_type_zq.Text = "";
+                _object_type_tb.Text = "";
+            }
+
         }
 
         private void clear()
         {
-            _shipper_name.SelectedIndex = 0;
-            _address.SelectedIndex = 0;
-            _animal.SelectedIndex = 1;
-            _object_count.Text = "";
-            _quater.SelectedIndex = 0;
-            _object_flag.SelectedIndex = 0;
-            _card_id.Text = "";
-            _ok_zq.Text = "";
+            _qua_card_id.Text = "";
+            _shipper_name.Text = "";
+            _address.Text = "";
             _no_zq.Text = "";
-            _ok_tb.Text = "";
             _no_tb.Text = "";
-            _card_id_tb.Text = "";
+            _object_type_zq.Text = "";
+            _object_type_tb.Text = "";
+            _function_zq.SelectedIndex = 0;
+            _function_tb.SelectedIndex = 0;
             _bz.Text = "";
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
 
@@ -126,66 +169,23 @@ namespace FoodSafetyMonitoring.Manager
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            if (_qua_card_id.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入检疫处理通知单编号！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-            if (_shipper_name.SelectedIndex == 0 || _shipper_name.Text == "")
+            if (_shipper_name.Text.Trim().Length == 0)
             {
                 Toolkit.MessageBox.Show("申报人姓名不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            if (_address.SelectedIndex == 0 || _address.Text == "")
+            if (_address.Text.Trim().Length == 0)
             {
                 Toolkit.MessageBox.Show("产地不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
-            if (_animal.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择屠宰动物种类！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            if (_object_count.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入入场数量！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            if (_quater.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择临床情况！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            if (_object_flag.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择是否佩戴规定的畜禽标识！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            if (_ok_zq.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入宰前检查合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            if (_no_zq.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入宰前检查不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            //if (_ok_tb.Text.Trim().Length == 0)
-            //{
-            //    Toolkit.MessageBox.Show("请输入同步检疫合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
-
-            //if (_no_tb.Text.Trim().Length == 0)
-            //{
-            //    Toolkit.MessageBox.Show("请输入同步检疫不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
 
             if (_help_user.SelectedIndex < 1)
             {
@@ -193,74 +193,27 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            string sbr_id;
-
-            //判断申报人是否存在，若不存在则插入数据库
-            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(sbrid) from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId));
-            if (!exit_flag)
-            {
-                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_record_sbr (sbrname,openflag,createuserid,createdeptid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}')",
-                                                              _shipper_name.Text, '1', userId, deptId, DateTime.Now));
-                if (n == 1)
-                {
-                    sbr_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT sbrid from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId)).ToString();
-                }
-                else
-                {
-                    Toolkit.MessageBox.Show("申报人添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-            }
-            else
-            {
-                sbr_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT sbrid from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId)).ToString();
-            }
-
-
-            string area_id;
-
-            //判断产地是否存在，若不存在则插入数据库
-            bool exit_flag2 = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(areaid) from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId));
-            if (!exit_flag2)
-            {
-                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_record_area (areaname,openflag,createuserid,createdeptid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}')",
-                                                              _address.Text, '1', userId, deptId, DateTime.Now));
-                if (n == 1)
-                {
-                    area_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT areaid from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId)).ToString();
-                }
-                else
-                {
-                    Toolkit.MessageBox.Show("申报人添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-            }
-            else
-            {
-                area_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT areaid from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId)).ToString();
-            }
-
-            string sql = string.Format("INSERT INTO t_quarantine_record(sbrid,sbrname,areaid,area," +
-                                        "animalid,objectcount,quater,objectflag,cardid_rc,ok_zq,no_zq,ok_tb," +
-                                        "no_tb,cardid_tb,createuserid,createdate,createdeptid,helpuserid,tzcname,qua_flag)" +
+            string sql = string.Format("INSERT INTO t_innocent_record(qua_cardid,sbrid,sbrname,areaid,area," +
+                                        "animalid,no_zq,objecttype_zq,function_zq,no_tb,objecttype_tb,function_tb," +
+                                        "bz,createuserid,createdate,createdeptid,helpuserid,tzcname)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
-                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}')"
-                                        , sbr_id, _shipper_name.Text, area_id, _address.Text, (_animal.SelectedItem as Label).Tag.ToString(),
-                                        _object_count.Text, (_quater.SelectedItem as Label).Tag.ToString(), (_object_flag.SelectedItem as Label).Tag.ToString(),
-                                        _card_id.Text, _ok_zq.Text, _no_zq.Text, _ok_tb.Text, _no_tb.Text, _card_id_tb.Text,
-                                        userId, System.DateTime.Now, deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
-                                        _slaughter_site.Text, "0");
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}' )"
+                                        , _qua_card_id.Text,sbrid, _shipper_name.Text, areaid, _address.Text, animalid,
+                                        _no_zq.Text, _object_type_zq.Text, (_function_zq.SelectedItem as Label).Tag.ToString(),
+                                        _no_tb.Text, _object_type_tb.Text, (_function_tb.SelectedItem as Label).Tag.ToString(),
+                                        _bz.Text,userId, System.DateTime.Now, deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
+                                        _slaughter_site.Text);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
-                Toolkit.MessageBox.Show("检疫记录保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("无害化处理情况保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 clear();
                 return;
             }
             else
             {
-                Toolkit.MessageBox.Show("检疫记录保存失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("无害化处理情况保存失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
         }

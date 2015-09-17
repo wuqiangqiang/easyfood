@@ -119,6 +119,7 @@ namespace FoodSafetyMonitoring.Manager
             _ok_tb.Text = "";
             _no_tb.Text = "";
             _card_id_tb.Text = "";
+            _qua_card_id.Text = "";
             _bz.Text = "";
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
 
@@ -163,17 +164,17 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (_ok_zq.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入宰前检查合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_ok_zq.Text.Trim().Length == 0)
+            //{
+            //    Toolkit.MessageBox.Show("请输入宰前检查合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_no_zq.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入宰前检查不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_no_zq.Text.Trim().Length == 0)
+            //{
+            //    Toolkit.MessageBox.Show("请输入宰前检查不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
             //if (_ok_tb.Text.Trim().Length == 0)
             //{
@@ -191,6 +192,17 @@ namespace FoodSafetyMonitoring.Manager
             {
                 Toolkit.MessageBox.Show("请选择协检员！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
+            }
+
+            //判断需不需要输入检疫处理通知单编号
+            if (_quater.SelectedIndex == 2 || Convert.ToDouble(_no_zq.Text) > 0 || Convert.ToDouble(_no_tb.Text) > 0)
+            {
+                if (_qua_card_id.Text.Trim().Length == 0)
+                {
+                    Toolkit.MessageBox.Show("请输入检疫处理通知单编号！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                
             }
 
             string sbr_id;
@@ -231,7 +243,7 @@ namespace FoodSafetyMonitoring.Manager
                 }
                 else
                 {
-                    Toolkit.MessageBox.Show("申报人添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Toolkit.MessageBox.Show("产地添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
             }
@@ -241,15 +253,15 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             string sql = string.Format("INSERT INTO t_quarantine_record(sbrid,sbrname,areaid,area," +
-                                        "animalid,objectcount,quater,objectflag,cardid_rc,ok_zq,no_zq,ok_tb," +
-                                        "no_tb,cardid_tb,createuserid,createdate,createdeptid,helpuserid,tzcname,qua_flag)" +
+                                        "animalid,objectcount,objecttype,quater,objectflag,cardid_rc,ok_zq,no_zq,ok_tb," +
+                                        "no_tb,cardid_tb,createuserid,createdate,createdeptid,helpuserid,tzcname,bz,qua_cardid)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
-                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}')"
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}')"
                                         , sbr_id, _shipper_name.Text,area_id, _address.Text, (_animal.SelectedItem as Label).Tag.ToString(),
-                                        _object_count.Text, (_quater.SelectedItem as Label).Tag.ToString(), (_object_flag.SelectedItem as Label).Tag.ToString(), 
+                                        _object_count.Text, _object_type.Text,(_quater.SelectedItem as Label).Tag.ToString(), (_object_flag.SelectedItem as Label).Tag.ToString(), 
                                         _card_id.Text,_ok_zq.Text,_no_zq.Text,_ok_tb.Text,_no_tb.Text,_card_id_tb.Text,
                                         userId, System.DateTime.Now,deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
-                                        _slaughter_site.Text,"0");
+                                        _slaughter_site.Text, _bz.Text, _qua_card_id.Text);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
