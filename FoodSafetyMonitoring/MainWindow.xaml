@@ -100,7 +100,7 @@
             <Thumb Grid.Column="1" DragDelta="Thumb_DragDelta" Background="Transparent" Opacity="0"></Thumb>
             <StackPanel Orientation="Horizontal"  Grid.Column="2" HorizontalAlignment="Right"  VerticalAlignment="Top">
                 <Image Width="29" Height="26" MouseEnter ="min_MouseEnter" MouseLeave="all_MouseLeave" Source="/res/min.png" x:Name="min" MouseDown="min_MouseDown" ToolTip="缩小" />
-                <Image Width="29" Height="26" MouseEnter ="max_MouseEnter" MouseLeave="all_MouseLeave"  Source="/res/max.png" x:Name="max" MouseDown="max_MouseDown" ToolTip="最大化"/>
+                <Image Width="29" Height="26" MouseEnter ="max_MouseEnter" MouseLeave="all_MouseLeave"  Source="/res/max.png" x:Name="max" MouseDown="max_MouseDown" ToolTip="还原"/>
                 <Image Width="29" Height="26" MouseEnter ="exit_MouseEnter" MouseLeave="all_MouseLeave"  Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" ToolTip="关闭"/>
             </StackPanel>
         </Grid>

@@ -176,7 +176,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //屠宰情况->检疫日记录表
                     case "20202": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
+                        temptb.Content = new UcQuarantineQuery(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //屠宰情况->无害化情况录入
@@ -186,7 +186,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //屠宰情况->无害化日统计表
                     case "20204": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
+                        temptb.Content = new UcInnocentTreatmentQuery(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //数据统计->检测数据统计->日报表

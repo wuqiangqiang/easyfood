@@ -187,6 +187,31 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            if (_no_zq.Text.Trim().Length != 0)
+            {
+                if (Convert.ToDouble(_no_zq.Text) > 0 )
+                {
+                    if (_function_zq.SelectedIndex < 1)
+                    {
+                        Toolkit.MessageBox.Show("请选择宰前无害化处理方式！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+            }
+
+            if (_no_tb.Text.Trim().Length != 0)
+            {
+                if (Convert.ToDouble(_no_tb.Text) > 0 )
+                {
+                    if (_function_tb.SelectedIndex < 1)
+                    {
+                        Toolkit.MessageBox.Show("请选择同步无害化处理方式！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+            }
+            
+
             if (_help_user.SelectedIndex < 1)
             {
                 Toolkit.MessageBox.Show("请选择协检员！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -199,8 +224,8 @@ namespace FoodSafetyMonitoring.Manager
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
                                         "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}' )"
                                         , _qua_card_id.Text,sbrid, _shipper_name.Text, areaid, _address.Text, animalid,
-                                        _no_zq.Text, _object_type_zq.Text, (_function_zq.SelectedItem as Label).Tag.ToString(),
-                                        _no_tb.Text, _object_type_tb.Text, (_function_tb.SelectedItem as Label).Tag.ToString(),
+                                        _no_zq.Text, _object_type_zq.Text, _function_zq.SelectedIndex < 1 ? "" : (_function_zq.SelectedItem as Label).Tag,
+                                        _no_tb.Text, _object_type_tb.Text, _function_tb.SelectedIndex < 1 ? "" : (_function_tb.SelectedItem as Label).Tag,
                                         _bz.Text,userId, System.DateTime.Now, deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
                                         _slaughter_site.Text);
 

@@ -1091,3 +1091,7 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcInnocentTreatmentRecord.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcQuarantineRecord.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcQuarantineRecord.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcQuarantineQuery.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcInnocentTreatmentQuery.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcQuarantineQuery.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcInnocentTreatmentQuery.baml

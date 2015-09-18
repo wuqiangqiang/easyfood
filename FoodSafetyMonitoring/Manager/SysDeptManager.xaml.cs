@@ -934,6 +934,30 @@ namespace FoodSafetyMonitoring.Manager
                                Toolkit.MessageBox.Show("省市区不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                return;
                            }
+
+                           bool provice_exit = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(id) from sys_city where name ='{0}'", provice));
+                           if (!provice_exit)
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("省：" + provice + "不存在,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+
+                           bool city_exit = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(id) from sys_city where name ='{0}'", city));
+                           if (!city_exit)
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("市：" + city + "不存在,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+
+                           bool country_exit = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(id) from sys_city where name ='{0}'", country));
+                           if (!country_exit)
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("区：" + country + "不存在,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
                        }
                        else if (row["FLAG_TIER"].ToString() == "2")
                        {
@@ -941,6 +965,22 @@ namespace FoodSafetyMonitoring.Manager
                            {
                                load.Close();
                                Toolkit.MessageBox.Show("省市不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+
+                           bool provice_exit = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(id) from sys_city where name ='{0}'", provice));
+                           if (!provice_exit)
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("省：" + provice + "不存在,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+
+                           bool city_exit = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(id) from sys_city where name ='{0}'", city));
+                           if (!city_exit)
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("市：" + city + "不存在,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                return;
                            }
                        }
@@ -952,7 +992,15 @@ namespace FoodSafetyMonitoring.Manager
                                Toolkit.MessageBox.Show("省不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                return;
                            }
-                       }
+
+                           bool provice_exit = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(id) from sys_city where name ='{0}'", provice));
+                           if (!provice_exit)
+                           {
+                               load.Close();
+                               Toolkit.MessageBox.Show("省：" + provice + "不存在,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                               return;
+                           }
+                       } 
                        
                        switch (row["FLAG_TIER"].ToString())
                        {
@@ -967,18 +1015,18 @@ namespace FoodSafetyMonitoring.Manager
                                break;
                            case "2": 
                                row["Province"] = ProvinceCityTable.Select("name='" + provice + "'")[0]["id"].ToString();
-                               row["City"] = ProvinceCityTable.Select("name='" + city + "' and pid = '" + row["Province"] + "'")[0]["id"].ToString();
+                               row["City"] = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT id from sys_city where name ='{0}' and pid = '{1}'", city, row["Province"])).ToString();
                                row["Country"] = "";
                                break;
                            case "3": 
                                row["Province"] = ProvinceCityTable.Select("name='" + provice + "'")[0]["id"].ToString();
-                               row["City"] = ProvinceCityTable.Select("name='" + city + "' and pid = '" + row["Province"] + "'")[0]["id"].ToString();
-                               row["Country"] = ProvinceCityTable.Select("name='" + country + "' and pid = '" + row["City"] + "'")[0]["id"].ToString();
+                               row["City"] = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT id from sys_city where name ='{0}' and pid = '{1}'", city, row["Province"])).ToString();
+                               row["Country"] = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT id from sys_city where name ='{0}' and pid = '{1}'", country, row["City"])).ToString();
                                break;
                            case "4":
                                row["Province"] = ProvinceCityTable.Select("name='" + provice + "'")[0]["id"].ToString();
-                               row["City"] = ProvinceCityTable.Select("name='" + city + "' and pid = '" + row["Province"] + "'")[0]["id"].ToString();
-                               row["Country"] = ProvinceCityTable.Select("name='" + country + "' and pid = '" + row["City"] + "'")[0]["id"].ToString();
+                               row["City"] = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT id from sys_city where name ='{0}' and pid = '{1}'", city, row["Province"])).ToString();
+                               row["Country"] = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT id from sys_city where name ='{0}' and pid = '{1}'", country, row["City"])).ToString();
                                break;
                            default: break;
                        }
@@ -1043,12 +1091,6 @@ namespace FoodSafetyMonitoring.Manager
                    return;
                }
            }
-           else
-           {
-               load.Close();
-               Toolkit.MessageBox.Show("导入excel内容有错，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-               return;
-           }
         }
 
         //读取Excel中的内容
@@ -1056,7 +1098,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             //打开对话框
             OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "Excel(*.xls)|*.xls|Excel(*.xlsx)|*.xlsx";
+            openFile.Filter = "Excel(*.xlsx)|*.xlsx|Excel(*.xls)|*.xls";
             openFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             openFile.Multiselect = false;
             if (openFile.ShowDialog() == DialogResult.Cancel)

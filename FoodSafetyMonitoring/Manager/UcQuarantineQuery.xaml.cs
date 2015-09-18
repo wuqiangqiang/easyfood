@@ -11,17 +11,64 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FoodSafetyMonitoring.dao;
+using System.Windows.Forms.Integration;
+using System.Data;
+using FoodSafetyMonitoring.Common;
+using FoodSafetyMonitoring.Manager.UserControls;
+using Toolkit = Microsoft.Windows.Controls;
 
 namespace FoodSafetyMonitoring.Manager
 {
     /// <summary>
-    /// UcQuarantineQuery.xaml 的交互逻辑
+    /// UcInnocentTreatmentQuery.xaml 的交互逻辑
     /// </summary>
     public partial class UcQuarantineQuery : UserControl
     {
-        public UcQuarantineQuery()
+        private IDBOperation dbOperation;
+        string userId = (Application.Current.Resources["User"] as UserInfo).ID;
+        string loginid = (Application.Current.Resources["User"] as UserInfo).LoginName;
+        string username = (Application.Current.Resources["User"] as UserInfo).ShowName;
+        string deptId = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
+
+        public UcQuarantineQuery(IDBOperation dbOperation)
         {
             InitializeComponent();
+
+            this.dbOperation = dbOperation;
+
+            dtpStartDate.SelectedDate = DateTime.Now;
+            dtpEndDate.SelectedDate = DateTime.Now;
+
+            //申报人姓名
+            ComboboxTool.InitComboboxSource(_shipper_name, string.Format("SELECT sbrid,sbrname FROM t_record_sbr WHERE openflag = '1' and createdeptid = '{0}'", deptId), "lr");
+        }
+
+        private void _query_Click(object sender, RoutedEventArgs e)
+        {
+            string shipper_name;
+            if (_shipper_name.SelectedIndex == 0)
+            {
+                shipper_name = "";
+            }
+            else
+            {
+                shipper_name = _shipper_name.Text;
+            }
+
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_quarantine_query('{0}','{1}','{2}','{3}')",
+                              deptId,
+                              ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
+                               shipper_name)).Tables[0];
+
+            livst.DataContext = table;
+
+        }
+
+        private void _export_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

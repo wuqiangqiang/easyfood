@@ -13,10 +13,30 @@
                 <ResourceDictionary Source="Themes/TextBlock.xaml"/>
                 <ResourceDictionary Source="Themes/TextBox.xaml"/>
                 <ResourceDictionary Source="Themes/DatePicker.xaml"/>
+                <ResourceDictionary Source="Themes/ListViewColumn.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid >
+        <Grid.Resources>
+            <control:BackGroundConverter x:Key="_converter"/>
+            <Style x:Key="_style_listviewItem" TargetType="ListViewItem">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <Binding RelativeSource="{RelativeSource Self}" Converter="{ StaticResource ResourceKey=_converter}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="Black">
+                </Setter>
+                <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>-->
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="微软雅黑"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Height" Value="35" />
+                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                <Setter Property="BorderBrush" Value="#e0e0e0" />
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="143"/>
             <RowDefinition />
@@ -56,9 +76,9 @@
                             <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
                             <TextBlock MinWidth="52">货主姓名:</TextBlock>
-                            <ComboBox Width="120" x:Name="_shipper_name" />
+                            <ComboBox Width="120" x:Name="_shipper_name" IsEditable="True"/>
                             <TextBlock MinWidth="50">《检疫处理通知单》编号:</TextBlock>
-                            <TextBox x:Name="_detect_station" Width="260" HorizontalContentAlignment="Center"/>
+                            <TextBox x:Name="_qua_cardid" Width="260" HorizontalContentAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                     <Grid  Grid.Row="1">
@@ -70,23 +90,6 @@
                 </Grid>
             </Border>
         </Grid>
-        <!--<ListView Grid.Row="1" Name="lvlist" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
-                        <ListView.View>
-                            <GridView >
-                                <GridViewColumn Width="100" Header="数据来源" DisplayMemberBinding="{Binding DetectTypeName}" ></GridViewColumn>
-                                <GridViewColumn Width="150" Header="检测时间"  DisplayMemberBinding="{Binding DETECTDATE}" ></GridViewColumn>
-                                <GridViewColumn Width="100" Header="检测单位"   DisplayMemberBinding="{Binding DeptName}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="检测项目"   DisplayMemberBinding="{Binding ItemNAME}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="检测对象"   DisplayMemberBinding="{Binding ObjectNAME}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="检测样本"   DisplayMemberBinding="{Binding SAMPLENAME}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="检测灵敏度"   DisplayMemberBinding="{Binding SENSITIVITYNAME}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="检测方法"   DisplayMemberBinding="{Binding REAGENTNAME}"></GridViewColumn>
-                                <GridViewColumn Width="80" Header="检测结果"   DisplayMemberBinding="{Binding RESULTNAME}"></GridViewColumn>
-                                <GridViewColumn Width="150" Header="来源产地"   DisplayMemberBinding="{Binding areaname}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="被检单位"   DisplayMemberBinding="{Binding COMPANYNAME}"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
         <Grid Grid.Row="1" Margin="5,5,5,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="37"/>
@@ -115,12 +118,13 @@
                 </Grid>
             </Grid>
             <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0" Background="#f2f7fb">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="{Binding ElementName=Column1, Path=ActualWidth}" />
                             <ColumnDefinition Width="{Binding ElementName=Column2, Path=ActualWidth}" />
@@ -130,73 +134,113 @@
                             <ColumnDefinition Width="{Binding ElementName=Column6, Path=ActualWidth}" />
                             <ColumnDefinition Width="{Binding ElementName=Column7, Path=ActualWidth}" />
                             <ColumnDefinition Width="{Binding ElementName=Column8, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=Column9, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=Column10, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=Column11, Path=ActualWidth}" />
+                            <ColumnDefinition Width="{Binding ElementName=Column12, Path=ActualWidth}" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Black" HorizontalAlignment="Center" BorderThickness="0,0,1,0">
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{Binding ElementName=Column1, Path=ActualWidth}" />
-                                    <ColumnDefinition Width="{Binding ElementName=Column2, Path=ActualWidth}" />
-                                    <ColumnDefinition Width="{Binding ElementName=Column3, Path=ActualWidth}" />
-                                    <ColumnDefinition Width="{Binding ElementName=Column4, Path=ActualWidth}" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.ColumnSpan="4" HorizontalAlignment="Center">Super Header!!</Label>
-                                <Border  Grid.Row="1" Grid.ColumnSpan="3"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,0" BorderBrush="Gray">
-                                    <Label HorizontalAlignment="Center">1111</Label>
-                                </Border>
-                                <Border  Grid.Row="1" Grid.Column="4"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="Gray">
-                                    <Label HorizontalAlignment="Center">1222</Label>
-                                </Border>
-                            </Grid>
+                        <Border Grid.Column="0" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center">检疫分站</Label>
                         </Border>
-                        <Border Grid.Column="4" Grid.ColumnSpan="3" BorderBrush="Black" HorizontalAlignment="Center" BorderThickness="0,0,1,0">
+                        <Border Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0" >
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center">屠宰场名称</Label>
+                        </Border>
+                        <Border Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center">检疫时间</Label>
+                        </Border>
+                        <Border Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center">货主姓名</Label>
+                        </Border>
+                        <Border Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center">产地</Label>
+                        </Border>
+                        <Border Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center">《检疫处理通知单》编号</Label>
+                        </Border>
+                        <Border Grid.Column="6" Grid.ColumnSpan="2" BorderBrush="#e0e0e0" BorderThickness="0,0,1,0">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{Binding ElementName=Column5, Path=ActualWidth}" />
-                                    <ColumnDefinition Width="{Binding ElementName=Column6, Path=ActualWidth}" />
                                     <ColumnDefinition Width="{Binding ElementName=Column7, Path=ActualWidth}" />
+                                    <ColumnDefinition Width="{Binding ElementName=Column8, Path=ActualWidth}" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.ColumnSpan="4" HorizontalAlignment="Center">Super Header!!</Label>
-                                <Border  Grid.Row="1" Grid.ColumnSpan="2"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,0" BorderBrush="Gray">
-                                    <Label HorizontalAlignment="Center">33333</Label>
+                                <Label Grid.ColumnSpan="2" HorizontalAlignment="Center">宰前检查</Label>
+                                <Border  Grid.Row="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="#e0e0e0">
+                                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">不合格数量(头、只、羽、匹)</TextBlock>
                                 </Border>
-                                <Border  Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="Gray">
-                                    <Label HorizontalAlignment="Center">5555</Label>
+                                <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="#e0e0e0">
+                                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">无害化处理方式</TextBlock>
                                 </Border>
                             </Grid>
                         </Border>
-                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="8">
-                            sfasfdsaf
-                        </Label>
+                        <Border Grid.Column="8" Grid.ColumnSpan="2" BorderBrush="#e0e0e0" BorderThickness="0,0,1,0">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{Binding ElementName=Column9, Path=ActualWidth}" />
+                                    <ColumnDefinition Width="{Binding ElementName=Column10, Path=ActualWidth}" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.ColumnSpan="4" HorizontalAlignment="Center">同步检疫</Label>
+                                <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="#e0e0e0">
+                                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">不合格数量(头、只、羽、匹)</TextBlock>
+                                </Border>
+                                <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="#e0e0e0">
+                                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">无害化处理方式</TextBlock>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="10" Grid.ColumnSpan="2" BorderBrush="#e0e0e0" BorderThickness="0,0,1,1">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="59"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{Binding ElementName=Column11, Path=ActualWidth}" />
+                                    <ColumnDefinition Width="{Binding ElementName=Column12, Path=ActualWidth}" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.ColumnSpan="4" HorizontalAlignment="Center">检疫人员</Label>
+                                <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,0" BorderBrush="#e0e0e0">
+                                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">官方兽医姓名</TextBlock>
+                                </Border>
+                                <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="#e0e0e0">
+                                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">协检员</TextBlock>
+                                </Border>
+                            </Grid>
+                        </Border>
                     </Grid>
-                    <ListView Grid.Row="1" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                        <ListView.View>
-                            <GridView>
-                                <!--<GridView.ColumnHeaderContainerStyle>
-                                    <Style>
-                                        <Setter Property="FrameworkElement.Height" Value="0"/>
-                                        <Setter Property="FrameworkElement.Visibility" Value="Hidden"/>
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>-->
-                                <GridViewColumn Header="column 1" Width="100" x:Name="Column1"/>
-                                <GridViewColumn Header="column 2" Width="80" x:Name="Column2"/>
-                                <GridViewColumn Header="column 3" Width="80" x:Name="Column3"/>
-                                <GridViewColumn Header="column 4" Width="100" x:Name="Column4"/>
-                                <GridViewColumn Header="column 1" Width="100" x:Name="Column5" />
-                                <GridViewColumn Header="column 2" Width="80" x:Name="Column6"/>
-                                <GridViewColumn Header="column 3" Width="80" x:Name="Column7"/>
-                                <GridViewColumn Header="column 4" Width="100" x:Name="Column8"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
+                        <ListView x:Name="livst" Grid.Row="1" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style>
+                                            <Setter Property="FrameworkElement.Height" Value="0"/>
+                                            <Setter Property="FrameworkElement.Visibility" Value="Hidden"/>
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
+                                    <GridViewColumn Header="检疫分站" Width="130" x:Name="Column1" DisplayMemberBinding="{Binding deptname}"/>
+                                    <GridViewColumn Header="屠宰场名称" Width="150" x:Name="Column2" DisplayMemberBinding="{Binding tzcname}"/>
+                                    <GridViewColumn Header="检疫时间" Width="150" x:Name="Column3" DisplayMemberBinding="{Binding createdate}"/>
+                                    <GridViewColumn Header="货主姓名" Width="100" x:Name="Column4" DisplayMemberBinding="{Binding sbrname}"/>
+                                    <GridViewColumn Header="产地" Width="150" x:Name="Column5" DisplayMemberBinding="{Binding area}"/>
+                                    <GridViewColumn Header="《检疫处理通知单》编号" Width="150" x:Name="Column6"  DisplayMemberBinding="{Binding qua_cardid}"/>
+                                    <GridViewColumn Header="不合格数量" Width="80" x:Name="Column7" DisplayMemberBinding="{Binding no_zq}"/>
+                                    <GridViewColumn Header="无害化处理方式" Width="80" x:Name="Column8" DisplayMemberBinding="{Binding function_zq}"/>
+                                    <GridViewColumn Header="不合格数量" Width="80" x:Name="Column9" DisplayMemberBinding="{Binding no_tb}"/>
+                                    <GridViewColumn Header="无害化处理方式" Width="80" x:Name="Column10" DisplayMemberBinding="{Binding function_tb}"/>
+                                    <GridViewColumn Header="官方兽医" Width="100" x:Name="Column11" DisplayMemberBinding="{Binding cusername}"/>
+                                    <GridViewColumn Header="协检员" Width="100" x:Name="Column12" DisplayMemberBinding="{Binding helpusername}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </ScrollViewer>
             </Border>
         </Grid>
     </Grid>

@@ -44,9 +44,12 @@ namespace FoodSafetyMonitoring
 
         public MainWindow(IDBOperation dbOperation)
         {
-            //Rect rc = SystemParameters.WorkArea;//获取工作区大小
-            this.Width = 1366;
-            this.Height = 766;
+            Rect rc = SystemParameters.WorkArea;//获取工作区大小
+            //this.Width = 1366;
+            //this.Height = 766;
+            this.Width = rc.Width;
+            this.Height = rc.Height;
+            rcnormal = new Rect((rc.Width - 1366) / 2, (rc.Height - 766) / 2, 1366, 766);
             InitializeComponent();
             this.dbOperation = dbOperation;
 
@@ -304,7 +307,7 @@ namespace FoodSafetyMonitoring
             {
                 MaxWindow();
             }
-            else if (max.ToolTip.ToString() == "正常")
+            else if (max.ToolTip.ToString() == "还原")
             {
                 NormalWindow();
             }
@@ -313,7 +316,7 @@ namespace FoodSafetyMonitoring
         //最大化窗口
         private void MaxWindow()
         {
-            max.ToolTip = "正常";
+            max.ToolTip = "还原";
             rcnormal = new Rect(this.Left, this.Top, this.Width, this.Height);//保存下当前位置与大小
             this.Left = 0;//设置位置
             this.Top = 0;

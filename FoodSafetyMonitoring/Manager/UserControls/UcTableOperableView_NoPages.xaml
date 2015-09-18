@@ -38,7 +38,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <!--<TextBlock x:Name="_title" FontSize="16" FontWeight="100" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>-->
-        <ListView x:Name="_listview" Grid.Row="0"  HorizontalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}">
+        <ListView x:Name="_listview" Grid.Row="0"  HorizontalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}"  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.View >
                 <GridView x:Name="_gridview" >
                 </GridView>
