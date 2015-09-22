@@ -265,9 +265,11 @@ namespace FoodSafetyMonitoring
 
                         Application.Current.Resources.Add("User", userInfo);
 
+                        string supplierid = (Application.Current.Resources["User"] as UserInfo).SupplierId == "" ? "zrd" : (Application.Current.Resources["User"] as UserInfo).SupplierId;
+
                         string current_version = ConfigurationManager.AppSettings["version"];
 
-                        string new_version = dbOperation.GetDbHelper().GetSingle("select version from t_version where id = (select max(id) from t_version)").ToString();
+                        string new_version = dbOperation.GetDbHelper().GetSingle(string.Format("select version from t_version_new where id = (select max(id) from t_version_new where supplierid ='{0}' )", supplierid)).ToString();
 
                         if (Convert.ToDouble(new_version == "" ? "0" : new_version) > Convert.ToDouble(current_version))
                         {

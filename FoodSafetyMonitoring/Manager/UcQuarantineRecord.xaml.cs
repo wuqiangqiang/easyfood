@@ -96,7 +96,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_animal.SelectedIndex > 0)
             {
-                string object_type = dbOperation.GetDbHelper().GetSingle("select unit from t_animal where animalid =" + (_animal.SelectedItem as Label).Tag.ToString()).ToString();
+                string object_type = dbOperation.GetDbHelper().GetSingle("select unit from t_animal_new where animalid =" + (_animal.SelectedItem as Label).Tag.ToString()).ToString();
                 _object_type.Text = object_type;
                 _object_type_zq.Text = object_type;
                 _object_type_zq2.Text = object_type;

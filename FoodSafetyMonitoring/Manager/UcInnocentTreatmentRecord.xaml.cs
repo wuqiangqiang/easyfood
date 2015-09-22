@@ -68,7 +68,8 @@ namespace FoodSafetyMonitoring.Manager
             {
                 if (_qua_card_id.Text.Trim().Length != 0)
                 {
-                    DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
+                    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
+                                                 _qua_card_id.Text,deptId)).Tables[0];
                     if (table.Rows.Count != 0)
                     {
                         sbrid = table.Rows[0][0].ToString();
@@ -119,7 +120,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_qua_card_id.Text.Trim().Length != 0)
             {
-                DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
+                DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
+                                                 _qua_card_id.Text, deptId)).Tables[0];
                 if (table.Rows.Count != 0)
                 {
                     sbrid = table.Rows[0][0].ToString();
