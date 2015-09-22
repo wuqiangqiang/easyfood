@@ -44,7 +44,7 @@ namespace FoodSafetyMonitoring.Manager
             user_id = (Application.Current.Resources["User"] as UserInfo).ID;
             dept_id = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
-            reportDate.SelectedDate = DateTime.Now.AddDays(-1);
+            reportDate.SelectedDate = DateTime.Now;
             switch (user_flag_tier)
             {
                 case "0": _dept_name.Text = "选择省:";

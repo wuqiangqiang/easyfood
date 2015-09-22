@@ -8,7 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ListViewColumn.xaml"/>
                 <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
-                <ResourceDictionary Source="Themes/Button_new.xaml"/>
+                <!--<ResourceDictionary Source="Themes/Button_new.xaml"/>-->
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
                 <ResourceDictionary Source="Themes/ComboBox.xaml"/>
                 <ResourceDictionary Source="Themes/TextBlock.xaml"/>
@@ -38,7 +38,7 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="106"/>
+            <RowDefinition Height="143"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Width="auto" Margin="5,5,5,5">
@@ -67,18 +67,14 @@
                 <Grid Margin="0,10,0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="37"/>
-                        <!--<RowDefinition Height="37"/>-->
+                        <RowDefinition Height="37"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" >
                         <StackPanel  VerticalAlignment="Center" >
-                            <!--<TextBlock MinWidth="50">设置日期:</TextBlock>
-                            <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center"/>
+                            <TextBlock MinWidth="50">设置日期:</TextBlock>
+                            <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center" Height="26"/>
                             <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
-                            <TextBlock MinWidth="50">来源产地:</TextBlock>
-                            <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_city" Width="120" Text="市(州)" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>-->
                             <TextBlock MinWidth="50">检疫证号:</TextBlock>
                             <TextBox x:Name="_card_no" Width="200" MaxLength="10"></TextBox>
                             <TextBlock MinWidth="50">货主代码:</TextBlock>
@@ -86,7 +82,11 @@
                             <TextBox x:Name="_source_company" Width="120" ></TextBox>
                             <TextBlock MinWidth="50">货主姓名:</TextBlock>
                             <TextBox x:Name="_source_name" Width="140" MaxLength="10"></TextBox>
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="100,0,0,0" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" >
+                        <StackPanel  VerticalAlignment="Center" >
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="800,0,0,0" />
                             <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0" />
                         </StackPanel>
                     </Grid>

@@ -68,7 +68,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 if (_qua_card_id.Text.Trim().Length != 0)
                 {
-                    DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
+                    DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
                     if (table.Rows.Count != 0)
                     {
                         sbrid = table.Rows[0][0].ToString();
@@ -77,14 +77,17 @@ namespace FoodSafetyMonitoring.Manager
                         _address.Text = table.Rows[0][3].ToString();
                         _object_type_zq.Text = table.Rows[0][4].ToString();
                         animalid = table.Rows[0][5].ToString();
+                        _no_zq.Text = table.Rows[0][6].ToString();
 
                         if (animalid == "1")//动物种类是鸡
                         {
                             _object_type_tb.Text = "羽";
+                            _no_tb.Text = table.Rows[0][7].ToString();
                         }
                         else
                         {
                             _object_type_tb.Text = "公斤";
+                            _no_tb.Text = "";
                         }
                     }
                     else
@@ -94,6 +97,8 @@ namespace FoodSafetyMonitoring.Manager
                         _address.Text = "";
                         _object_type_zq.Text = "";
                         _object_type_tb.Text = "";
+                        _no_zq.Text = "";
+                        _no_tb.Text = "";
                         return;
                     }
                 }
@@ -103,6 +108,8 @@ namespace FoodSafetyMonitoring.Manager
                     _address.Text = "";
                     _object_type_zq.Text = "";
                     _object_type_tb.Text = "";
+                    _no_zq.Text = "";
+                    _no_tb.Text = "";
                 }
 
             }
@@ -112,7 +119,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_qua_card_id.Text.Trim().Length != 0)
             {
-                DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
+                DataTable table = dbOperation.GetDbHelper().GetDataSet("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid =" + _qua_card_id.Text).Tables[0];
                 if (table.Rows.Count != 0)
                 {
                     sbrid = table.Rows[0][0].ToString();
@@ -121,14 +128,17 @@ namespace FoodSafetyMonitoring.Manager
                     _address.Text = table.Rows[0][3].ToString();
                     _object_type_zq.Text = table.Rows[0][4].ToString();
                     animalid = table.Rows[0][5].ToString();
+                    _no_zq.Text = table.Rows[0][6].ToString();
 
                     if (animalid == "1")//动物种类是鸡
                     {
                         _object_type_tb.Text = "羽";
+                        _no_tb.Text = table.Rows[0][7].ToString();
                     }
                     else
                     {
                         _object_type_tb.Text = "公斤";
+                        _no_tb.Text = "";
                     }
                 }
                 else
@@ -138,6 +148,8 @@ namespace FoodSafetyMonitoring.Manager
                     _address.Text = "";
                     _object_type_zq.Text = "";
                     _object_type_tb.Text = "";
+                    _no_zq.Text = "";
+                    _no_tb.Text = "";
                     return;
                 }
             }
@@ -147,6 +159,8 @@ namespace FoodSafetyMonitoring.Manager
                 _address.Text = "";
                 _object_type_zq.Text = "";
                 _object_type_tb.Text = "";
+                _no_zq.Text = "";
+                _no_tb.Text = "";
             }
 
         }

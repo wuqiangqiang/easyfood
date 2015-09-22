@@ -125,6 +125,7 @@ namespace FoodSafetyMonitoring
                 {
                     dept_str = deptId;
                 }
+
                 DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image,INFO_NAME from sys_client_sysdept where INFO_CODE ='{0}'", dept_str)).Tables[0];
                 if (dt.Rows[0][0].ToString() != "")
                 {
@@ -151,7 +152,6 @@ namespace FoodSafetyMonitoring
 
                 flag = 1;
                 timer.Interval = new TimeSpan(1000);
-
                 load.Close();
 
             }

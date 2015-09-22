@@ -41,7 +41,7 @@ namespace FoodSafetyMonitoring.Manager
             this.dbOperation = dbOperation;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
-            reportDate.SelectedDate = DateTime.Now.AddDays(-1);
+            reportDate.SelectedDate = DateTime.Now;
             switch (user_flag_tier)
             {
                 case "0": _dept_name.Text = "选择省:";

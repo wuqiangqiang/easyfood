@@ -38,6 +38,9 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
 
+            dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
+            dtpEndDate.SelectedDate = DateTime.Now;
+
             //ComboboxTool.InitComboboxSource(_source_company, string.Format("select DISTINCT t_certificate.companyid ,t_shipper.shippername" +
             //                                 " FROM t_certificate left join t_shipper ON t_certificate.companyid = t_shipper.shipperid" +
             //                                 " WHERE t_certificate.createdeptid like '{0}%' ", deptId), "cxtj");
@@ -49,8 +52,10 @@ namespace FoodSafetyMonitoring.Manager
             //清空列表
             lvlist.DataContext = null;
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_new_new({0},'{1}','{2}','{3}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate_new_new({0},'{1}','{2}','{3}','{4}','{5}')",
                    (Application.Current.Resources["User"] as UserInfo).ID,
+                   ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                   ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                    _card_no.Text,
                    _source_company.Text,
                    _source_name.Text)).Tables[0];
@@ -90,6 +95,13 @@ namespace FoodSafetyMonitoring.Manager
             {
                 return;
             }
+
+            if (current_table.Rows.Count == 0)
+            {
+                Toolkit.MessageBox.Show("导出内容为空，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
             sfd.Filter = "导出文件 (*.csv)|*.csv";
             sfd.FilterIndex = 0;

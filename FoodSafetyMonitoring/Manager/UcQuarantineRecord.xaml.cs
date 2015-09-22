@@ -105,6 +105,45 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
+        private void ObjectCount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (_object_count.Text.Trim().Length != 0)
+                {
+                    _ok_zq.Text = _object_count.Text;
+                    _no_zq.Text = "0";
+                    _ok_tb.Text = _object_count.Text;
+                    _no_tb.Text = "0";
+                }
+                else
+                {
+                    _ok_zq.Text = "";
+                    _no_zq.Text = "";
+                    _ok_tb.Text = "";
+                    _no_tb.Text = "";
+                }
+            }
+        }
+
+        private void ObjectCount_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (_object_count.Text.Trim().Length != 0)
+            {
+                _ok_zq.Text = _object_count.Text;
+                _no_zq.Text = "0";
+                _ok_tb.Text = _object_count.Text;
+                _no_tb.Text = "0";
+            }
+            else
+            {
+                _ok_zq.Text = "";
+                _no_zq.Text = "";
+                _ok_tb.Text = "";
+                _no_tb.Text = "";
+            }
+        }
+
         private void clear()
         {
             _shipper_name.SelectedIndex = 0;
@@ -152,6 +191,12 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            if (Convert.ToInt32(_object_count.Text) <= 0)
+            {
+                Toolkit.MessageBox.Show("入场数量必须大于0！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             if (_quater.SelectedIndex < 1)
             {
                 Toolkit.MessageBox.Show("请选择临床情况！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -164,29 +209,41 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            //if (_ok_zq.Text.Trim().Length == 0)
-            //{
-            //    Toolkit.MessageBox.Show("请输入宰前检查合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
+            if (_ok_zq.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入宰前检查合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-            //if (_no_zq.Text.Trim().Length == 0)
-            //{
-            //    Toolkit.MessageBox.Show("请输入宰前检查不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
+            if (_no_zq.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入宰前检查不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-            //if (_ok_tb.Text.Trim().Length == 0)
-            //{
-            //    Toolkit.MessageBox.Show("请输入同步检疫合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
+            if (Convert.ToInt32(_ok_zq.Text) + Convert.ToInt32(_no_zq.Text) != Convert.ToInt32(_object_count.Text))
+            {
+                Toolkit.MessageBox.Show("宰前检查(合格数+不合格数) != 入场数量,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-            //if (_no_tb.Text.Trim().Length == 0)
-            //{
-            //    Toolkit.MessageBox.Show("请输入同步检疫不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
+            if (_ok_tb.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入同步检疫合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_no_tb.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入同步检疫不合格数！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (Convert.ToInt32(_ok_tb.Text) + Convert.ToInt32(_no_tb.Text) != Convert.ToInt32(_ok_zq.Text))
+            {
+                Toolkit.MessageBox.Show("同步检疫(合格数+不合格数) != 宰前检查合格数,请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
             if (_help_user.SelectedIndex < 1)
             {
@@ -201,8 +258,15 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     Toolkit.MessageBox.Show("请输入检疫处理通知单编号！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
+                } 
+
+                //判断检疫处理通知单编号是否存在
+                bool exit_id = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(id) from t_quarantine_record where qua_cardid ='{0}' and createdeptid = '{1}'", _qua_card_id.Text, deptId));
+                if (exit_id)
+                {
+                    Toolkit.MessageBox.Show("检疫处理通知单编号已存在，请确认后重新输入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
                 }
-                
             }
 
             string sbr_id;
