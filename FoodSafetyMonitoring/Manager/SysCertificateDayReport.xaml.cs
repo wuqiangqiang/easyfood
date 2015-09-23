@@ -167,6 +167,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
+            
             _tableview.ExportExcel();
         }
     }

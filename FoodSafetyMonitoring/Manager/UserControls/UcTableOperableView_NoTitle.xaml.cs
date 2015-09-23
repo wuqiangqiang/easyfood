@@ -401,7 +401,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             }
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
             sfd.Filter = "导出文件 (*.csv)|*.csv";
-            //sfd.Filter = "Excel(*.xls)|*.xls|Excel(*.xlsx)|*.xlsx";
+            //sfd.Filter = "Excel(*.xlsx)|*.xlsx|Excel(*.xls)|*.xls";
             sfd.FilterIndex = 0;
             sfd.RestoreDirectory = true;
             sfd.Title = "导出文件保存路径";
@@ -411,8 +411,17 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             {
                 if (File.Exists(strFilePath))
                 {
-                    File.Delete(strFilePath);
+                    try
+                    {
+                        File.Delete(strFilePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        Toolkit.MessageBox.Show("导出文件时出错,文件可能正被打开！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
                 }
+
                 StreamWriter sw = new StreamWriter(new FileStream(strFilePath, FileMode.CreateNew), Encoding.Default);
                 string tableHeader = " ";
                 foreach (DataColumn c in dt.Columns)
