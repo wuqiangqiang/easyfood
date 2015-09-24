@@ -84,28 +84,28 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     deptId = rows[0]["INFO_CODE"].ToString();
                 }
-                rows = table.Select("FK_CODE_DEPT='" + deptId + "'");
+                rows = table.Select("FK_CODE_DEPT='" + deptId + "'", " orderid asc");
                 foreach (DataRow row1 in rows)
                 {
                     Department department1 = new Department();
                     department1.Parent = department;
                     department1.Row = row1;
                     department1.Name = row1["INFO_NAME"].ToString();
-                    rows = table.Select("FK_CODE_DEPT='" + row1["INFO_CODE"].ToString() + "'");
+                    rows = table.Select("FK_CODE_DEPT='" + row1["INFO_CODE"].ToString() + "'", " orderid asc");
                     foreach (DataRow row2 in rows)
                     {
                         Department department2 = new Department();
                         department2.Parent = department1;
                         department2.Row = row2;
                         department2.Name = row2["INFO_NAME"].ToString();
-                        rows = table.Select("FK_CODE_DEPT='" + row2["INFO_CODE"].ToString() + "'");
+                        rows = table.Select("FK_CODE_DEPT='" + row2["INFO_CODE"].ToString() + "'", " orderid asc");
                         foreach (DataRow row3 in rows)
                         {
                             Department department3 = new Department();
                             department3.Parent = department2;
                             department3.Row = row3;
                             department3.Name = row3["INFO_NAME"].ToString();
-                            rows = table.Select("FK_CODE_DEPT='" + row3["INFO_CODE"].ToString() + "'");
+                            rows = table.Select("FK_CODE_DEPT='" + row3["INFO_CODE"].ToString() + "'", " orderid asc");
                             foreach (DataRow row4 in rows)
                             {
                                 Department department4 = new Department();
