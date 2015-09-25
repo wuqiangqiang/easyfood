@@ -255,7 +255,7 @@ namespace FoodSafetyMonitoring.Manager
                     //将数据导入到工作表的单元格  
                     for (int i = 0; i < exporttable.Rows.Count; i++)
                     {
-                        for (int j = 4; j < exporttable.Columns.Count - 1; j++)
+                        for (int j = 4; j < exporttable.Columns.Count - 2; j++)
                         {
                             excelWS.Cells[i + 5, j - 3] = exporttable.Rows[i][j].ToString();
                         }

@@ -40,9 +40,11 @@
                         <TextBlock  Width="100" FontSize="15" TextWrapping="Wrap">《检疫处理通知单》编号:</TextBlock>
                         <TextBox Width="130" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False" KeyDown="TextBox_KeyDown" LostFocus="_card_id_LostFocus"></TextBox>
                         <TextBlock Width="110" FontSize="15" Margin="25,0,10,0">申报人姓名:</TextBlock>
-                        <TextBox Width="100" x:Name="_shipper_name" FontSize="15" IsEnabled="False" Margin="0,0,0,0"></TextBox>
+                        <ComboBox Width="100" x:Name="_shipper_name" FontSize="15" IsEditable="True"></ComboBox>
+                        <!--<TextBox Width="100" x:Name="_shipper_name" FontSize="15" IsEnabled="False" Margin="0,0,0,0"></TextBox>-->
                         <TextBlock  Width="80" FontSize="15" Margin="30,0,10,0" xml:space="preserve">产      地:</TextBlock>
-                        <TextBox Width="212" x:Name="_address" FontSize="15" Margin="0" IsEnabled="False"></TextBox>
+                        <ComboBox Width="212" x:Name="_address" FontSize="15" Margin="0,0,0,0" IsEditable="True"></ComboBox>
+                        <!--<TextBox Width="212" x:Name="_address" FontSize="15" Margin="0" IsEnabled="False"></TextBox>-->
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="2">

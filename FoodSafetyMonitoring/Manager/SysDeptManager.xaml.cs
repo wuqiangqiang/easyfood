@@ -233,6 +233,7 @@ namespace FoodSafetyMonitoring.Manager
 
                 string lower_area_id = "";
 
+
                 //根据当前部门的级别来赋省，市，区的值
                 switch (row["FLAG_TIER"].ToString())
                 {

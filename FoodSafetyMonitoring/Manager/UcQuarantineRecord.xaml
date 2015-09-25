@@ -49,7 +49,7 @@
                 <Grid Grid.Row="2">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="80" FontSize="15">入场数量:</TextBlock>
-                        <TextBox Width="75" x:Name="_object_count" Margin="0" FontSize="15" MaxLength="5" KeyDown="ObjectCount_KeyDown" LostFocus="ObjectCount_LostFocus" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                        <TextBox Width="75" x:Name="_object_count" Margin="0" FontSize="15" MaxLength="5"  InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                         <TextBox Width="30" x:Name="_object_type" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
                         <TextBlock  Width="100" FontSize="15" Margin="30,0,10,0">官方兽医姓名:</TextBlock>
                         <TextBox  x:Name="_user_name" Margin="0" Width="106" IsEnabled="False" FontSize="15"></TextBox>
@@ -82,7 +82,8 @@
                             </StackPanel>
                         </GroupBox>
                         <TextBlock Width="110" TextWrapping="Wrap" FontSize="15" Margin="20,15,10,0" Foreground="#1956a2">《检疫处理通知单》编号:</TextBlock>
-                        <TextBox Width="222" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False" Margin="5,15,10,0"></TextBox>
+                        <TextBox Width="130" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False" Margin="5,15,10,0"></TextBox>
+                        <CheckBox x:Name="_san" Margin="10,12,0,0" Foreground="#1956a2" Checked="san_checked" Unchecked="san_unchecked">三腺修割</CheckBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="5">
