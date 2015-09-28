@@ -223,13 +223,13 @@ namespace FoodSafetyMonitoring.Manager
 
             if (_shipper_name.SelectedIndex < 1)
             {
-                Toolkit.MessageBox.Show("申报人姓名不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请选择存在的申报人！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             if (_address.SelectedIndex < 1)
             {
-                Toolkit.MessageBox.Show("产地不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("请选择存在的产地！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
