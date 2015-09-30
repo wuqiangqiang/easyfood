@@ -64,138 +64,149 @@ namespace FoodSafetyMonitoring.Manager
             //无害化处理方式
             ComboboxTool.InitComboboxSource(_function_zq, string.Format("select functionid,functionname from t_function where openflag = '1'"), "lr");
             ComboboxTool.InitComboboxSource(_function_tb, string.Format("select functionid,functionname from t_function where openflag = '1'"), "lr");
+
+            //单位
+            DataTable dt_type = dbOperation.GetDbHelper().GetDataSet("select animalid,unit from t_animal_new where deptflag =" + shipperflag).Tables[0];
+            _object_type_zq.Text = dt_type.Rows[0][1].ToString();
+            _object_type_tb.Text = dt_type.Rows[0][1].ToString();
+            _object_type_san.Text = "公斤";
         }
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (_qua_card_id.Text.Trim().Length != 0)
-                {
-                    //DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
-                    //                             _qua_card_id.Text,deptId)).Tables[0];
-                    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select objecttype,animalid from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
-                                                 _qua_card_id.Text, deptId)).Tables[0];
-                    if (table.Rows.Count != 0)
-                    {
-                        //sbrid = table.Rows[0][0].ToString();
-                        //_shipper_name.Text = table.Rows[0][1].ToString();
-                        //areaid = table.Rows[0][2].ToString();
-                        //_address.Text = table.Rows[0][3].ToString();
-                        //_object_type_zq.Text = table.Rows[0][4].ToString();
-                        //animalid = table.Rows[0][5].ToString();
-                        //_no_zq.Text = table.Rows[0][6].ToString();
+        //private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Enter)
+        //    {
+        //        if (_qua_card_id.Text.Trim().Length != 0)
+        //        {
+        //            //DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
+        //            //                             _qua_card_id.Text,deptId)).Tables[0];
+        //            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select objecttype,animalid from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
+        //                                         _qua_card_id.Text, deptId)).Tables[0];
+        //            if (table.Rows.Count != 0)
+        //            {
+        //                //sbrid = table.Rows[0][0].ToString();
+        //                //_shipper_name.Text = table.Rows[0][1].ToString();
+        //                //areaid = table.Rows[0][2].ToString();
+        //                //_address.Text = table.Rows[0][3].ToString();
+        //                //_object_type_zq.Text = table.Rows[0][4].ToString();
+        //                //animalid = table.Rows[0][5].ToString();
+        //                //_no_zq.Text = table.Rows[0][6].ToString();
 
-                        //if (animalid == "1")//动物种类是鸡
-                        //{
-                        //    _object_type_tb.Text = "羽";
-                        //    _no_tb.Text = table.Rows[0][7].ToString();
-                        //}
-                        //else
-                        //{
-                        //    _object_type_tb.Text = "公斤";
-                        //    _no_tb.Text = "";
-                        //}
+        //                //if (animalid == "1")//动物种类是鸡
+        //                //{
+        //                //    _object_type_tb.Text = "羽";
+        //                //    _no_tb.Text = table.Rows[0][7].ToString();
+        //                //}
+        //                //else
+        //                //{
+        //                //    _object_type_tb.Text = "公斤";
+        //                //    _no_tb.Text = "";
+        //                //}
 
-                        _object_type_zq.Text = table.Rows[0][0].ToString();
-                        animalid = table.Rows[0][1].ToString();
-                        if (animalid == "1")//动物种类是鸡
-                        {
-                            _object_type_tb.Text = "羽";
-                        }
-                        else
-                        {
-                            _object_type_tb.Text = "公斤";
-                        }
-                    }
-                    else
-                    {
-                        Toolkit.MessageBox.Show("该检疫处理通知单不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                        //_shipper_name.Text = "";
-                        //_address.Text = "";
-                        _object_type_zq.Text = "";
-                        _object_type_tb.Text = "";
-                        //_no_zq.Text = "";
-                        //_no_tb.Text = "";
-                        return;
-                    }
-                }
-                else
-                {
-                    //_shipper_name.Text = "";
-                    //_address.Text = "";
-                    _object_type_zq.Text = "";
-                    _object_type_tb.Text = "";
-                    //_no_zq.Text = "";
-                    //_no_tb.Text = "";
-                }
+        //                _object_type_zq.Text = table.Rows[0][0].ToString();
+        //                animalid = table.Rows[0][1].ToString();
+        //                if (animalid == "1")//动物种类是鸡
+        //                {
+        //                    _object_type_tb.Text = "羽";
+        //                }
+        //                else
+        //                {
+        //                    _object_type_tb.Text = table.Rows[0][0].ToString();
+        //                }
+        //                _object_type_san.Text = "公斤";
+        //            }
+        //            else
+        //            {
+        //                Toolkit.MessageBox.Show("该检疫处理通知单不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //                //_shipper_name.Text = "";
+        //                //_address.Text = "";
+        //                _object_type_zq.Text = "";
+        //                _object_type_tb.Text = "";
+        //                _object_type_san.Text = "";
+        //                //_no_zq.Text = "";
+        //                //_no_tb.Text = "";
+        //                return;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //_shipper_name.Text = "";
+        //            //_address.Text = "";
+        //            _object_type_zq.Text = "";
+        //            _object_type_tb.Text = "";
+        //            _object_type_san.Text = "";
+        //            //_no_zq.Text = "";
+        //            //_no_tb.Text = "";
+        //        }
+        //    }
+        //}
 
-            }
-        }
+        //private void _card_id_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (_qua_card_id.Text.Trim().Length != 0)
+        //    {
+        //        //DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
+        //        //                             _qua_card_id.Text,deptId)).Tables[0];
+        //        DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select objecttype,animalid from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
+        //                                     _qua_card_id.Text, deptId)).Tables[0];
+        //        if (table.Rows.Count != 0)
+        //        {
+        //            //sbrid = table.Rows[0][0].ToString();
+        //            //_shipper_name.Text = table.Rows[0][1].ToString();
+        //            //areaid = table.Rows[0][2].ToString();
+        //            //_address.Text = table.Rows[0][3].ToString();
+        //            //_object_type_zq.Text = table.Rows[0][4].ToString();
+        //            //animalid = table.Rows[0][5].ToString();
+        //            //_no_zq.Text = table.Rows[0][6].ToString();
 
-        private void _card_id_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (_qua_card_id.Text.Trim().Length != 0)
-            {
-                //DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select sbrid,sbrname,areaid,area,objecttype,animalid,no_zq,no_tb from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
-                //                             _qua_card_id.Text,deptId)).Tables[0];
-                DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select objecttype,animalid from t_quarantine_record where qua_cardid ='{0}' and createdeptid ='{1}'",
-                                             _qua_card_id.Text, deptId)).Tables[0];
-                if (table.Rows.Count != 0)
-                {
-                    //sbrid = table.Rows[0][0].ToString();
-                    //_shipper_name.Text = table.Rows[0][1].ToString();
-                    //areaid = table.Rows[0][2].ToString();
-                    //_address.Text = table.Rows[0][3].ToString();
-                    //_object_type_zq.Text = table.Rows[0][4].ToString();
-                    //animalid = table.Rows[0][5].ToString();
-                    //_no_zq.Text = table.Rows[0][6].ToString();
+        //            //if (animalid == "1")//动物种类是鸡
+        //            //{
+        //            //    _object_type_tb.Text = "羽";
+        //            //    _no_tb.Text = table.Rows[0][7].ToString();
+        //            //}
+        //            //else
+        //            //{
+        //            //    _object_type_tb.Text = "公斤";
+        //            //    _no_tb.Text = "";
+        //            //}
 
-                    //if (animalid == "1")//动物种类是鸡
-                    //{
-                    //    _object_type_tb.Text = "羽";
-                    //    _no_tb.Text = table.Rows[0][7].ToString();
-                    //}
-                    //else
-                    //{
-                    //    _object_type_tb.Text = "公斤";
-                    //    _no_tb.Text = "";
-                    //}
+        //            _object_type_zq.Text = table.Rows[0][0].ToString();
+        //            animalid = table.Rows[0][1].ToString();
+        //            if (animalid == "1")//动物种类是鸡
+        //            {
+        //                _object_type_tb.Text = "羽";
+        //            }
+        //            else
+        //            {
+        //                _object_type_tb.Text = table.Rows[0][0].ToString();
+        //            }
+        //            _object_type_san.Text = "公斤";
+        //        }
+        //        else
+        //        {
+        //            Toolkit.MessageBox.Show("该检疫处理通知单不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //            //_shipper_name.Text = "";
+        //            //_address.Text = "";
+        //            _object_type_zq.Text = "";
+        //            _object_type_tb.Text = "";
+        //            _object_type_san.Text = "";
+        //            //_no_zq.Text = "";
+        //            //_no_tb.Text = "";
+        //            return;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        //_shipper_name.Text = "";
+        //        //_address.Text = "";
+        //        _object_type_zq.Text = "";
+        //        _object_type_tb.Text = "";
+        //        _object_type_san.Text = "";
+        //        //_no_zq.Text = "";
+        //        //_no_tb.Text = "";
+        //    }
 
-                    _object_type_zq.Text = table.Rows[0][0].ToString();
-                    animalid = table.Rows[0][1].ToString();
-                    if (animalid == "1")//动物种类是鸡
-                    {
-                        _object_type_tb.Text = "羽";
-                    }
-                    else
-                    {
-                        _object_type_tb.Text = "公斤";
-                    }
-                }
-                else
-                {
-                    Toolkit.MessageBox.Show("该检疫处理通知单不存在！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //_shipper_name.Text = "";
-                    //_address.Text = "";
-                    _object_type_zq.Text = "";
-                    _object_type_tb.Text = "";
-                    //_no_zq.Text = "";
-                    //_no_tb.Text = "";
-                    return;
-                }
-            }
-            else
-            {
-                //_shipper_name.Text = "";
-                //_address.Text = "";
-                _object_type_zq.Text = "";
-                _object_type_tb.Text = "";
-                //_no_zq.Text = "";
-                //_no_tb.Text = "";
-            }
-
-        }
+        //}
 
         private void clear()
         {
@@ -204,8 +215,11 @@ namespace FoodSafetyMonitoring.Manager
             _address.Text = "";
             _no_zq.Text = "";
             _no_tb.Text = "";
-            _object_type_zq.Text = "";
-            _object_type_tb.Text = "";
+            _san_zl.Text = "";
+            //_object_type_zq.Text = "";
+            //_object_type_tb.Text = "";
+            //_object_type_san.Text = "";
+            _san.IsChecked = false;
             _function_zq.SelectedIndex = 0;
             _function_tb.SelectedIndex = 0;
             _bz.Text = "";
@@ -264,17 +278,28 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            //三腺修割标志位
+            string san_flag;
+            if (_san.IsChecked == true)
+            {
+                san_flag = "1";
+            }
+            else
+            {
+                san_flag = "0";
+            }
+
             string sql = string.Format("INSERT INTO t_innocent_record(qua_cardid,sbrid,sbrname,areaid,area," +
                                         "animalid,no_zq,objecttype_zq,function_zq,no_tb,objecttype_tb,function_tb," +
-                                        "bz,createuserid,createdate,createdeptid,helpuserid,tzcname)" +
+                                        "bz,createuserid,createdate,createdeptid,helpuserid,tzcname,san_flag,san_zl)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
-                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}' )"
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}' )"
                                         , _qua_card_id.Text, (_shipper_name.SelectedItem as Label).Tag.ToString(), _shipper_name.Text,
                                         (_address.SelectedItem as Label).Tag.ToString(), _address.Text, animalid,
                                         _no_zq.Text, _object_type_zq.Text, _function_zq.SelectedIndex < 1 ? "" : (_function_zq.SelectedItem as Label).Tag.ToString(),
                                         _no_tb.Text, _object_type_tb.Text, _function_tb.SelectedIndex < 1 ? "" : (_function_tb.SelectedItem as Label).Tag.ToString(),
                                         _bz.Text,userId, System.DateTime.Now, deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
-                                        _slaughter_site.Text);
+                                        _slaughter_site.Text, san_flag, _san_zl.Text);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
@@ -294,6 +319,16 @@ namespace FoodSafetyMonitoring.Manager
         {
             clear();
             _help_user.SelectedIndex = 0;
+        }
+
+        private void san_checked(object sender, RoutedEventArgs e)
+        {
+            _bz.Text = "三腺修割";
+        }
+
+        private void san_unchecked(object sender, RoutedEventArgs e)
+        {
+            _bz.Text = "";
         }
 
         private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)

@@ -38,7 +38,7 @@
                 <Grid Grid.Row="1">
                     <StackPanel >
                         <TextBlock  Width="100" FontSize="15" TextWrapping="Wrap">《检疫处理通知单》编号:</TextBlock>
-                        <TextBox Width="130" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False" KeyDown="TextBox_KeyDown" LostFocus="_card_id_LostFocus"></TextBox>
+                        <TextBox Width="130" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False"></TextBox>
                         <TextBlock Width="110" FontSize="15" Margin="25,0,10,0">申报人姓名:</TextBlock>
                         <ComboBox Width="100" x:Name="_shipper_name" FontSize="15" IsEditable="True"></ComboBox>
                         <!--<TextBox Width="100" x:Name="_shipper_name" FontSize="15" IsEnabled="False" Margin="0,0,0,0"></TextBox>-->
@@ -66,12 +66,16 @@
                             <TextBox Width="47" x:Name="_object_type_tb" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
                             <TextBlock Width="110" FontSize="15" Margin="30,0,10,0">无害化处理方式:</TextBlock>
                             <ComboBox Width="100" x:Name="_function_tb" FontSize="15"></ComboBox>
+                            <TextBlock Width="80" FontSize="15" Margin="30,0,10,0" xml:space="preserve">重       量:</TextBlock>
+                            <TextBox Width="80" x:Name="_san_zl" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                            <TextBox Width="47" x:Name="_object_type_san" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
+                            <CheckBox x:Name="_san" Margin="10,0,10,0" Foreground="#1956a2" Checked="san_checked" Unchecked="san_unchecked">三腺修割</CheckBox>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
                 <Grid Grid.Row="4">
                     <StackPanel >
-                        <TextBlock  Width="100" FontSize="15">备注:</TextBlock>
+                        <TextBlock  Width="100" FontSize="15" xml:space="preserve">备        注:</TextBlock>
                         <TextBox  x:Name="_bz" Width="380" FontSize="15"></TextBox>
                     </StackPanel>
                 </Grid>

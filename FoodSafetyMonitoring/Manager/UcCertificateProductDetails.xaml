@@ -21,7 +21,7 @@
             <TextBlock Canvas.Left="572" Canvas.Top="332" x:Name="_user_id" Width="100" Margin="0" FontSize="16">222</TextBlock>
             <TextBlock  Canvas.Left="454" Canvas.Top="366" Width="70" x:Name="_nian" FontSize="14">二〇一五</TextBlock>
             <TextBlock  Canvas.Left="540" Canvas.Top="365" Width="30" x:Name="_yue" FontSize="16">444</TextBlock>
-            <TextBlock  Canvas.Left="603" Canvas.Top="365" Width="50" x:Name="_day" FontSize="16">555</TextBlock>
+            <TextBlock  Canvas.Left="598" Canvas.Top="365" Width="50" x:Name="_day" FontSize="16">二十九</TextBlock>
         </Canvas>
     </Grid>
 </UserControl>

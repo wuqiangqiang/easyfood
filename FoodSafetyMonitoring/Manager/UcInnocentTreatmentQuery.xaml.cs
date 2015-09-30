@@ -34,6 +34,8 @@ namespace FoodSafetyMonitoring.Manager
         string deptId = (System.Windows.Application.Current.Resources["User"] as UserInfo).DepartmentID;
         string user_flag_tier = (System.Windows.Application.Current.Resources["User"] as UserInfo).FlagTier;
 
+        Exporting_window load;
+
         public UcInnocentTreatmentQuery(IDBOperation dbOperation)
         {
             InitializeComponent();
@@ -165,6 +167,8 @@ namespace FoodSafetyMonitoring.Manager
                         return;
                     }
 
+                    load = new Exporting_window();
+                    load.Show();
                     Workbook excelWB = excelApp.Workbooks.Add(System.Type.Missing);    //创建工作簿（WorkBook：即Excel文件主体本身）  
                     Worksheet excelWS = (Worksheet)excelWB.Worksheets[1];   //创建工作表（即Excel里的子表sheet） 1表示在子表sheet1里进行数据导出 
                     excelWS.Name = "屠宰检疫无害化处理情况日汇总表";
@@ -259,11 +263,13 @@ namespace FoodSafetyMonitoring.Manager
                     excelWB.SaveAs(excelFilePath);  //将其进行保存到指定的路径  
                     excelWB.Close();
                     excelApp.Quit();
-                    KillAllExcel(excelApp); //释放可能还没释放的进程  
+                    KillAllExcel(excelApp); //释放可能还没释放的进程 
+                    load.Close();
                     Toolkit.MessageBox.Show("文件导出成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch
                 {
+                    load.Close();
                     Toolkit.MessageBox.Show("无法创建Excel对象，可能您的机子Office版本有问题！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }

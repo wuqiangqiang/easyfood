@@ -82,8 +82,7 @@
                             </StackPanel>
                         </GroupBox>
                         <TextBlock Width="110" TextWrapping="Wrap" FontSize="15" Margin="20,15,10,0" Foreground="#1956a2">《检疫处理通知单》编号:</TextBlock>
-                        <TextBox Width="130" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False" Margin="5,15,10,0"></TextBox>
-                        <CheckBox x:Name="_san" Margin="10,12,0,0" Foreground="#1956a2" Checked="san_checked" Unchecked="san_unchecked">三腺修割</CheckBox>
+                        <TextBox Width="222" x:Name="_qua_card_id" FontSize="15" MaxLength="10" InputMethod.IsInputMethodEnabled="False" Margin="5,15,10,0"></TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="5">

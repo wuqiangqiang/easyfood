@@ -269,17 +269,6 @@ namespace FoodSafetyMonitoring.Manager
             //    }
             //}
 
-            //三腺修割标志位
-            string san_flag;
-            if(_san.IsChecked == true)
-            {
-                san_flag = "1";
-            }
-            else
-            {
-                san_flag = "0";
-            }
-
             string sbr_id;
 
             //判断申报人是否存在，若不存在则插入数据库
@@ -329,14 +318,14 @@ namespace FoodSafetyMonitoring.Manager
 
             string sql = string.Format("INSERT INTO t_quarantine_record(sbrid,sbrname,areaid,area," +
                                         "animalid,objectcount,objecttype,quater,objectflag,cardid_rc,ok_zq,no_zq,ok_tb," +
-                                        "no_tb,cardid_tb,createuserid,createdate,createdeptid,helpuserid,tzcname,bz,qua_cardid,san_flag)" +
+                                        "no_tb,cardid_tb,createuserid,createdate,createdeptid,helpuserid,tzcname,bz,qua_cardid)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
-                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}')"
+                                        "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}')"
                                         , sbr_id, _shipper_name.Text,area_id, _address.Text, (_animal.SelectedItem as Label).Tag.ToString(),
                                         _object_count.Text, _object_type.Text,(_quater.SelectedItem as Label).Tag.ToString(), (_object_flag.SelectedItem as Label).Tag.ToString(), 
                                         _card_id.Text,_ok_zq.Text,_no_zq.Text,_ok_tb.Text,_no_tb.Text,_card_id_tb.Text,
                                         userId, System.DateTime.Now,deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
-                                        _slaughter_site.Text, _bz.Text, _qua_card_id.Text, san_flag);
+                                        _slaughter_site.Text, _bz.Text, _qua_card_id.Text);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
@@ -400,14 +389,6 @@ namespace FoodSafetyMonitoring.Manager
             return true;
         }
 
-        private void san_checked(object sender, RoutedEventArgs e)
-        {
-            _bz.Text = "三腺修割";
-        }
-
-        private void san_unchecked(object sender, RoutedEventArgs e)
-        {
-            _bz.Text = "";
-        }
+        
     }
 }
