@@ -148,28 +148,28 @@
                                 <ColumnDefinition Width="{Binding ElementName=Column18, Path=ActualWidth}" />
                                 <ColumnDefinition Width="{Binding ElementName=Column19, Path=ActualWidth}" />
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="0" BorderThickness="1,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">检疫分站</Label>
                             </Border>
-                            <Border Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0" >
+                            <Border Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="Black" >
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">屠宰场名称</Label>
                             </Border>
-                            <Border Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="2" BorderThickness="0,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">屠宰动物种类</Label>
                             </Border>
-                            <Border Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="3" BorderThickness="0,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">检疫时间</Label>
                             </Border>
-                            <Border Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="4" BorderThickness="0,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">申报人</Label>
                             </Border>
-                            <Border Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="5" BorderThickness="0,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">产地</Label>
                             </Border>
-                            <Border Grid.Column="6" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="6" BorderThickness="0,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">入场数量</Label>
                             </Border>
-                            <Border Grid.Column="7" Grid.ColumnSpan="3" BorderBrush="#e0e0e0" BorderThickness="0,0,1,0">
+                            <Border Grid.Column="7" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="0,1,1,0">
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -181,18 +181,18 @@
                                         <ColumnDefinition Width="{Binding ElementName=Column10, Path=ActualWidth}" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.ColumnSpan="2" HorizontalAlignment="Center">入场监督查验</Label>
-                                    <Border  Grid.Row="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">临床情况</TextBlock>
                                     </Border>
-                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">是都佩戴规定的畜禽标识</TextBlock>
                                     </Border>
-                                    <Border  Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">回收《动物检疫合格证明》编号</TextBlock>
                                     </Border>
                                 </Grid>
                             </Border>
-                            <Border Grid.Column="10" Grid.ColumnSpan="2" BorderBrush="#e0e0e0" BorderThickness="0,0,1,0">
+                            <Border Grid.Column="10" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,1,1,0">
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -203,15 +203,15 @@
                                         <ColumnDefinition Width="{Binding ElementName=Column12, Path=ActualWidth}" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.ColumnSpan="4" HorizontalAlignment="Center">宰前检查</Label>
-                                    <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">合格数(头、只、羽、匹)</TextBlock>
                                     </Border>
-                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">不合格数(头、只、羽、匹)</TextBlock>
                                     </Border>
                                 </Grid>
                             </Border>
-                            <Border Grid.Column="12" Grid.ColumnSpan="3" BorderBrush="#e0e0e0" BorderThickness="0,0,1,0">
+                            <Border Grid.Column="12" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="0,1,1,0">
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -223,18 +223,18 @@
                                         <ColumnDefinition Width="{Binding ElementName=Column15, Path=ActualWidth}" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.ColumnSpan="4" HorizontalAlignment="Center">同步检疫</Label>
-                                    <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">合格数(头、只、羽、匹)</TextBlock>
                                     </Border>
-                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,1,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">出具《动物检疫合格证明》编号</TextBlock>
                                     </Border>
-                                    <Border  Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,1" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">不合格数(头、只、羽、匹)</TextBlock>
                                     </Border>
                                 </Grid>
                             </Border>
-                            <Border Grid.Column="15" Grid.ColumnSpan="2" BorderBrush="#e0e0e0" BorderThickness="0,0,1,1">
+                            <Border Grid.Column="15" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,1,1,1">
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -245,18 +245,18 @@
                                         <ColumnDefinition Width="{Binding ElementName=Column17, Path=ActualWidth}" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.ColumnSpan="4" HorizontalAlignment="Center">检疫人员</Label>
-                                    <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,0" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1"   HorizontalAlignment="Stretch" BorderThickness="0,1,1,0" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">官方兽医姓名</TextBlock>
                                     </Border>
-                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="#e0e0e0">
+                                    <Border  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="Black">
                                         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5">协检员</TextBlock>
                                     </Border>
                                 </Grid>
                             </Border>
-                            <Border Grid.Column="17" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="17" BorderThickness="0,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">备注</Label>
                             </Border>
-                            <Border Grid.Column="18" BorderThickness="0,0,1,1" BorderBrush="#e0e0e0">
+                            <Border Grid.Column="18" BorderThickness="0,1,1,1" BorderBrush="Black">
                                 <Label HorizontalAlignment="Center" VerticalAlignment="Center">检疫处理通知单编号</Label>
                             </Border>
                         </Grid>
@@ -274,7 +274,7 @@
                                     <GridViewColumn Header="屠宰动物种类" Width="90" x:Name="Column3" DisplayMemberBinding="{Binding animalname}"/>
                                     <GridViewColumn Header="检疫时间" Width="150" x:Name="Column4" DisplayMemberBinding="{Binding createdate}"/>
                                     <GridViewColumn Header="货主姓名" Width="100" x:Name="Column5" DisplayMemberBinding="{Binding sbrname}"/>
-                                    <GridViewColumn Header="产地" Width="150" x:Name="Column6" DisplayMemberBinding="{Binding area}"/>
+                                    <GridViewColumn Header="产地" Width="200" x:Name="Column6" DisplayMemberBinding="{Binding area}"/>
                                     <GridViewColumn Header="入场数量" Width="80" x:Name="Column7"  DisplayMemberBinding="{Binding objectcount}"/>
                                     <GridViewColumn Header="临床情况" Width="40" x:Name="Column8" DisplayMemberBinding="{Binding quater}"/>
                                     <GridViewColumn Header="是都佩戴规定的畜禽标识" Width="60" x:Name="Column9" DisplayMemberBinding="{Binding objectflag}"/>

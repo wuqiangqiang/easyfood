@@ -325,7 +325,7 @@ namespace FoodSafetyMonitoring.Manager
             this._manager_flag.Text = "(必填)";
             string id = (sender as Button).Tag.ToString();
 
-            DataRow dr = dbOperation.GetDbHelper().GetDataSet("SELECT RECO_PKID,NUMB_USER,INFO_USER,INFO_PASSWORD,fk_dept,sys_client_sysdept.INFO_NAME,ROLE_ID,expired " +
+            DataRow dr = dbOperation.GetDbHelper().GetDataSet("SELECT RECO_PKID,NUMB_USER,INFO_USER,INFO_PASSWORD,fk_dept,sys_client_sysdept.INFO_NAME,ROLE_ID,expired,FLAG_TIER " +
                         "FROM sys_client_user ,sys_client_sysdept " +
                         "WHERE sys_client_user.fk_dept = sys_client_sysdept.INFO_CODE " +
                         "AND sys_client_user.RECO_PKID = " + id).Tables[0].Rows[0];
@@ -351,8 +351,17 @@ namespace FoodSafetyMonitoring.Manager
                 }
             }
 
-            this._loginPassword.Password = dr["INFO_PASSWORD"].ToString();
-            password_old = dr["INFO_PASSWORD"].ToString();
+            this._loginPassword.Password = dr["INFO_PASSWORD"].ToString().Substring(1,6);
+            password_old = dr["INFO_PASSWORD"].ToString().Substring(1, 6);
+            //除了省级领导，其余均不能修改自己的密码
+            if (user_flag_tier != "1" & user_flag_tier != "0")
+            {
+                if (user_flag_tier == dr["FLAG_TIER"].ToString())
+                {
+                    this._loginPassword.IsEnabled = false;
+                }
+            }
+            
             if (dr["expired"].ToString() == "1")
             {
                 this._user_manger.IsChecked = true;

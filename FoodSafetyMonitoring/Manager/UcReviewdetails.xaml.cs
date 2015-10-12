@@ -51,9 +51,9 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
             MyColumns.Add("reagentname", new MyColumn("reagentname", "检测方法") { BShow = true, Width = 10 });
             MyColumns.Add("resultname", new MyColumn("resultname", "检测结果") { BShow = true, Width = 10 });
-            MyColumns.Add("detectusername", new MyColumn("detectusername", "检测师") { BShow = true, Width = 10 });
+            MyColumns.Add("detectusername", new MyColumn("detectusername", "检测师") { BShow = true, Width = 15 });
             MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false, Width = 14 });
-            MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 12 });
+            MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 25 });
             MyColumns.Add("reviewflagname", new MyColumn("reviewflagname", "是否复核") { BShow = false });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 

@@ -72,7 +72,7 @@ namespace FoodSafetyMonitoring
                     Grid grid = new Grid();
                     grid.SetValue(Grid.RowProperty, j);
                     grid.SetValue(Grid.ColumnSpanProperty, 2);
-                    grid.SetBinding(Grid.BackgroundProperty, new Binding("IsPressed"));
+                    //grid.SetBinding(Grid.BackgroundProperty, new Binding("IsPressed") { Converter = new VisibleBtnConverter() });
                     grids[i].Children.Add(grid);
 
                     grids[i].ColumnDefinitions.Add(new ColumnDefinition());
@@ -384,6 +384,27 @@ namespace FoodSafetyMonitoring
             //{
             //    ((IClickChildMenuInitUserControlUI)uc).InitUserControlUI();
             //}
+        }
+    }
+
+    public class VisibleBtnConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value.ToString() == "合计" || value.ToString() == "上级下达任务量" || value.ToString() == "未分配量")
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Visibility.Visible;
         }
     }
 }

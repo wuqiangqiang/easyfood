@@ -190,7 +190,7 @@
                         <Grid Grid.Row ="4">
                             <StackPanel  VerticalAlignment="Center" >
                                 <TextBlock Width="100"  >帐号密码:</TextBlock>
-                                <PasswordBox  Name="_loginPassword" VerticalAlignment="Center" GotFocus="FrameworkElement_GotFocus" Margin="0"  Width="300" Height="26" ></PasswordBox>
+                                <PasswordBox  Name="_loginPassword" VerticalAlignment="Center" GotFocus="FrameworkElement_GotFocus" Margin="0"  Width="300" Height="26" MaxLength="15"></PasswordBox>
                                 <TextBlock x:Name="_password_flag" Foreground="Red" Margin="0" ></TextBlock>
                             </StackPanel>
                         </Grid>

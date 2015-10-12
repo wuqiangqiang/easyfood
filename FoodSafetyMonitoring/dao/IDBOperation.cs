@@ -61,6 +61,8 @@ namespace FoodSafetyMonitoring.dao
 
         public string DepartmentID { get; set; }
 
+        public string DepartmentName { get; set; }
+
         public string FlagTier { get; set; }
 
         public string SupplierId { get; set; }

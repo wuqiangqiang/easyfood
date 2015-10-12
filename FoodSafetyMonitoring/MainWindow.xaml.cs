@@ -111,6 +111,7 @@ namespace FoodSafetyMonitoring
                 this._user.Text = this.userName;
                 //this._date.Text = DateTime.Now.ToLongDateString().ToString() +  DateTime.Now.ToString("dddd");
                 this._date.Text = DateTime.Now.ToLongDateString().ToString();
+                this._dept.Text = userInfo.DepartmentName;
 
                 DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select companyName,phone from t_supplier where supplierId ='{0}'", (Application.Current.Resources["User"] as UserInfo).SupplierId == "" ? "zrd" : (Application.Current.Resources["User"] as UserInfo).SupplierId)).Tables[0];
                 this._bottom.Text = "版权所有:" + table.Rows[0][0].ToString() + "  软著登字第0814101号    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
