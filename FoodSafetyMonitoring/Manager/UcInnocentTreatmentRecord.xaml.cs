@@ -211,8 +211,8 @@ namespace FoodSafetyMonitoring.Manager
         private void clear()
         {
             _qua_card_id.Text = "";
-            _shipper_name.Text = "";
-            _address.Text = "";
+            _shipper_name.SelectedIndex = 0;
+            _address.SelectedIndex = 0;
             _no_zq.Text = "";
             _no_tb.Text = "";
             _san_zl.Text = "";
@@ -229,47 +229,47 @@ namespace FoodSafetyMonitoring.Manager
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (_qua_card_id.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入检疫处理通知单编号！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_qua_card_id.Text.Trim().Length == 0)
+            //{
+            //    Toolkit.MessageBox.Show("请输入检疫处理通知单编号！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_shipper_name.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择存在的申报人！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_shipper_name.SelectedIndex < 1)
+            //{
+            //    Toolkit.MessageBox.Show("请选择存在的申报人！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_address.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择存在的产地！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_address.SelectedIndex < 1)
+            //{
+            //    Toolkit.MessageBox.Show("请选择存在的产地！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_no_zq.Text.Trim().Length != 0)
-            {
-                if (Convert.ToDouble(_no_zq.Text) > 0 )
-                {
-                    if (_function_zq.SelectedIndex < 1)
-                    {
-                        Toolkit.MessageBox.Show("请选择宰前无害化处理方式！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                        return;
-                    }
-                }
-            }
+            //if (_no_zq.Text.Trim().Length != 0)
+            //{
+            //    if (Convert.ToDouble(_no_zq.Text) > 0 )
+            //    {
+            //        if (_function_zq.SelectedIndex < 1)
+            //        {
+            //            Toolkit.MessageBox.Show("请选择宰前无害化处理方式！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //            return;
+            //        }
+            //    }
+            //}
 
-            if (_no_tb.Text.Trim().Length != 0)
-            {
-                if (Convert.ToDouble(_no_tb.Text) > 0 )
-                {
-                    if (_function_tb.SelectedIndex < 1)
-                    {
-                        Toolkit.MessageBox.Show("请选择同步无害化处理方式！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                        return;
-                    }
-                }
-            }
+            //if (_no_tb.Text.Trim().Length != 0)
+            //{
+            //    if (Convert.ToDouble(_no_tb.Text) > 0 )
+            //    {
+            //        if (_function_tb.SelectedIndex < 1)
+            //        {
+            //            Toolkit.MessageBox.Show("请选择同步无害化处理方式！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //            return;
+            //        }
+            //    }
+            //}
             
 
             if (_help_user.SelectedIndex < 1)
@@ -289,16 +289,37 @@ namespace FoodSafetyMonitoring.Manager
                 san_flag = "0";
             }
 
+            string sbr_name = "";
+            if (_shipper_name.Text != "-请选择-")
+            {
+                sbr_name = _shipper_name.Text;
+            }
+            else
+            {
+                sbr_name = "";
+            }
+
+            string area_name = "";
+            if (_address.Text != "-请选择-")
+            {
+                area_name = _address.Text;
+            }
+            else
+            {
+                area_name = "";
+            }
+
             string sql = string.Format("INSERT INTO t_innocent_record(qua_cardid,sbrid,sbrname,areaid,area," +
                                         "animalid,no_zq,objecttype_zq,function_zq,no_tb,objecttype_tb,function_tb," +
                                         "bz,createuserid,createdate,createdeptid,helpuserid,tzcname,san_flag,san_zl)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
                                         "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}' )"
-                                        , _qua_card_id.Text, (_shipper_name.SelectedItem as Label).Tag.ToString(), _shipper_name.Text,
-                                        (_address.SelectedItem as Label).Tag.ToString(), _address.Text, animalid,
+                                        , _qua_card_id.Text,
+                                        _shipper_name.SelectedIndex < 1 ? "" : (_shipper_name.SelectedItem as Label).Tag.ToString(), sbr_name,
+                                        _address.SelectedIndex < 1 ? "" : (_address.SelectedItem as Label).Tag.ToString(), area_name, animalid,
                                         _no_zq.Text, _object_type_zq.Text, _function_zq.SelectedIndex < 1 ? "" : (_function_zq.SelectedItem as Label).Tag.ToString(),
                                         _no_tb.Text, _object_type_tb.Text, _function_tb.SelectedIndex < 1 ? "" : (_function_tb.SelectedItem as Label).Tag.ToString(),
-                                        _bz.Text,userId, System.DateTime.Now, deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
+                                        _bz.Text, userId, _entering_datetime.Text + " " + DateTime.Now.ToLongTimeString().ToString(), deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
                                         _slaughter_site.Text, san_flag, _san_zl.Text);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);

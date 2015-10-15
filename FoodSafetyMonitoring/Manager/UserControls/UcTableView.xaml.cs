@@ -274,7 +274,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
         }
     }
 
-
+    //用于表格内容每行颜色显示
     public class BackGroundConverter : IValueConverter
     {
 
@@ -299,6 +299,29 @@ namespace FoodSafetyMonitoring.Manager.UserControls
         }
     }
 
+    //用于屠宰情况两个查询画面中合计行不显示删除按钮
+    public class BtnIsVisibleConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value.ToString() == "")
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Visibility.Visible;
+        }
+    }
+
+    //用于很多统计报表上特定行不显示详情按钮
     public class VisibleBtnConverter : IValueConverter
     {
 

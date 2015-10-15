@@ -1,18 +1,19 @@
 ﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcInnocentTreatmentRecord"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
+             xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls"
+             xmlns:toolkit ="http://schemas.microsoft.com/wpf/2008/toolkit">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
                 <ResourceDictionary Source="Themes/TextBox.xaml"/>
                 <ResourceDictionary Source="Themes/PasswordBox.xaml"/>
-                <ResourceDictionary Source="Themes/Button_new.xaml"/>
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
                 <ResourceDictionary Source="Themes/ComboBox.xaml"/>
                 <ResourceDictionary Source="Themes/TextBlock.xaml"/>
                 <ResourceDictionary Source="Themes/CheckBox.xaml"/>
+                <ResourceDictionary Source="Themes/DatePicker.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -86,7 +87,8 @@
                         <TextBlock  Width="110" FontSize="15" Margin="25,0,5,0" xml:space="preserve">协   检   员:</TextBlock>
                         <ComboBox  x:Name="_help_user" Margin="5,0,0,0" Width="100" FontSize="15"></ComboBox>
                         <TextBlock  Width="80" FontSize="15" Margin="30,0,10,0">录入时间:</TextBlock>
-                        <TextBox  x:Name="_entering_datetime"  Width="212" IsEnabled="False" FontSize="15" Margin="0"></TextBox>
+                        <!--<TextBox  x:Name="_entering_datetime"  Width="212" IsEnabled="False" FontSize="15" Margin="0"></TextBox>-->
+                        <toolkit:DatePicker x:Name="_entering_datetime" VerticalAlignment="Center" Width="212"/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="6">

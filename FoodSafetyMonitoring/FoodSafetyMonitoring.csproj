@@ -1340,7 +1340,9 @@
     <Compile Include="Manager\UcYearReportDetails.xaml.cs">
       <DependentUpon>UcYearReportDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Manager\UserControls\DatePicker.xaml.cs" />
+    <Compile Include="Manager\UserControls\DatePicker.xaml.cs">
+      <DependentUpon>DatePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UserControls\TitleBarControl.xaml.cs">
       <DependentUpon>TitleBarControl.xaml</DependentUpon>
     </Compile>

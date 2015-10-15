@@ -167,47 +167,47 @@ namespace FoodSafetyMonitoring.Manager
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
 
-            if (_shipper_name.SelectedIndex == 0 || _shipper_name.Text == "")
-            {
-                Toolkit.MessageBox.Show("申报人姓名不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_shipper_name.SelectedIndex == 0 || _shipper_name.Text == "")
+            //{
+            //    Toolkit.MessageBox.Show("申报人姓名不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_address.SelectedIndex == 0 || _address.Text == "")
-            {
-                Toolkit.MessageBox.Show("产地不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_address.SelectedIndex == 0 || _address.Text == "")
+            //{
+            //    Toolkit.MessageBox.Show("产地不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_animal.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择屠宰动物种类！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_animal.SelectedIndex < 1)
+            //{
+            //    Toolkit.MessageBox.Show("请选择屠宰动物种类！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_object_count.Text.Trim().Length == 0)
-            {
-                Toolkit.MessageBox.Show("请输入入场数量！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_object_count.Text.Trim().Length == 0)
+            //{
+            //    Toolkit.MessageBox.Show("请输入入场数量！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (Convert.ToInt32(_object_count.Text) <= 0)
-            {
-                Toolkit.MessageBox.Show("入场数量必须大于0！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (Convert.ToInt32(_object_count.Text) <= 0)
+            //{
+            //    Toolkit.MessageBox.Show("入场数量必须大于0！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_quater.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择临床情况！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_quater.SelectedIndex < 1)
+            //{
+            //    Toolkit.MessageBox.Show("请选择临床情况！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
-            if (_object_flag.SelectedIndex < 1)
-            {
-                Toolkit.MessageBox.Show("请选择是否佩戴规定的畜禽标识！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_object_flag.SelectedIndex < 1)
+            //{
+            //    Toolkit.MessageBox.Show("请选择是否佩戴规定的畜禽标识！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
             //if (_ok_zq.Text.Trim().Length == 0)
             //{
@@ -269,62 +269,82 @@ namespace FoodSafetyMonitoring.Manager
             //    }
             //}
 
-            string sbr_id;
+            string sbr_id = "";
+            string sbr_name = "";
 
             //判断申报人是否存在，若不存在则插入数据库
-            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(sbrid) from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId));
-            if (!exit_flag)
+            if (_shipper_name.Text != "-请选择-")
             {
-                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_record_sbr (sbrname,openflag,createuserid,createdeptid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}')",
-                                                              _shipper_name.Text,'1',userId, deptId, DateTime.Now));
-                if (n == 1)
+                bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(sbrid) from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId));
+                if (!exit_flag)
+                {
+                    int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_record_sbr (sbrname,openflag,createuserid,createdeptid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}')",
+                                                                  _shipper_name.Text, '1', userId, deptId, DateTime.Now));
+                    if (n == 1)
+                    {
+                        sbr_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT sbrid from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId)).ToString();
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("申报人添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+                else
                 {
                     sbr_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT sbrid from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId)).ToString();
                 }
-                else
-                {
-                    Toolkit.MessageBox.Show("申报人添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
+                sbr_name = _shipper_name.Text;
             }
             else
             {
-                sbr_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT sbrid from t_record_sbr where sbrname ='{0}' and createdeptid = '{1}'", _shipper_name.Text, deptId)).ToString();
+                sbr_name = "";
             }
 
 
-            string area_id;
+            string area_id = "";
+            string area_name = "";
 
             //判断产地是否存在，若不存在则插入数据库
-            bool exit_flag2 = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(areaid) from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId));
-            if (!exit_flag2)
+            if (_address.Text != "-请选择-")
             {
-                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_record_area (areaname,openflag,createuserid,createdeptid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}')",
-                                                              _address.Text, '1', userId, deptId, DateTime.Now));
-                if (n == 1)
+                bool exit_flag2 = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(areaid) from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId));
+                if (!exit_flag2)
+                {
+                    int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_record_area (areaname,openflag,createuserid,createdeptid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}')",
+                                                                  _address.Text, '1', userId, deptId, DateTime.Now));
+                    if (n == 1)
+                    {
+                        area_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT areaid from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId)).ToString();
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("产地添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+                else
                 {
                     area_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT areaid from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId)).ToString();
                 }
-                else
-                {
-                    Toolkit.MessageBox.Show("产地添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
+                area_name = _address.Text;
             }
             else
             {
-                area_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT areaid from t_record_area where areaname ='{0}' and createdeptid = '{1}'", _address.Text, deptId)).ToString();
+                area_name = "";
             }
+            
 
             string sql = string.Format("INSERT INTO t_quarantine_record(sbrid,sbrname,areaid,area," +
                                         "animalid,objectcount,objecttype,quater,objectflag,cardid_rc,ok_zq,no_zq,ok_tb," +
                                         "no_tb,cardid_tb,createuserid,createdate,createdeptid,helpuserid,tzcname,bz,qua_cardid)" +
                                         " values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}'," +
                                         "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}')"
-                                        , sbr_id, _shipper_name.Text,area_id, _address.Text, (_animal.SelectedItem as Label).Tag.ToString(),
-                                        _object_count.Text, _object_type.Text,(_quater.SelectedItem as Label).Tag.ToString(), (_object_flag.SelectedItem as Label).Tag.ToString(), 
+                                        , sbr_id, sbr_name, area_id, area_name, _animal.SelectedIndex < 1 ? "" : (_animal.SelectedItem as Label).Tag.ToString(),
+                                        _object_count.Text, _object_type.Text, _quater.SelectedIndex < 1 ? "" : (_quater.SelectedItem as Label).Tag.ToString(),
+                                        _object_flag.SelectedIndex < 1 ? "" : (_object_flag.SelectedItem as Label).Tag.ToString(), 
                                         _card_id.Text,_ok_zq.Text,_no_zq.Text,_ok_tb.Text,_no_tb.Text,_card_id_tb.Text,
-                                        userId, System.DateTime.Now,deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
+                                        userId, _entering_datetime.Text + " " + DateTime.Now.ToLongTimeString().ToString(), deptId, (_help_user.SelectedItem as Label).Tag.ToString(),
                                         _slaughter_site.Text, _bz.Text, _qua_card_id.Text);
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,6 +62,24 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
+
+            System.Data.DataTable table = GetData();
+
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = (table.Rows.Count - 1).ToString();
+
+            livst.DataContext = table;
+
+            if ((table.Rows.Count - 1) == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+        }
+
+        private System.Data.DataTable GetData()
+        {
             string shipper_name;
             if (_shipper_name.SelectedIndex == 0)
             {
@@ -77,18 +96,8 @@ namespace FoodSafetyMonitoring.Manager
                               ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                               _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as System.Windows.Controls.Label).Tag,
                               _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as System.Windows.Controls.Label).Tag,
-                               shipper_name,_qua_cardid.Text)).Tables[0];
-
-            _sj.Visibility = Visibility.Visible;
-            _hj.Visibility = Visibility.Visible;
-            _title.Text = (table.Rows.Count - 1).ToString();
-
-            livst.DataContext = table;
-            if ((table.Rows.Count - 1) == 0)
-            {
-                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+                               shipper_name, _qua_cardid.Text)).Tables[0];
+            return table;
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)
@@ -108,23 +117,7 @@ namespace FoodSafetyMonitoring.Manager
                 }
             }
 
-            string shipper_name;
-            if (_shipper_name.SelectedIndex == 0)
-            {
-                shipper_name = "";
-            }
-            else
-            {
-                shipper_name = _shipper_name.Text;
-            }
-
-            System.Data.DataTable exporttable = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_innocent_query('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                              deptId,
-                              ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
-                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
-                              _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as System.Windows.Controls.Label).Tag,
-                              _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as System.Windows.Controls.Label).Tag,
-                               shipper_name, _qua_cardid.Text)).Tables[0];
+            System.Data.DataTable exporttable = GetData();
 
             if (exporttable.Rows.Count - 1 == 0)
             {
@@ -187,8 +180,8 @@ namespace FoodSafetyMonitoring.Manager
                     excelRange.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
                     //导出标题
-                    excelWS.Cells[2, 1] = "动物卫生监督所(分所)名称：" + exporttable.Rows[0][0].ToString();
-                    excelWS.Cells[2, 7] = "屠宰场名称：" + exporttable.Rows[0][1].ToString();
+                    excelWS.Cells[2, 1] = "动物卫生监督所(分所)名称：" + exporttable.Rows[0][1].ToString();
+                    excelWS.Cells[2, 7] = "屠宰场名称：" + exporttable.Rows[0][2].ToString();
                     //设置行高
                     Range excelRange2 = excelWS.get_Range("A2");
                     excelRange2.RowHeight = 25;
@@ -243,9 +236,9 @@ namespace FoodSafetyMonitoring.Manager
                     //将数据导入到工作表的单元格  
                     for (int i = 0; i < exporttable.Rows.Count; i++)
                     {
-                        for (int j = 3; j < exporttable.Columns.Count; j++)
+                        for (int j = 4; j < exporttable.Columns.Count; j++)
                         {
-                            excelWS.Cells[i + 5, j - 2] = exporttable.Rows[i][j].ToString();
+                            excelWS.Cells[i + 5, j - 3] = exporttable.Rows[i][j].ToString();
                         }
                     }
 
@@ -305,6 +298,35 @@ namespace FoodSafetyMonitoring.Manager
                 return false;
             }
             return true;
+        }
+
+        private void _btn_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (Toolkit.MessageBox.Show("确定要删除该条记录吗？", "系统询问", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                string id = (sender as System.Windows.Controls.Button).Tag.ToString();
+                try
+                {
+                    int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("delete from t_innocent_record where id ='{0}'", id));
+                    if (result > 0)
+                    {
+                        Toolkit.MessageBox.Show("删除成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        System.Data.DataTable table = GetData();
+                        _title.Text = (table.Rows.Count - 1).ToString();
+                        livst.DataContext = table;
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("删除失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+                catch
+                {
+                    Toolkit.MessageBox.Show("删除失败2！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+            }
         } 
     }
 }

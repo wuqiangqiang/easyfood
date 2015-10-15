@@ -36,7 +36,7 @@ namespace FoodSafetyMonitoring.Manager
 
             orderid = id;
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_detect_details('{0}')", id)).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_detect_details_new('{0}')", id)).Tables[0];
 
             //给画面上的控件赋值
             //图片地址改为从数据库中获取
