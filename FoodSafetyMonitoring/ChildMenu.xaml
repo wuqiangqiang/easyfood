@@ -72,7 +72,7 @@
                                                   IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   OverridesDefaultStyle="True"/>
                             </Grid>
-                            <Image Source="/res/line.png" Grid.Row="1"></Image>
+                            <Image x:Name="img" Source="/res/line.png" Grid.Row="1"></Image>
                             <Border x:Name="scv" Background="#f2f1f1" BorderThickness="0" BorderBrush="Gray" Grid.Row="2" >
                                 <ContentPresenter Margin="0" ContentSource="Content"/>
                             </Border>
@@ -81,7 +81,8 @@
                             <Trigger Property="IsExpanded" Value="True">
                                 <Setter TargetName="gr" Property="Height" Value="{Binding Path=DesiredSize/Height,ElementName=scv}"/>
                                 <Setter TargetName="scv" Property="Background" Value="#f2f1f1"/>
-                                <Setter TargetName="back" Property="Background" Value="#e9e9e9"/>
+                                <Setter TargetName="back" Property="Background" Value="#c6cbd0"/>
+                                <Setter TargetName="img" Property="Source" Value="/res/line_pressed.png"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -94,24 +95,32 @@
             <Setter Property="FontFamily" Value="微软雅黑"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Height" Value="35"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                        <Border x:Name="Border" BorderThickness="0" Background="#f2f1f1" BorderBrush="{StaticResource NormalBorderBrush}" VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="145"/>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="img" Source ="/res/file_2.png" Grid.Column="1" Width="14" Height="19"/>
+                                <Label x:Name="lab" Foreground="Black" Grid.Column="3" Content="{TemplateBinding Content}" Height="35" VerticalContentAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#1956a2"/>
+                                <Setter TargetName="lab" Property="Foreground" Value="White"/>
+                                <Setter TargetName="img" Property="Source" Value="/res/file_2_pressed.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <!--<Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Gold"/>
-                </Trigger>-->
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="FontWeight" Value="Bold"/>
-                </Trigger>
-                <!--<Trigger Property="IsPressed" Value="false">
-                    <Setter Property="Foreground" Value="Black"/>
-                </Trigger>-->
-            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid  x:Name="_grid" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto" >

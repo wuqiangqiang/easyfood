@@ -66,46 +66,22 @@ namespace FoodSafetyMonitoring
                 int j = 0;
                 foreach (DataRow row in childMenus[i].child_childmenu)
                 {
-                    //插入一行两列
+                    //插入一行
                     grids[i].RowDefinitions.Add(new RowDefinition());
                     grids[i].RowDefinitions[j].Height = new GridLength(35, GridUnitType.Pixel);
-                    Grid grid = new Grid();
-                    grid.SetValue(Grid.RowProperty, j);
-                    grid.SetValue(Grid.ColumnSpanProperty, 2);
-                    //grid.SetBinding(Grid.BackgroundProperty, new Binding("IsPressed") { Converter = new VisibleBtnConverter() });
-                    grids[i].Children.Add(grid);
 
-                    grids[i].ColumnDefinitions.Add(new ColumnDefinition());
-                    grids[i].ColumnDefinitions.Add(new ColumnDefinition());
-                    grids[i].ColumnDefinitions[0].Width = new GridLength(65, GridUnitType.Pixel);
-                    grids[i].ColumnDefinitions[1].Width = new GridLength(145, GridUnitType.Pixel);
-
-                    //第一列插入图片
-                    Image img = new Image();
-                    img.Source = new BitmapImage(new Uri("pack://application:,," + "/res/file_2.png"));
-                    img.Width = 14;
-                    img.Height = 19;
-                    Thickness thick = new Thickness(35, 0, 5, 0);
-                    img.Margin = thick;
-                    img.SetValue(Grid.RowProperty, j);
-                    img.SetValue(Grid.ColumnProperty, 0);
-                    grids[i].Children.Add(img);
-
-                    //第二列插入button
+                    //插入button
                     childMenus[i].buttons[j].SetValue(Grid.RowProperty, j);
-                    childMenus[i].buttons[j].SetValue(Grid.ColumnProperty, 1);
                     grids[i].Children.Add(childMenus[i].buttons[j]);
 
                     j = j + 1;
                 }
             }
         }
-
     }
 
     public class MyChildMenu
     {
-        //public Button btn;
         public List<Button> buttons;
         public string name;
         MainWindow mainWindow;
@@ -127,7 +103,6 @@ namespace FoodSafetyMonitoring
                 Button btn = new Button();
                 btn.Content = row["SUB_NAME"].ToString();
                 btn.Tag = row["SUB_ID"].ToString();
-                btn.MinWidth = 120;
                 btn.VerticalAlignment = VerticalAlignment.Center;
                 btn.Click += new RoutedEventHandler(this.btn_Click);
                 buttons.Add(btn);
@@ -167,6 +142,11 @@ namespace FoodSafetyMonitoring
                     //屠宰检测->检测单查询
                     case "20102": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
+                        flag = 1;
+                        break;
+                    //屠宰检测->自检表
+                    case "20103": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysDetectReport(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //屠宰情况->检疫情况录入
@@ -384,27 +364,6 @@ namespace FoodSafetyMonitoring
             //{
             //    ((IClickChildMenuInitUserControlUI)uc).InitUserControlUI();
             //}
-        }
-    }
-
-    public class VisibleBtnConverter : IValueConverter
-    {
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value.ToString() == "合计" || value.ToString() == "上级下达任务量" || value.ToString() == "未分配量")
-            {
-                return Visibility.Hidden;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return Visibility.Visible;
         }
     }
 }

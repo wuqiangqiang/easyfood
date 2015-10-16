@@ -1097,3 +1097,5 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcInnocentTreatmentQuery.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\Exporting_window.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\Exporting_window.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysDetectReport.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysDetectReport.baml

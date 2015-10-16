@@ -287,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\SysDetectReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1097,6 +1101,9 @@
     <Compile Include="Manager\SysDayReport.xaml.cs">
       <DependentUpon>SysDayReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysDetectReport.xaml.cs">
+      <DependentUpon>SysDetectReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysHelp.xaml.cs">
       <DependentUpon>SysHelp.xaml</DependentUpon>
     </Compile>
@@ -1463,6 +1470,8 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\file_2_pressed.png" />
+    <Resource Include="res\line_pressed.png" />
     <Resource Include="res\certificate.png" />
     <Resource Include="res\certificate_print.png" />
     <Resource Include="res\certificate_product.png" />

@@ -239,8 +239,8 @@
                                             <Setter Property="FrameworkElement.Visibility" Value="Hidden"/>
                                         </Style>
                                     </GridView.ColumnHeaderContainerStyle>
-                                    <GridViewColumn Header="检疫分站" Width="160" x:Name="Column1" DisplayMemberBinding="{Binding deptname}"/>
-                                    <GridViewColumn Header="屠宰场名称" Width="160" x:Name="Column2" DisplayMemberBinding="{Binding tzcname}"/>
+                                    <GridViewColumn Header="检疫分站" Width="200" x:Name="Column1" DisplayMemberBinding="{Binding deptname}"/>
+                                    <GridViewColumn Header="屠宰场名称" Width="200" x:Name="Column2" DisplayMemberBinding="{Binding tzcname}"/>
                                     <GridViewColumn Header="检疫时间" Width="150" x:Name="Column3" DisplayMemberBinding="{Binding createdate}"/>
                                     <GridViewColumn Header="货主姓名" Width="100" x:Name="Column4" DisplayMemberBinding="{Binding sbrname}"/>
                                     <GridViewColumn Header="产地" Width="200" x:Name="Column5" DisplayMemberBinding="{Binding area}"/>
