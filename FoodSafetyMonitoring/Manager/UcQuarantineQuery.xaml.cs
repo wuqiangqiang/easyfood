@@ -83,6 +83,7 @@ namespace FoodSafetyMonitoring.Manager
             
         }
 
+
         private System.Data.DataTable GetData()
         {
             string shipper_name;
@@ -147,6 +148,7 @@ namespace FoodSafetyMonitoring.Manager
                     {
                         System.IO.File.Delete(excelFilePath);
                     }
+
                     catch (Exception ex)
                     {
                         Toolkit.MessageBox.Show("导出文件时出错,文件可能正被打开！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);

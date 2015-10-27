@@ -24,12 +24,10 @@
             <Style x:Key="_style_listviewItem" TargetType="ListViewItem">
                 <Setter Property="Background">
                     <Setter.Value>
-                        <Binding RelativeSource="{RelativeSource Self}" Converter="{ StaticResource ResourceKey=_converter}" />
+                        <Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource ResourceKey=_converter}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground" Value="Black">
-                </Setter>
-                <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>-->
+                <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="FontFamily" Value="微软雅黑"/>
                 <Setter Property="FontSize" Value="12"/>

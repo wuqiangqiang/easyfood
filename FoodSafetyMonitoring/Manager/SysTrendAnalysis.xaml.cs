@@ -189,10 +189,11 @@ namespace FoodSafetyMonitoring.Manager
             title.FontSize = 16;
             chart.Titles.Add(title);
 
-            for (int i = 0; i < table.Rows.Count; i++)
+            for (int i = 0; i < table.Rows.Count - 1; i++)
             {
                 DataSeries dataSeries = new DataSeries();
                 dataSeries.RenderAs = RenderAs.Line;
+                dataSeries.LineThickness = 2;
                 dataSeries.LegendText = table.Rows[i][0].ToString();
                 dataSeries.LabelFontFamily = new FontFamily("楷体");
                 for (int j = 1; j < table.Columns.Count - 1; j++)

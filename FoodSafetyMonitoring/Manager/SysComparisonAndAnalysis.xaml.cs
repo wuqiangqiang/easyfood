@@ -222,6 +222,7 @@ namespace FoodSafetyMonitoring.Manager
                 point.LabelStyle = LabelStyles.Inside;
                 point.LabelText = table.Rows[i][0].ToString();
                 point.LabelFontFamily = new FontFamily("微软雅黑");
+
                 point.LabelFontSize = 12;
                 dataSeries.DataPoints.Add(point);
             }

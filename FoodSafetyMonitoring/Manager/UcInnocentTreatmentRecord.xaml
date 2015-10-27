@@ -51,6 +51,7 @@
                 <Grid Grid.Row="2">
                     <GroupBox Header="宰前检查" FontSize="15" Margin="0,5,0,0">
                         <StackPanel >
+                            
                             <TextBlock Width="100" FontSize="15">不合格数:</TextBlock>
                             <TextBox Width="80" x:Name="_no_zq" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                             <TextBox Width="47" x:Name="_object_type_zq" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
@@ -68,7 +69,7 @@
                             <TextBlock Width="110" FontSize="15" Margin="30,0,10,0">无害化处理方式:</TextBlock>
                             <ComboBox Width="100" x:Name="_function_tb" FontSize="15"></ComboBox>
                             <TextBlock Width="80" FontSize="15" Margin="30,0,10,0" xml:space="preserve">重       量:</TextBlock>
-                            <TextBox Width="80" x:Name="_san_zl" Margin="0" FontSize="15" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                            <TextBox Width="80" x:Name="_san_zl" Margin="0" FontSize="15" MaxLength="6" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="San_Zl_Pasting" PreviewKeyDown="San_Zl_PreviewKeyDown"  PreviewTextInput="San_Zl_PreviewTextInput"></TextBox>
                             <TextBox Width="47" x:Name="_object_type_san" FontSize="15" Margin="1,0,0,0" IsEnabled="False"></TextBox>
                             <CheckBox x:Name="_san" Margin="10,0,10,0" Foreground="#1956a2" Checked="san_checked" Unchecked="san_unchecked">三腺修割</CheckBox>
                         </StackPanel>

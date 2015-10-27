@@ -121,6 +121,7 @@
                 <Grid Grid.Column="1">
                     <Grid.Background>
                         <ImageBrush ImageSource="/res/title_right.png"/>
+                        
                     </Grid.Background>
                 </Grid>
             </Grid>

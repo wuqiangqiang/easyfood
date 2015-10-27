@@ -394,6 +394,48 @@ namespace FoodSafetyMonitoring.Manager
             return true;
         }
 
+        private void San_Zl_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumbericOrDot(text))
+                { e.CancelCommand(); }
+            }
+            else { e.CancelCommand(); }
+        }
+
+        private void San_Zl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void San_Zl_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!isNumbericOrDot(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
+        }
+
+        //isDigit是否是数字
+        public static bool isNumbericOrDot(string _string)
+        {
+            if (string.IsNullOrEmpty(_string))
+
+                return false;
+            foreach (char c in _string)
+            {
+                if (!(char.IsDigit(c) || c == '.'))
+                    //if(c<'0' c="">'9')//最好的方法,在下面测试数据中再加一个0，然后这种方法效率会搞10毫秒左右
+                    return false;
+            }
+            return true;
+        }
+
 
     }
 }

@@ -894,7 +894,7 @@ namespace FoodSafetyMonitoring.Manager
                        string type = importdt.Rows[i][4].ToString();
                        if (row["FLAG_TIER"].ToString() == "4")
                        {
-                           if (city_flag == "")
+                           if (type == "")
                            {
                                load.Close();
                                Toolkit.MessageBox.Show("检测站点性质不能为空！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
