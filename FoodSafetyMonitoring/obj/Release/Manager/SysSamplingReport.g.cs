@@ -142,7 +142,7 @@ namespace FoodSafetyMonitoring.Manager {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/检测监管系统;component/manager/syssamplingreport.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ZRDSystem;component/manager/syssamplingreport.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Manager\SysSamplingReport.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

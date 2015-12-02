@@ -76,7 +76,7 @@ namespace FoodSafetyMonitoring.Manager {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/检测监管系统;component/manager/ucwarningreportdept.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ZRDSystem;component/manager/ucwarningreportdept.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Manager\UcWarningReportDept.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

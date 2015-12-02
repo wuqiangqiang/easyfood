@@ -36,6 +36,7 @@ namespace FoodSafetyMonitoring.Manager
         private string user_flag_tier;
         private DataTable SupplierTable;
         private string password_old;
+        private string reco_pkid;
         //private int flag_init = 0;//初始化,0未初始化,1已初始化
 
         //当前选中的部门id,名称,部门等级,检测单位的类别
@@ -330,6 +331,7 @@ namespace FoodSafetyMonitoring.Manager
                         "WHERE sys_client_user.fk_dept = sys_client_sysdept.INFO_CODE " +
                         "AND sys_client_user.RECO_PKID = " + id).Tables[0].Rows[0];
 
+            reco_pkid = dr["RECO_PKID"].ToString();
             this.txtUserName.Text = dr["INFO_USER"].ToString();
             this._loginName.Text = dr["NUMB_USER"].ToString();
 
@@ -480,6 +482,13 @@ namespace FoodSafetyMonitoring.Manager
             }
             else
             {
+                bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(RECO_PKID) from sys_client_user where NUMB_USER ='{0}' and  RECO_PKID <> '{1}'", _loginName.Text,reco_pkid));
+                if (exit_flag)
+                {
+                    Toolkit.MessageBox.Show("该登录帐号已存在，请重新输入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
                 if (this._loginPassword.Password == password_old)
                 {
                     strSql = string.Format(@"UPDATE sys_client_user SET NUMB_USER = '{0}', INFO_USER = '{1}', fk_dept = '{2}',

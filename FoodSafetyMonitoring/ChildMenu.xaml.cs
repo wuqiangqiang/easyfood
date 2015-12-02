@@ -206,7 +206,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //数据分析->趋势分析
                     case "40102": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new SysTrendAnalysis(mainWindow.dbOperation); 
+                        temptb.Content = new SysTrendAnalysis(mainWindow.dbOperation);
                         flag = 1;
                         break;
                     //数据分析->区域分析

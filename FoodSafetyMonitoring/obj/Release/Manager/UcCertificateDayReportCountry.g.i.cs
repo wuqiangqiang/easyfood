@@ -30,7 +30,6 @@ using System.Windows.Media.Media3D;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WelfareInstitution;
 
 
 namespace FoodSafetyMonitoring.Manager {
@@ -77,7 +76,7 @@ namespace FoodSafetyMonitoring.Manager {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/检测监管系统;component/manager/uccertificatedayreportcountry.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ZRDSystem;component/manager/uccertificatedayreportcountry.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Manager\UcCertificateDayReportCountry.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

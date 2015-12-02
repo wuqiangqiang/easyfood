@@ -771,11 +771,6 @@ D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysCertificateYear
 D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysCertificateDayReport.baml
 D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysCertificateMonthReport.baml
 D:\20150825\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysCertificateYearReport.baml
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe.config
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\检测监管系统.exe
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\检测监管系统.pdb
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.exe
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\检测监管系统.pdb
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\DBUtility.dll
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\ICSharpCode.SharpZipLib.dll
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\MySql.Data.dll
@@ -971,10 +966,7 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\VerAniControl.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\MainWindow.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\App.g.cs
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\检测监管系统_Content.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\GeneratedInternalTypeHelper.g.cs
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\检测监管系统_MarkupCompile.cache
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\检测监管系统_MarkupCompile.lref
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Frame.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysAreaAnalysis.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysCertificateDayReport.baml
@@ -1050,7 +1042,6 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcUserManager.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UserControls\UcTableView_NoTitle.baml
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\UcHeaderTitle.baml
-D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\检测监管系统.g.resources
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\FoodSafetyMonitoring.Properties.Resources.resources
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\FoodSafetyMonitoring.csproj.GenerateResource.Cache
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysShipperQuery.g.cs
@@ -1099,3 +1090,12 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\Exporting_window.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysDetectReport.g.cs
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysDetectReport.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\ZRDSystem.exe.config
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\ZRDSystem.exe
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\ZRDSystem.pdb
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem_Content.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem_MarkupCompile.cache
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem_MarkupCompile.lref
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem.g.resources
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem.exe
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem.pdb

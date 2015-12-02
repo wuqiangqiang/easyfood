@@ -67,7 +67,7 @@ namespace FoodSafetyMonitoring {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/检测监管系统;component/mainwindowtradition.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ZRDSystem;component/mainwindowtradition.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\MainWindowTradition.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

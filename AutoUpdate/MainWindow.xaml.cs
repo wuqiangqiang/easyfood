@@ -47,7 +47,7 @@ namespace AutoUpdate
             //    startexe = Application.Current.Properties["startexe"].ToString().Trim();
             //}
 
-            startexe = "检测监管系统.exe";
+            startexe = "ZRDSystem.exe";
 
             if (Application.Current.Properties["version"] != null)
             {

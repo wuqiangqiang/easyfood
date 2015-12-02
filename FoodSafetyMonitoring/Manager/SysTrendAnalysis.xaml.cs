@@ -25,6 +25,7 @@ namespace FoodSafetyMonitoring.Manager
     public partial class SysTrendAnalysis : UserControl
     {
         IDBOperation dbOperation;
+        private DataTable currenttable;
         public SysTrendAnalysis(IDBOperation dbOperation)
         {
             InitializeComponent();
@@ -59,7 +60,10 @@ namespace FoodSafetyMonitoring.Manager
 
         void _chart_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            if (currenttable != null)
+            {
+                setChart(currenttable);
+            }
         }
 
 
@@ -164,6 +168,8 @@ namespace FoodSafetyMonitoring.Manager
                 row_count = 0;
             }
 
+            currenttable = table;
+
             _title.Text = _analysis_theme.Text;
             _title_2.Text = _analysis_theme.Text;
             _tableview.SetDataTable(table, "", new List<int>());
@@ -178,7 +184,13 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            _chart.Children.Clear(); 
+            //赋值曲线图
+            setChart(table);
+        }
+
+        public void setChart(DataTable table)
+        {
+            _chart.Children.Clear();
             chart = new Chart();
             chart.Background = Brushes.Transparent;
             chart.View3D = true;
@@ -189,26 +201,34 @@ namespace FoodSafetyMonitoring.Manager
             title.FontSize = 16;
             chart.Titles.Add(title);
 
+            //初始化一个新的Axis
+            Axis yAxis = new Axis();
+            //设置图标中Y轴的最小值永远为0           
+            yAxis.AxisMinimum = 0;
+            yAxis.Suffix = "      ";
+            chart.AxesY.Add(yAxis);
+
             for (int i = 0; i < table.Rows.Count - 1; i++)
             {
                 DataSeries dataSeries = new DataSeries();
-                dataSeries.RenderAs = RenderAs.Line;
-                dataSeries.LineThickness = 2;
-                dataSeries.LegendText = table.Rows[i][0].ToString();
+                dataSeries.RenderAs = RenderAs.Line;  //折线图
+                dataSeries.LineThickness = 2;   //线粗
+                dataSeries.LegendText = table.Rows[i][0].ToString();  //线说明
                 dataSeries.LabelFontFamily = new FontFamily("楷体");
                 for (int j = 1; j < table.Columns.Count - 1; j++)
                 {
                     DataPoint point = new DataPoint();
-                    point.LabelStyle = LabelStyles.OutSide;
-                    point.LabelFontSize = 14;
                     point.AxisXLabel = table.Columns[j].ColumnName;
+                    //point.XValue = table.Columns[j].ColumnName;
                     point.YValue = Convert.ToDouble(table.Rows[i][j].ToString());
+                    //point.MarkerSize = 8;
                     dataSeries.DataPoints.Add(point);
                 }
                 chart.Series.Add(dataSeries);
             }
-          _chart.Children.Add(chart);
+            _chart.Children.Add(chart);
         }
+
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {

@@ -227,7 +227,7 @@ namespace FoodSafetyMonitoring {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/检测监管系统;component/childmenu.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ZRDSystem;component/childmenu.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\ChildMenu.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

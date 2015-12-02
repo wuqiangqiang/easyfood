@@ -83,7 +83,7 @@ namespace FoodSafetyMonitoring {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/检测监管系统;component/ucmenuimage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ZRDSystem;component/ucmenuimage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\UcMenuImage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
