@@ -284,6 +284,16 @@ namespace FoodSafetyMonitoring
                         temptb.Content = new UcUserManager(mainWindow.dbOperation);
                         flag = 1;
                         break;
+                    //系统管理->系统管理->角色管理
+                    case "70103": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysRoleManager();
+                        flag = 1;
+                        break;
+                    //系统管理->系统管理->权限管理
+                    case "70104": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysRolePowerManager();
+                        flag = 1;
+                        break;
                     //系统管理->系统管理->修改密码
                     case "70105": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysModifyPassword();
@@ -304,11 +314,7 @@ namespace FoodSafetyMonitoring
                         temptb.Content = new SysSetArea(mainWindow.dbOperation);
                         flag = 1;
                         break;
-                    //系统管理->系统管理->权限管理
-                    case "70103": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new SysRolePowerManager();
-                        flag = 1;
-                        break;
+                    
                     //帮助->帮助->帮助
                     case "80101": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcUnrealizedModul();

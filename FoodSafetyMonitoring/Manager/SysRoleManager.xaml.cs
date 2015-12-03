@@ -24,13 +24,34 @@ namespace FoodSafetyMonitoring.Manager
     /// </summary>
     public partial class SysRoleManager : UserControl
     {
-        // private String mouseEnterImage = "pack://application:,,/Images/小人3.png";
         private DbHelperMySQL dbHelper = null;
-
+        private System.Data.DataTable dt_role_flag = new System.Data.DataTable();
         private DataTable currentTable = new DataTable();
         public SysRoleManager()
         {
             InitializeComponent();
+
+            //赋值角色级别下拉选择框
+            dt_role_flag.Columns.Add(new DataColumn("levelid"));
+            dt_role_flag.Columns.Add(new DataColumn("levelname"));
+            var row2 = dt_role_flag.NewRow();
+            row2["levelid"] = "1";
+            row2["levelname"] = "省级";
+            dt_role_flag.Rows.Add(row2);
+            var row3 = dt_role_flag.NewRow();
+            row3["levelid"] = "2";
+            row3["levelname"] = "市(州)";
+            dt_role_flag.Rows.Add(row3);
+            var row4 = dt_role_flag.NewRow();
+            row4["levelid"] = "3";
+            row4["levelname"] = "区县";
+            dt_role_flag.Rows.Add(row4);
+            var row5 = dt_role_flag.NewRow();
+            row5["levelid"] = "4";
+            row5["levelname"] = "检测单位";
+            dt_role_flag.Rows.Add(row5);
+            ComboboxTool.InitComboboxSource(role_flag, dt_role_flag, "lr");
+
 
             this.Loaded += new RoutedEventHandler(Test_Loaded);
 
@@ -39,63 +60,22 @@ namespace FoodSafetyMonitoring.Manager
         void Test_Loaded(object sender, RoutedEventArgs e)
         {
             BindData();
-            Clear();
+            //Clear();
         }
-        /// <summary>
-        /// 初始化Combobox，绑定数据源
-        /// </summary>
-        /// <param name="cmb">Combobox</param>
-        /// <param name="strSql">sql语句</param>
-        public void InitCombobox(ComboBox cmb)
-        {
-            try
-            {
 
-                if (cmb != null)
-                {
-                    if (cmb.Items.Count > 0)
-                    {
-                        cmb.Items.Clear();
-                    }
-                }
-                Label item = new Label();
-                item.Tag = -1;
-                item.Content = "-请选择-";
-                cmb.Items.Add(item);
-                cmb.SelectedItem = item;
-
-                for (int i = 1; i < 6; i++)
-                {
-                    string strValue = i.ToString();//隐藏值
-                    string strItem = i.ToString();//显示值
-                    Label item1 = new Label();
-                    item1.Tag = strValue;
-                    item1.Content = strItem;
-                    cmb.Items.Add(item1);
-                }
-            }
-            catch (Exception)
-            {
-                return;
-            }
-        }
         /// <summary>
         /// 从数据库获取数据
         /// </summary>
         /// 
         private void BindData()
         {
-
             DataTable dt = null;
             lvlist.DataContext = null;
-            string strSql = string.Format("select NUMB_ROLE,INFO_NAME,INFO_EXPL,FLAG_TIER,FK_NUMB_ROLE,INFO_NOTE FROM sys_client_role where cuserid = '{0}'", (Application.Current.Resources["User"] as UserInfo).ID);
+            string strSql = string.Format("select NUMB_ROLE,INFO_NAME,INFO_EXPL,FLAG_TIER FROM sys_client_role where cuserid = '{0}'", (Application.Current.Resources["User"] as UserInfo).ID);
             try
             {
-
                 dbHelper = DbHelperMySQL.CreateDbHelper();
-
                 dt = dbHelper.GetDataSet(strSql).Tables[0];
-                lvlist.DataContext = null;
                 lvlist.DataContext = dt;
                 currentTable = dt;
             }
@@ -104,58 +84,7 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
         }
-        private void TextboxSearchControl_ImageClick(object sender, EventArgs e)
-        {
-            SelectUser(txtSearch.Text.Trim());
-        }
 
-        /// <summary>
-        /// 从内存表中查询用户
-        /// </summary>
-        /// <param name="userName">用户名</param>
-        /// <param name="userType">角色类型</param>
-        private void SelectUser(string userName)
-        {
-            if (userName != "")
-            {
-                DataRow[] drs = currentTable.Select("INFO_NAME like '%" + userName + "%'");
-                DataTable temp = currentTable.Clone();
-                foreach (DataRow row in drs)
-                {
-                    DataRow dr = temp.NewRow();
-                    dr.ItemArray = row.ItemArray;
-                    temp.Rows.Add(dr);
-                }
-                lvlist.DataContext = temp;
-            }
-            else
-            {
-                lvlist.DataContext = currentTable;
-            }
-        }
-        //判断角色代码是否存在
-        private bool isExistVisifnbr()
-        {
-            string sql = "select count(*) from sys_client_role where INFO_NAME='" + this.txt_RoleName.Text.ToString() + "'";
-            try
-            {
-                int i = Convert.ToInt32(dbHelper.GetSingle(sql));
-                if (i > 0)
-                {
-                    Toolkit.MessageBox.Show("角色代码已经存在！", "系统提示");
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
         //判断角色下是否存在人员
         private bool isExistRoleName(string oid)
         {
@@ -163,19 +92,8 @@ namespace FoodSafetyMonitoring.Manager
             bool result = false;
             try
             {
-                if (this.txt_RoleName.Text.Trim() == "")
-                {
-                    DataRow[] drs = currentTable.Select("NUMB_ROLE=" + oid);
+                sql = string.Format("select RECO_PKID from sys_client_user where ROLE_ID ='{0}'", oid);
 
-                    string INFO_ROLE = drs[0]["INFO_CODE"].ToString();
-
-                    sql = string.Format("select FK_CODE_ROLE from sys_client_user where  FK_CODE_ROLE ='{0}'", INFO_ROLE);
-
-                }
-                else
-                {
-                    sql = string.Format("select FK_CODE_ROLE from sys_client_user where FK_CODE_ROLE ='{0}'", this.txt_RoleName.Tag.ToString());
-                }
                 if (Exists(sql))
                 {
                     result = true;
@@ -211,19 +129,14 @@ namespace FoodSafetyMonitoring.Manager
         }
         private void Clear()
         {
+            this.role_details.Visibility = Visibility.Visible;
             this.txt_RoleName.IsEnabled = false;
             this.txt_RoleExplain.IsEnabled = false;
-
-            this.txt_vComment.IsEnabled = false;
-
+            this.role_flag.IsEnabled = false;
             this.txt_RoleName.Text = "";
             this.txt_RoleExplain.Text = "";
-
-
-
-            this.txt_vComment.Text = "";
+            this.role_flag.SelectedIndex = 0;
             this.btnSave.Tag = null;
-            this.txtMsg.Text = "";
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -235,6 +148,7 @@ namespace FoodSafetyMonitoring.Manager
                     if (DeleteUser(id))
                     {
                         Toolkit.MessageBox.Show("删除成功！", "系统提示");
+                        Common.SysLogEntry.WriteLog("角色管理", (Application.Current.Resources["User"] as UserInfo).ShowName, OperationType.Delete, "删除用户角色");
                         BindData();
                         Clear();
                     }
@@ -245,7 +159,7 @@ namespace FoodSafetyMonitoring.Manager
                 }
                 else
                 {
-                    Toolkit.MessageBox.Show("角色下存在人员，不能删除！", "系统提示");
+                    Toolkit.MessageBox.Show("角色已分配给用户，不能删除！", "系统提示");
                     return;
                 }
             }
@@ -274,11 +188,10 @@ namespace FoodSafetyMonitoring.Manager
         }
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
+            Clear();
             this.txt_RoleName.IsEnabled = true;
             this.txt_RoleExplain.IsEnabled = true;
-
-
-            this.txt_vComment.IsEnabled = true;
+            this.role_flag.IsEnabled = true;
 
             string id = (sender as Button).Tag.ToString();
             DataRow[] drs = currentTable.Select("NUMB_ROLE=" + id);
@@ -287,43 +200,41 @@ namespace FoodSafetyMonitoring.Manager
                 this.txt_RoleName.Tag = drs[0]["NUMB_ROLE"].ToString();
                 this.txt_RoleName.Text = drs[0]["INFO_NAME"].ToString();
                 this.txt_RoleExplain.Text = drs[0]["INFO_EXPL"].ToString();
-
-
-                this.txt_vComment.Text = drs[0]["INFO_NOTE"].ToString();
-
+                for (int i = 0; i < role_flag.Items.Count; i++)
+                {
+                    if ((role_flag.Items[i] as Label).Tag.ToString() == drs[0]["FLAG_TIER"].ToString())
+                    {
+                        role_flag.SelectedItem = role_flag.Items[i];
+                        break;
+                    }
+                }
                 this.btnSave.Tag = id;
             }
         }
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (this.txt_RoleName.Text.Trim() == "")
             {
-                txtMsg.Text = "*角色名不能为空！";
-                txtMsg.Tag = "txt_RoleName";
+                Toolkit.MessageBox.Show("角色名不能为空!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
 
             //根据btnSave按钮的Tag属性判断是添加还是修改（null为添加，反之为修改）
             string strSql = string.Empty;
             if (btnSave.Tag == null)
             {
-                if (isExistVisifnbr())//判断角色代码是否存在
-                {
-                    strSql = string.Format("call p_insert_role({0},'{1}','{2}','{3}')",
-                        (Application.Current.Resources["User"] as UserInfo).ID, txt_RoleName.Text,txt_vComment.Text, txt_RoleExplain.Text);
-                }
-                else
-                {
-                    this.txtMsg.Text = "";
-                    return;
-                }
+                strSql = string.Format("call p_insert_role({0},'{1}','{2}','{3}')",
+                        (Application.Current.Resources["User"] as UserInfo).ID, txt_RoleName.Text,txt_RoleExplain.Text,
+                         role_flag.SelectedIndex < 1 ? "" : (role_flag.SelectedItem as Label).Tag.ToString());
             }
             else
             {
-                strSql = string.Format(@"update sys_client_role set INFO_NAME='{0}',INFO_EXPL='{1}',MUSERID='{2}',INFO_NOTE='{3}'
-                                                         where NUMB_ROLE={4} ", txt_RoleName.Text, txt_RoleExplain.Text.Trim(), (Application.Current.Resources["User"] as UserInfo).ID,
-                                    txt_vComment.Text, btnSave.Tag.ToString());
+                strSql = string.Format(@"update sys_client_role set INFO_NAME='{0}',INFO_EXPL='{1}',FLAG_TIER='{2}',cuserid ='{3}'   
+                                         where NUMB_ROLE={4} ", txt_RoleName.Text, txt_RoleExplain.Text.Trim(),
+                                           role_flag.SelectedIndex < 1 ? "" : (role_flag.SelectedItem as Label).Tag.ToString(), 
+                                          (Application.Current.Resources["User"] as UserInfo).ID,
+                                          btnSave.Tag.ToString());
             }
 
             try
@@ -333,6 +244,14 @@ namespace FoodSafetyMonitoring.Manager
                 if (num == 1)
                 {
                     Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                    if (btnSave.Tag == null)
+                    {
+                        Common.SysLogEntry.WriteLog("角色管理", (Application.Current.Resources["User"] as UserInfo).ShowName, OperationType.Add, "添加用户角色");
+                    }
+                    else
+                    {
+                        Common.SysLogEntry.WriteLog("角色管理", (Application.Current.Resources["User"] as UserInfo).ShowName, OperationType.Modify, "修改用户角色");
+                    }
                     Clear();
                     BindData();
                 }
@@ -354,13 +273,12 @@ namespace FoodSafetyMonitoring.Manager
             Clear();
         }
 
-
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             Clear();
             this.txt_RoleName.IsEnabled = true;
             this.txt_RoleExplain.IsEnabled = true;
-            this.txt_vComment.IsEnabled = true;
+            this.role_flag.IsEnabled = true;
         }
 
 
@@ -375,8 +293,7 @@ namespace FoodSafetyMonitoring.Manager
 
             DataTable dt_SelectRole = null;
             lvlist.DataContext = null;
-            strsql.Append("select NUMB_ROLE,INFO_CODE,INFO_NAME,INFO_EXPL,FLAG_TIER,FK_NUMB_ROLE,FK_CODE_ROLE,FK_NAME_ROLE,INFO_NOTE FROM sys_client_role where 1=1 ");
-
+            strsql.Append("select NUMB_ROLE,INFO_NAME,INFO_EXPL,FLAG_TIER FROM sys_client_role where 1=1 ");
 
             if (RoleName != "")
             {
