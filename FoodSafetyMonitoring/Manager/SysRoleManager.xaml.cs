@@ -16,7 +16,7 @@ using DBUtility;
 using System.Data;
 using FoodSafetyMonitoring.Common;
 using FoodSafetyMonitoring.dao;
-
+  
 namespace FoodSafetyMonitoring.Manager
 {
     /// <summary>

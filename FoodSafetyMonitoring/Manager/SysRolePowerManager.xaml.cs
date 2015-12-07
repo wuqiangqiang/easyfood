@@ -225,7 +225,7 @@ namespace FoodSafetyMonitoring.Manager
 
                 StringBuilder s_list_roleMenu = new StringBuilder();
                 for (int i = 0; i < list_roleMenu.Count; i++)
-                {
+                {  
                     s_list_roleMenu.Append(list_roleMenu[i]);
                     if (i < list_roleMenu.Count - 1)
                     {
