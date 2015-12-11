@@ -1470,6 +1470,8 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\warning_normal_exist.png" />
+    <Resource Include="res\warning_select_exist.png" />
     <Resource Include="res\file_2_pressed.png" />
     <Resource Include="res\line_pressed.png" />
     <Resource Include="res\certificate.png" />

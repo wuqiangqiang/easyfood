@@ -183,6 +183,10 @@ namespace FoodSafetyMonitoring
                                                   _text_7,_text_8};
             Grid[] grids = new Grid[] { _grid_0, _grid_1, _grid_2, _grid_3, _grid_4, _grid_5, _grid_6,
                                                   _grid_7,_grid_8};
+            Label[] nums = new Label[] { _num_0, _num_1, _num_2, _num_3, _num_4, _num_5, _num_6, _num_7, _num_8 };
+
+            //查询有无预警数据（疑似阳性和阳性）
+            string war_num = dbOperation.GetDbHelper().GetSingle(string.Format("call p_get_warning_num('{0}')", (Application.Current.Resources["User"] as UserInfo).ID)).ToString();
 
             int i = 0;
             foreach (DataRow row in row_mainmenu)
@@ -204,7 +208,23 @@ namespace FoodSafetyMonitoring
                     }
                 }
 
-                mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[i], grids[i], row["SUB_URL"].ToString(), row["SUB_SELECT_URL"].ToString(), childMenus, this));
+                //判断有无预警数据（疑似阳性和阳性）
+                string sub_url = "", sub_select_url = "";
+                
+                if (row["SUB_NAME"].ToString() == "风险预警" && int.Parse(war_num) > 0)
+                {
+                    sub_url = "/res/warning_normal_exist.png";
+                    sub_select_url = "/res/warning_select_exist.png";
+                    nums[i].Content = war_num;
+  
+                }
+                else
+                {
+                    sub_url = row["SUB_URL"].ToString();
+                    sub_select_url = row["SUB_SELECT_URL"].ToString();
+                }
+
+                mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[i], grids[i], sub_url, sub_select_url, childMenus, this));
                 texts[i].Text = row["SUB_NAME"].ToString();
 
                 i = i + 1;

@@ -177,6 +177,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 return;
             }
+
         }
 
         void _department_SelectionChanged(object sender, SelectionChangedEventArgs e)

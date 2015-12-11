@@ -135,38 +135,47 @@
             <Grid Grid.Column="1" x:Name="_grid_0">
                 <Image x:Name="_image_0" />
                 <TextBlock x:Name="_text_0" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_0"  FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="2" x:Name="_grid_1">
-                <Image x:Name="_image_1" />
+                <Image x:Name="_image_1"/>
                 <TextBlock x:Name="_text_1" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_1" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="3" x:Name="_grid_2">
                 <Image x:Name="_image_2" />
                 <TextBlock x:Name="_text_2" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_2" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="4" x:Name="_grid_3">
                 <Image x:Name="_image_3" />
                 <TextBlock x:Name="_text_3" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_3" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="5" x:Name="_grid_4">
                 <Image x:Name="_image_4" />
                 <TextBlock x:Name="_text_4" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_4" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="6" x:Name="_grid_5">
                 <Image x:Name="_image_5" />
                 <TextBlock x:Name="_text_5" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_5" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="7" x:Name="_grid_6">
                 <Image x:Name="_image_6" />
                 <TextBlock x:Name="_text_6" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_6" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="8" x:Name="_grid_7">
                 <Image x:Name="_image_7" />
                 <TextBlock x:Name="_text_7" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_7" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
             <Grid Grid.Column="9" x:Name="_grid_8">
                 <Image x:Name="_image_8" />
                 <TextBlock x:Name="_text_8" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+                <Label x:Name="_num_8" FontFamily="微软雅黑" Foreground="White" FontSize="10" Width="22" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center"  Margin="51,24,0,0"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="2" x:Name="grid_mainpage">
