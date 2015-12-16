@@ -56,9 +56,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 cityname = table.Rows[0][0].ToString();
                 shipperflag = table.Rows[0][1].ToString();
-
                 string tzcarea = table.Rows[0][3].ToString();
-
                 _city_ks.Text = tzcarea.Substring(0,2).ToString();
                 _region_ks.Text = tzcarea.Substring(3, 3).ToString();
                 //_town_ks.Text = table.Rows[0][4].ToString();

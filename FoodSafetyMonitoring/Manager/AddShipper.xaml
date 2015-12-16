@@ -18,12 +18,12 @@
             <ImageBrush ImageSource="../res/sampling.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="45"/>
             <RowDefinition />
             <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
         <Grid Margin="13,11,11,0">
-            <Thumb Width="440" Height="40" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
+            <Thumb Width="440" Height="35" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
             <TextBlock Height="20" Width="160" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Center" Foreground="White">货主信息录入</TextBlock>
             <Image  Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Top" />
         </Grid>

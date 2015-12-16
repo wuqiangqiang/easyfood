@@ -120,7 +120,7 @@
                             <StackPanel VerticalAlignment="Center">
                                 <TextBlock  Width="80">部门级别:</TextBlock>
                                 <TextBlock  x:Name="_regional_level" Margin="6,0,0,0"></TextBlock>
-                                <TextBlock  x:Name="_is_dept" Visibility="Hidden">是否直属:</TextBlock>
+                                <TextBlock  x:Name="_is_dept" Visibility="Hidden">市级直属:</TextBlock>
                                 <ComboBox x:Name="_city_flag" Visibility="Hidden" MinWidth="50" >
                                     <ComboBoxItem>是</ComboBoxItem>
                                     <ComboBoxItem>否</ComboBoxItem>
