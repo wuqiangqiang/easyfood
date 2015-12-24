@@ -29,7 +29,7 @@ namespace FoodSafetyMonitoring.Manager
 
             if (supplierId == "" || supplierId == "zrd")
             {
-                _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/zrd.png"));
+                _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/zrd.jpg"));
             }
             else if (supplierId == "nkrx")
             {

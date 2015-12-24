@@ -314,6 +314,16 @@ namespace FoodSafetyMonitoring
                         temptb.Content = new SysSetArea(mainWindow.dbOperation);
                         flag = 1;
                         break;
+                    //系统管理->系统管理->检测师签到查询
+                    case "70109": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysUserSignIn(mainWindow.dbOperation);
+                        flag = 1;
+                        break;
+                    //系统管理->系统管理->来源单位管理
+                    case "70110": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysCompanyQuery(mainWindow.dbOperation);
+                        flag = 1;
+                        break;
                     
                     //帮助->帮助->帮助
                     case "80101": temptb.Header = (sender as Button).Content.ToString();

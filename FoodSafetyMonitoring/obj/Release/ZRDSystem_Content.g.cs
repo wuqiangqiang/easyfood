@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dll/icsharpcode.sharpziplib.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dll/itextsharp.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dll/mysql.data.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dll/npoi.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("dll/npoi.ooxml.dll")]

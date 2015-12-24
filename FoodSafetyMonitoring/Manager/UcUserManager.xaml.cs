@@ -19,6 +19,9 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using FoodSafetyMonitoring.dao;
 using System.Security.Cryptography;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -39,9 +42,8 @@ namespace FoodSafetyMonitoring.Manager
         private string reco_pkid;
         //private int flag_init = 0;//初始化,0未初始化,1已初始化
 
-        //当前选中的部门id,名称,部门等级,检测单位的类别
+        //当前选中的部门id,部门等级,检测单位的类别
         private string dept_id;
-        private string dept_name;
         private string dept_flag;
         private string dept_type;
 
@@ -149,11 +151,11 @@ namespace FoodSafetyMonitoring.Manager
                 Department department = (sender as TextBlock).Tag as Department;
                 DataRow row = department.Row;
                 dept_id = row["INFO_CODE"].ToString();
-                dept_name = row["INFO_NAME"].ToString();
                 dept_flag = row["FLAG_TIER"].ToString();
                 dept_type = row["type"].ToString();
                 Load_UserManager(dept_id);
                 btnCreate.Visibility = Visibility.Visible;
+                btnExport.Visibility = Visibility.Visible;
                 Clear();
             }
         }
@@ -221,7 +223,15 @@ namespace FoodSafetyMonitoring.Manager
             btnSave.Visibility = Visibility.Visible;
             btnCancel.Visibility = Visibility.Visible;
             Clear();
-            this._department.Text = dept_name;
+            //赋值部门
+            for (int i = 0; i < _department.Items.Count; i++)
+            {
+                if ((_department.Items[i] as Label).Tag.ToString() == dept_id)
+                {
+                    _department.SelectedItem = _department.Items[i];
+                    break;
+                }
+            }
             //this._department.IsEnabled = true;
             this._loginName.IsEnabled = true;
             this._loginPassword.IsEnabled = true;
@@ -559,6 +569,83 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            System.Data.DataTable exporttable = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT INFO_USER,fk_dept,sys_client_sysdept.INFO_NAME,ROLE_ID,sys_client_role.INFO_NAME"+
+                                                        " from sys_client_user,sys_client_sysdept,sys_client_role"+
+                                                        " where fk_dept like CONCAT('{0}','%')"+
+                                                        " AND sys_client_user.fk_dept = sys_client_sysdept.INFO_CODE"+
+                                                        " AND sys_client_user.ROLE_ID = sys_client_role.NUMB_ROLE"+
+                                                        " ORDER BY fk_dept",dept_id)).Tables[0];
+            if (exporttable != null)
+            {
+                if (exporttable.Rows.Count == 0)
+                {
+                    Toolkit.MessageBox.Show("导出内容为空，请确认！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                //打开对话框
+                System.Windows.Forms.SaveFileDialog saveFile = new System.Windows.Forms.SaveFileDialog();
+                saveFile.Filter = "Text documents (.pdf)|*.pdf";
+                saveFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    return;
+                }
+                var pdfFilePath = saveFile.FileName;
+                if (pdfFilePath != "")
+                {
+                    if (System.IO.File.Exists(pdfFilePath))
+                    {
+                        try
+                        {
+                            System.IO.File.Delete(pdfFilePath);
+                        }
+                        catch (Exception ex)
+                        {
+                            Toolkit.MessageBox.Show("导出文件时出错,文件可能正被打开！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+                    }
+
+                    try
+                    {
+                        Document document = new Document();
+                        PdfWriter.GetInstance(document, new FileStream(pdfFilePath, FileMode.Create));
+                        // 添加文档内容
+                        document.Open();
+
+                        //设置中文是字体，否则，中文存不了
+                        BaseFont bfHei = BaseFont.CreateFont(@"C:\Windows\Fonts\simfang.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                        iTextSharp.text.Font font = new iTextSharp.text.Font(bfHei, 10);
+
+                        PdfPTable table = new PdfPTable(3);
+                        table.AddCell(new Phrase("人员姓名", font));
+                        table.AddCell(new Phrase("所属部门", font));
+                        table.AddCell(new Phrase("权限名称", font));
+                        for (int i = 0; i < exporttable.Rows.Count; i++)
+                        {
+                            table.AddCell(new Phrase(exporttable.Rows[i][0].ToString(), font));
+                            table.AddCell(new Phrase(exporttable.Rows[i][2].ToString(), font));
+                            table.AddCell(new Phrase(exporttable.Rows[i][4].ToString(), font));
+                        }
+
+                        document.Add(table);
+                        document.Close();
+                        Toolkit.MessageBox.Show("文件导出成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    }
+                    catch
+                    {
+                        Toolkit.MessageBox.Show("无法创建pdf对象！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+
+                }
+            }
         }
     }
 }

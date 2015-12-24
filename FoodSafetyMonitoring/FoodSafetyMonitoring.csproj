@@ -84,6 +84,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL" />
+    <Reference Include="itextsharp, Version=5.4.4.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -269,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\SysCompanyQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysComparisonAndAnalysis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -408,6 +416,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysUserSignIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\SysWarningReport.xaml">
       <SubType>Designer</SubType>
@@ -819,6 +831,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcUserSignDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcWarningCountry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -948,6 +964,10 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\userSignMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TestUserControl1.xaml">
       <SubType>Designer</SubType>
@@ -1092,6 +1112,9 @@
     <Compile Include="Manager\SysCertificateYearReport.xaml.cs">
       <DependentUpon>SysCertificateYearReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysCompanyQuery.xaml.cs">
+      <DependentUpon>SysCompanyQuery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysComparisonAndAnalysis.xaml.cs">
       <DependentUpon>SysComparisonAndAnalysis.xaml</DependentUpon>
     </Compile>
@@ -1169,6 +1192,9 @@
     </Compile>
     <Compile Include="Manager\SysUserManager.xaml.cs">
       <DependentUpon>SysUserManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysUserSignIn.xaml.cs">
+      <DependentUpon>SysUserSignIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysWarningReport.xaml.cs">
       <DependentUpon>SysWarningReport.xaml</DependentUpon>
@@ -1320,6 +1346,9 @@
     <Compile Include="Manager\SysWarningInfo.xaml.cs">
       <DependentUpon>SysWarningInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcUserSignDetails.xaml.cs">
+      <DependentUpon>UcUserSignDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcWarningCountry.xaml.cs">
       <DependentUpon>UcWarningCountry.xaml</DependentUpon>
     </Compile>
@@ -1388,6 +1417,9 @@
     </Compile>
     <Compile Include="Manager\UserControls\UcTableView_NoTitle.xaml.cs">
       <DependentUpon>UcTableView_NoTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\userSignMap.xaml.cs">
+      <DependentUpon>userSignMap.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -1467,9 +1499,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="DLL\itextsharp.dll" />
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\map.png" />
     <Resource Include="res\warning_normal_exist.png" />
     <Resource Include="res\warning_select_exist.png" />
     <Resource Include="res\file_2_pressed.png" />

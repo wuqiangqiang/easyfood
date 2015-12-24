@@ -127,7 +127,10 @@
                         </ListView.View>
                     </ListView>
                     <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                        <Button Name="btnCreate"  Width="120" Height="32" Style="{StaticResource CreateImageButtonTemplate}" Click="btnCreate_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
+                        <StackPanel HorizontalAlignment="Center">
+                            <Button Name="btnCreate"  Width="120" Height="32" Style="{StaticResource CreateImageButtonTemplate}" Click="btnCreate_Click" VerticalAlignment="Center" Margin="0,0,20,0"  Visibility="Hidden"/>
+                            <Button Name="btnExport"  Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="btnExport_Click" VerticalAlignment="Center"  Visibility="Hidden"/>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Border>

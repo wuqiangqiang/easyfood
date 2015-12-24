@@ -32,8 +32,8 @@ namespace FoodSafetyMonitoring.Manager.UserControls
         public event StateRowEventHandler StateRowEnvent;
         public delegate void GetDataByPageNumberEventHandler();
         public event GetDataByPageNumberEventHandler GetDataByPageNumberEvent;
-        public delegate void SoldRowEventHandler(string id);
-        public event SoldRowEventHandler SoldRowEnvent;
+        public delegate void MapRowEventHandler(string id);
+        public event MapRowEventHandler MapRowEnvent;
 
 
         public UcTableOperableView_NoTitle()
@@ -218,23 +218,23 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 _gridview.Columns.Add(gvc_state);
             }
 
-            if (BShowSold)
+            if (BShowMap)
             {
-                GridViewColumn gvc_sold = new GridViewColumn();
-                gvc_sold.Header = "出栏";
-                FrameworkElementFactory button_sold = new FrameworkElementFactory(typeof(Button));
-                button_sold.SetResourceReference(Button.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
-                button_sold.SetValue(Button.WidthProperty, 40.0);
-                button_sold.AddHandler(Button.ClickEvent, new RoutedEventHandler(Sold_Click));
-                button_sold.SetBinding(Button.TagProperty, new Binding(table.Columns[0].ColumnName));
+                GridViewColumn gvc_map = new GridViewColumn();
+                gvc_map.Header = "地图";
+                FrameworkElementFactory button_map = new FrameworkElementFactory(typeof(Button));
+                button_map.SetResourceReference(Button.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
+                button_map.SetValue(Button.WidthProperty, 40.0);
+                button_map.AddHandler(Button.ClickEvent, new RoutedEventHandler(Map_Click));
+                button_map.SetBinding(Button.TagProperty, new Binding(table.Columns[0].ColumnName));
                 //button_sold.SetResourceReference(Button.StyleProperty, "ListDetailsImageButtonTemplate");
-                button_sold.SetValue(Button.ContentProperty, "出栏");
-                button_sold.SetValue(Button.ForegroundProperty, Brushes.White);
-                button_sold.SetValue(Button.FontSizeProperty, 14.0);
+                button_map.SetValue(Button.ContentProperty, "查看");
+                button_map.SetValue(Button.ForegroundProperty, Brushes.White);
+                button_map.SetValue(Button.FontSizeProperty, 14.0);
                 //button_sold.SetValue(Button.FontFamilyProperty, "黑体");
-                DataTemplate dataTemplate_sold = new DataTemplate() { VisualTree = button_sold };
-                gvc_sold.CellTemplate = dataTemplate_sold;
-                _gridview.Columns.Add(gvc_sold);
+                DataTemplate dataTemplate_sold = new DataTemplate() { VisualTree = button_map };
+                gvc_map.CellTemplate = dataTemplate_sold;
+                _gridview.Columns.Add(gvc_map);
             }
             _listview.ItemsSource = null;
             _listview.ItemsSource = table.DefaultView;
@@ -253,7 +253,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
         public bool BShowDelete { set; get; }
         public bool BShowDetails { set; get; }
         public bool BShowState { set; get; }
-        public bool BShowSold { set; get; }
+        public bool BShowMap { set; get; }
 
         private DataTable table;
         public DataTable Table
@@ -298,11 +298,11 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             }
         }
 
-        private void Sold_Click(object sender, RoutedEventArgs e)
+        private void Map_Click(object sender, RoutedEventArgs e)
         {
-            if (SoldRowEnvent != null)
+            if (MapRowEnvent != null)
             {
-                SoldRowEnvent((sender as Button).Tag.ToString());
+                MapRowEnvent((sender as Button).Tag.ToString());
             }
         }
 

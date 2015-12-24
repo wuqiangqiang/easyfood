@@ -5,6 +5,7 @@ FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\S
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysCertificateDayReport.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysCertificateMonthReport.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysCertificateYearReport.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysCompanyQuery.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysComparisonAndAnalysis.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysDataDicManager.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysDayReport.xaml;;
@@ -29,6 +30,7 @@ FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\S
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysTaskReport.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysTrendAnalysis.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysUserManager.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysUserSignIn.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysWarningReport.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysYearAnalysis.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\Themes\ExpandDockPanel.xaml;;
@@ -74,6 +76,7 @@ FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\S
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysYearReport.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysDesignReport.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\SysWarningInfo.xaml;;
+FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcUserSignDetails.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcWarningCountry.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcWarningDept.xaml;;
 FD:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\Manager\UcWarningdetails.xaml;;

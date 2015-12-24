@@ -1099,3 +1099,12 @@ D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Releas
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem.g.resources
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem.exe
 D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\ZRDSystem.pdb
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysUserSignIn.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcUserSignDetails.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysUserSignIn.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\UcUserSignDetails.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\userSignMap.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\userSignMap.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysCompanyQuery.g.cs
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\obj\Release\Manager\SysCompanyQuery.baml
+D:\湖北老平台新版本连正式库\easyfood\FoodSafetyMonitoring\bin\Release\itextsharp.dll

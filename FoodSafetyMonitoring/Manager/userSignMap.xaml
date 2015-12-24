@@ -1,0 +1,21 @@
+﻿<Window x:Class="FoodSafetyMonitoring.Manager.userSignMap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="400" Height="374" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderBrush="Transparent" ResizeMode="NoResize" Background="Transparent"  AllowsTransparency ="True">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Canvas Width="400" Height="374" >
+        <Canvas.Background>
+            <ImageBrush ImageSource="../res/map.png"/>
+        </Canvas.Background>
+        <Thumb Width="400" Height="40" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
+        <TextBlock x:Name="_title" Canvas.Left="20" Canvas.Top="12" FontSize="16" FontFamily="微软雅黑">地图</TextBlock>
+        <Image Canvas.Left="367" Canvas.Top="5" Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Image x:Name="_img" Canvas.Left="7"  Canvas.Top="46"  Source="/res/none.jpg" Width="386" Height="321" Stretch="Fill"/>   
+    </Canvas>
+</Window>
