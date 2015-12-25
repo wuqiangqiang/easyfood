@@ -46,7 +46,14 @@ namespace FoodSafetyMonitoring.Manager
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
             _year.ItemsSource = year;
-            _year.SelectedIndex = 1;
+            for (int i = 0; i < _year.Items.Count; i++)
+            {
+                if (_year.Items[i].ToString() == DateTime.Now.Year.ToString())
+                {
+                    _year.SelectedItem = _year.Items[i];
+                    break;
+                }
+            }
 
             //检测单位
             switch (user_flag_tier)

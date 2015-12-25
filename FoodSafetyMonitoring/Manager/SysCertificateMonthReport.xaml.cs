@@ -67,10 +67,24 @@ namespace FoodSafetyMonitoring.Manager
             dept_id = (Application.Current.Resources["User"] as UserInfo).DepartmentID;
 
             _year.ItemsSource = year;
-            _year.SelectedIndex = 5;
+            for (int i = 0; i < _year.Items.Count; i++)
+            {
+                if (_year.Items[i].ToString() == DateTime.Now.Year.ToString())
+                {
+                    _year.SelectedItem = _year.Items[i];
+                    break;
+                }
+            }
 
             _month.ItemsSource = month;
-            _month.SelectedIndex = 8;
+            for (int i = 0; i < _month.Items.Count; i++)
+            {
+                if (_month.Items[i].ToString() == DateTime.Now.Month.ToString())
+                {
+                    _month.SelectedItem = _month.Items[i];
+                    break;
+                }
+            }
 
             switch (user_flag_tier)
             {
