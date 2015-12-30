@@ -26,3 +26,4 @@ namespace FoodSafetyMonitoring.Manager
         }
     }
 }
+ 

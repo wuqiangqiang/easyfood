@@ -124,6 +124,7 @@ namespace FoodSafetyMonitoring
             }
             if (flag_exits == 0)
             {
+                mainWindow.grid_Component.Visibility = Visibility.Visible;
                 int flag = 0;
                 temptb = new TabItem();
                 temptb.Tag = (sender as Button).Tag.ToString();
